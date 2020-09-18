@@ -8,9 +8,9 @@
 4.	Evt.
 
 # AI liste:
-- [ ]Færdiggør og konkretiser spilregler 100%	
-- Resultat: Appendix med fuld beskrivelse af regelsæt
-- (Rasmus, David, Villiam, **Daniel**)
+- [ ] Færdiggør og konkretiser spilregler 100%
+    - (Rasmus, David, Villiam, **Daniel**)
+    - Resultat: Appendix med fuld beskrivelse af regelsæt
 
 - [ ] Risk accessment - hvornår skal det være klart? Følg op.
     - (**Simon**)	
