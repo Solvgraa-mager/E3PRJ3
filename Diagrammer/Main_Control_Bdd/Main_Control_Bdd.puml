@@ -1,0 +1,48 @@
+@startuml
+skinparam BackgroundColor transparent
+
+title BDD for bilkontrol\n og controllers
+
+object "Bilkontrol" as main
+    'main : Name = "Dummy"
+object "Embedded controller" as embedded
+object "Receiver" as receiver
+object "Transmitter" as transmitter
+object "Digital lydbehandling" as dsb
+object "Gameplay" as gameplay
+object "Point" as point
+object "Display" as display
+object "Trådløs IF" as wifi
+object "Controller behandling" as controls
+object "Joystick behandling" as joystickTreat
+
+
+object "Controller" as controller
+object "Lyd-modul" as lydmodul
+    'main : Name = "Dummy"
+object "Mikrofon" as mikrofon
+object "Analog filterbehandlig" as filter
+object "Joystick" as joystick
+object "ADC" as adc
+object "Transmitter" as controlTransmit
+object "Microcontroller" as muc
+
+main *-- embedded
+embedded *-- transmitter
+    transmitter *-- wifi
+embedded *-- receiver
+embedded *-- gameplay
+    gameplay *-- point
+        point *-- display
+embedded *-- controls
+    controls *-- dsb
+    controls *-- joystickTreat
+
+controller *-- muc      
+    muc *-- adc
+    muc *-- controlTransmit
+controller *-- lydmodul        
+    lydmodul *-- filter
+    lydmodul *-- mikrofon
+controller *-- joystick        
+@enduml
