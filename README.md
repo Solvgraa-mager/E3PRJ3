@@ -25,5 +25,6 @@
     - Resultat: Rapportafsnit indeholdende blokdiagrammer. Subsystem detaljeringsniveau (mikrofon, PSoC, microcontroller, wireless modul, rpi, osv .. ) - hvor skal hvad værer.Spørg Peter Høegh om vores definition af en aktuator er fyldestgørende for projektets mål.
 
 - [ ] Tidsplan
-(Daniel, **Adam**) 	Resultat: Excel dokument med første iteration på tidsplan + faste deadlines + indkorporering af hårde arbejdsbelastninger ifht de andre fag.
+    - (Daniel, **Adam**) 	
+    - Resultat: Excel dokument med første iteration på tidsplan + faste deadlines + indkorporering af hårde arbejdsbelastninger ifht de andre fag.
 
