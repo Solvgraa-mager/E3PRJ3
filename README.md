@@ -32,6 +32,6 @@
     - Resultat: Excel dokument med første iteration på tidsplan + faste deadlines + indkorporering af hårde arbejdsbelastninger ifht de andre fag.
 
 # Tidsplan
-![Tidsplanen](/Diagrammer/Tidsplan/GanntTidsplan.png)
+![Tidsplanen](/Diagrammer/Tidsplan/out/GanntTidsplan.svg)
 
-Findes i fuld størrelse under [Diagrammer](Diagrammer/Tidsplan/GanntTidsplan.png).
+Findes i fuld størrelse under [Diagrammer](Diagrammer/Tidsplan/out/GanntTidsplan.svg).
