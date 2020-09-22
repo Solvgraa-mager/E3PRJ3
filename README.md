@@ -1,5 +1,8 @@
 # E3PRJ3
-
+- [E3PRJ3](#e3prj3)
+- [Dagsorden](#dagsorden)
+- [AI liste:](#ai-liste)
+- [Tidsplan](#tidsplan)
 # Dagsorden
 
 1.	Status: action item liste + tidsplan
@@ -28,3 +31,7 @@
     - (Daniel, **Adam**) 	
     - Resultat: Excel dokument med første iteration på tidsplan + faste deadlines + indkorporering af hårde arbejdsbelastninger ifht de andre fag.
 
+# Tidsplan
+![Tidsplanen](/Diagrammer/Tidsplan/GanntTidsplan.png)
+
+Findes i fuld størrelse under [Diagrammer](Diagrammer/Tidsplan/GanntTidsplan.png).
