@@ -1,18 +1,35 @@
 @startgantt
 project starts the 2020/09/07
+[Last update] happens 2020/09/22 and is colored in #AAF
+
 saturday are closed
 sunday are closed
+
+' [Vejledermøde] happens on wednesday
 -- FASER I PROJEKTET --
 
-[Projektdefinering] lasts 5 days
+[Projektdefinering] as [PD] starts the 2020/09/07 and ends at 2020/09/17
 
-[Risk assesment & mitigation] starts the 2020/09/17 and ends 2020/10/07
+[Risk assesment & mitigation] as [RA] starts the 2020/09/17
+[RA] ends 2020/10/07 and is colored in Salmon
+[Kravspecifikation] as [KravSpek] starts the 2020/09/23
+[KravSpek] lasts 5 days
 
-[Initial development] starts the 2020/10/08 and ends 2020/10/20
+[Systemarkitektur] as [SysArch] starts at [KravSpek]'s end
+[SysArch] lasts 5 days
 
-[Development] starts the 2020/10/21 and ends 2020/12/09
+[Implementering og Test] as [ImpTest] starts at [SysArch]'s end
+[ImpTest] lasts 5 days
 
-[Closure] starts the 2020/12/10 and ends 2020/12/17
+
+[Initial development] as [Init] starts the 2020/10/08 
+[Init] ends 2020/10/20  and is colored in DarkSalmon
+
+[Development] as [Dev] starts the 2020/10/21 
+[Dev] ends 2020/12/09 and is colored in Orchid
+
+[Closure] as [Clo] starts the 2020/12/10
+[Clo] ends 2020/12/17 and is colored in OrangeRed
 
 [Deadline] happens 2020/12/17
 
