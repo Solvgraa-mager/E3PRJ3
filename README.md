@@ -44,8 +44,9 @@
   - (Daniel, Rasmus)
 - [ ] Konkretiser projektnomenklatur.
   - (Simon, Adam)
-- [ ] Gå et abstraktionsniveau op mht. PSoC og Raspberry Pi - skriv µC (+ evt. wireless modul)
+- [x] Gå et abstraktionsniveau op mht. PSoC og Raspberry Pi - skriv µC (+ evt. wireless modul)
   - (Simon)
+  - Note: Lavet til Plant UML format, ændret navne og tilføjet til rapport
 - [ ] Skriv til Peter Høgh
   - Undersøg hvor meget skal Raspberry Pi og PSoC fylde, rent projektmæssigt.
   - Afklaring om risk accessment.
