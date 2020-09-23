@@ -46,7 +46,7 @@
   - (Simon, Adam)
 - [x] Gå et abstraktionsniveau op mht. PSoC og Raspberry Pi - skriv µC (+ evt. wireless modul)
   - (Simon)
-  - Note: Lavet til Plant UML format, ændret navne og tilføjet til rapport
+  - Note: Done: Lavet til Plant UML format, ændret navne og tilføjet til rapport
 - [ ] Skriv til Peter Høgh
   - Undersøg hvor meget skal Raspberry Pi og PSoC fylde, rent projektmæssigt.
   - Afklaring om risk accessment.
