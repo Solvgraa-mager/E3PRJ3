@@ -35,4 +35,4 @@
 # Tidsplan
 ![Tidsplanen](/Diagrammer/Tidsplan/out/GanntTidsplan.png)
 
-Findes i fuld størrelse under [Diagrammer](Diagrammer/Tidsplan/out/GanntTidsplan.png).
+Findes i fuld størrelse under [Diagrammer](Diagrammer/Tidsplan/out/GanntTidsplan.png), og beskrives nærmere i [README](Diagrammer/Tidsplan/README.md) filen.
