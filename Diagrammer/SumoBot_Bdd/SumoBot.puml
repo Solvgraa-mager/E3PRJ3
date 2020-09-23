@@ -1,0 +1,27 @@
+@startuml
+skinparam BackgroundColor transparent
+
+title BDD for SumoBot
+
+object "SumoBot" as SumoBot
+object "Motor" as Motor
+object "Motorstyring" as Motorstyring
+object "PSU" as PSU
+object "Batteri" as Batteri
+object "Charger" as Charger
+object "MicroController" as muc_SumoBot
+object "Digital Logik" as muc2_SumoBot 
+object "Attack Sensor" as AttackSensor
+object "Scoreboard" as Scoreboard
+
+SumoBot *-- Motor
+  Motor *-- Motorstyring
+SumoBot *-- PSU
+  PSU *-- Charger
+  PSU *-- Batteri
+SumoBot *-- muc_SumoBot
+SumoBot *-- muc2_SumoBot
+muc2_SumoBot *-- AttackSensor
+muc2_SumoBot *-- Scoreboard
+
+@enduml
