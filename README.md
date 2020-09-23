@@ -67,7 +67,7 @@
     - (Rasmus, David, Villiam, **Daniel**)
     - Resultat: Appendix med fuld beskrivelse af regelsæt
 
-- [ ] Risk accessment - hvornår skal det være klart? Følg op.
+- [x] Risk accessment - hvornår skal det være klart? Følg op.
     - Status : **Ikke gjort - mangler stadig svar**
     - (**Simon**)	
     - Resultat: Notat om hvornår risk accessment skal færdiggøres
