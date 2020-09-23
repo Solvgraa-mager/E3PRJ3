@@ -4,13 +4,14 @@
 - [AI liste:](#ai-liste)
 - [Tidsplan](#tidsplan)
 # Dagsorden
-
+## 2020-09-17
 1.	Status: action item liste + tidsplan
 2.	action item næste uge
 3.	Næste møde: Onsdag d. 23/9, kl. 14:15-15:15
 4.	Evt.
 
 # AI liste:
+## 2020-09-17
 - [ ] Færdiggør og konkretiser spilregler 100%
     - (Rasmus, David, Villiam, **Daniel**)
     - Resultat: Appendix med fuld beskrivelse af regelsæt
