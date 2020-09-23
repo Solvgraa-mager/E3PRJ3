@@ -34,14 +34,41 @@
 
 # AI liste:
 ## 2020-09-23
-- [ ] - 
+
+- [ ] Tilføj system BDD
+  - (Adam)
+- [ ] Tilføj IBD til rapport
+  - [ ] Styringsenhed
+  - [ ] Main 
+  - [ ] Robot
+  - (Daniel, Rasmus)
+- [ ] Konkretiser projektnomenklatur.
+  - (Simon, Adam)
+- [ ] Gå et abstraktionsniveau op mht. PSoC og Raspberry Pi - skriv µC (+ evt. wireless modul)
+  - (Simon)
+- [ ] Skriv til Peter Høgh
+  - Undersøg hvor meget skal Raspberry Pi og PSoC fylde, rent projektmæssigt.
+  - Afklaring om risk accessment.
+  - (**David**)
+---
+- [ ] Konceptillustrationer
+  - [ ] Bil
+  - [ ] Spilleplade
+  - (Adam, Villiam, David)
+- [ ] Opdatering af kravspek ud fra nye analysepunkter.
+  - (Villiam, Adam)
+- [ ] 
+  - (Simon, Frederik)
 
 ## 2020-09-17
-- [ ] Færdiggør og konkretiser spilregler 100%
+
+- [x] Færdiggør og konkretiser spilregler 100%
+    - Status: **Der mangler en konkretisering af selve spilpladen- gerne flere illustrationer - Mål: 99% færdig **
     - (Rasmus, David, Villiam, **Daniel**)
     - Resultat: Appendix med fuld beskrivelse af regelsæt
 
 - [ ] Risk accessment - hvornår skal det være klart? Følg op.
+    - Status : **Ikke gjort - mangler stadig svar**
     - (**Simon**)	
     - Resultat: Notat om hvornår risk accessment skal færdiggøres
 
