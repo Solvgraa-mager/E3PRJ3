@@ -36,6 +36,7 @@
 ## 2020-09-23
 
 - [ ] Tilføj system BDD
+  - Status : Der mangler en beskrivelse af diagrammerne, samt en afklaring på selve forløbet i systemet.
   - (Adam)
 - [ ] Tilføj IBD til rapport
   - [ ] Styringsenhed
