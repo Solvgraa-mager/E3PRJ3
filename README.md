@@ -43,8 +43,9 @@
   - [ ] Main 
   - [ ] Robot
   - (Daniel, Rasmus)
-- [ ] Konkretiser projektnomenklatur.
+- [x] Konkretiser projektnomenklatur.
   - (Simon, Adam)
+  - Nomenklatur udarbejdet på baggrund af gennemlæsning af nuværende projektrapport. Bør fremover løbende følges og opdateres.  
 - [x] Gå et abstraktionsniveau op mht. PSoC og Raspberry Pi - skriv µC (+ evt. wireless modul)
   - (Simon)
   - Note: Done: Lavet til Plant UML format, ændret navne og tilføjet til rapport
