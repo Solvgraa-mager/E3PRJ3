@@ -61,6 +61,7 @@
   - (Villiam, Adam)
 - [ ] 
   - (Simon, Frederik)
+  - Note fra Simon: Her har tidligere stået noget med test-cases ud fra krav spec. 
 
 ## 2020-09-17
 
