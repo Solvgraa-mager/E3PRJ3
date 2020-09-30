@@ -33,6 +33,24 @@
 4.	Evt.
 
 # AI liste:
+
+## 2020-09-30
+
+- [ ] Rettet IBD'er og BDD'er til ud fra fællesnavngivning
+  - Resultat: IBD'er og BDD'er har samme delkomponenter
+- [ ] Opdater IBD og BDD'er med ens samme blokke
+  - Resultat: IBD'er og BDD'er indeholder ens blokke
+- [ ] Risk Assements 
+  - Resultat: Risk Assesment udført
+- [ ] Skriv til Peter Høgh ang. deadline dato'er
+  - Resultat: Opdateret tidsplanen med "rigtige" datoer
+- [ ] Dagsorden til John
+  - Resultat: John er med til næste møde.
+- [ ] Fully-Dressed Use case for en eller to cases
+  - Resultat: Fully-dressed use case er indsat i journal, med alle dertilhørende detajler.
+- [ ] Fjern "uspecificerede" krav.
+  - Resultat: uspeciferede krav er fjernet.
+
 ## 2020-09-23
 
 - [ ] Tilføj system BDD
@@ -49,14 +67,13 @@
 - [x] Gå et abstraktionsniveau op mht. PSoC og Raspberry Pi - skriv µC (+ evt. wireless modul)
   - (Simon)
   - Note: Done: Lavet til Plant UML format, ændret navne og tilføjet til rapport
-- [ ] Skriv til Peter Høgh
+- [x] Skriv til Peter Høgh
   - Undersøg hvor meget skal Raspberry Pi og PSoC fylde, rent projektmæssigt.
   - Afklaring om risk accessment.
   - (**David**)
----
 - [ ] Konceptillustrationer
   - [ ] Bil
-  - [ ] Spilleplade
+  - [x] Spilleplade
   - (Adam, Villiam, David)
 - [ ] Opdatering af kravspek ud fra nye analysepunkter.
   - (Villiam, Adam)
