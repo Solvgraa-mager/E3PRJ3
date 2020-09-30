@@ -38,19 +38,25 @@
 
 - [ ] Rettet IBD'er og BDD'er til ud fra fællesnavngivning
   - Resultat: IBD'er og BDD'er har samme delkomponenter
+  - (**Simon**)
 - [ ] Opdater IBD og BDD'er med ens samme blokke
   - Resultat: IBD'er og BDD'er indeholder ens blokke
+  - (**Simon**)
 - [ ] Risk Assements 
   - Resultat: Risk Assesment udført
+  - (**Adam**, David, Daniel)
 - [ ] Skriv til Peter Høgh ang. deadline dato'er
   - Resultat: Opdateret tidsplanen med "rigtige" datoer
+  - (**Frederik**)
 - [ ] Dagsorden til John
   - Resultat: John er med til næste møde.
+  - (**Daniel**)
 - [ ] Fully-Dressed Use case for en eller to cases
   - Resultat: Fully-dressed use case er indsat i journal, med alle dertilhørende detajler.
+  - (**Rasmus**, Villiam, Simon)
 - [ ] Fjern "uspecificerede" krav.
   - Resultat: uspeciferede krav er fjernet.
-
+  - (**Villiam**, David)
 ## 2020-09-23
 
 - [ ] Tilføj system BDD
