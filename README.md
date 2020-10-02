@@ -36,12 +36,15 @@
 
 ## 2020-09-30
 
-- [ ] Rettet IBD'er og BDD'er til ud fra fællesnavngivning
+- [ ] Rettet IBD'er og BDD'er til ud fra fællesnavngivning - **50%**
   - Resultat: IBD'er og BDD'er har samme delkomponenter
   - (**Simon**)
-- [ ] Opdater IBD og BDD'er med ens samme blokke
+    - Note: Struktur for BDD'er strømlinet, alle BDD'er har nu en mappe med tekstdokument + billede i. 
+    - Note2: BDD'er strømlinet ift. navngivning. Har tilladt mig at benytte udtrykket Interface fremfor Transmitter/Receiver for at undgå forvirringer i forbindelser
+- [ ] Opdater IBD og BDD'er med ens samme blokke - **50%**
   - Resultat: IBD'er og BDD'er indeholder ens blokke
   - (**Simon**)
+    - Note: BDD'er strømlinet ift. struktur
 - [ ] Risk Assements 
   - Resultat: Risk Assesment udført
   - (**Adam**, David, Daniel)
