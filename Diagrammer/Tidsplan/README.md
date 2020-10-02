@@ -20,3 +20,7 @@ sunday are closed
 ```
 
 Uddrag af koden til E3PRJ3 tidsplanen.
+
+
+
+![Tidsplanen](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/Solvgraa-mager/E3PRJ3/master/Diagrammer/Tidsplan/GanntTidsplan.puml?token=ANMW2NURGVM6LSADI62W6MK7O4GUI)
