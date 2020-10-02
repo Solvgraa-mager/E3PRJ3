@@ -1,0 +1,30 @@
+@startuml
+skinparam BackgroundColor transparent
+
+title BDD for Central Computer
+
+object "Central Computer" as central_computer
+object "Styringsenhed IF" as styringsenhedIF
+object "SumoBot IF" as sumoBotIF
+object "Digital lydbehandling" as lydTreat
+object "ADC" as adc
+object "Gameplay" as gameplay
+object "Point" as point
+object "Display" as display
+object "Trådløs Modul" as wifi
+object "Styringsenhedsbehandling" as styringsenhedsbehandling
+object "Joystick behandling" as joystickTreat
+
+central_computer *-- styringsenhedIF
+central_computer *-- sumoBotIF
+    sumoBotIF *-- wifi
+central_computer *-- gameplay
+    gameplay *-- display
+        display *-- point
+central_computer *-- styringsenhedsbehandling
+    styringsenhedsbehandling *-- joystickTreat
+        joystickTreat *-- adc
+    styringsenhedsbehandling *-- lydTreat
+        lydTreat *-- adc
+
+@enduml
