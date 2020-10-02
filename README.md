@@ -33,32 +33,59 @@
 4.	Evt.
 
 # AI liste:
+
+## 2020-09-30
+
+- [ ] Rettet IBD'er og BDD'er til ud fra fællesnavngivning
+  - Resultat: IBD'er og BDD'er har samme delkomponenter
+  - (**Simon**)
+- [ ] Opdater IBD og BDD'er med ens samme blokke
+  - Resultat: IBD'er og BDD'er indeholder ens blokke
+  - (**Simon**)
+- [ ] Risk Assements 
+  - Resultat: Risk Assesment udført
+  - (**Adam**, David, Daniel)
+- [ ] Skriv til Peter Høgh ang. deadline dato'er
+  - Resultat: Opdateret tidsplanen med "rigtige" datoer
+  - (**Frederik**)
+- [ ] Dagsorden til John
+  - Resultat: John er med til næste møde.
+  - (**Daniel**)
+- [ ] Fully-Dressed Use case for en eller to cases
+  - Resultat: Fully-dressed use case er indsat i journal, med alle dertilhørende detajler.
+  - (**Rasmus**, Villiam, Simon)
+- [ ] Fjern "uspecificerede" krav.
+  - Resultat: uspeciferede krav er fjernet.
+  - (**Villiam**, David)
 ## 2020-09-23
 
 - [ ] Tilføj system BDD
+  - Status : Der mangler en beskrivelse af diagrammerne, samt en afklaring på selve forløbet i systemet.
   - (Adam)
 - [ ] Tilføj IBD til rapport
   - [ ] Styringsenhed
   - [ ] Main 
   - [ ] Robot
   - (Daniel, Rasmus)
-- [ ] Konkretiser projektnomenklatur.
+- [x] Konkretiser projektnomenklatur.
   - (Simon, Adam)
-- [ ] Gå et abstraktionsniveau op mht. PSoC og Raspberry Pi - skriv µC (+ evt. wireless modul)
+  - Nomenklatur udarbejdet på baggrund af gennemlæsning af nuværende projektrapport. Bør fremover løbende følges og opdateres.  
+- [x] Gå et abstraktionsniveau op mht. PSoC og Raspberry Pi - skriv µC (+ evt. wireless modul)
   - (Simon)
-- [ ] Skriv til Peter Høgh
+  - Note: Done: Lavet til Plant UML format, ændret navne og tilføjet til rapport
+- [x] Skriv til Peter Høgh
   - Undersøg hvor meget skal Raspberry Pi og PSoC fylde, rent projektmæssigt.
   - Afklaring om risk accessment.
   - (**David**)
----
 - [ ] Konceptillustrationer
   - [ ] Bil
-  - [ ] Spilleplade
+  - [x] Spilleplade
   - (Adam, Villiam, David)
 - [ ] Opdatering af kravspek ud fra nye analysepunkter.
   - (Villiam, Adam)
 - [ ] 
   - (Simon, Frederik)
+  - Note fra Simon: Her har tidligere stået noget med test-cases ud fra krav spec. 
 
 ## 2020-09-17
 
