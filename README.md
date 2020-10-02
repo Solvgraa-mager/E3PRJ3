@@ -115,6 +115,7 @@
     - Resultat: Excel dokument med første iteration på tidsplan + faste deadlines + indkorporering af hårde arbejdsbelastninger ifht de andre fag.
 
 # Tidsplan
-![Tidsplanen](/Diagrammer/Tidsplan/out/GanntTidsplan.png)
 
-Findes i fuld størrelse under [Diagrammer](Diagrammer/Tidsplan/out/GanntTidsplan.png), og beskrives nærmere i [README](Diagrammer/Tidsplan/README.md) filen.
+![Tidsplanen](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/Solvgraa-mager/E3PRJ3/master/Diagrammer/Tidsplan/GanntTidsplan.puml?token=ANMW2NURGVM6LSADI62W6MK7O4GUI)
+
+Tryk på tidsplanen for at se den i fuld størrelse. Syntaxen beskrives nærmere i [README](Diagrammer/Tidsplan/README.md) filen.
