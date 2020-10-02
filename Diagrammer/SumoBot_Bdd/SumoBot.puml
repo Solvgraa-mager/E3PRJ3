@@ -10,9 +10,9 @@ object "PSU" as PSU
 object "Batteri" as Batteri
 object "Charger" as Charger
 object "MicroController" as muc_SumoBot
-object "Digital Logik" as muc2_SumoBot 
+object "Game-Modul" as game_Module 
 object "Attack Sensor" as AttackSensor
-object "Scoreboard" as Scoreboard
+object "Central Computer IF" as central_computer_IF
 
 SumoBot *-- Motor
   Motor *-- Motorstyring
@@ -20,8 +20,8 @@ SumoBot *-- PSU
   PSU *-- Charger
   PSU *-- Batteri
 SumoBot *-- muc_SumoBot
-SumoBot *-- muc2_SumoBot
-muc2_SumoBot *-- AttackSensor
-muc2_SumoBot *-- Scoreboard
+SumoBot *-- game_Module
+game_Module *-- AttackSensor
+SumoBot *-- central_computer_IF
 
 @enduml

@@ -9,14 +9,13 @@ object "Central Computer" as central_computer
     central_computer : <b>Parts:</b>
     central_computer : Styringsenhed IF
     central_computer : SumoBot IF
-    central_computer : Gameplay
     central_computer : Styringsbehandling
 object "SumoBot" as sumobot
     sumobot : <b>Parts:</b>
     sumobot : Motor
     sumobot : PSU
     sumobot : Mikrocontroller
-    sumobot : Digital Logik
+    sumobot : Central Computer IF
 object "Styringsenhed" as styringsenhed
     styringsenhed : <b>Parts:</b>
     styringsenhed : Joystik
