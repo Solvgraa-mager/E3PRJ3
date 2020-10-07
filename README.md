@@ -59,7 +59,7 @@
 - [ ] Fully-Dressed Use case for en eller to cases
   - Resultat: Fully-dressed use case er indsat i journal, med alle dertilhørende detajler.
   - (**Rasmus**, Villiam, Simon)
-- [ ] Fjern "uspecificerede" krav.
+- [x] Fjern "uspecificerede" krav.
   - Resultat: uspeciferede krav er fjernet.
   - (**Villiam**, David)
 ## 2020-09-23
