@@ -4,8 +4,9 @@
   - [2020-09-23](#2020-09-23)
   - [2020-09-17](#2020-09-17)
 - [AI liste:](#ai-liste)
-  - [2020-09-23](#2020-09-23-1)
-  - [2020-09-17](#2020-09-17-1)
+  - [2020-10-7](#2020-10-07)
+  - [2020-09-23](#2020-09-23)
+  - [2020-09-17](#2020-09-17)
 - [Tidsplan](#tidsplan)
 # Dagsorden
 
@@ -33,32 +34,39 @@
 4.	Evt.
 
 # AI liste:
+## 2020-10-07
+ - [ ] Fully-Dressed Use case for en eller to cases
+  - Resultat: Fully-dressed use case er indsat i journal, med alle dertilhørende detajler.
+  - (**Rasmus**, Villiam, Adam)
+  
+  - [ ] Analyse + risk assessment af blok: X
+  
+  - [ ] Analyse + risk assessment af blok: X
+  
+  - [ ] Første udkast til tilgængelige interfacebeskrivelser med tilhørende \tbr ved tvivl
 
 ## 2020-09-30
 
-- [ ] Rettet IBD'er og BDD'er til ud fra fællesnavngivning - **100%**
+- [x] Rettet IBD'er og BDD'er til ud fra fællesnavngivning - **100%**
   - Resultat: IBD'er og BDD'er har samme delkomponenter
   - (**Simon**, Daniel)
     - Note: Struktur for BDD'er strømlinet, alle BDD'er har nu en mappe med tekstdokument + billede i. 
     - Note2: BDD'er strømlinet ift. navngivning. Har tilladt mig at benytte udtrykket Interface fremfor Transmitter/Receiver for at undgå forvirringer i forbindelser
     - Note3: BDD og IBD færdige og lagt i rapporten
-- [ ] Opdater IBD og BDD'er med ens samme blokke - **100%**
+- [x] Opdater IBD og BDD'er med ens samme blokke - **100%**
   - Resultat: IBD'er og BDD'er indeholder ens blokke
   - (**Simon**, Daniel)
     - Note: BDD'er strømlinet ift. struktur
     - Note: IBD og BDD opdateret og lagt i rapporten
-- [ ] Risk Assements 
+- [x] Risk Assements 
   - Resultat: Risk Assesment udført
   - (**Adam**, David, Daniel)
-- [ ] Skriv til Peter Høgh ang. deadline dato'er
+- [x] Skriv til Peter Høgh ang. deadline dato'er
   - Resultat: Opdateret tidsplanen med "rigtige" datoer
   - (**Frederik**)
-- [ ] Dagsorden til John
+- [x] Dagsorden til John
   - Resultat: John er med til næste møde.
   - (**Daniel**)
-- [ ] Fully-Dressed Use case for en eller to cases
-  - Resultat: Fully-dressed use case er indsat i journal, med alle dertilhørende detajler.
-  - (**Rasmus**, Villiam, Simon)
 - [x] Fjern "uspecificerede" krav.
   - Resultat: uspeciferede krav er fjernet.
   - (**Villiam**, David)
