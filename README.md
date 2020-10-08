@@ -128,4 +128,4 @@
 
 ![Tidsplanen](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/Solvgraa-mager/E3PRJ3/master/Diagrammer/Tidsplan/GanntTidsplan.puml)
 
-Tryk på tidsplanen for at se den i fuld størrelse. Syntaxen beskrives nærmere i [README](Diagrammer/Tidsplan/README.md) filen.
+Tryk [HER](https://github.com/Solvgraa-mager/E3PRJ3/blob/master/Diagrammer/Tidsplan/GanntTidsplan.puml) for at ændre i tidsplanen. Tryk på tidsplanen for at se den i fuld størrelse. Syntaxen beskrives nærmere i [README](Diagrammer/Tidsplan/README.md)filen.
