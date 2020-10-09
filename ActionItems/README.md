@@ -1,14 +1,24 @@
 # AI liste:
-## 2020-10-07
+## 2020-10-07 - 2020-10-21
  - [ ] Fully-Dressed Use case for en eller to cases
-  - Resultat: Fully-dressed use case er indsat i journal, med alle dertilhørende detajler.
-  - (**Rasmus**, Villiam, Adam)
+  - Resultat: Fully-dressed use case er indsat i journal, med alle dertilhørende detaljer.
+  - (Alle)
+  - Status: 100%. Fully-dressed use case for use case 1 (Styr SumoBot) er indsat i journal med alle dertilhørende detaljer. 
   
-  - [ ] Analyse + risk assessment af blok: X
+  - [ ] SumoBot: Analyse + risk assessment + første udkast til interfacebeskrivelser (blackbox) med tilhørende \tbr ved tvivl
+  - Resultat: Analyseafsnit af blok "SumoBot" indsat i journal + indsat interfacebeskrivelse efter tilhørende IBD
+  - (**Frederik**, **David**)
+  - Status:
   
-  - [ ] Analyse + risk assessment af blok: X
-  
-  - [ ] Første udkast til tilgængelige interfacebeskrivelser med tilhørende \tbr ved tvivl
+  - [ ] Styringsenhed: Analyse + risk assessment + første udkast til interfacebeskrivelser (blackbox) med tilhørende \tbr ved tvivl
+  - Resultat: Analyseafsnit af blok "Styringsenhed" indsat i journal + indsat interfacebeskrivelse efter tilhørende IBD
+  (**Daniel**, **Adam**, **Rasmus**)
+  - Status:
+
+  - [ ] Central Computer: Analyse + risk assessment + første udkast til interfacebeskrivelser (blackbox) med tilhørende \tbr ved tvivl
+  - Resultat: Analyseafsnit af blok "Central Computer" indsat i journal + indsat interfacebeskrivelse efter tilhørende IBD
+  (**Villiam**, **Simon(hvis han ikke er blevet afhængig af morfin?)**)
+  - Status:
 
 ## 2020-09-30
 
