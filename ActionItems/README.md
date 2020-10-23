@@ -15,10 +15,10 @@
   (**Daniel**, **Adam**, **Rasmus**)
   - Status:
 
-  - [ ] Central Computer: Analyse + risk assessment + første udkast til interfacebeskrivelser (blackbox) med tilhørende \tbr ved tvivl
+  - [x] Central Computer: Analyse + risk assessment + første udkast til interfacebeskrivelser (blackbox) med tilhørende \tbr ved tvivl
   - Resultat: Analyseafsnit af blok "Central Computer" indsat i journal + indsat interfacebeskrivelse efter tilhørende IBD
   (**Villiam**, **Simon(hvis han ikke er blevet afhængig af morfin?)**)
-  - Status: Analyse: 80%, Risk assessment: 100%, Udkast til IF: Afventer snak med andre delgrupper
+  - Status: Analyse: 100%, Risk assessment: 100%, Interfacebeskrivelse: 100% 
 
 ## 2020-09-30
 
