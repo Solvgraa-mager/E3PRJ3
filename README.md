@@ -12,6 +12,33 @@
 
 # Dagsorden
 
+## 2020-10-28
+
+- **Deltagere**: Daniel, Simon, Frederik, Villiam, Adam, Rasmus, John, **David?**
+
+- **Mødeleder**: Villiam
+
+- **Placering**: [Zoom](https://aarhusuniversity.zoom.us/j/66634576248)
+
+1. Vurdering af det forgåenden arbejde. Analyse, arkitektur, diagrammer osv.
+   1. fejl og manlger
+   2. Undring, revurdering
+   3. John kommentar
+   
+2. Delgrupper presentere deres aktuelle arbejde og kommenteres.
+  1. SumoBot
+  2. Styringsenhed
+  3. Centralcomputer 
+  
+3. Gennemgang af tidsplan.
+  1. updateres
+
+4. Action items til næste uge!
+
+5. Næste møde: Onsdag d. 04/11, kl. 14:15-15:15
+
+6. Evt.
+
 ## 2020-09-23
 - **Deltagere**: Daniel, Simon, Frederik, Villiam, Adam, samt vejleder.
 
