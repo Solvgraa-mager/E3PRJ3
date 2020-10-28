@@ -5,29 +5,44 @@
   - **Adam**, Rasmus
   - Status: 90%. Fully-dressed use case for use case 1 (Styr SumoBot) er indsat i journal med alle dertilhørende detaljer. 
   
-  - [ ] Sekvens diagrammer
+  - [ ] system Sekvens diagrammer
   - Resultat - sekvens diaagram der afspejler usecase.
   - **Fredrik**, Adam
   - Status: 0%
   
-  - [ ] SumoBot: Analyse + risk assessment + første udkast til interfacebeskrivelser (blackbox) med tilhørende \tbr ved tvivl
-  - Resultat: Analyseafsnit af blok "SumoBot" indsat i journal + indsat interfacebeskrivelse efter tilhørende IBD
-  - (**Frederik**, **David**)
-  - Status: 50% - tabeller, opdel impl og design del fra analyse.
+ - [ ] Central computer sekvens diagram 
+ - Resultat - Sekvens diagram.
+ - **Siomon**, Villiam
   
-  - [ ] Styringsenhed: Analyse + risk assessment + første udkast til interfacebeskrivelser (blackbox) med tilhørende \tbr ved tvivl
-  - Resultat: Analyseafsnit af blok "Styringsenhed" indsat i journal + indsat interfacebeskrivelse efter tilhørende IBD
+  - [ ] Udviklingsværktøj
+  - Resultat - det er rykket til toppen
+  - **Adam??**
+ 
+  - [ ] SumoBot: struktur + analyse afsnit. 
+  - Resultat struktur: Alle IBD signaler er beskrevet of difineret. Alle navne er ens, HUSK ORDLISTE. 
+  - Resultat Analyse: Alle delbokke, fra IBD, er beskrevet med kravt til in/out samt funktionalitet aka blackbox. 
+  - (**Frederik**, **David**)
+  - Status: 0%
+  
+  - [ ] Styringsenhed: struktur + analyse afsnit.
+  - Resultat:Alle IBD signaler er beskrevet of difineret. Alle navne er ens, HUSK ORDLISTE. 
+  - Resultat Analyse: Alle delbokke, fra IBD, er beskrevet med kravt til in/out samt funktionalitet aka blackbox. 
   (**Daniel**, **Adam**, **Rasmus**)
-  - Status:
+  - Status: 0%
 
-  - [x] Central Computer: Analyse + risk assessment + første udkast til interfacebeskrivelser (blackbox) med tilhørende \tbr ved tvivl
-  - Resultat: Analyseafsnit af blok "Central Computer" indsat i journal + indsat interfacebeskrivelse efter tilhørende IBD
+  - [] Central Computer: struktur + analyse afsnit.
+  - Resultat: Alle IBD signaler er beskrevet of difineret. Alle navne er ens, HUSK ORDLISTE. 
+  - Resultat Analyse: Alle delbokke, fra IBD, er beskrevet med kravt til in/out samt funktionalitet aka blackbox. 
   (**Villiam**, **Simon(hvis han ikke er blevet afhængig af morfin?)**)
-  - Status: Analyse: 100%, Risk assessment: 100%, Interfacebeskrivelse: 100% 
+  - Status: Analyse: 0%
+  
+  - [] Risk-assestment
+  - Resultat: færdigt afsnit.
+  - status 0%
   
  - [] Gennemlæsning, gennemretning, struktur, adskil analyse, design og impl.
  **Villiam**, (Alle)
-- Ens struktur i alle Analyse, design, Impl.
+- Ens struktur i Analyse, design, Impl.
 
 
 ## 2020-09-30
