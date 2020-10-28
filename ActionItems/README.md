@@ -3,7 +3,7 @@
  - [ ] Fully-Dressed Use case for en eller to cases
   - Resultat: Fully-dressed use case er indsat i journal, med alle dertilhørende detaljer.
   - (Alle)
-  - Status: 100%. Fully-dressed use case for use case 1 (Styr SumoBot) er indsat i journal med alle dertilhørende detaljer. 
+  - Status: 90%. Fully-dressed use case for use case 1 (Styr SumoBot) er indsat i journal med alle dertilhørende detaljer. 
   
   - [ ] SumoBot: Analyse + risk assessment + første udkast til interfacebeskrivelser (blackbox) med tilhørende \tbr ved tvivl
   - Resultat: Analyseafsnit af blok "SumoBot" indsat i journal + indsat interfacebeskrivelse efter tilhørende IBD
