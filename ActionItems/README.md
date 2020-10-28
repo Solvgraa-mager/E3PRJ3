@@ -5,6 +5,11 @@
   - **Adam**, Rasmus
   - Status: 90%. Fully-dressed use case for use case 1 (Styr SumoBot) er indsat i journal med alle dertilhørende detaljer. 
   
+  - [ ] Sekvens diagrammer
+  - Resultat - sekvens diaagram der afspejler usecase.
+  - **Fredrik**, Adam
+  - Status: 0%
+  
   - [ ] SumoBot: Analyse + risk assessment + første udkast til interfacebeskrivelser (blackbox) med tilhørende \tbr ved tvivl
   - Resultat: Analyseafsnit af blok "SumoBot" indsat i journal + indsat interfacebeskrivelse efter tilhørende IBD
   - (**Frederik**, **David**)
