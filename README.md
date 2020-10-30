@@ -6,7 +6,7 @@
   - [2020-09-17](#2020-09-17)
 - [Tidsplan](#tidsplan)
 
-# Action item 
+# Action item .
 
 [AI liste](ActionItems/)
 
