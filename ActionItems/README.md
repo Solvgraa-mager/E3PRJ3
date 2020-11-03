@@ -36,9 +36,9 @@
   (**Villiam**, **Simon(hvis han ikke er blevet afhængig af morfin?)**)
   - Status: Analyse: 0%
   
-  - [] Risk-assestment
+  - [x] Risk-assestment
   - Resultat: færdigt afsnit.
-  - status 0%
+  - status 100% **Done** . Færdigt afsnit med beskrivelse og tabel. 
   
  - [] Gennemlæsning, gennemretning, struktur, adskil analyse, design og impl.
  **Villiam**, (Alle)
