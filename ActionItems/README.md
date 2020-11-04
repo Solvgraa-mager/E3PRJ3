@@ -9,7 +9,7 @@
 - [x] system Sekvens diagrammer
   - Resultat - sekvens diaagram der afspejler usecase.
   - **Fredrik**, Adam
-  - Status: 100%
+  - Status: 0%
 - [x] Central computer sekvens diagram
   - Resultat - Sekvens diagram.
   - **Siomon**, Villiam
