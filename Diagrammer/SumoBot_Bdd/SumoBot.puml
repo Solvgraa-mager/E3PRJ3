@@ -8,20 +8,16 @@ object "Motor" as Motor
 object "Motorstyring" as Motorstyring
 object "PSU" as PSU
 object "Batteri" as Batteri
-object "Charger" as Charger
 object "MicroController" as muc_SumoBot
-object "Game-Modul" as game_Module 
 object "Attack Sensor" as AttackSensor
 object "Central Computer IF" as central_computer_IF
 
 SumoBot *-- Motor
   Motor *-- Motorstyring
 SumoBot *-- PSU
-  PSU *-- Charger
   PSU *-- Batteri
 SumoBot *-- muc_SumoBot
-SumoBot *-- game_Module
-game_Module *-- AttackSensor
+SumoBot *-- AttackSensor
 SumoBot *-- central_computer_IF
 
 @enduml
