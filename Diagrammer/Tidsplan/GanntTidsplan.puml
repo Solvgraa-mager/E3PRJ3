@@ -20,12 +20,14 @@ sunday are closed
 [Implementering og Test] as [ImpTest] starts at [SysArch]'s end
 [ImpTest] lasts 5 days
 
-
 [Initial development] as [Init] starts the 2020/10/08 
 [Init] ends 2020/10/20  and is colored in DarkSalmon
 
 [Development] as [Dev] starts the 2020/10/21 
 [Dev] ends 2020/12/09 and is colored in Orchid
+
+[Process og Metode] as [Process] starts the 2020/12/04 
+[Process] lasts 7 days
 
 [Closure] as [Clo] starts the 2020/12/10
 [Clo] ends 2020/12/17 and is colored in OrangeRed
