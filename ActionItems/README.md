@@ -25,7 +25,7 @@
 
 - [ ] Alle IBD’er og BDD’er strømlines ift. navngivning og signaler
 - Resultat: Alle IBD’er og BDD’er er strømlinet. 
-- Deltagere: **Villiam**, Simon (Hvis du vil have en ekstra mand til at hjælpe med noget
+- Deltagere: **Villiam**
 - Status: 0%
 
 
