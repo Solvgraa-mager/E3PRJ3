@@ -10,10 +10,10 @@
   - **Fredrik**, Adam
   - Status: 0%
   
- - [/] Central computer sekvens diagram 
+ - [x] Central computer sekvens diagram 
  - Resultat - Sekvens diagram.
  - **Siomon**, Villiam
- - Status: 80% - mangler at bliver rettet til. 
+ - Status: 100% System Sekvens Diagram indsat. 
   
   - [ ] Udviklingsværktøj
   - Resultat - det er rykket til toppen
