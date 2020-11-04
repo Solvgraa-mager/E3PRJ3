@@ -1,49 +1,49 @@
 # AI liste:
+
 ## 2020-10-07 - 2020-10-21 - 2020 - 11 - 04
- - [ ] Fully-Dressed Use case for en eller to cases
+
+- [ ] Fully-Dressed Use case for en eller to cases
   - Resultat: Fully-dressed use case er indsat i journal, med alle dertilhørende detaljer.
   - **Adam**, Rasmus
-  - Status: 90%. Fully-dressed use case for use case 1 (Styr SumoBot) er indsat i journal med alle dertilhørende detaljer. 
-  
-  - [ ] system Sekvens diagrammer
+  - Status: 90%. Fully-dressed use case for use case 1 (Styr SumoBot) er indsat i journal med alle dertilhørende detaljer.
+- [ ] system Sekvens diagrammer
   - Resultat - sekvens diaagram der afspejler usecase.
   - **Fredrik**, Adam
   - Status: 0%
-  
- - [x] Central computer sekvens diagram 
- - Resultat - Sekvens diagram.
- - **Siomon**, Villiam
- - Status: 100% System Sekvens Diagram indsat. 
-  
-  - [ ] Udviklingsværktøj
+- [x] Central computer sekvens diagram
+  - Resultat - Sekvens diagram.
+  - **Siomon**, Villiam
+  - Status: 100% System Sekvens Diagram indsat.
+- [x] Udviklingsværktøjer
   - Resultat - det er rykket til toppen
   - **Adam??**
- 
-  - [ ] SumoBot: struktur + analyse afsnit. 
-  - Resultat struktur: Alle IBD signaler er beskrevet of difineret. Alle navne er ens, HUSK ORDLISTE. 
-  - Resultat Analyse: Alle delbokke, fra IBD, er beskrevet med kravt til in/out samt funktionalitet aka blackbox. 
+  - Status: 100%. Software og hardwaresektion rykket til top.
+
+- [ ] SumoBot: struktur + analyse afsnit.
+  - Resultat struktur: Alle IBD signaler er beskrevet of difineret. Alle navne er ens, HUSK ORDLISTE.
+  - Resultat Analyse: Alle delbokke, fra IBD, er beskrevet med kravt til in/out samt funktionalitet aka blackbox.
   - (**Frederik**, **David**)
   - Status: 0%
   
-  - [ ] Styringsenhed: struktur + analyse afsnit.
-  - Resultat:Alle IBD signaler er beskrevet of difineret. Alle navne er ens, HUSK ORDLISTE. 
-  - Resultat Analyse: Alle delbokke, fra IBD, er beskrevet med kravt til in/out samt funktionalitet aka blackbox. 
-  (**Daniel**, **Adam**, **Rasmus**)
+- [ ] Styringsenhed: struktur + analyse afsnit.
+  - Resultat:Alle IBD signaler er beskrevet of difineret. Alle navne er ens, HUSK ORDLISTE.
+  - Resultat Analyse: Alle delbokke, fra IBD, er beskrevet med kravt til in/out samt funktionalitet aka blackbox.
+    (**Daniel**, **Adam**, **Rasmus**)
   - Status: 0%
 
-  - [x] Central Computer: struktur + analyse afsnit.
-  - Resultat: Alle IBD signaler er beskrevet of difineret. Alle navne er ens, HUSK ORDLISTE. 
-  - Resultat Analyse: Alle delbokke, fra IBD, er beskrevet med kravt til in/out samt funktionalitet aka blackbox. 
-  (**Villiam**, **Simon**)
-  - Status: Analyse: 100% Gennemarbejdet struktur og analyseafsnit. 
+- [x] Central Computer: struktur + analyse afsnit.
+  - Resultat: Alle IBD signaler er beskrevet of difineret. Alle navne er ens, HUSK ORDLISTE.
+  - Resultat Analyse: Alle delbokke, fra IBD, er beskrevet med kravt til in/out samt funktionalitet aka blackbox.
+    (**Villiam**, **Simon**)
+  - Status: Analyse: 100% Gennemarbejdet struktur og analyseafsnit.
   
-  - [x] Risk-assestment
+- [x] Risk-assestment
   - Resultat: færdigt afsnit.
-  - status 100% **Done** . Færdigt afsnit med beskrivelse og tabel. 
+  - status 100% **Done** . Færdigt afsnit med beskrivelse og tabel.
   
- - [] Gennemlæsning, gennemretning, struktur, adskil analyse, design og impl.
- **Villiam**, (Alle)
-- Ens struktur i Analyse, design, Impl.
+- [] Gennemlæsning, gennemretning, struktur, adskil analyse, design og impl.
+  **Villiam**, (Alle)
+  - Ens struktur i Analyse, design, Impl.
 
 
 ## 2020-09-30
