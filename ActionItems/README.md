@@ -2,14 +2,14 @@
 
 ## 2020-10-07 - 2020-10-21 - 2020 - 11 - 04
 
-- [ ] Fully-Dressed Use case for en eller to cases
+- [x] Fully-Dressed Use case for en eller to cases
   - Resultat: Fully-dressed use case er indsat i journal, med alle dertilhørende detaljer.
   - **Adam**, Rasmus
-  - Status: 90%. Fully-dressed use case for use case 1 (Styr SumoBot) er indsat i journal med alle dertilhørende detaljer.
-- [ ] system Sekvens diagrammer
+  - Status: 100%. Fully-dressed use case for use case 1 (Styr SumoBot) er indsat i journal med alle dertilhørende detaljer.
+- [x] system Sekvens diagrammer
   - Resultat - sekvens diaagram der afspejler usecase.
   - **Fredrik**, Adam
-  - Status: 0%
+  - Status: 100%
 - [x] Central computer sekvens diagram
   - Resultat - Sekvens diagram.
   - **Siomon**, Villiam
