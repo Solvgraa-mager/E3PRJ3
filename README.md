@@ -12,6 +12,23 @@
 
 # Dagsorden
 
+## 2020-11-4
+
+- **Deltagere**: Daniel, Simon, Frederik, Villiam, Adam, Rasmus, John, David
+
+- **Mødeleder**: Daniel
+
+- **Placering**: [Zoom](https://aarhusuniversity.zoom.us/j/66634576248)
+
+1. Gennemgang af AI liste
+- Præsentation af ny struktur og analyse
+
+2. Generelle spørgsmål til indledende design ifht opsætning af journal
+
+3. Ny AI liste laves
+
+4. Evt
+
 ## 2020-10-28
 
 - **Deltagere**: Daniel, Simon, Frederik, Villiam, Adam, Rasmus, John, **David?**
