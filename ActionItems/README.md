@@ -6,19 +6,23 @@
 - Resultat: Kompaktéret autist-Signalbeskrivelser
 - Deltagere: **Villiam** (Overordnet + Central Computer), **David** (Robotten), **Daniel** (Styringsenheden)
 - Status: 0%
+
 [] Analyseafsnit skal indeholde reference til hvor blokkene er taget fra (evt. med billeder)
 - Resultat: Mindre saga-agtig analyseafsnit med referencer og evt. billeder.
 - **How to**: Lille snas fra blokbeskrivelse kopieres ind og der lægges et billede ind af blokken fra IBD’et så det er let at se hvad der går ud/ind.
 - Deltagere: **Simon** (Central Computer), **David**  (SumoBot), **Adam** (Styringsenhed)
 - Status: 0%
+
 [] Opret en versionshistorik, så den er klar til at blive skrevet i 
 - Resultat: Versionshistorik-template
 - Deltagere: **Rasmus*
 - Status: 0%
+
 [] Tilføj til krav hvad SumoBot må veje
 - Resultat: Kravspec indeholder SumoBot’s vægt
 - Deltagere: **Frederik**
 - Status: 0%
+
 [] Alle IBD’er og BDD’er strømlines ift. navngivning og signaler
 - Resultat: Alle IBD’er og BDD’er er strømlinet. 
 - Deltagere: **Villiam**, Simon (Hvis du vil have en ekstra mand til at hjælpe med noget
