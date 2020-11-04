@@ -30,11 +30,11 @@
   (**Daniel**, **Adam**, **Rasmus**)
   - Status: 0%
 
-  - [] Central Computer: struktur + analyse afsnit.
+  - [x] Central Computer: struktur + analyse afsnit.
   - Resultat: Alle IBD signaler er beskrevet of difineret. Alle navne er ens, HUSK ORDLISTE. 
   - Resultat Analyse: Alle delbokke, fra IBD, er beskrevet med kravt til in/out samt funktionalitet aka blackbox. 
-  (**Villiam**, **Simon(hvis han ikke er blevet afhængig af morfin?)**)
-  - Status: Analyse: 0%
+  (**Villiam**, **Simon**)
+  - Status: Analyse: 100% Gennemarbejdet struktur og analyseafsnit. 
   
   - [x] Risk-assestment
   - Resultat: færdigt afsnit.
