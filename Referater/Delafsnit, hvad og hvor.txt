@@ -1,0 +1,24 @@
+Analyse: 
+Black boxing
+Hvad kommer ud og ind af delblokkene
+Ind- og udgangsimpedanser
+Krav til delblokkene - hvad skal de kunne kunne
+Software: Noget med hvor hurtigt ting behøver at kunne overføres 
+SW: Hvad skal vores teknologier kunne 
+
+Design: 
+Nu designer vi kredsløbet, udregner filteret osv. 
+Matematikken og udregningerne 
+Filterdimensionering
+Aktivt eller passivt filter? 
+Signal/noise-ratio 
+SW: Protokoller
+SW: Sekvensdiagrammer 
+
+Implementering: 
+Hvilke komponenter bruger vi så? 
+SW: Hvordan ser den endelige c-kode ud, på baggrund af sekvensdiagrammerne
+Et billede hvor man har skruet to hjul på en motor 
+Print-udlæg
+Hvad sker der når man lukker al elektronikken ind i en kasse der kører
+Hvad sker der når SW skal snakke sammen.. Bottlenecks, hastigheder mv. 
