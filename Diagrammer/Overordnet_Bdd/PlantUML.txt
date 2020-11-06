@@ -1,7 +1,7 @@
 @startuml
 skinparam BackgroundColor transparent
 
-title Systemdiagrams
+title Systemdiagram
 
 object "Robo-Sumo-Battle" as system
 
@@ -13,8 +13,9 @@ object "Central Computer" as central_computer
 object "SumoBot" as sumobot
     sumobot : <b>Parts:</b>
     sumobot : Motor
+    sumobot : Attack Sensor
     sumobot : PSU
-    sumobot : Mikrocontroller
+    sumobot : Microcontroller
     sumobot : Central Computer IF
 object "Styringsenhed" as styringsenhed
     styringsenhed : <b>Parts:</b>
