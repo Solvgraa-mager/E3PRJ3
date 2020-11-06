@@ -1,0 +1,22 @@
+@startuml
+participant SumoBot
+actor CC #red
+
+== Init Socket Connection ==
+
+SumoBot -> SumoBot : Create socket
+SumoBot -> CC : Connect to server
+
+== Idle ==
+loop
+    CC -> SumoBot : Direction and speed 
+    opt [Attack]
+        SumoBot -> CC : Attack
+        CC -> CC : Lives--
+    end
+end
+
+== Shutdown == 
+ 
+SumoBot -> SumoBot : Close socket
+@enduml
