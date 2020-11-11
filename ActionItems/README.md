@@ -5,7 +5,8 @@
 - [ ] Kompaktér signalbeskrivelser så den står mere skarpt kun med tal hvor der skal være tal. 
 - Resultat: Kompaktéret autist-Signalbeskrivelser
 - Deltagere: **Villiam** (Overordnet + Central Computer), **David** (Robotten), **Daniel** (Styringsenheden)
-- Status: 0%
+- Status:
+- Styringsenhed: 90%
 
 - [ ] Analyseafsnit skal indeholde reference til hvor blokkene er taget fra (evt. med billeder)
 - Resultat: Mindre saga-agtig analyseafsnit med referencer og evt. billeder.
@@ -25,8 +26,8 @@
 
 - [ ] Alle IBD’er og BDD’er strømlines ift. navngivning og signaler
 - Resultat: Alle IBD’er og BDD’er er strømlinet. 
-- Deltagere: **Villiam**
-- Status: 0%
+- Deltagere: **Villiam**, Daniel
+- Status: 100%
 
 
 ## 2020-10-07 - 2020-10-21 - 2020 - 11 - 04
