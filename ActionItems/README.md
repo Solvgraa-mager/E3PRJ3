@@ -13,10 +13,10 @@
 - Deltagere: **Simon** (Central Computer), **David**  (SumoBot), **Adam** (Styringsenhed)
 - Status: 0%
 
-- [ ] Opret en versionshistorik, så den er klar til at blive skrevet i 
+- [x] Opret en versionshistorik, så den er klar til at blive skrevet i 
 - Resultat: Versionshistorik-template
-- Deltagere: **Rasmus*
-- Status: 0%
+- Deltagere: **Rasmus**
+- Status: 100%
 
 - [ ] Tilføj til krav hvad SumoBot må veje
 - Resultat: Kravspec indeholder SumoBot’s vægt
