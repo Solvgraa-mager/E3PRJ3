@@ -1,0 +1,9 @@
+Last Modified Date & Time: 11/06/2020 14:13:51
+
+Alfonso_FFT: Alfonso_FFT.cydwr
+	cy_boot [v3.40] to [v6.0]
+
+Alfonso_FFT: TopDesign.cysch
+	Pin [v1.90] to [v2.20]
+
+

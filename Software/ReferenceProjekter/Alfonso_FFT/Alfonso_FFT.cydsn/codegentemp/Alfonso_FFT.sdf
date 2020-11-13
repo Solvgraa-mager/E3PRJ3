@@ -1,0 +1,19 @@
+(DELAYFILE
+ (SDFVERSION "IEEE 1497 4.0")
+ (DATE "2013-05-31T10:46:16Z")
+ (DESIGN "Alfonso_FFT")
+ (VENDOR "Cypress Semiconductor")
+ (PROGRAM "cydsfit")
+ (VERSION "No Version Information Found")
+ (DIVIDER .)
+ (TIMESCALE 1 ns)
+ (CELL
+  (CELLTYPE "Alfonso_FFT")
+  (INSTANCE *)
+  (DELAY
+   (ABSOLUTE
+    (INTERCONNECT Pin\(0\)_PAD Pin\(0\).pad_in (0.000:0.000:0.000))
+   )
+  )
+ )
+)
