@@ -1,0 +1,6 @@
+-F0x30 -g -blit:0x150.0x7fff 
+ -bdata:0.0x700 -bSSCParmBlk:0x00F7.0x00FF -BInterruptRAM:0 -Bvirtual_registers  
+ -Bfft_RAM 
+ -o"output/fft" 
+ ./obj/main.o   
+ D:/DOCUME~1/Nicola/Desktop/FFT_29~1/lib/libPSoc.a -LD:/PROGRA~1/CYPRES~1/PSOCDE~1/tools/lib/LMM/eightpages D:/PROGRA~1/CYPRES~1/PSOCDE~1/tools/lib/CY8C29000/cms.a  

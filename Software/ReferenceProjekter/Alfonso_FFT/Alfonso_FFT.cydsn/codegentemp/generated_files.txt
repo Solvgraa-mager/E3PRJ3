@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="us-ascii"?>
+
+<fileSet version="1" anchorPath="C:\Users\asha\Documents\PSoC3 training and projects\Q2-13\Alfonso_FFT\Alfonso_FFT.cydsn\codegentemp" xsi:schemaLocation="http://cypress.com/xsd/cypathdictionary cypathdictionary.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://cypress.com/xsd/cypathdictionary">
+  <file name="C:\Users\asha\Documents\PSoC3 training and projects\Q2-13\Alfonso_FFT\Alfonso_FFT.cydsn\codegentemp\cyfitter_cfg.h" value="NONE;" />
+  <file name="C:\Users\asha\Documents\PSoC3 training and projects\Q2-13\Alfonso_FFT\Alfonso_FFT.cydsn\codegentemp\cyfitter_cfg.c" value="ARM_C_FILE;" />
+  <file name="C:\Users\asha\Documents\PSoC3 training and projects\Q2-13\Alfonso_FFT\Alfonso_FFT.cydsn\codegentemp\protect.hex" value="NONE;" />
+  <file name="C:\Users\asha\Documents\PSoC3 training and projects\Q2-13\Alfonso_FFT\Alfonso_FFT.cydsn\codegentemp\cydevice_trm.h" value="NONE;" />
+  <file name="C:\Users\asha\Documents\PSoC3 training and projects\Q2-13\Alfonso_FFT\Alfonso_FFT.cydsn\codegentemp\cydevicegnu_trm.inc" value="NONE;" />
+  <file name="C:\Users\asha\Documents\PSoC3 training and projects\Q2-13\Alfonso_FFT\Alfonso_FFT.cydsn\codegentemp\cydevicerv_trm.inc" value="NONE;" />
+  <file name="C:\Users\asha\Documents\PSoC3 training and projects\Q2-13\Alfonso_FFT\Alfonso_FFT.cydsn\codegentemp\cyfittergnu.inc" value="NONE;" />
+  <file name="C:\Users\asha\Documents\PSoC3 training and projects\Q2-13\Alfonso_FFT\Alfonso_FFT.cydsn\codegentemp\cyfitterrv.inc" value="NONE;" />
+  <file name="C:\Users\asha\Documents\PSoC3 training and projects\Q2-13\Alfonso_FFT\Alfonso_FFT.cydsn\codegentemp\cyfitter.h" value="NONE;" />
+  <file name="C:\Users\asha\Documents\PSoC3 training and projects\Q2-13\Alfonso_FFT\Alfonso_FFT.cydsn\codegentemp\Pin.c" value="ARM_C_FILE;Pin" />
+  <file name="C:\Users\asha\Documents\PSoC3 training and projects\Q2-13\Alfonso_FFT\Alfonso_FFT.cydsn\codegentemp\Pin.h" value="NONE;Pin" />
+  <file name="C:\Users\asha\Documents\PSoC3 training and projects\Q2-13\Alfonso_FFT\Alfonso_FFT.cydsn\codegentemp\Pin_aliases.h" value="NONE;Pin" />
+  <file name="C:\Users\asha\Documents\PSoC3 training and projects\Q2-13\Alfonso_FFT\Alfonso_FFT.cydsn\codegentemp\cm0gcc.ld" value="NONE;cy_boot" />
+  <file name="C:\Users\asha\Documents\PSoC3 training and projects\Q2-13\Alfonso_FFT\Alfonso_FFT.cydsn\codegentemp\Cm0RealView.scat" value="NONE;cy_boot" />
+  <file name="C:\Users\asha\Documents\PSoC3 training and projects\Q2-13\Alfonso_FFT\Alfonso_FFT.cydsn\codegentemp\Cm0Start.c" value="ARM_C_FILE;cy_boot" />
+  <file name="C:\Users\asha\Documents\PSoC3 training and projects\Q2-13\Alfonso_FFT\Alfonso_FFT.cydsn\codegentemp\core_cm0_psoc4.h" value="NONE;cy_boot" />
+  <file name="C:\Users\asha\Documents\PSoC3 training and projects\Q2-13\Alfonso_FFT\Alfonso_FFT.cydsn\codegentemp\core_cm0.c" value="ARM_C_FILE;cy_boot" />
+  <file name="C:\Users\asha\Documents\PSoC3 training and projects\Q2-13\Alfonso_FFT\Alfonso_FFT.cydsn\codegentemp\core_cm0.h" value="NONE;cy_boot" />
+  <file name="C:\Users\asha\Documents\PSoC3 training and projects\Q2-13\Alfonso_FFT\Alfonso_FFT.cydsn\codegentemp\CyBootAsmGnu.s" value="GNU_ARM_ASM_FILE;cy_boot" />
+  <file name="C:\Users\asha\Documents\PSoC3 training and projects\Q2-13\Alfonso_FFT\Alfonso_FFT.cydsn\codegentemp\CyBootAsmRv.s" value="REALVIEW_ARM_ASM_FILE;cy_boot" />
+  <file name="C:\Users\asha\Documents\PSoC3 training and projects\Q2-13\Alfonso_FFT\Alfonso_FFT.cydsn\codegentemp\CyFlash.c" value="ARM_C_FILE;cy_boot" />
+  <file name="C:\Users\asha\Documents\PSoC3 training and projects\Q2-13\Alfonso_FFT\Alfonso_FFT.cydsn\codegentemp\CyFlash.h" value="NONE;cy_boot" />
+  <file name="C:\Users\asha\Documents\PSoC3 training and projects\Q2-13\Alfonso_FFT\Alfonso_FFT.cydsn\codegentemp\CyLib.c" value="ARM_C_FILE;cy_boot" />
+  <file name="C:\Users\asha\Documents\PSoC3 training and projects\Q2-13\Alfonso_FFT\Alfonso_FFT.cydsn\codegentemp\CyLib.h" value="NONE;cy_boot" />
+  <file name="C:\Users\asha\Documents\PSoC3 training and projects\Q2-13\Alfonso_FFT\Alfonso_FFT.cydsn\codegentemp\cyPm.c" value="ARM_C_FILE;cy_boot" />
+  <file name="C:\Users\asha\Documents\PSoC3 training and projects\Q2-13\Alfonso_FFT\Alfonso_FFT.cydsn\codegentemp\cyPm.h" value="NONE;cy_boot" />
+  <file name="C:\Users\asha\Documents\PSoC3 training and projects\Q2-13\Alfonso_FFT\Alfonso_FFT.cydsn\codegentemp\cytypes.h" value="NONE;cy_boot" />
+  <file name="C:\Users\asha\Documents\PSoC3 training and projects\Q2-13\Alfonso_FFT\Alfonso_FFT.cydsn\codegentemp\cyutils.c" value="ARM_C_FILE;cy_boot" />
+  <file name="C:\Users\asha\Documents\PSoC3 training and projects\Q2-13\Alfonso_FFT\Alfonso_FFT.cydsn\codegentemp\cypins.h" value="NONE;cy_boot" />
+  <file name="C:\Users\asha\Documents\PSoC3 training and projects\Q2-13\Alfonso_FFT\Alfonso_FFT.cydsn\codegentemp\project.h" value="NONE;" />
+</fileSet>

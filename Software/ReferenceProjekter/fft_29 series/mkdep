@@ -1,0 +1,10 @@
+-a -f project.dep -p./lib/obj/ -o.o -- -ID:/PROGRA~1/CYPRES~1/PSOCDE~1/tools/include -I./lib -ID:/PROGRA~1/CYPRES~1/PSOCDE~1/tools/include/CY8C29~1 -- 
+lib/delsig11_1.asm   
+lib/delsig11_1int.asm   
+lib/lcd_1.asm   
+lib/pga_1.asm   
+lib/psocconfig.asm   
+lib/psocconfigtbl.asm   
+lib/uart_1.asm   
+lib/uart_1int.asm   
+lib/uart_1plus.asm 

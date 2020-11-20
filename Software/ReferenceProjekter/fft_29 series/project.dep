@@ -1,0 +1,38 @@
+# DO NOT DELETE
+./obj/boot.o :  D:/PROGRA~1/CYPRES~1/PSOCDE~1/tools/include/CY8C29~1/m8c.inc\
+   D:/PROGRA~1/CYPRES~1/PSOCDE~1/tools/include/CY8C29~1/m8ssc.inc\
+   D:\DOCUME~1\Nicola\Desktop\FFT_29~1\lib\GLOBAL~1.INC\
+   D:\DOCUME~1\Nicola\Desktop\FFT_29~1\memory.inc
+./obj/main.o :  ./lib/DELSIG~1.H ./lib/LCD_1.h ./lib/PGA_1.h\
+   ./lib/PSoCAPI.h ./lib/UART_1.h\
+   D:/PROGRA~1/CYPRES~1/PSOCDE~1/tools/include/CY8C29~1/M8C.h\
+   D:/PROGRA~1/CYPRES~1/PSOCDE~1/tools/include/CY8C29~1/m8c.h\
+   D:/PROGRA~1/CYPRES~1/PSOCDE~1/tools/include/_const.h\
+   D:/PROGRA~1/CYPRES~1/PSOCDE~1/tools/include/limits.h\
+   D:/PROGRA~1/CYPRES~1/PSOCDE~1/tools/include/math.h\
+   D:/PROGRA~1/CYPRES~1/PSOCDE~1/tools/include/stdlib.h\
+   D:\DOCUME~1\Nicola\Desktop\FFT_29~1\fft.h
+./lib/obj/delsig11_1.o :  ./lib/DELSIG~1.INC\
+   D:/PROGRA~1/CYPRES~1/PSOCDE~1/tools/include/CY8C29~1/m8c.inc\
+   D:\DOCUME~1\Nicola\Desktop\FFT_29~1\memory.inc
+./lib/obj/delsig11_1int.o :  ./lib/DELSIG~1.INC\
+   D:/PROGRA~1/CYPRES~1/PSOCDE~1/tools/include/CY8C29~1/m8c.inc\
+   D:\DOCUME~1\Nicola\Desktop\FFT_29~1\memory.inc
+./lib/obj/lcd_1.o :  ./lib/LCD_1.inc\
+   D:/PROGRA~1/CYPRES~1/PSOCDE~1/tools/include/CY8C29~1/m8c.inc\
+   D:\DOCUME~1\Nicola\Desktop\FFT_29~1\memory.inc
+./lib/obj/pga_1.o :  ./lib/PGA_1.inc\
+   D:/PROGRA~1/CYPRES~1/PSOCDE~1/tools/include/CY8C29~1/m8c.inc\
+   D:\DOCUME~1\Nicola\Desktop\FFT_29~1\memory.inc
+./lib/obj/psocconfig.o :  ./lib/GLOBAL~1.INC\
+   D:/PROGRA~1/CYPRES~1/PSOCDE~1/tools/include/CY8C29~1/m8c.inc\
+   D:\DOCUME~1\Nicola\Desktop\FFT_29~1\memory.inc
+./lib/obj/psocconfigtbl.o : \
+   D:/PROGRA~1/CYPRES~1/PSOCDE~1/tools/include/CY8C29~1/m8c.inc
+./lib/obj/uart_1.o :  ./lib/UART_1.inc\
+   D:/PROGRA~1/CYPRES~1/PSOCDE~1/tools/include/CY8C29~1/m8c.inc\
+   D:\DOCUME~1\Nicola\Desktop\FFT_29~1\memory.inc
+./lib/obj/uart_1int.o :  ./lib/UART_1.inc\
+   D:/PROGRA~1/CYPRES~1/PSOCDE~1/tools/include/CY8C29~1/m8c.inc\
+   D:\DOCUME~1\Nicola\Desktop\FFT_29~1\memory.inc
+./lib/obj/uart_1plus.o : 

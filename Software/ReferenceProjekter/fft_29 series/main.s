@@ -1,0 +1,3573 @@
+	cpu LMM
+	.module main.c
+	.area data(ram, con, rel)
+_mod::
+	.word 0x0,0x0
+	.word 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+	.word 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+	.word 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+	.word 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+	.word 0,0,0,0,0
+	.byte 0,0
+	.dbfile ./fft.h
+	.dbsym e mod _mod A[256:64]D
+	.area data(ram, con, rel)
+	.dbfile ./fft.h
+	.area data(ram, con, rel)
+	.dbfile ./fft.h
+_data_re::
+	.word 0x0,0x0
+	.word 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+	.word 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+	.word 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+	.word 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+	.word 0,0,0,0,0
+	.byte 0,0
+	.dbsym e data_re _data_re A[256:64]D
+	.area data(ram, con, rel)
+	.dbfile ./fft.h
+	.area data(ram, con, rel)
+	.dbfile ./fft.h
+_data_imm::
+	.word 0x0,0x0
+	.word 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+	.word 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+	.word 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+	.word 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+	.word 0,0,0,0,0
+	.byte 0,0
+	.dbsym e data_imm _data_imm A[256:64]D
+	.area data(ram, con, rel)
+	.dbfile ./fft.h
+	.area text(rom, con, rel)
+	.dbfile ./fft.h
+	.dbfunc e FFT _FFT fS
+;             ty -> X+68
+;             tx -> X+64
+;             i2 -> X+60
+;              l -> X+56
+;              z -> X+52
+;             c2 -> X+48
+;             c1 -> X+44
+;              k -> X+40
+;              j -> X+36
+;             l2 -> X+32
+;              n -> X+28
+;             l1 -> X+24
+;             u2 -> X+20
+;             u1 -> X+16
+;             t2 -> X+12
+;             t1 -> X+8
+;             i1 -> X+4
+;              i -> X+0
+;              y -> X-13
+;              x -> X-11
+;              m -> X-9
+;            dir -> X-5
+_FFT::
+	.dbline -1
+	push X
+	mov X,SP
+	add SP,74
+	.dbline 14
+; //----------------------------------------------------------------------------
+; // VC1 provides a sample clock of 3 MHz to the DELTA_SIGMA-11bit, 
+; // resulting in a sample rate of 7.8 Ksamples per second. 
+; // VC3 generates the baud clock for the UART by dividing 24 MHz by 156. The UART internally 
+; // divides VC3 by 8 resulting in a baud rate of 19,200 bps. The serial data is 
+; // sent as ASCII text with 1 start bit, 8 data bits, 1 stop bit and no parity. 
+; // This data may be monitored using most terminal software. 
+; //
+; //
+; // PSoCEval1 Connections:
+; //      port0_pin1 -> External Signal = ADC Input (0-Vdd)
+; //      port1_pin6 -> RX = RS232 RX
+; //      port2_pin7 -> TX = RS232 TX
+; //
+	.dbline 22
+; //-----------------------------------------------------------------------------
+; 
+; 
+; #include <m8c.h>                         // part specific constants and macros
+; #include "PSoCAPI.h"                     // PSoC API definitions for all User Modules
+; #include "stdlib.h"
+; #include "fft.h"                     // PSoC API definitions for all User Modules
+; 	
+	mov [X+28],0
+	mov [X+29],0
+	mov [X+30],0
+	mov [X+31],1
+	.dbline 23
+; #define RESOLUTION 12                    // ADC resolution
+	mov [X+0],0
+	mov [X+1],0
+	mov [X+2],0
+	mov [X+3],0
+	xjmp L5
+L2:
+	.dbline 24
+	asl [X+31]
+	rlc [X+30]
+	rlc [X+29]
+	rlc [X+28]
+L3:
+	.dbline 23
+	add [X+3],1
+	adc [X+2],0
+	adc [X+1],0
+	adc [X+0],0
+L5:
+	.dbline 23
+	mov A,[X+3]
+	sub A,[X-6]
+	mov A,[X+2]
+	sbb A,[X-7]
+	mov A,[X+1]
+	sbb A,[X-8]
+	mov A,[X-9]
+	xor A,-128
+	mov REG[0xd0],>__r0
+	mov [__rX],A
+	mov A,[X+0]
+	xor A,-128
+	sbb A,[__rX]
+	jc L2
+X0:
+	.dbline 27
+; #define SCALE_BG  (( 1 << RESOLUTION)/55) // BarGraph scale factor
+; 
+; int  iResult;                            // ADC result variable
+; char df[4];
+	mov REG[0xd0],>__r0
+	mov A,[X+28]
+	mov [__r0],A
+	mov A,[X+29]
+	mov [__r1],A
+	mov A,[X+30]
+	mov [__r2],A
+	mov A,[X+31]
+	mov [__r3],A
+	asr [__r0]
+	rrc [__r1]
+	rrc [__r2]
+	rrc [__r3]
+	mov A,[__r0]
+	mov [X+60],A
+	mov A,[__r1]
+	mov [X+61],A
+	mov A,[__r2]
+	mov [X+62],A
+	mov A,[__r3]
+	mov [X+63],A
+	.dbline 28
+; double max,zero=0;
+	mov [X+36],0
+	mov [X+37],0
+	mov [X+38],0
+	mov [X+39],0
+	.dbline 29
+	mov [X+0],0
+	mov [X+1],0
+	mov [X+2],0
+	mov [X+3],0
+	xjmp L9
+L6:
+	.dbline 29
+; unsigned int i=0;         //index
+	.dbline 30
+; unsigned int ind;         
+	mov A,[X+3]
+	sub A,[X+39]
+	mov A,[X+2]
+	sbb A,[X+38]
+	mov A,[X+1]
+	sbb A,[X+37]
+	mov A,[X+36]
+	xor A,-128
+	mov REG[0xd0],>__r0
+	mov [__rX],A
+	mov A,[X+0]
+	xor A,-128
+	sbb A,[__rX]
+	jnc L10
+X1:
+	.dbline 30
+	.dbline 31
+; unsigned int endl=65535;  //uart tag
+	mov REG[0xd0],>__r0
+	mov A,[X+0]
+	mov [__r0],A
+	mov A,[X+1]
+	mov [__r1],A
+	mov A,[X+2]
+	mov [__r2],A
+	mov A,[X+3]
+	mov [__r3],A
+	mov A,2
+X2:
+	mov REG[0xd0],>__r0
+	asl [__r3]
+	rlc [__r2]
+	rlc [__r1]
+	rlc [__r0]
+	dec A
+	jnz X2
+	mov A,[__r3]
+	mov [__r1],A
+	mov A,[__r2]
+	mov [__r0],A
+	mov A,[X-10]
+	add [__r1],A
+	mov A,[X-11]
+	adc [__r0],A
+	mov A,[__r0]
+	mov REG[0xd4],A
+	mvi A,[__r1]
+	mov [X+64],A
+	mvi A,[__r1]
+	mov [X+65],A
+	mvi A,[__r1]
+	mov [X+66],A
+	mvi A,[__r1]
+	mov [X+67],A
+	.dbline 32
+; 
+	mov A,[X+0]
+	mov [__r0],A
+	mov A,[X+1]
+	mov [__r1],A
+	mov A,[X+2]
+	mov [__r2],A
+	mov A,[X+3]
+	mov [__r3],A
+	mov A,2
+X3:
+	mov REG[0xd0],>__r0
+	asl [__r3]
+	rlc [__r2]
+	rlc [__r1]
+	rlc [__r0]
+	dec A
+	jnz X3
+	mov A,[__r3]
+	mov [__r1],A
+	mov A,[__r2]
+	mov [__r0],A
+	mov A,[X-12]
+	add [__r1],A
+	mov A,[X-13]
+	adc [__r0],A
+	mov A,[__r0]
+	mov REG[0xd4],A
+	mvi A,[__r1]
+	mov [X+68],A
+	mvi A,[__r1]
+	mov [X+69],A
+	mvi A,[__r1]
+	mov [X+70],A
+	mvi A,[__r1]
+	mov [X+71],A
+	.dbline 33
+; 
+	mov A,[X+36]
+	mov [__r0],A
+	mov A,[X+37]
+	mov [__r1],A
+	mov A,[X+38]
+	mov [__r2],A
+	mov A,[X+39]
+	mov [__r3],A
+	mov A,2
+X4:
+	mov REG[0xd0],>__r0
+	asl [__r3]
+	rlc [__r2]
+	rlc [__r1]
+	rlc [__r0]
+	dec A
+	jnz X4
+	mov A,[__r3]
+	mov [__r1],A
+	mov A,[__r2]
+	mov [__r0],A
+	mov A,[X-10]
+	add [__r1],A
+	mov A,[X-11]
+	adc [__r0],A
+	mov A,[__r0]
+	mov REG[0xd4],A
+	mvi A,[__r1]
+	mov [__r4],A
+	mvi A,[__r1]
+	mov [__r5],A
+	mvi A,[__r1]
+	mov [__r6],A
+	mvi A,[__r1]
+	mov [__r7],A
+	mov A,[X+0]
+	mov [__r0],A
+	mov A,[X+1]
+	mov [__r1],A
+	mov A,[X+2]
+	mov [__r2],A
+	mov A,[X+3]
+	mov [__r3],A
+	mov A,2
+X5:
+	mov REG[0xd0],>__r0
+	asl [__r3]
+	rlc [__r2]
+	rlc [__r1]
+	rlc [__r0]
+	dec A
+	jnz X5
+	mov A,[__r3]
+	mov [__r1],A
+	mov A,[__r2]
+	mov [__r0],A
+	mov A,[X-10]
+	add [__r1],A
+	mov A,[X-11]
+	adc [__r0],A
+	mov A,[__r0]
+	mov REG[0xd5],A
+	mov A,[__r4]
+	mvi [__r1],A
+	mov A,[__r5]
+	mvi [__r1],A
+	mov A,[__r6]
+	mvi [__r1],A
+	mov A,[__r7]
+	mvi [__r1],A
+	.dbline 34
+; // Delta-Sigma-11bit: 7.8 ksps
+	mov A,[X+36]
+	mov [__r0],A
+	mov A,[X+37]
+	mov [__r1],A
+	mov A,[X+38]
+	mov [__r2],A
+	mov A,[X+39]
+	mov [__r3],A
+	mov A,2
+X6:
+	mov REG[0xd0],>__r0
+	asl [__r3]
+	rlc [__r2]
+	rlc [__r1]
+	rlc [__r0]
+	dec A
+	jnz X6
+	mov A,[__r3]
+	mov [__r1],A
+	mov A,[__r2]
+	mov [__r0],A
+	mov A,[X-12]
+	add [__r1],A
+	mov A,[X-13]
+	adc [__r0],A
+	mov A,[__r0]
+	mov REG[0xd4],A
+	mvi A,[__r1]
+	mov [__r4],A
+	mvi A,[__r1]
+	mov [__r5],A
+	mvi A,[__r1]
+	mov [__r6],A
+	mvi A,[__r1]
+	mov [__r7],A
+	mov A,[X+0]
+	mov [__r0],A
+	mov A,[X+1]
+	mov [__r1],A
+	mov A,[X+2]
+	mov [__r2],A
+	mov A,[X+3]
+	mov [__r3],A
+	mov A,2
+X7:
+	mov REG[0xd0],>__r0
+	asl [__r3]
+	rlc [__r2]
+	rlc [__r1]
+	rlc [__r0]
+	dec A
+	jnz X7
+	mov A,[__r3]
+	mov [__r1],A
+	mov A,[__r2]
+	mov [__r0],A
+	mov A,[X-12]
+	add [__r1],A
+	mov A,[X-13]
+	adc [__r0],A
+	mov A,[__r0]
+	mov REG[0xd5],A
+	mov A,[__r4]
+	mvi [__r1],A
+	mov A,[__r5]
+	mvi [__r1],A
+	mov A,[__r6]
+	mvi [__r1],A
+	mov A,[__r7]
+	mvi [__r1],A
+	.dbline 35
+; unsigned int N_samples=7800;
+	mov A,[X+36]
+	mov [__r0],A
+	mov A,[X+37]
+	mov [__r1],A
+	mov A,[X+38]
+	mov [__r2],A
+	mov A,[X+39]
+	mov [__r3],A
+	mov A,2
+X8:
+	mov REG[0xd0],>__r0
+	asl [__r3]
+	rlc [__r2]
+	rlc [__r1]
+	rlc [__r0]
+	dec A
+	jnz X8
+	mov A,[__r3]
+	mov [__r1],A
+	mov A,[__r2]
+	mov [__r0],A
+	mov A,[X-10]
+	add [__r1],A
+	mov A,[X-11]
+	adc [__r0],A
+	mov A,[__r0]
+	mov REG[0xd5],A
+	mov A,[X+64]
+	mvi [__r1],A
+	mov A,[X+65]
+	mvi [__r1],A
+	mov A,[X+66]
+	mvi [__r1],A
+	mov A,[X+67]
+	mvi [__r1],A
+	.dbline 36
+; double  time;    // time record
+	mov A,[X+36]
+	mov [__r0],A
+	mov A,[X+37]
+	mov [__r1],A
+	mov A,[X+38]
+	mov [__r2],A
+	mov A,[X+39]
+	mov [__r3],A
+	mov A,2
+X9:
+	mov REG[0xd0],>__r0
+	asl [__r3]
+	rlc [__r2]
+	rlc [__r1]
+	rlc [__r0]
+	dec A
+	jnz X9
+	mov A,[__r3]
+	mov [__r1],A
+	mov A,[__r2]
+	mov [__r0],A
+	mov A,[X-12]
+	add [__r1],A
+	mov A,[X-13]
+	adc [__r0],A
+	mov A,[__r0]
+	mov REG[0xd5],A
+	mov A,[X+68]
+	mvi [__r1],A
+	mov A,[X+69]
+	mvi [__r1],A
+	mov A,[X+70]
+	mvi [__r1],A
+	mov A,[X+71]
+	mvi [__r1],A
+	.dbline 37
+; double delta_f;  // frequency sampling interval
+L10:
+	.dbline 38
+; 
+	mov A,[X+60]
+	mov [X+40],A
+	mov A,[X+61]
+	mov [X+41],A
+	mov A,[X+62]
+	mov [X+42],A
+	mov A,[X+63]
+	mov [X+43],A
+	xjmp L13
+L12:
+	.dbline 39
+	.dbline 40
+	mov A,[X+43]
+	sub [X+39],A
+	mov A,[X+42]
+	sbb [X+38],A
+	mov A,[X+41]
+	sbb [X+37],A
+	mov A,[X+40]
+	sbb [X+36],A
+	.dbline 41
+	asr [X+40]
+	rrc [X+41]
+	rrc [X+42]
+	rrc [X+43]
+	.dbline 42
+L13:
+	.dbline 39
+	mov A,[X+39]
+	sub A,[X+43]
+	mov A,[X+38]
+	sbb A,[X+42]
+	mov A,[X+37]
+	sbb A,[X+41]
+	mov A,[X+40]
+	xor A,-128
+	mov REG[0xd0],>__r0
+	mov [__rX],A
+	mov A,[X+36]
+	xor A,-128
+	sbb A,[__rX]
+	jnc L12
+X10:
+	.dbline 43
+	mov A,[X+43]
+	add [X+39],A
+	mov A,[X+42]
+	adc [X+38],A
+	mov A,[X+41]
+	adc [X+37],A
+	mov A,[X+40]
+	adc [X+36],A
+	.dbline 44
+L7:
+	.dbline 29
+	add [X+3],1
+	adc [X+2],0
+	adc [X+1],0
+	adc [X+0],0
+L9:
+	.dbline 29
+	mov REG[0xd0],>__r0
+	mov A,[X+31]
+	sub A,1
+	mov [__r3],A
+	mov A,[X+30]
+	sbb A,0
+	mov [__r2],A
+	mov A,[X+29]
+	sbb A,0
+	mov [__r1],A
+	mov A,[X+28]
+	sbb A,0
+	mov [__r0],A
+	mov A,[X+3]
+	sub A,[__r3]
+	mov A,[X+2]
+	sbb A,[__r2]
+	mov A,[X+1]
+	sbb A,[__r1]
+	mov A,[__r0]
+	xor A,-128
+	mov [__rX],A
+	mov A,[X+0]
+	xor A,-128
+	sbb A,[__rX]
+	jc L6
+X11:
+	.dbline 47
+; void UART_print_re_imm ()  //send REAL and IMAGINARY parts data
+; {  
+;      UART_1_CPutString("Real Part\t\tImaginary Part\n");
+;      for(i=0;i<N_points;i++)
+;      {
+;        UART_1_PutSHexInt(data_re[i]);
+;         UART_1_CPutString("\t\t");
+;         UART_1_PutSHexInt(data_imm[i]);
+;       UART_1_PutCRLF();  
+	mov [X+44],-65
+	mov [X+45],-128
+	mov [X+46],0
+	mov [X+47],0
+	.dbline 48
+;       }
+	mov [X+48],0
+	mov [X+49],0
+	mov [X+50],0
+	mov [X+51],0
+	.dbline 49
+;     }
+	mov [X+32],0
+	mov [X+33],0
+	mov [X+34],0
+	mov [X+35],1
+	.dbline 50
+	mov [X+56],0
+	mov [X+57],0
+	mov [X+58],0
+	mov [X+59],0
+	xjmp L18
+L15:
+	.dbline 50
+; 
+	.dbline 51
+; void UART_print_mod ()    //send ABSOLUTE VALUE data
+	mov A,[X+32]
+	mov [X+24],A
+	mov A,[X+33]
+	mov [X+25],A
+	mov A,[X+34]
+	mov [X+26],A
+	mov A,[X+35]
+	mov [X+27],A
+	.dbline 52
+; {
+	asl [X+35]
+	rlc [X+34]
+	rlc [X+33]
+	rlc [X+32]
+	.dbline 53
+;    UART_1_PutSHexInt(0);
+	mov [X+16],63
+	mov [X+17],-128
+	mov [X+18],0
+	mov [X+19],0
+	.dbline 54
+;    for(i=0;i<N_points;i++)
+	mov [X+20],0
+	mov [X+21],0
+	mov [X+22],0
+	mov [X+23],0
+	.dbline 55
+	mov [X+36],0
+	mov [X+37],0
+	mov [X+38],0
+	mov [X+39],0
+	xjmp L22
+L19:
+	.dbline 55
+;    {
+	.dbline 56
+	mov A,[X+36]
+	mov [X+0],A
+	mov A,[X+37]
+	mov [X+1],A
+	mov A,[X+38]
+	mov [X+2],A
+	mov A,[X+39]
+	mov [X+3],A
+	xjmp L26
+L23:
+	.dbline 56
+	.dbline 57
+	mov A,[X+3]
+	add A,[X+27]
+	mov [X+7],A
+	mov A,[X+2]
+	adc A,[X+26]
+	mov [X+6],A
+	mov A,[X+1]
+	adc A,[X+25]
+	mov [X+5],A
+	mov A,[X+0]
+	adc A,[X+24]
+	mov [X+4],A
+	.dbline 58
+	mov REG[0xd0],>__r0
+	mov A,[X+4]
+	mov [__r0],A
+	mov A,[X+5]
+	mov [__r1],A
+	mov A,[X+6]
+	mov [__r2],A
+	mov A,[X+7]
+	mov [__r3],A
+	mov A,2
+X12:
+	mov REG[0xd0],>__r0
+	asl [__r3]
+	rlc [__r2]
+	rlc [__r1]
+	rlc [__r0]
+	dec A
+	jnz X12
+	mov A,[__r3]
+	mov [__r1],A
+	mov A,[__r2]
+	mov [__r0],A
+	mov A,[__r1]
+	add A,[X-12]
+	mov [__r3],A
+	mov A,[__r0]
+	adc A,[X-13]
+	mov REG[0xd4],A
+	mvi A,[__r3]
+	mov [__r4],A
+	mvi A,[__r3]
+	mov [__r5],A
+	mvi A,[__r3]
+	mov [__r6],A
+	mvi A,[__r3]
+	mov [__r7],A
+	mov A,[__r4]
+	push A
+	mov A,[__r5]
+	push A
+	mov A,[__r6]
+	push A
+	mov A,[__r7]
+	push A
+	mov A,[X+20]
+	push A
+	mov A,[X+21]
+	push A
+	mov A,[X+22]
+	push A
+	mov A,[X+23]
+	push A
+	xcall __fpmul
+	pop A
+	mov [__r7],A
+	pop A
+	mov [__r6],A
+	pop A
+	mov [__r5],A
+	pop A
+	mov [__r4],A
+	add SP,-4
+	mov A,[X-10]
+	add [__r1],A
+	mov A,[X-11]
+	adc [__r0],A
+	mov A,[__r0]
+	mov REG[0xd4],A
+	mvi A,[__r1]
+	mov [__r8],A
+	mvi A,[__r1]
+	mov [__r9],A
+	mvi A,[__r1]
+	mov [__r10],A
+	mvi A,[__r1]
+	mov [__r11],A
+	mov A,[__r8]
+	push A
+	mov A,[__r9]
+	push A
+	mov A,[__r10]
+	push A
+	mov A,[__r11]
+	push A
+	mov A,[X+16]
+	push A
+	mov A,[X+17]
+	push A
+	mov A,[X+18]
+	push A
+	mov A,[X+19]
+	push A
+	xcall __fpmul
+	pop A
+	mov [__r3],A
+	pop A
+	mov [__r2],A
+	pop A
+	mov [__r1],A
+	pop A
+	mov [__r0],A
+	add SP,-4
+	mov A,[__r4]
+	push A
+	mov A,[__r5]
+	push A
+	mov A,[__r6]
+	push A
+	mov A,[__r7]
+	push A
+	mov A,[__r0]
+	push A
+	mov A,[__r1]
+	push A
+	mov A,[__r2]
+	push A
+	mov A,[__r3]
+	push A
+	xcall __fpsub
+	pop A
+	mov [X+11],A
+	pop A
+	mov [X+10],A
+	pop A
+	mov [X+9],A
+	pop A
+	mov [X+8],A
+	add SP,-4
+	.dbline 59
+	mov A,[X+4]
+	mov [__r0],A
+	mov A,[X+5]
+	mov [__r1],A
+	mov A,[X+6]
+	mov [__r2],A
+	mov A,[X+7]
+	mov [__r3],A
+	mov A,2
+X13:
+	mov REG[0xd0],>__r0
+	asl [__r3]
+	rlc [__r2]
+	rlc [__r1]
+	rlc [__r0]
+	dec A
+	jnz X13
+	mov A,[__r3]
+	mov [__r1],A
+	mov A,[__r2]
+	mov [__r0],A
+	mov A,[__r1]
+	add A,[X-10]
+	mov [__r3],A
+	mov A,[__r0]
+	adc A,[X-11]
+	mov REG[0xd4],A
+	mvi A,[__r3]
+	mov [__r4],A
+	mvi A,[__r3]
+	mov [__r5],A
+	mvi A,[__r3]
+	mov [__r6],A
+	mvi A,[__r3]
+	mov [__r7],A
+	mov A,[__r4]
+	push A
+	mov A,[__r5]
+	push A
+	mov A,[__r6]
+	push A
+	mov A,[__r7]
+	push A
+	mov A,[X+20]
+	push A
+	mov A,[X+21]
+	push A
+	mov A,[X+22]
+	push A
+	mov A,[X+23]
+	push A
+	xcall __fpmul
+	pop A
+	mov [__r7],A
+	pop A
+	mov [__r6],A
+	pop A
+	mov [__r5],A
+	pop A
+	mov [__r4],A
+	add SP,-4
+	mov A,[X-12]
+	add [__r1],A
+	mov A,[X-13]
+	adc [__r0],A
+	mov A,[__r0]
+	mov REG[0xd4],A
+	mvi A,[__r1]
+	mov [__r8],A
+	mvi A,[__r1]
+	mov [__r9],A
+	mvi A,[__r1]
+	mov [__r10],A
+	mvi A,[__r1]
+	mov [__r11],A
+	mov A,[__r8]
+	push A
+	mov A,[__r9]
+	push A
+	mov A,[__r10]
+	push A
+	mov A,[__r11]
+	push A
+	mov A,[X+16]
+	push A
+	mov A,[X+17]
+	push A
+	mov A,[X+18]
+	push A
+	mov A,[X+19]
+	push A
+	xcall __fpmul
+	pop A
+	mov [__r3],A
+	pop A
+	mov [__r2],A
+	pop A
+	mov [__r1],A
+	pop A
+	mov [__r0],A
+	add SP,-4
+	mov A,[__r4]
+	push A
+	mov A,[__r5]
+	push A
+	mov A,[__r6]
+	push A
+	mov A,[__r7]
+	push A
+	mov A,[__r0]
+	push A
+	mov A,[__r1]
+	push A
+	mov A,[__r2]
+	push A
+	mov A,[__r3]
+	push A
+	xcall __fpadd
+	pop A
+	mov [X+15],A
+	pop A
+	mov [X+14],A
+	pop A
+	mov [X+13],A
+	pop A
+	mov [X+12],A
+	add SP,-4
+	.dbline 60
+	mov A,[X+0]
+	mov [__r0],A
+	mov A,[X+1]
+	mov [__r1],A
+	mov A,[X+2]
+	mov [__r2],A
+	mov A,[X+3]
+	mov [__r3],A
+	mov A,2
+X14:
+	mov REG[0xd0],>__r0
+	asl [__r3]
+	rlc [__r2]
+	rlc [__r1]
+	rlc [__r0]
+	dec A
+	jnz X14
+	mov A,[__r3]
+	mov [__r1],A
+	mov A,[__r2]
+	mov [__r0],A
+	mov A,[X-10]
+	add [__r1],A
+	mov A,[X-11]
+	adc [__r0],A
+	mov A,[__r0]
+	mov REG[0xd4],A
+	mvi A,[__r1]
+	mov [__r4],A
+	mvi A,[__r1]
+	mov [__r5],A
+	mvi A,[__r1]
+	mov [__r6],A
+	mvi A,[__r1]
+	mov [__r7],A
+	mov A,[X+8]
+	push A
+	mov A,[X+9]
+	push A
+	mov A,[X+10]
+	push A
+	mov A,[X+11]
+	push A
+	mov A,[__r4]
+	push A
+	mov A,[__r5]
+	push A
+	mov A,[__r6]
+	push A
+	mov A,[__r7]
+	push A
+	xcall __fpsub
+	pop A
+	mov [__r3],A
+	pop A
+	mov [__r2],A
+	pop A
+	mov [__r1],A
+	pop A
+	mov [__r0],A
+	add SP,-4
+	mov A,[X+4]
+	mov [__r4],A
+	mov A,[X+5]
+	mov [__r5],A
+	mov A,[X+6]
+	mov [__r6],A
+	mov A,[X+7]
+	mov [__r7],A
+	mov A,2
+X15:
+	mov REG[0xd0],>__r0
+	asl [__r7]
+	rlc [__r6]
+	rlc [__r5]
+	rlc [__r4]
+	dec A
+	jnz X15
+	mov A,[__r7]
+	mov [__r5],A
+	mov A,[__r6]
+	mov [__r4],A
+	mov A,[X-10]
+	add [__r5],A
+	mov A,[X-11]
+	adc [__r4],A
+	mov A,[__r4]
+	mov REG[0xd5],A
+	mov A,[__r0]
+	mvi [__r5],A
+	mov A,[__r1]
+	mvi [__r5],A
+	mov A,[__r2]
+	mvi [__r5],A
+	mov A,[__r3]
+	mvi [__r5],A
+	.dbline 61
+	mov A,[X+0]
+	mov [__r0],A
+	mov A,[X+1]
+	mov [__r1],A
+	mov A,[X+2]
+	mov [__r2],A
+	mov A,[X+3]
+	mov [__r3],A
+	mov A,2
+X16:
+	mov REG[0xd0],>__r0
+	asl [__r3]
+	rlc [__r2]
+	rlc [__r1]
+	rlc [__r0]
+	dec A
+	jnz X16
+	mov A,[__r3]
+	mov [__r1],A
+	mov A,[__r2]
+	mov [__r0],A
+	mov A,[X-12]
+	add [__r1],A
+	mov A,[X-13]
+	adc [__r0],A
+	mov A,[__r0]
+	mov REG[0xd4],A
+	mvi A,[__r1]
+	mov [__r4],A
+	mvi A,[__r1]
+	mov [__r5],A
+	mvi A,[__r1]
+	mov [__r6],A
+	mvi A,[__r1]
+	mov [__r7],A
+	mov A,[X+12]
+	push A
+	mov A,[X+13]
+	push A
+	mov A,[X+14]
+	push A
+	mov A,[X+15]
+	push A
+	mov A,[__r4]
+	push A
+	mov A,[__r5]
+	push A
+	mov A,[__r6]
+	push A
+	mov A,[__r7]
+	push A
+	xcall __fpsub
+	pop A
+	mov [__r3],A
+	pop A
+	mov [__r2],A
+	pop A
+	mov [__r1],A
+	pop A
+	mov [__r0],A
+	add SP,-4
+	mov A,[X+4]
+	mov [__r4],A
+	mov A,[X+5]
+	mov [__r5],A
+	mov A,[X+6]
+	mov [__r6],A
+	mov A,[X+7]
+	mov [__r7],A
+	mov A,2
+X17:
+	mov REG[0xd0],>__r0
+	asl [__r7]
+	rlc [__r6]
+	rlc [__r5]
+	rlc [__r4]
+	dec A
+	jnz X17
+	mov A,[__r7]
+	mov [__r5],A
+	mov A,[__r6]
+	mov [__r4],A
+	mov A,[X-12]
+	add [__r5],A
+	mov A,[X-13]
+	adc [__r4],A
+	mov A,[__r4]
+	mov REG[0xd5],A
+	mov A,[__r0]
+	mvi [__r5],A
+	mov A,[__r1]
+	mvi [__r5],A
+	mov A,[__r2]
+	mvi [__r5],A
+	mov A,[__r3]
+	mvi [__r5],A
+	.dbline 62
+	mov A,[X+0]
+	mov [__r0],A
+	mov A,[X+1]
+	mov [__r1],A
+	mov A,[X+2]
+	mov [__r2],A
+	mov A,[X+3]
+	mov [__r3],A
+	mov A,2
+X18:
+	mov REG[0xd0],>__r0
+	asl [__r3]
+	rlc [__r2]
+	rlc [__r1]
+	rlc [__r0]
+	dec A
+	jnz X18
+	mov A,[__r3]
+	mov [__r1],A
+	mov A,[__r2]
+	mov [__r0],A
+	mov A,[X-10]
+	add [__r1],A
+	mov A,[X-11]
+	adc [__r0],A
+	mov A,[__r0]
+	mov REG[0xd4],A
+	mvi A,[__r1]
+	mov [__r4],A
+	mvi A,[__r1]
+	mov [__r5],A
+	mvi A,[__r1]
+	mov [__r6],A
+	mvi A,[__r1]
+	sub [__r1],4
+	mov [__r7],A
+	mov A,[X+8]
+	push A
+	mov A,[X+9]
+	push A
+	mov A,[X+10]
+	push A
+	mov A,[X+11]
+	push A
+	mov A,[__r4]
+	push A
+	mov A,[__r5]
+	push A
+	mov A,[__r6]
+	push A
+	mov A,[__r7]
+	push A
+	xcall __fpadd
+	pop A
+	mov [__r7],A
+	pop A
+	mov [__r6],A
+	pop A
+	mov [__r5],A
+	pop A
+	mov [__r4],A
+	add SP,-4
+	mov A,[__r0]
+	mov REG[0xd5],A
+	mov A,[__r4]
+	mvi [__r1],A
+	mov A,[__r5]
+	mvi [__r1],A
+	mov A,[__r6]
+	mvi [__r1],A
+	mov A,[__r7]
+	mvi [__r1],A
+	.dbline 63
+	mov A,[X+0]
+	mov [__r0],A
+	mov A,[X+1]
+	mov [__r1],A
+	mov A,[X+2]
+	mov [__r2],A
+	mov A,[X+3]
+	mov [__r3],A
+	mov A,2
+X19:
+	mov REG[0xd0],>__r0
+	asl [__r3]
+	rlc [__r2]
+	rlc [__r1]
+	rlc [__r0]
+	dec A
+	jnz X19
+	mov A,[__r3]
+	mov [__r1],A
+	mov A,[__r2]
+	mov [__r0],A
+	mov A,[X-12]
+	add [__r1],A
+	mov A,[X-13]
+	adc [__r0],A
+	mov A,[__r0]
+	mov REG[0xd4],A
+	mvi A,[__r1]
+	mov [__r4],A
+	mvi A,[__r1]
+	mov [__r5],A
+	mvi A,[__r1]
+	mov [__r6],A
+	mvi A,[__r1]
+	sub [__r1],4
+	mov [__r7],A
+	mov A,[X+12]
+	push A
+	mov A,[X+13]
+	push A
+	mov A,[X+14]
+	push A
+	mov A,[X+15]
+	push A
+	mov A,[__r4]
+	push A
+	mov A,[__r5]
+	push A
+	mov A,[__r6]
+	push A
+	mov A,[__r7]
+	push A
+	xcall __fpadd
+	pop A
+	mov [__r7],A
+	pop A
+	mov [__r6],A
+	pop A
+	mov [__r5],A
+	pop A
+	mov [__r4],A
+	add SP,-4
+	mov A,[__r0]
+	mov REG[0xd5],A
+	mov A,[__r4]
+	mvi [__r1],A
+	mov A,[__r5]
+	mvi [__r1],A
+	mov A,[__r6]
+	mvi [__r1],A
+	mov A,[__r7]
+	mvi [__r1],A
+	.dbline 64
+L24:
+	.dbline 56
+	mov A,[X+35]
+	add [X+3],A
+	mov A,[X+34]
+	adc [X+2],A
+	mov A,[X+33]
+	adc [X+1],A
+	mov A,[X+32]
+	adc [X+0],A
+L26:
+	.dbline 56
+	mov A,[X+3]
+	sub A,[X+31]
+	mov A,[X+2]
+	sbb A,[X+30]
+	mov A,[X+1]
+	sbb A,[X+29]
+	mov A,[X+28]
+	xor A,-128
+	mov REG[0xd0],>__r0
+	mov [__rX],A
+	mov A,[X+0]
+	xor A,-128
+	sbb A,[__rX]
+	jc L23
+X20:
+	.dbline 65
+	mov REG[0xd0],>__r0
+	mov A,[X+48]
+	push A
+	mov A,[X+49]
+	push A
+	mov A,[X+50]
+	push A
+	mov A,[X+51]
+	push A
+	mov A,[X+20]
+	push A
+	mov A,[X+21]
+	push A
+	mov A,[X+22]
+	push A
+	mov A,[X+23]
+	push A
+	xcall __fpmul
+	pop A
+	mov [__r3],A
+	pop A
+	mov [__r2],A
+	pop A
+	mov [__r1],A
+	pop A
+	mov [__r0],A
+	add SP,-4
+	mov A,[X+44]
+	push A
+	mov A,[X+45]
+	push A
+	mov A,[X+46]
+	push A
+	mov A,[X+47]
+	push A
+	mov A,[X+16]
+	push A
+	mov A,[X+17]
+	push A
+	mov A,[X+18]
+	push A
+	mov A,[X+19]
+	push A
+	xcall __fpmul
+	pop A
+	mov [__r7],A
+	pop A
+	mov [__r6],A
+	pop A
+	mov [__r5],A
+	pop A
+	mov [__r4],A
+	add SP,-4
+	mov A,[__r0]
+	push A
+	mov A,[__r1]
+	push A
+	mov A,[__r2]
+	push A
+	mov A,[__r3]
+	push A
+	mov A,[__r4]
+	push A
+	mov A,[__r5]
+	push A
+	mov A,[__r6]
+	push A
+	mov A,[__r7]
+	push A
+	xcall __fpsub
+	pop A
+	mov [X+55],A
+	pop A
+	mov [X+54],A
+	pop A
+	mov [X+53],A
+	pop A
+	mov [X+52],A
+	add SP,-4
+	.dbline 66
+	mov A,[X+44]
+	push A
+	mov A,[X+45]
+	push A
+	mov A,[X+46]
+	push A
+	mov A,[X+47]
+	push A
+	mov A,[X+20]
+	push A
+	mov A,[X+21]
+	push A
+	mov A,[X+22]
+	push A
+	mov A,[X+23]
+	push A
+	xcall __fpmul
+	pop A
+	mov [__r3],A
+	pop A
+	mov [__r2],A
+	pop A
+	mov [__r1],A
+	pop A
+	mov [__r0],A
+	add SP,-4
+	mov A,[X+48]
+	push A
+	mov A,[X+49]
+	push A
+	mov A,[X+50]
+	push A
+	mov A,[X+51]
+	push A
+	mov A,[X+16]
+	push A
+	mov A,[X+17]
+	push A
+	mov A,[X+18]
+	push A
+	mov A,[X+19]
+	push A
+	xcall __fpmul
+	pop A
+	mov [__r7],A
+	pop A
+	mov [__r6],A
+	pop A
+	mov [__r5],A
+	pop A
+	mov [__r4],A
+	add SP,-4
+	mov A,[__r0]
+	push A
+	mov A,[__r1]
+	push A
+	mov A,[__r2]
+	push A
+	mov A,[__r3]
+	push A
+	mov A,[__r4]
+	push A
+	mov A,[__r5]
+	push A
+	mov A,[__r6]
+	push A
+	mov A,[__r7]
+	push A
+	xcall __fpadd
+	pop A
+	mov [X+23],A
+	pop A
+	mov [X+22],A
+	pop A
+	mov [X+21],A
+	pop A
+	mov [X+20],A
+	add SP,-4
+	.dbline 67
+	mov A,[X+52]
+	mov [X+16],A
+	mov A,[X+53]
+	mov [X+17],A
+	mov A,[X+54]
+	mov [X+18],A
+	mov A,[X+55]
+	mov [X+19],A
+	.dbline 68
+L20:
+	.dbline 55
+	add [X+39],1
+	adc [X+38],0
+	adc [X+37],0
+	adc [X+36],0
+L22:
+	.dbline 55
+	mov A,[X+39]
+	sub A,[X+27]
+	mov A,[X+38]
+	sbb A,[X+26]
+	mov A,[X+37]
+	sbb A,[X+25]
+	mov A,[X+24]
+	xor A,-128
+	mov REG[0xd0],>__r0
+	mov [__rX],A
+	mov A,[X+36]
+	xor A,-128
+	sbb A,[__rX]
+	jc L19
+X21:
+	.dbline 69
+;    UART_1_PutSHexInt(mod[i]);
+;    }
+;    UART_1_PutSHexInt(endl);
+;    UART_1_PutCRLF();   
+; }
+; 
+; void UART_print_data ()   // send REAL data
+; {
+;    UART_1_CPutString("Data init\n"); // Example string
+;     
+;    for (i=0;i<N_points;i++)
+;    {
+;    UART_1_PutSHexInt(data_re[i]);
+;    UART_1_PutCRLF();
+	mov REG[0xd0],>__r0
+	mov A,[X+44]
+	push A
+	mov A,[X+45]
+	push A
+	mov A,[X+46]
+	push A
+	mov A,[X+47]
+	push A
+	mov A,63
+	push A
+	mov A,-128
+	push A
+	mov A,0
+	push A
+	push A
+	xcall __fpsub
+	pop A
+	mov [__r3],A
+	pop A
+	mov [__r2],A
+	pop A
+	mov [__r1],A
+	pop A
+	mov [__r0],A
+	add SP,-4
+	mov A,64
+	push A
+	mov A,0
+	push A
+	push A
+	push A
+	mov A,[__r0]
+	push A
+	mov A,[__r1]
+	push A
+	mov A,[__r2]
+	push A
+	mov A,[__r3]
+	push A
+	xcall __fpdiv
+	pop A
+	mov [__r3],A
+	pop A
+	mov [__r2],A
+	pop A
+	mov [__r1],A
+	pop A
+	add SP,-4
+	push A
+	mov A,[__r1]
+	push A
+	mov A,[__r2]
+	push A
+	mov A,[__r3]
+	push A
+	xcall _sqrt
+	add SP,-4
+	mov REG[0xd0],>__r0
+	mov A,[__r0]
+	mov [X+48],A
+	mov A,[__r1]
+	mov [X+49],A
+	mov A,[__r2]
+	mov [X+50],A
+	mov A,[__r3]
+	mov [X+51],A
+	.dbline 70
+;    }
+	cmp [X-5],0
+	jnz L27
+	cmp [X-4],1
+	jnz L27
+X22:
+	.dbline 71
+; 
+	xor [X+48],-128
+L27:
+	.dbline 72
+	mov REG[0xd0],>__r0
+	mov A,63
+	push A
+	mov A,-128
+	push A
+	mov A,0
+	push A
+	push A
+	mov A,[X+44]
+	push A
+	mov A,[X+45]
+	push A
+	mov A,[X+46]
+	push A
+	mov A,[X+47]
+	push A
+	xcall __fpadd
+	pop A
+	mov [__r3],A
+	pop A
+	mov [__r2],A
+	pop A
+	mov [__r1],A
+	pop A
+	mov [__r0],A
+	add SP,-4
+	mov A,64
+	push A
+	mov A,0
+	push A
+	push A
+	push A
+	mov A,[__r0]
+	push A
+	mov A,[__r1]
+	push A
+	mov A,[__r2]
+	push A
+	mov A,[__r3]
+	push A
+	xcall __fpdiv
+	pop A
+	mov [__r3],A
+	pop A
+	mov [__r2],A
+	pop A
+	mov [__r1],A
+	pop A
+	add SP,-4
+	push A
+	mov A,[__r1]
+	push A
+	mov A,[__r2]
+	push A
+	mov A,[__r3]
+	push A
+	xcall _sqrt
+	add SP,-4
+	mov REG[0xd0],>__r0
+	mov A,[__r0]
+	mov [X+44],A
+	mov A,[__r1]
+	mov [X+45],A
+	mov A,[__r2]
+	mov [X+46],A
+	mov A,[__r3]
+	mov [X+47],A
+	.dbline 73
+L16:
+	.dbline 50
+	add [X+59],1
+	adc [X+58],0
+	adc [X+57],0
+	adc [X+56],0
+L18:
+	.dbline 50
+	mov A,[X+59]
+	sub A,[X-6]
+	mov A,[X+58]
+	sbb A,[X-7]
+	mov A,[X+57]
+	sbb A,[X-8]
+	mov A,[X-9]
+	xor A,-128
+	mov REG[0xd0],>__r0
+	mov [__rX],A
+	mov A,[X+56]
+	xor A,-128
+	sbb A,[__rX]
+	jc L15
+X23:
+	.dbline 76
+; }
+; 
+; void LCD_print()
+; {         
+; 	/* find the fundamental harmonic (except the zero component)*/
+	cmp [X-5],0
+	jnz L29
+	cmp [X-4],1
+	jnz L29
+X24:
+	.dbline 76
+	.dbline 77
+	mov [X+0],0
+	mov [X+1],0
+	mov [X+2],0
+	mov [X+3],0
+	xjmp L34
+L31:
+	.dbline 77
+	.dbline 78
+	mov REG[0xd0],>__r0
+	mov A,[X+0]
+	mov [__r0],A
+	mov A,[X+1]
+	mov [__r1],A
+	mov A,[X+2]
+	mov [__r2],A
+	mov A,[X+3]
+	mov [__r3],A
+	mov A,2
+X25:
+	mov REG[0xd0],>__r0
+	asl [__r3]
+	rlc [__r2]
+	rlc [__r1]
+	rlc [__r0]
+	dec A
+	jnz X25
+	mov A,[__r3]
+	mov [__r1],A
+	mov A,[__r2]
+	mov [__r0],A
+	mov A,[X-10]
+	add [__r1],A
+	mov A,[X-11]
+	adc [__r0],A
+	mov A,[X+28]
+	push A
+	mov A,[X+29]
+	push A
+	mov A,[X+30]
+	push A
+	mov A,[X+31]
+	push A
+	xcall __long2fp
+	pop A
+	mov [__r7],A
+	pop A
+	mov [__r6],A
+	pop A
+	mov [__r5],A
+	pop A
+	mov [__r4],A
+	mov A,[__r0]
+	mov REG[0xd4],A
+	mvi A,[__r1]
+	mov [__r8],A
+	mvi A,[__r1]
+	mov [__r9],A
+	mvi A,[__r1]
+	mov [__r10],A
+	mvi A,[__r1]
+	sub [__r1],4
+	mov [__r11],A
+	mov A,[__r4]
+	push A
+	mov A,[__r5]
+	push A
+	mov A,[__r6]
+	push A
+	mov A,[__r7]
+	push A
+	mov A,[__r8]
+	push A
+	mov A,[__r9]
+	push A
+	mov A,[__r10]
+	push A
+	mov A,[__r11]
+	push A
+	xcall __fpdiv
+	pop A
+	mov [__r7],A
+	pop A
+	mov [__r6],A
+	pop A
+	mov [__r5],A
+	pop A
+	mov [__r4],A
+	add SP,-4
+	mov A,[__r0]
+	mov REG[0xd5],A
+	mov A,[__r4]
+	mvi [__r1],A
+	mov A,[__r5]
+	mvi [__r1],A
+	mov A,[__r6]
+	mvi [__r1],A
+	mov A,[__r7]
+	mvi [__r1],A
+	.dbline 79
+	mov A,[X+0]
+	mov [__r0],A
+	mov A,[X+1]
+	mov [__r1],A
+	mov A,[X+2]
+	mov [__r2],A
+	mov A,[X+3]
+	mov [__r3],A
+	mov A,2
+X26:
+	mov REG[0xd0],>__r0
+	asl [__r3]
+	rlc [__r2]
+	rlc [__r1]
+	rlc [__r0]
+	dec A
+	jnz X26
+	mov A,[__r3]
+	mov [__r1],A
+	mov A,[__r2]
+	mov [__r0],A
+	mov A,[X-12]
+	add [__r1],A
+	mov A,[X-13]
+	adc [__r0],A
+	mov A,[X+28]
+	push A
+	mov A,[X+29]
+	push A
+	mov A,[X+30]
+	push A
+	mov A,[X+31]
+	push A
+	xcall __long2fp
+	pop A
+	mov [__r7],A
+	pop A
+	mov [__r6],A
+	pop A
+	mov [__r5],A
+	pop A
+	mov [__r4],A
+	mov A,[__r0]
+	mov REG[0xd4],A
+	mvi A,[__r1]
+	mov [__r8],A
+	mvi A,[__r1]
+	mov [__r9],A
+	mvi A,[__r1]
+	mov [__r10],A
+	mvi A,[__r1]
+	sub [__r1],4
+	mov [__r11],A
+	mov A,[__r4]
+	push A
+	mov A,[__r5]
+	push A
+	mov A,[__r6]
+	push A
+	mov A,[__r7]
+	push A
+	mov A,[__r8]
+	push A
+	mov A,[__r9]
+	push A
+	mov A,[__r10]
+	push A
+	mov A,[__r11]
+	push A
+	xcall __fpdiv
+	pop A
+	mov [__r7],A
+	pop A
+	mov [__r6],A
+	pop A
+	mov [__r5],A
+	pop A
+	mov [__r4],A
+	add SP,-4
+	mov A,[__r0]
+	mov REG[0xd5],A
+	mov A,[__r4]
+	mvi [__r1],A
+	mov A,[__r5]
+	mvi [__r1],A
+	mov A,[__r6]
+	mvi [__r1],A
+	mov A,[__r7]
+	mvi [__r1],A
+	.dbline 80
+L32:
+	.dbline 77
+	add [X+3],1
+	adc [X+2],0
+	adc [X+1],0
+	adc [X+0],0
+L34:
+	.dbline 77
+;         max=mod[0];        
+	mov A,[X+3]
+	sub A,[X+31]
+	mov A,[X+2]
+	sbb A,[X+30]
+	mov A,[X+1]
+	sbb A,[X+29]
+	mov A,[X+28]
+	xor A,-128
+	mov REG[0xd0],>__r0
+	mov [__rX],A
+	mov A,[X+0]
+	xor A,-128
+	sbb A,[__rX]
+	jc L31
+X27:
+	.dbline 81
+;         ind=0;
+;         for(i=1;i<N_points/2;i++)
+;         	if(mod[i]>max)
+;         		{
+L29:
+	.dbline 83
+;         		  max=mod[i];
+;         		  ind=i;
+	mov [X+0],0
+	mov [X+1],0
+	mov [X+2],0
+	mov [X+3],0
+L35:
+	.dbline 85
+	mov REG[0xd0],>__r0
+	mov A,[X+0]
+	mov [__r0],A
+	mov A,[X+1]
+	mov [__r1],A
+	mov A,[X+2]
+	mov [__r2],A
+	mov A,[X+3]
+	mov [__r3],A
+	mov A,2
+X28:
+	mov REG[0xd0],>__r0
+	asl [__r3]
+	rlc [__r2]
+	rlc [__r1]
+	rlc [__r0]
+	dec A
+	jnz X28
+	mov A,[__r3]
+	mov [__r1],A
+	mov A,[__r2]
+	mov [__r0],A
+	mov A,[__r1]
+	mov [X+73],A
+	mov A,[__r0]
+	mov [X+72],A
+	mov A,[__r1]
+	add A,<_data_re
+	mov [__r3],A
+	mov A,[__r0]
+	adc A,>_data_re
+	mov REG[0xd4],A
+	mvi A,[__r3]
+	mov [__r4],A
+	mvi A,[__r3]
+	mov [__r5],A
+	mvi A,[__r3]
+	mov [__r6],A
+	mvi A,[__r3]
+	mov [__r7],A
+	mov A,[__r1]
+	add A,<_data_imm
+	mov [__r3],A
+	mov A,[__r0]
+	adc A,>_data_imm
+	mov REG[0xd4],A
+	mvi A,[__r3]
+	mov [__r8],A
+	mvi A,[__r3]
+	mov [__r9],A
+	mvi A,[__r3]
+	mov [__r10],A
+	mvi A,[__r3]
+	mov [__r11],A
+	mov A,[__r8]
+	push A
+	mov A,[__r9]
+	push A
+	mov A,[__r10]
+	push A
+	mov A,[__r11]
+	push A
+	mov A,[__r8]
+	push A
+	mov A,[__r9]
+	push A
+	mov A,[__r10]
+	push A
+	mov A,[__r11]
+	push A
+	xcall __fpmul
+	pop A
+	mov [__r11],A
+	pop A
+	mov [__r10],A
+	pop A
+	mov [__r9],A
+	pop A
+	mov [__r8],A
+	add SP,-4
+	mov A,[__r4]
+	push A
+	mov A,[__r5]
+	push A
+	mov A,[__r6]
+	push A
+	mov A,[__r7]
+	push A
+	mov A,[__r4]
+	push A
+	mov A,[__r5]
+	push A
+	mov A,[__r6]
+	push A
+	mov A,[__r7]
+	push A
+	xcall __fpmul
+	pop A
+	mov [__r7],A
+	pop A
+	mov [__r6],A
+	pop A
+	mov [__r5],A
+	pop A
+	mov [__r4],A
+	add SP,-4
+	mov A,[__r8]
+	push A
+	mov A,[__r9]
+	push A
+	mov A,[__r10]
+	push A
+	mov A,[__r11]
+	push A
+	mov A,[__r4]
+	push A
+	mov A,[__r5]
+	push A
+	mov A,[__r6]
+	push A
+	mov A,[__r7]
+	push A
+	xcall __fpadd
+	pop A
+	mov [__r7],A
+	pop A
+	mov [__r6],A
+	pop A
+	mov [__r5],A
+	pop A
+	add SP,-4
+	push A
+	mov A,[__r5]
+	push A
+	mov A,[__r6]
+	push A
+	mov A,[__r7]
+	push A
+	xcall _sqrt
+	add SP,-4
+	mov REG[0xd0],>__r0
+	mov A,66
+	push A
+	mov A,-128
+	push A
+	mov A,0
+	push A
+	push A
+	mov A,[__r0]
+	push A
+	mov A,[__r1]
+	push A
+	mov A,[__r2]
+	push A
+	mov A,[__r3]
+	push A
+	xcall __fpdiv
+	pop A
+	mov [__r3],A
+	pop A
+	mov [__r2],A
+	pop A
+	mov [__r1],A
+	pop A
+	mov [__r0],A
+	add SP,-4
+	mov A,[X+73]
+	add A,<_mod
+	mov [__r5],A
+	mov A,[X+72]
+	adc A,>_mod
+	mov REG[0xd5],A
+	mov A,[__r0]
+	mvi [__r5],A
+	mov A,[__r1]
+	mvi [__r5],A
+	mov A,[__r2]
+	mvi [__r5],A
+	mov A,[__r3]
+	mvi [__r5],A
+L36:
+	.dbline 83
+	add [X+3],1
+	adc [X+2],0
+	adc [X+1],0
+	adc [X+0],0
+	.dbline 83
+	mov A,[X+3]
+	sub A,64
+	mov A,[X+2]
+	sbb A,0
+	mov A,[X+1]
+	sbb A,0
+	mov A,[X+0]
+	xor A,-128
+	sbb A,(0 ^ 0x80)
+	jc L35
+X29:
+	.dbline -2
+	.dbline 86
+;          		 }
+;         		
+;         itoa(df,(int)(max),10);
+L1:
+	add SP,-74
+	pop X
+	.dbline 0 ; func end
+	ret
+	.dbsym l ty 68 D
+	.dbsym l tx 64 D
+	.dbsym l i2 60 L
+	.dbsym l l 56 L
+	.dbsym l z 52 D
+	.dbsym l c2 48 D
+	.dbsym l c1 44 D
+	.dbsym l k 40 L
+	.dbsym l j 36 L
+	.dbsym l l2 32 L
+	.dbsym l n 28 L
+	.dbsym l l1 24 L
+	.dbsym l u2 20 D
+	.dbsym l u1 16 D
+	.dbsym l t2 12 D
+	.dbsym l t1 8 D
+	.dbsym l i1 4 L
+	.dbsym l i 0 L
+	.dbsym l y -13 pD
+	.dbsym l x -11 pD
+	.dbsym l m -9 L
+	.dbsym l dir -5 I
+	.dbend
+	.area data(ram, con, rel)
+	.dbfile ./fft.h
+_zero::
+	.word 0x0,0x0
+	.dbfile ./main.c
+	.dbsym e zero _zero D
+	.area data(ram, con, rel)
+	.dbfile ./main.c
+	.area data(ram, con, rel)
+	.dbfile ./main.c
+_i::
+	.word 0
+	.dbsym e i _i i
+	.area data(ram, con, rel)
+	.dbfile ./main.c
+	.area data(ram, con, rel)
+	.dbfile ./main.c
+_endl::
+	.word 65535
+	.dbsym e endl _endl i
+	.area data(ram, con, rel)
+	.dbfile ./main.c
+	.area data(ram, con, rel)
+	.dbfile ./main.c
+_N_samples::
+	.word 7800
+	.dbsym e N_samples _N_samples i
+	.area data(ram, con, rel)
+	.dbfile ./main.c
+	.area text(rom, con, rel)
+	.dbfile ./main.c
+	.dbfunc e UART_print_re_imm _UART_print_re_imm fV
+_UART_print_re_imm::
+	.dbline -1
+	.dbline 40
+	.dbline 41
+	push X
+	mov A,>L40
+	push A
+	mov A,<L40
+	mov X,A
+	pop A
+	xcall _UART_1_CPutString
+	pop X
+	.dbline 42
+	mov REG[0xd0],>_i
+	mov [_i+1],0
+	mov [_i],0
+	xjmp L44
+L41:
+	.dbline 43
+	.dbline 44
+	mov REG[0xd0],>_i
+	mov A,[_i+1]
+	push A
+	mov A,[_i]
+	mov REG[0xd0],>__r0
+	mov [__r0],A
+	pop A
+	mov [__r1],A
+	asl [__r1]
+	rlc [__r0]
+	asl [__r1]
+	rlc [__r0]
+	add [__r1],<_data_re
+	adc [__r0],>_data_re
+	mov A,[__r0]
+	mov REG[0xd4],A
+	mvi A,[__r1]
+	mov [__r4],A
+	mvi A,[__r1]
+	mov [__r5],A
+	mvi A,[__r1]
+	mov [__r6],A
+	mvi A,[__r1]
+	mov [__r7],A
+	mov A,[__r4]
+	push A
+	mov A,[__r5]
+	push A
+	mov A,[__r6]
+	push A
+	mov A,[__r7]
+	push A
+	xcall __fp2long
+	pop A
+	mov [__r1],A
+	pop A
+	add SP,-2
+	push X
+	push A
+	mov A,[__r1]
+	pop X
+	xcall _UART_1_PutSHexInt
+	.dbline 45
+	mov A,>L45
+	push A
+	mov A,<L45
+	mov X,A
+	pop A
+	xcall _UART_1_CPutString
+	pop X
+	.dbline 46
+	mov REG[0xd0],>_i
+	mov A,[_i+1]
+	push A
+	mov A,[_i]
+	mov REG[0xd0],>__r0
+	mov [__r0],A
+	pop A
+	mov [__r1],A
+	asl [__r1]
+	rlc [__r0]
+	asl [__r1]
+	rlc [__r0]
+	add [__r1],<_data_imm
+	adc [__r0],>_data_imm
+	mov A,[__r0]
+	mov REG[0xd4],A
+	mvi A,[__r1]
+	mov [__r4],A
+	mvi A,[__r1]
+	mov [__r5],A
+	mvi A,[__r1]
+	mov [__r6],A
+	mvi A,[__r1]
+	mov [__r7],A
+	mov A,[__r4]
+	push A
+	mov A,[__r5]
+	push A
+	mov A,[__r6]
+	push A
+	mov A,[__r7]
+	push A
+	xcall __fp2long
+	pop A
+	mov [__r1],A
+	pop A
+	add SP,-2
+	push X
+	push A
+	mov A,[__r1]
+	pop X
+	xcall _UART_1_PutSHexInt
+	.dbline 47
+	xcall _UART_1_PutCRLF
+	pop X
+	.dbline 48
+L42:
+	.dbline 42
+	mov REG[0xd0],>_i
+	inc [_i+1]
+	adc [_i],0
+L44:
+	.dbline 42
+	mov REG[0xd0],>_i
+	mov A,[_i+1]
+	sub A,64
+	mov A,[_i]
+	sbb A,0
+	jc L41
+X30:
+	.dbline -2
+	.dbline 49
+L39:
+	.dbline 0 ; func end
+	ret
+	.dbend
+	.dbfunc e UART_print_mod _UART_print_mod fV
+_UART_print_mod::
+	.dbline -1
+	.dbline 52
+	.dbline 53
+	push X
+	mov A,0
+	mov X,A
+	xcall _UART_1_PutSHexInt
+	pop X
+	.dbline 54
+	mov REG[0xd0],>_i
+	mov [_i+1],0
+	mov [_i],0
+	xjmp L50
+L47:
+	.dbline 55
+	.dbline 56
+	mov REG[0xd0],>_i
+	mov A,[_i+1]
+	push A
+	mov A,[_i]
+	mov REG[0xd0],>__r0
+	mov [__r0],A
+	pop A
+	mov [__r1],A
+	asl [__r1]
+	rlc [__r0]
+	asl [__r1]
+	rlc [__r0]
+	add [__r1],<_mod
+	adc [__r0],>_mod
+	mov A,[__r0]
+	mov REG[0xd4],A
+	mvi A,[__r1]
+	mov [__r4],A
+	mvi A,[__r1]
+	mov [__r5],A
+	mvi A,[__r1]
+	mov [__r6],A
+	mvi A,[__r1]
+	mov [__r7],A
+	mov A,[__r4]
+	push A
+	mov A,[__r5]
+	push A
+	mov A,[__r6]
+	push A
+	mov A,[__r7]
+	push A
+	xcall __fp2long
+	pop A
+	mov [__r1],A
+	pop A
+	add SP,-2
+	push X
+	push A
+	mov A,[__r1]
+	pop X
+	xcall _UART_1_PutSHexInt
+	pop X
+	.dbline 57
+L48:
+	.dbline 54
+	mov REG[0xd0],>_i
+	inc [_i+1]
+	adc [_i],0
+L50:
+	.dbline 54
+	mov REG[0xd0],>_i
+	mov A,[_i+1]
+	sub A,64
+	mov A,[_i]
+	sbb A,0
+	jc L47
+X31:
+	.dbline 58
+	push X
+	mov REG[0xd0],>_endl
+	mov A,[_endl]
+	push A
+	mov A,[_endl+1]
+	pop X
+	xcall _UART_1_PutSHexInt
+	.dbline 59
+	xcall _UART_1_PutCRLF
+	pop X
+	.dbline -2
+	.dbline 60
+L46:
+	.dbline 0 ; func end
+	ret
+	.dbend
+	.dbfunc e UART_print_data _UART_print_data fV
+_UART_print_data::
+	.dbline -1
+	.dbline 63
+	.dbline 64
+	push X
+	mov A,>L52
+	push A
+	mov A,<L52
+	mov X,A
+	pop A
+	xcall _UART_1_CPutString
+	pop X
+	.dbline 66
+	mov REG[0xd0],>_i
+	mov [_i+1],0
+	mov [_i],0
+	xjmp L56
+L53:
+	.dbline 67
+	.dbline 68
+	mov REG[0xd0],>_i
+	mov A,[_i+1]
+	push A
+	mov A,[_i]
+	mov REG[0xd0],>__r0
+	mov [__r0],A
+	pop A
+	mov [__r1],A
+	asl [__r1]
+	rlc [__r0]
+	asl [__r1]
+	rlc [__r0]
+	add [__r1],<_data_re
+	adc [__r0],>_data_re
+	mov A,[__r0]
+	mov REG[0xd4],A
+	mvi A,[__r1]
+	mov [__r4],A
+	mvi A,[__r1]
+	mov [__r5],A
+	mvi A,[__r1]
+	mov [__r6],A
+	mvi A,[__r1]
+	mov [__r7],A
+	mov A,[__r4]
+	push A
+	mov A,[__r5]
+	push A
+	mov A,[__r6]
+	push A
+	mov A,[__r7]
+	push A
+	xcall __fp2long
+	pop A
+	mov [__r1],A
+	pop A
+	add SP,-2
+	push X
+	push A
+	mov A,[__r1]
+	pop X
+	xcall _UART_1_PutSHexInt
+	.dbline 69
+	xcall _UART_1_PutCRLF
+	pop X
+	.dbline 70
+L54:
+	.dbline 66
+	mov REG[0xd0],>_i
+	inc [_i+1]
+	adc [_i],0
+L56:
+	.dbline 66
+	mov REG[0xd0],>_i
+	mov A,[_i+1]
+	sub A,64
+	mov A,[_i]
+	sbb A,0
+	jc L53
+X32:
+	.dbline -2
+	.dbline 72
+L51:
+	.dbline 0 ; func end
+	ret
+	.dbend
+	.dbfunc e LCD_print _LCD_print fV
+_LCD_print::
+	.dbline -1
+	.dbline 75
+	.dbline 77
+	mov REG[0xd0],>_mod
+	mov A,[_mod]
+	push A
+	mov A,[_mod+1]
+	push A
+	mov A,[_mod+2]
+	push A
+	mov A,[_mod+3]
+	mov REG[0xd0],>_max
+	mov [_max+3],A
+	pop A
+	mov [_max+2],A
+	pop A
+	mov [_max+1],A
+	pop A
+	mov [_max],A
+	.dbline 78
+	mov REG[0xd0],>_ind
+	mov [_ind+1],0
+	mov [_ind],0
+	.dbline 79
+	mov REG[0xd0],>_i
+	mov [_i+1],1
+	mov [_i],0
+	xjmp L61
+L58:
+	.dbline 80
+	mov REG[0xd0],>_i
+	mov A,[_i+1]
+	push A
+	mov A,[_i]
+	mov REG[0xd0],>__r0
+	mov [__r0],A
+	pop A
+	mov [__r1],A
+	asl [__r1]
+	rlc [__r0]
+	asl [__r1]
+	rlc [__r0]
+	add [__r1],<_mod
+	adc [__r0],>_mod
+	mov A,[__r0]
+	mov REG[0xd4],A
+	mvi A,[__r1]
+	mov [__r4],A
+	mvi A,[__r1]
+	mov [__r5],A
+	mvi A,[__r1]
+	mov [__r6],A
+	mvi A,[__r1]
+	mov [__r7],A
+	mov REG[0xd0],>_max
+	mov A,[_max]
+	push A
+	mov A,[_max+1]
+	push A
+	mov A,[_max+2]
+	push A
+	mov A,[_max+3]
+	push A
+	mov REG[0xd0],>__r0
+	mov A,[__r4]
+	push A
+	mov A,[__r5]
+	push A
+	mov A,[__r6]
+	push A
+	mov A,[__r7]
+	push A
+	xcall __fpcmp
+	add SP,-8
+	cmp A,0
+	jz L62
+	cmp A,1
+	jnz L62
+	.dbline 81
+	.dbline 82
+	mov REG[0xd0],>_i
+	mov A,[_i+1]
+	push A
+	mov A,[_i]
+	mov REG[0xd0],>__r0
+	mov [__r0],A
+	pop A
+	mov [__r1],A
+	asl [__r1]
+	rlc [__r0]
+	asl [__r1]
+	rlc [__r0]
+	add [__r1],<_mod
+	adc [__r0],>_mod
+	mov A,[__r0]
+	mov REG[0xd4],A
+	mvi A,[__r1]
+	mov REG[0xd0],>_max
+	mov [_max],A
+	mov REG[0xd0],>__r0
+	mvi A,[__r1]
+	mov REG[0xd0],>_max
+	mov [_max+1],A
+	mov REG[0xd0],>__r0
+	mvi A,[__r1]
+	mov REG[0xd0],>_max
+	mov [_max+2],A
+	mov REG[0xd0],>__r0
+	mvi A,[__r1]
+	mov REG[0xd0],>_max
+	mov [_max+3],A
+	.dbline 83
+	mov REG[0xd0],>_i
+	mov A,[_i+1]
+	push A
+	mov A,[_i]
+	mov REG[0xd0],>_ind
+	mov [_ind],A
+	pop A
+	mov [_ind+1],A
+	.dbline 84
+L62:
+L59:
+	.dbline 79
+	mov REG[0xd0],>_i
+	inc [_i+1]
+	adc [_i],0
+L61:
+	.dbline 79
+	mov REG[0xd0],>_i
+	mov A,[_i+1]
+	sub A,32
+	mov A,[_i]
+	sbb A,0
+	jc L58
+X34:
+	.dbline 86
+	mov A,0
+	push A
+	mov A,10
+	push A
+	mov REG[0xd0],>_max
+	mov A,[_max]
+	push A
+	mov A,[_max+1]
+	push A
+	mov A,[_max+2]
+	push A
+	mov A,[_max+3]
+	push A
+	mov REG[0xd0],>__r0
+	xcall __fp2long
+	pop A
+	mov [__r1],A
+	pop A
+	add SP,-2
+	push A
+	mov A,[__r1]
+	push A
+	mov A,>_df
+	push A
+	mov A,<_df
+	push A
+	xcall _itoa
+	add SP,-6
+	.dbline 87
+;         LCD_1_Position(1,0);
+	push X
+	mov X,0
+	mov A,1
+	xcall _LCD_1_Position
+	.dbline 88
+;         LCD_1_PrString(df);
+	mov A,>_df
+	push A
+	mov A,<_df
+	mov X,A
+	pop A
+	xcall _LCD_1_PrString
+	pop X
+	.dbline 90
+;         
+;         itoa(df,(int)(ind*delta_f),10);
+	mov A,0
+	push A
+	mov A,10
+	push A
+	mov REG[0xd0],>_ind
+	mov A,[_ind+1]
+	and A,1
+	mov REG[0xd0],>__r0
+	mov [__r1],A
+	mov REG[0xd0],>_ind
+	mov A,[_ind]
+	and A,0
+	mov REG[0xd0],>__r0
+	mov [__r0],A
+	mov A,[__r1]
+	mov [__r3],A
+	mov A,[__r0]
+	mov [__r2],A
+	tst [__r2],-128
+	jz X35
+	mov [__r1],-1
+	mov [__r0],-1
+	jmp X36
+X35:
+	mov REG[0xd0],>__r0
+	mov [__r1],0
+	mov [__r0],0
+X36:
+	mov REG[0xd0],>__r0
+	mov A,[__r0]
+	push A
+	mov A,[__r1]
+	push A
+	mov A,[__r2]
+	push A
+	mov A,[__r3]
+	push A
+	xcall __long2fp
+	pop A
+	mov [__r3],A
+	pop A
+	mov [__r2],A
+	pop A
+	mov [__r1],A
+	pop A
+	mov [__r0],A
+	mov REG[0xd0],>_ind
+	mov A,[_ind+1]
+	push A
+	mov A,[_ind]
+	mov REG[0xd0],>__r0
+	mov [__r4],A
+	pop A
+	mov [__r5],A
+	and F,-5
+	rrc [__r4]
+	rrc [__r5]
+	mov A,[__r5]
+	mov [__r7],A
+	mov A,[__r4]
+	mov [__r6],A
+	tst [__r6],-128
+	jz X37
+	mov [__r5],-1
+	mov [__r4],-1
+	jmp X38
+X37:
+	mov REG[0xd0],>__r0
+	mov [__r5],0
+	mov [__r4],0
+X38:
+	mov REG[0xd0],>__r0
+	mov A,[__r4]
+	push A
+	mov A,[__r5]
+	push A
+	mov A,[__r6]
+	push A
+	mov A,[__r7]
+	push A
+	xcall __long2fp
+	pop A
+	mov [__r7],A
+	pop A
+	mov [__r6],A
+	pop A
+	mov [__r5],A
+	pop A
+	push A
+	mov A,[__r5]
+	push A
+	mov A,[__r6]
+	push A
+	mov A,[__r7]
+	push A
+	mov A,64
+	push A
+	mov A,0
+	push A
+	push A
+	push A
+	xcall __fpmul
+	pop A
+	mov [__r7],A
+	pop A
+	mov [__r6],A
+	pop A
+	mov [__r5],A
+	pop A
+	mov [__r4],A
+	add SP,-4
+	mov A,[__r0]
+	push A
+	mov A,[__r1]
+	push A
+	mov A,[__r2]
+	push A
+	mov A,[__r3]
+	push A
+	mov A,[__r4]
+	push A
+	mov A,[__r5]
+	push A
+	mov A,[__r6]
+	push A
+	mov A,[__r7]
+	push A
+	xcall __fpadd
+	pop A
+	mov [__r3],A
+	pop A
+	mov [__r2],A
+	pop A
+	mov [__r1],A
+	pop A
+	mov [__r0],A
+	add SP,-4
+	mov REG[0xd0],>_delta_f
+	mov A,[_delta_f]
+	push A
+	mov A,[_delta_f+1]
+	push A
+	mov A,[_delta_f+2]
+	push A
+	mov A,[_delta_f+3]
+	push A
+	mov REG[0xd0],>__r0
+	mov A,[__r0]
+	push A
+	mov A,[__r1]
+	push A
+	mov A,[__r2]
+	push A
+	mov A,[__r3]
+	push A
+	xcall __fpmul
+	pop A
+	mov [__r3],A
+	pop A
+	mov [__r2],A
+	pop A
+	mov [__r1],A
+	pop A
+	add SP,-4
+	push A
+	mov A,[__r1]
+	push A
+	mov A,[__r2]
+	push A
+	mov A,[__r3]
+	push A
+	xcall __fp2long
+	pop A
+	mov [__r1],A
+	pop A
+	add SP,-2
+	push A
+	mov A,[__r1]
+	push A
+	mov A,>_df
+	push A
+	mov A,<_df
+	push A
+	xcall _itoa
+	add SP,-6
+	.dbline 91
+;         LCD_1_Position(1,6);
+	push X
+	mov X,6
+	mov A,1
+	xcall _LCD_1_Position
+	.dbline 92
+;         LCD_1_PrString(df);
+	mov A,>_df
+	push A
+	mov A,<_df
+	mov X,A
+	pop A
+	xcall _LCD_1_PrString
+	.dbline 94
+;         
+;         LCD_1_Position(1,11);
+	mov X,11
+	mov A,1
+	xcall _LCD_1_Position
+	.dbline 95
+;         LCD_1_PrCString("Hz");
+	mov A,>L64
+	push A
+	mov A,<L64
+	mov X,A
+	pop A
+	xcall _LCD_1_PrCString
+	pop X
+	.dbline -2
+	.dbline 96
+; }
+L57:
+	.dbline 0 ; func end
+	ret
+	.dbend
+	.dbfunc e main _main fV
+;          bgPos -> X+0
+_main::
+	.dbline -1
+	push X
+	mov X,SP
+	add SP,5
+	.dbline 99
+; 
+; void main()
+; {
+	.dbline 102
+;     BYTE bgPos;                          // BarGraph position
+;    
+;     UART_1_Start(UART_PARITY_NONE);      // Enable UART
+	push X
+	mov A,0
+	xcall _UART_1_Start
+	.dbline 104
+;       
+;     PGA_1_Start(PGA_1_MEDPOWER);         // Turn on PGA power
+	mov A,2
+	xcall _PGA_1_Start
+	.dbline 106
+;     
+;     DELSIG11_1_Start( DELSIG11_1_HIGHPOWER );  
+	mov A,3
+	xcall _DELSIG11_1_Start
+	.dbline 107
+;     DELSIG11_1_StartAD(); 
+	xcall _DELSIG11_1_StartAD
+	pop X
+	.dbline 109
+;     
+;     time=(double)N_points/N_samples;
+	mov REG[0xd0],>_N_samples
+	mov A,[_N_samples+1]
+	and A,1
+	mov REG[0xd0],>__r0
+	mov [__r1],A
+	mov REG[0xd0],>_N_samples
+	mov A,[_N_samples]
+	and A,0
+	mov REG[0xd0],>__r0
+	mov [__r0],A
+	mov A,[__r1]
+	mov [__r3],A
+	mov A,[__r0]
+	mov [__r2],A
+	tst [__r2],-128
+	jz X40
+	mov [__r1],-1
+	mov [__r0],-1
+	jmp X41
+X40:
+	mov REG[0xd0],>__r0
+	mov [__r1],0
+	mov [__r0],0
+X41:
+	mov REG[0xd0],>__r0
+	mov A,[__r0]
+	push A
+	mov A,[__r1]
+	push A
+	mov A,[__r2]
+	push A
+	mov A,[__r3]
+	push A
+	xcall __long2fp
+	pop A
+	mov [__r3],A
+	pop A
+	mov [__r2],A
+	pop A
+	mov [__r1],A
+	pop A
+	mov [__r0],A
+	mov REG[0xd0],>_N_samples
+	mov A,[_N_samples+1]
+	push A
+	mov A,[_N_samples]
+	mov REG[0xd0],>__r0
+	mov [__r4],A
+	pop A
+	mov [__r5],A
+	and F,-5
+	rrc [__r4]
+	rrc [__r5]
+	mov A,[__r5]
+	mov [__r7],A
+	mov A,[__r4]
+	mov [__r6],A
+	tst [__r6],-128
+	jz X42
+	mov [__r5],-1
+	mov [__r4],-1
+	jmp X43
+X42:
+	mov REG[0xd0],>__r0
+	mov [__r5],0
+	mov [__r4],0
+X43:
+	mov REG[0xd0],>__r0
+	mov A,[__r4]
+	push A
+	mov A,[__r5]
+	push A
+	mov A,[__r6]
+	push A
+	mov A,[__r7]
+	push A
+	xcall __long2fp
+	pop A
+	mov [__r7],A
+	pop A
+	mov [__r6],A
+	pop A
+	mov [__r5],A
+	pop A
+	push A
+	mov A,[__r5]
+	push A
+	mov A,[__r6]
+	push A
+	mov A,[__r7]
+	push A
+	mov A,64
+	push A
+	mov A,0
+	push A
+	push A
+	push A
+	xcall __fpmul
+	pop A
+	mov [__r7],A
+	pop A
+	mov [__r6],A
+	pop A
+	mov [__r5],A
+	pop A
+	mov [__r4],A
+	add SP,-4
+	mov A,[__r0]
+	push A
+	mov A,[__r1]
+	push A
+	mov A,[__r2]
+	push A
+	mov A,[__r3]
+	push A
+	mov A,[__r4]
+	push A
+	mov A,[__r5]
+	push A
+	mov A,[__r6]
+	push A
+	mov A,[__r7]
+	push A
+	xcall __fpadd
+	pop A
+	mov [__r3],A
+	pop A
+	mov [__r2],A
+	pop A
+	mov [__r1],A
+	pop A
+	add SP,-4
+	push A
+	mov A,[__r1]
+	push A
+	mov A,[__r2]
+	push A
+	mov A,[__r3]
+	push A
+	mov A,66
+	push A
+	mov A,-128
+	push A
+	mov A,0
+	push A
+	push A
+	xcall __fpdiv
+	pop A
+	mov REG[0xd0],>_time
+	mov [_time+3],A
+	pop A
+	mov [_time+2],A
+	pop A
+	mov [_time+1],A
+	pop A
+	mov [_time],A
+	add SP,-4
+	.dbline 110
+;     delta_f=(double)1/time;
+	mov A,[_time]
+	push A
+	mov A,[_time+1]
+	push A
+	mov A,[_time+2]
+	push A
+	mov A,[_time+3]
+	push A
+	mov A,63
+	push A
+	mov A,-128
+	push A
+	mov A,0
+	push A
+	push A
+	mov REG[0xd0],>__r0
+	xcall __fpdiv
+	pop A
+	mov REG[0xd0],>_delta_f
+	mov [_delta_f+3],A
+	pop A
+	mov [_delta_f+2],A
+	pop A
+	mov [_delta_f+1],A
+	pop A
+	mov [_delta_f],A
+	add SP,-4
+	.dbline 112
+;     
+;     itoa(df,(int)delta_f,10);
+	mov A,0
+	push A
+	mov A,10
+	push A
+	mov A,[_delta_f]
+	push A
+	mov A,[_delta_f+1]
+	push A
+	mov A,[_delta_f+2]
+	push A
+	mov A,[_delta_f+3]
+	push A
+	mov REG[0xd0],>__r0
+	xcall __fp2long
+	pop A
+	mov [__r1],A
+	pop A
+	add SP,-2
+	push A
+	mov A,[__r1]
+	push A
+	mov A,>_df
+	push A
+	mov A,<_df
+	push A
+	xcall _itoa
+	add SP,-6
+	.dbline 114
+;     
+;     LCD_1_Start();                       // Init the LCD
+	push X
+	xcall _LCD_1_Start
+	.dbline 115
+;     LCD_1_InitBG(LCD_1_SOLID_BG);
+	mov A,0
+	xcall _LCD_1_InitBG
+	.dbline 116
+;     LCD_1_Position(0,0);
+	mov A,0
+	mov X,A
+	xcall _LCD_1_Position
+	.dbline 117
+;     LCD_1_PrCString("FFT  df=");
+	mov A,>L66
+	push A
+	mov A,<L66
+	mov X,A
+	pop A
+	xcall _LCD_1_PrCString
+	.dbline 118
+;     LCD_1_Position(0,8);
+	mov X,8
+	mov A,0
+	xcall _LCD_1_Position
+	.dbline 119
+;     LCD_1_PrString(df);
+	mov A,>_df
+	push A
+	mov A,<_df
+	mov X,A
+	pop A
+	xcall _LCD_1_PrString
+	.dbline 120
+;     LCD_1_PrCString(" Hz");
+	mov A,>L67
+	push A
+	mov A,<L67
+	mov X,A
+	pop A
+	xcall _LCD_1_PrCString
+	pop X
+	.dbline 121
+;     M8C_EnableGInt;                      // Enable Global interrupts
+		or  F, 01h
+
+	.dbline 124
+;     
+;        
+;     i=0;
+	mov REG[0xd0],>_i
+	mov [_i+1],0
+	mov [_i],0
+	xjmp L69
+L68:
+	.dbline 127
+;     
+;  	while (1)// Main loop 
+;     {   
+	.dbline 128
+;          if ( DELSIG11_1_fIsDataAvailable() ) 
+	push X
+	xcall _DELSIG11_1_fIsDataAvailable
+	mov REG[0xd0],>__r0
+	pop X
+	cmp A,0
+	jz L71
+	.dbline 129
+;          {  
+	.dbline 130
+;          data_re[i]=DELSIG11_1_iGetDataClearFlag();       
+	push X
+	xcall _DELSIG11_1_iGetDataClearFlag
+	mov REG[0xd0],>__r0
+	mov [__r0],X
+	pop X
+	mov [__r3],A
+	mov A,[__r0]
+	mov [__r2],A
+	tst [__r2],-128
+	jz X44
+	mov [__r1],-1
+	mov [__r0],-1
+	jmp X45
+X44:
+	mov REG[0xd0],>__r0
+	mov [__r1],0
+	mov [__r0],0
+X45:
+	mov REG[0xd0],>__r0
+	mov A,[__r0]
+	push A
+	mov A,[__r1]
+	push A
+	mov A,[__r2]
+	push A
+	mov A,[__r3]
+	push A
+	xcall __long2fp
+	pop A
+	mov [__r3],A
+	pop A
+	mov [__r2],A
+	pop A
+	mov [__r1],A
+	pop A
+	mov [__r0],A
+	mov REG[0xd0],>_i
+	mov A,[_i+1]
+	push A
+	mov A,[_i]
+	mov REG[0xd0],>__r0
+	mov [__r4],A
+	pop A
+	mov [__r5],A
+	asl [__r5]
+	rlc [__r4]
+	asl [__r5]
+	rlc [__r4]
+	add [__r5],<_data_re
+	adc [__r4],>_data_re
+	mov A,[__r4]
+	mov REG[0xd5],A
+	mov A,[__r0]
+	mvi [__r5],A
+	mov A,[__r1]
+	mvi [__r5],A
+	mov A,[__r2]
+	mvi [__r5],A
+	mov A,[__r3]
+	mvi [__r5],A
+	.dbline 131
+;          i++;
+	mov REG[0xd0],>_i
+	inc [_i+1]
+	adc [_i],0
+	.dbline 132
+;          } 
+L71:
+	.dbline 134
+;       
+;        if(i==N_points)
+	mov REG[0xd0],>_i
+	cmp [_i],0
+	jnz L73
+	cmp [_i+1],64
+	jnz L73
+X46:
+	.dbline 135
+;         {
+	.dbline 137
+;             
+;         	FFT(1,exponent,data_re,data_imm );
+	mov A,66
+	push A
+	mov A,-128
+	push A
+	mov A,0
+	push A
+	push A
+	xcall _log
+	mov REG[0xd0],>__r0
+	mov A,[__r0]
+	mov [X+1],A
+	mov A,[__r1]
+	mov [X+2],A
+	mov A,[__r2]
+	mov [X+3],A
+	mov A,[__r3]
+	mov [X+4],A
+	mov A,64
+	push A
+	mov A,0
+	push A
+	push A
+	push A
+	xcall _log
+	add SP,-8
+	mov A,>_data_imm
+	push A
+	mov A,<_data_imm
+	push A
+	mov A,>_data_re
+	push A
+	mov A,<_data_re
+	push A
+	mov REG[0xd0],>__r0
+	mov A,[__r0]
+	push A
+	mov A,[__r1]
+	push A
+	mov A,[__r2]
+	push A
+	mov A,[__r3]
+	push A
+	mov A,[X+1]
+	push A
+	mov A,[X+2]
+	push A
+	mov A,[X+3]
+	push A
+	mov A,[X+4]
+	push A
+	xcall __fpdiv
+	pop A
+	mov [__r3],A
+	pop A
+	mov [__r2],A
+	pop A
+	mov [__r1],A
+	pop A
+	add SP,-4
+	push A
+	mov A,[__r1]
+	push A
+	mov A,[__r2]
+	push A
+	mov A,[__r3]
+	push A
+	xcall __fp2long
+	pop A
+	mov [__r3],A
+	pop A
+	mov [__r2],A
+	pop A
+	mov [__r1],A
+	pop A
+	push A
+	mov A,[__r1]
+	push A
+	mov A,[__r2]
+	push A
+	mov A,[__r3]
+	push A
+	mov A,0
+	push A
+	mov A,1
+	push A
+	xcall _FFT
+	add SP,-10
+	.dbline 139
+;        
+;             UART_print_mod ();
+	xcall _UART_print_mod
+	.dbline 140
+;             UART_print_re_imm ();
+	xcall _UART_print_re_imm
+	.dbline 142
+;             //UART_print_data();
+;     	    LCD_print();
+	xcall _LCD_print
+	.dbline 144
+;         	
+;          	for(i=0;i<N_points;i++)
+	mov REG[0xd0],>_i
+	mov [_i+1],0
+	mov [_i],0
+	xjmp L78
+L75:
+	.dbline 145
+	.dbline 146
+	mov REG[0xd0],>_i
+	mov A,[_i+1]
+	push A
+	mov A,[_i]
+	mov REG[0xd0],>__r0
+	mov [__r0],A
+	pop A
+	mov [__r1],A
+	asl [__r1]
+	rlc [__r0]
+	asl [__r1]
+	rlc [__r0]
+	add [__r1],<_mod
+	adc [__r0],>_mod
+	mov A,[__r0]
+	mov REG[0xd5],A
+	mov A,0
+	mvi [__r1],A
+	mvi [__r1],A
+	mvi [__r1],A
+	mvi [__r1],A
+	.dbline 147
+	mov REG[0xd0],>_i
+	mov A,[_i+1]
+	push A
+	mov A,[_i]
+	mov REG[0xd0],>__r0
+	mov [__r0],A
+	pop A
+	mov [__r1],A
+	asl [__r1]
+	rlc [__r0]
+	asl [__r1]
+	rlc [__r0]
+	add [__r1],<_data_re
+	adc [__r0],>_data_re
+	mov A,[__r0]
+	mov REG[0xd5],A
+	mov A,0
+	mvi [__r1],A
+	mvi [__r1],A
+	mvi [__r1],A
+	mvi [__r1],A
+	.dbline 148
+	mov REG[0xd0],>_i
+	mov A,[_i+1]
+	push A
+	mov A,[_i]
+	mov REG[0xd0],>__r0
+	mov [__r0],A
+	pop A
+	mov [__r1],A
+	asl [__r1]
+	rlc [__r0]
+	asl [__r1]
+	rlc [__r0]
+	add [__r1],<_data_imm
+	adc [__r0],>_data_imm
+	mov A,[__r0]
+	mov REG[0xd5],A
+	mov A,0
+	mvi [__r1],A
+	mvi [__r1],A
+	mvi [__r1],A
+	mvi [__r1],A
+	.dbline 149
+L76:
+	.dbline 144
+	mov REG[0xd0],>_i
+	inc [_i+1]
+	adc [_i],0
+L78:
+	.dbline 144
+	mov REG[0xd0],>_i
+	mov A,[_i+1]
+	sub A,64
+	mov A,[_i]
+	sbb A,0
+	jc L75
+X47:
+	.dbline 150
+;          	{  	
+;             mod[i]=0;       //init 0
+;             data_re[i]=0;
+;             data_imm[i]=0;
+;             }
+;             i=0;
+	mov REG[0xd0],>_i
+	mov [_i+1],0
+	mov [_i],0
+	.dbline 151
+;         }       
+L73:
+	.dbline 152
+L69:
+	.dbline 126
+	xjmp L68
+X39:
+	.dbline -2
+	.dbline 153
+; }      
+; }
+L65:
+	add SP,-5
+	pop X
+	.dbline 0 ; func end
+	jmp .
+	.dbsym l bgPos 0 c
+	.dbend
+	.area data(ram, con, rel)
+	.dbfile ./main.c
+_delta_f::
+	.byte 0,0,0,0
+	.dbsym e delta_f _delta_f D
+	.area data(ram, con, rel)
+	.dbfile ./main.c
+_time::
+	.byte 0,0,0,0
+	.dbsym e time _time D
+	.area data(ram, con, rel)
+	.dbfile ./main.c
+_ind::
+	.byte 0,0
+	.dbsym e ind _ind i
+	.area data(ram, con, rel)
+	.dbfile ./main.c
+_max::
+	.byte 0,0,0,0
+	.dbsym e max _max D
+	.area data(ram, con, rel)
+	.dbfile ./main.c
+_df::
+	.byte 0,0,0,0
+	.dbsym e df _df A[4:4]c
+	.area data(ram, con, rel)
+	.dbfile ./main.c
+_iResult::
+	.byte 0,0
+	.dbsym e iResult _iResult I
+	.area lit(rom, con, rel)
+L67:
+	.byte 32,'H,'z,0
+L66:
+	.byte 'F,'F,'T,32,32,'d,'f,61,0
+L64:
+	.byte 'H,'z,0
+L52:
+	.byte 'D,'a,'t,'a,32,'i,'n,'i,'t,10,0
+L45:
+	.byte 9,9,0
+L40:
+	.byte 'R,'e,'a,'l,32,'P,'a,'r,'t,9,9,'I,'m,'a,'g,'i
+	.byte 'n,'a,'r,'y,32,'P,'a,'r,'t,10,0

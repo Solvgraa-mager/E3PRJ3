@@ -1,0 +1,32 @@
+C:/Users/asha/Documents/PSoC3\ training\ and\ projects/Q2-13/Alfonso_FFT/Alfonso_FFT.cydsn/CortexM0/ARM_GCC_441/Debug/main.o : C:/Users/asha/Documents/PSoC3\ training\ and\ projects/Q2-13/Alfonso_FFT/Alfonso_FFT.cydsn/Generated_Source/PSoC4/CyFlash.h C:/Users/asha/Documents/PSoC3\ training\ and\ projects/Q2-13/Alfonso_FFT/Alfonso_FFT.cydsn/Generated_Source/PSoC4/CyLib.h C:/Users/asha/Documents/PSoC3\ training\ and\ projects/Q2-13/Alfonso_FFT/Alfonso_FFT.cydsn/Generated_Source/PSoC4/Pin.h C:/Users/asha/Documents/PSoC3\ training\ and\ projects/Q2-13/Alfonso_FFT/Alfonso_FFT.cydsn/Generated_Source/PSoC4/Pin_aliases.h C:/Users/asha/Documents/PSoC3\ training\ and\ projects/Q2-13/Alfonso_FFT/Alfonso_FFT.cydsn/Generated_Source/PSoC4/core_cm0.h C:/Users/asha/Documents/PSoC3\ training\ and\ projects/Q2-13/Alfonso_FFT/Alfonso_FFT.cydsn/Generated_Source/PSoC4/core_cm0_psoc4.h C:/Users/asha/Documents/PSoC3\ training\ and\ projects/Q2-13/Alfonso_FFT/Alfonso_FFT.cydsn/Generated_Source/PSoC4/cyPm.h C:/Users/asha/Documents/PSoC3\ training\ and\ projects/Q2-13/Alfonso_FFT/Alfonso_FFT.cydsn/Generated_Source/PSoC4/cydevice_trm.h C:/Users/asha/Documents/PSoC3\ training\ and\ projects/Q2-13/Alfonso_FFT/Alfonso_FFT.cydsn/Generated_Source/PSoC4/cyfitter.h C:/Users/asha/Documents/PSoC3\ training\ and\ projects/Q2-13/Alfonso_FFT/Alfonso_FFT.cydsn/Generated_Source/PSoC4/cyfitter_cfg.h C:/Users/asha/Documents/PSoC3\ training\ and\ projects/Q2-13/Alfonso_FFT/Alfonso_FFT.cydsn/Generated_Source/PSoC4/cypins.h C:/Users/asha/Documents/PSoC3\ training\ and\ projects/Q2-13/Alfonso_FFT/Alfonso_FFT.cydsn/Generated_Source/PSoC4/cytypes.h C:/Users/asha/Documents/PSoC3\ training\ and\ projects/Q2-13/Alfonso_FFT/Alfonso_FFT.cydsn/Generated_Source/PSoC4/project.h C:/Users/asha/Documents/PSoC3\ training\ and\ projects/Q2-13/Alfonso_FFT/Alfonso_FFT.cydsn/device.h C:/Users/asha/Documents/PSoC3\ training\ and\ projects/Q2-13/Alfonso_FFT/Alfonso_FFT.cydsn/main.c 
+
+C:/Users/asha/Documents/PSoC3\ training\ and\ projects/Q2-13/Alfonso_FFT/Alfonso_FFT.cydsn/Generated_Source/PSoC4/CyFlash.h : 
+
+C:/Users/asha/Documents/PSoC3\ training\ and\ projects/Q2-13/Alfonso_FFT/Alfonso_FFT.cydsn/Generated_Source/PSoC4/CyLib.h : 
+
+C:/Users/asha/Documents/PSoC3\ training\ and\ projects/Q2-13/Alfonso_FFT/Alfonso_FFT.cydsn/Generated_Source/PSoC4/Pin.h : 
+
+C:/Users/asha/Documents/PSoC3\ training\ and\ projects/Q2-13/Alfonso_FFT/Alfonso_FFT.cydsn/Generated_Source/PSoC4/Pin_aliases.h : 
+
+C:/Users/asha/Documents/PSoC3\ training\ and\ projects/Q2-13/Alfonso_FFT/Alfonso_FFT.cydsn/Generated_Source/PSoC4/core_cm0.h : 
+
+C:/Users/asha/Documents/PSoC3\ training\ and\ projects/Q2-13/Alfonso_FFT/Alfonso_FFT.cydsn/Generated_Source/PSoC4/core_cm0_psoc4.h : 
+
+C:/Users/asha/Documents/PSoC3\ training\ and\ projects/Q2-13/Alfonso_FFT/Alfonso_FFT.cydsn/Generated_Source/PSoC4/cyPm.h : 
+
+C:/Users/asha/Documents/PSoC3\ training\ and\ projects/Q2-13/Alfonso_FFT/Alfonso_FFT.cydsn/Generated_Source/PSoC4/cydevice_trm.h : 
+
+C:/Users/asha/Documents/PSoC3\ training\ and\ projects/Q2-13/Alfonso_FFT/Alfonso_FFT.cydsn/Generated_Source/PSoC4/cyfitter.h : 
+
+C:/Users/asha/Documents/PSoC3\ training\ and\ projects/Q2-13/Alfonso_FFT/Alfonso_FFT.cydsn/Generated_Source/PSoC4/cyfitter_cfg.h : 
+
+C:/Users/asha/Documents/PSoC3\ training\ and\ projects/Q2-13/Alfonso_FFT/Alfonso_FFT.cydsn/Generated_Source/PSoC4/cypins.h : 
+
+C:/Users/asha/Documents/PSoC3\ training\ and\ projects/Q2-13/Alfonso_FFT/Alfonso_FFT.cydsn/Generated_Source/PSoC4/cytypes.h : 
+
+C:/Users/asha/Documents/PSoC3\ training\ and\ projects/Q2-13/Alfonso_FFT/Alfonso_FFT.cydsn/Generated_Source/PSoC4/project.h : 
+
+C:/Users/asha/Documents/PSoC3\ training\ and\ projects/Q2-13/Alfonso_FFT/Alfonso_FFT.cydsn/device.h : 
+
+C:/Users/asha/Documents/PSoC3\ training\ and\ projects/Q2-13/Alfonso_FFT/Alfonso_FFT.cydsn/main.c : 
+

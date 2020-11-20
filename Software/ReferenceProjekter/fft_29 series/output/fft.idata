@@ -1,0 +1,16 @@
+flash 2D42 SRAM   1C:
+ 00 22 bytes
+flash 2D46 SRAM   32:
+ <size at next line>  1E 78  0  0 FF FF
+  [size:] 6 bytes
+flash 2D4F SRAM   38:
+ 00 4 bytes
+flash 2D53 SRAM  100:
+ 00 255 bytes
+flash 2D57 SRAM  1FF:
+ 00 255 bytes
+flash 2D5B SRAM  2FE:
+ 00 255 bytes
+flash 2D5F SRAM  3FD:
+ <size at next line>   0  0  0
+  [size:] 3 bytes

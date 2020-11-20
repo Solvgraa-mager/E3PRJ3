@@ -1,0 +1,109 @@
+XH
+H 3 areas 6 global symbols
+M delsig11_1int.asm
+A text size 0 flags 0
+dbfile lib/delsig11_1int.asm
+dbfunc 0 ? 0 I
+dbfile DELSIG11_1.inc
+dbfunc 0 ? 0 I
+dbfile D:/PROGRA~1/CYPRES~1/PSOCDE~1/tools/include/CY8C29~1/m8c.inc
+dbfunc 0 ? 0 I
+dbfile ./lib/DELSIG11_1.inc
+dbfunc 0 ? 0 I
+dbfile lib/delsig11_1int.asm
+dbfunc 0 ? 0 I
+dbfile memory.inc
+dbfunc 0 ? 0 I
+dbfile lib/delsig11_1int.asm
+dbfunc 0 ? 0 I
+dbfile D:/PROGRA~1/CYPRES~1/PSOCDE~1/tools/include/CY8C29~1/m8c.inc
+dbfunc 0 ? 0 I
+A InterruptRAM size C flags 20
+S _DELSIG11_1_iResult Def0009
+S DELSIG11_1_bfStatus Def000B
+S DELSIG11_1_fState Def0008
+S _DELSIG11_1_bfStatus Def000B
+S DELSIG11_1_iResult Def0009
+A UserModules size 69 flags 0
+dbfile lib/delsig11_1int.asm
+dbfunc 0 ? 0 I
+dbline 69 0
+dbline 6A 2
+dbline 6B 5
+dbline 72 7
+dbline 73 A
+dbline 76 D
+dbline 77 10
+dbline 78 13
+dbline 7C 14
+dbline 7F 15
+dbline 80 17
+dbline 81 19
+dbline 82 1B
+dbline 83 1D
+dbline 84 1F
+dbline 86 21
+dbline 87 23
+dbline 88 25
+dbline 89 27
+dbline 8B 29
+dbline 8C 2C
+dbline 90 2E
+dbline 91 30
+dbline 92 32
+dbline 93 34
+dbline 94 36
+dbline 95 37
+dbline 9A 38
+dbline 9B 3B
+dbline 9D 3C
+dbline 9E 3E
+dbline A0 40
+dbline A1 42
+dbline A2 44
+dbline A3 46
+dbline A6 48
+dbline A7 4A
+dbline A8 4D
+dbline A9 4F
+dbline AA 51
+dbline AB 53
+dbline AE 55
+dbline AF 57
+dbline D5 59
+dbline D6 5B
+dbline D7 5D
+dbline E0 60
+dbline E1 63
+dbline E2 66
+dbline E3 67
+dbline E4 68
+S _DELSIG11_1_ADConversion_ISR Def0000
+T 00 00 76 00 08 47 00 08 01 A0 0E 5F 00 01
+R 00 00 00 02 09 03 00 01 09 06 00 01 09 0C 00 01
+T 00 09 00 03 5F 00 00 00 02 5F
+R 00 00 00 02 09 02 00 01 09 05 00 01 09 07 00 01
+T 00 0E 00 03 00 05 5F 00 02
+R 00 00 00 02 09 02 00 01 09 04 00 01 09 07 00 01
+T 00 12 00 04 7E 08 5D E5 53 00 05 14 00 03 5D E4
+R 00 00 00 02 09 02 00 01 09 09 00 01 09 0C 00 01
+T 00 1D 53 00 04 1C 00 02 51 00 03 14
+R 00 00 00 02 09 03 00 01 09 06 00 01 09 09 00 01
+T 00 24 00 01 51 00 02 1C 00 00 47
+R 00 00 00 02 09 02 00 01 09 05 00 01 09 08 00 01
+T 00 2A 00 08 04 B0 0B 51 00 01 04 00 07 51
+R 00 00 00 02 09 02 00 01 09 08 00 01 09 0B 00 01
+T 00 33 00 00 0C 00 06 18 7E 55 00 08 00 10 68
+R 00 00 00 02 09 02 00 01 09 05 00 01 09 0A 00 01
+T 00 3D 00 00 6E 00 01 51 00 01 04
+R 00 00 00 02 09 02 00 01 09 05 00 01 09 08 00 01
+T 00 43 00 07 51 00 00 0C 00 06 C0 0C 3C
+R 00 00 00 02 09 02 00 01 09 05 00 01 09 08 00 01
+T 00 4B 00 06 80 B0 07 57 7F 50 FF 80 05 58 00 06
+R 00 00 00 02 09 02 00 01 09 0E 00 01
+T 00 57 51 00 07 53 00 0A 5A 00 09 55
+R 00 00 00 02 09 03 00 01 09 06 00 01 09 09 00 01
+T 00 5E 00 0B 10 5F 00 07 00 01 5F
+R 00 00 00 02 09 02 00 01 09 06 00 01 09 08 00 01
+T 00 64 00 06 00 00 20 18 7E
+R 00 00 00 02 09 02 00 01 09 04 00 01

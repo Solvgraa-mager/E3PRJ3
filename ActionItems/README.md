@@ -5,7 +5,8 @@
 - [ ] Kompaktér signalbeskrivelser så den står mere skarpt kun med tal hvor der skal være tal. 
 - Resultat: Kompaktéret autist-Signalbeskrivelser
 - Deltagere: **Villiam** (Overordnet + Central Computer), **David** (Robotten), **Daniel** (Styringsenheden)
-- Status: 0%
+- Status:
+- Styringsenhed: 90%
 
 - [ ] Analyseafsnit skal indeholde reference til hvor blokkene er taget fra (evt. med billeder)
 - Resultat: Mindre saga-agtig analyseafsnit med referencer og evt. billeder.
@@ -13,20 +14,20 @@
 - Deltagere: **Simon** (Central Computer), **David**  (SumoBot), **Adam** (Styringsenhed)
 - Status: 0%
 
-- [ ] Opret en versionshistorik, så den er klar til at blive skrevet i 
+- [x] Opret en versionshistorik, så den er klar til at blive skrevet i 
 - Resultat: Versionshistorik-template
-- Deltagere: **Rasmus*
-- Status: 0%
+- Deltagere: **Rasmus**
+- Status: 100%
 
 - [ ] Tilføj til krav hvad SumoBot må veje
 - Resultat: Kravspec indeholder SumoBot’s vægt
 - Deltagere: **Frederik**
-- Status: 0%
+- Status: 99%
 
 - [ ] Alle IBD’er og BDD’er strømlines ift. navngivning og signaler
 - Resultat: Alle IBD’er og BDD’er er strømlinet. 
-- Deltagere: **Villiam**
-- Status: 0%
+- Deltagere: **Villiam**, Daniel
+- Status: 100%
 
 
 ## 2020-10-07 - 2020-10-21 - 2020 - 11 - 04
