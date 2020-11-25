@@ -6,24 +6,56 @@ participant Display
 collections SumoBot
 collections Styringsenhed
 
+' ***Pkt 1***
 UC1 -> Startknap: WaitForStart()
+activate Startknap
 UC1 <-- Startknap: players Ready
-autonumber 
+deactivate Startknap
+' ***Pkt 2***
 UC1 -> Display: StartCountDown()
 activate Display
 UC1 <-- Display: GO!
 deactivate Display
-loop while !attack
-UC1 -> Styringsenhed: GetDirectionSpeed()
-activate Styringsenhed
-UC1 <-- Styringsenhed: Direction, Speed
-deactivate Styringsenhed
-UC1 -> SumoBot: setDirectionSpeed(Dir, speed)
-activate SumoBot
-UC1 <-- SumoBot: Ack + Attack status
-deactivate SumoBot
-
+loop While Remaining Lives
+' ***Pkt 3***
+    UC1 -> Styringsenhed: GetDirectionSpeed()
+    activate Styringsenhed
+    UC1 <-- Styringsenhed: Direction, Speed
+    deactivate Styringsenhed
+    UC1 -> SumoBot: setDirectionSpeed(Dir, speed)
+    activate SumoBot
+    UC1 <-- SumoBot: Attack-Status = False
+' ***Pkt 4***    
+    opt ATTACK
+        SumoBot -> SumoBot : substractLife()
+        UC1 <-- SumoBot: Attack-Status = True
+        deactivate SumoBot
+' ***Pkt 5***
+        UC1 -> SumoBot : GetLifes()
+        activate SumoBot
+        SumoBot --> UC1 : Lifes
+        deactivate SumoBot
+        UC1 -> Display : LostLife(life,life)
+        activate Display
+        Display --> UC1 :
+        deactivate Display 
+'***Pkt 6***
+        UC1 -> Startknap : WaitForStart()
+        activate Startknap
+        Startknap --> UC1 : Players Ready
+        deactivate Startknap
+'***Pkt 7***
+        UC1 -> Display : StartCountDown()
+        activate Display
+        Display --> UC1 : GO!
+        deactivate Display
+    end opt
 end loop
+'***Pkt 9***
+        UC1 -> Display : showWinner(SumoBot)
+        activate Display
+        Display --> UC1 :
+        deactivate Display    
 
 
 
