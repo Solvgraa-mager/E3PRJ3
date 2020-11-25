@@ -13,7 +13,9 @@ Filterdimensionering
 Aktivt eller passivt filter? 
 Signal/noise-ratio 
 SW: Protokoller
-SW: Sekvensdiagrammer 
+SW: Sekvensdiagrammer + Klassediagrammer + timing + overvejelser (eksempelvis polling vs interrupt)
+SW: Timing kan være så kritisk at det ikke kan programmeres i højniveau. 
+
 
 Implementering: 
 Hvilke komponenter bruger vi så? 

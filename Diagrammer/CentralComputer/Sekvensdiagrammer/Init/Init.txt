@@ -1,0 +1,29 @@
+@startuml
+actor Bruger #red
+actor SumoBot_p1 #green
+actor SumoBot_p2 #green
+participant CC
+
+title Init
+Bruger -> SumoBot_p1 : Turn on
+SumoBot_p1 -> CC : ConnectToCC()
+activate SumoBot_p1
+Bruger  -> CC : Turn on 
+CC -> CC : OpenForConnections()
+CC -> Bruger : Display("Waiting for Connections..")
+CC --> SumoBot_p1 : Connected
+deactivate SumoBot_p1
+
+CC -> Bruger : Display("SumoBot 1: Connected") 
+
+SumoBot_p2 -> CC : ConnectToCC()
+activate SumoBot_p2
+CC --> SumoBot_p2 : Connected
+deactivate SumoBot_p2
+CC -> Bruger : Display("SumoBot 2: Connected") 
+
+== State: Ready == 
+CC -> CC : WaitForStartSignal()
+
+
+@enduml

@@ -1,5 +1,5 @@
 @startuml
-title Domæneanalyse for UC1
+title Domæneanalyse for UC1 + UC2
 
 
 object Joystick
@@ -18,7 +18,7 @@ float Retning
 int Hastighed
 }
 
-class CentralComputer
+object CentralComputer
 'class Display{
 'Nedtælling(int tid)
 '}

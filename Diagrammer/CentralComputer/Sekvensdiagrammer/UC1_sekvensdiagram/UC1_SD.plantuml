@@ -1,0 +1,32 @@
+@startuml
+
+participant UC1
+collections Startknap
+participant Display
+collections SumoBot
+collections Styringsenhed
+
+UC1 -> Startknap: WaitForStart()
+UC1 <-- Startknap: players Ready
+autonumber 
+UC1 -> Display: StartCountDown()
+activate Display
+UC1 <-- Display: GO!
+deactivate Display
+loop while !attack
+UC1 -> Styringsenhed: GetDirectionSpeed()
+activate Styringsenhed
+UC1 <-- Styringsenhed: Direction, Speed
+deactivate Styringsenhed
+UC1 -> SumoBot: setDirectionSpeed(Dir, speed)
+activate SumoBot
+UC1 <-- SumoBot: Ack + Attack status
+deactivate SumoBot
+
+end loop
+
+
+
+
+
+@enduml

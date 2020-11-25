@@ -1,0 +1,57 @@
+@startuml
+participant Styringsenhed_p1 << (C,#ADD1B2) Styringsenhed >>
+participant SumoBot1 << (C,#ADD1B2) SumoBot >>
+participant Styringsenhed_p2 << (C,#ADD1B2) Styringsenhed >>
+participant SumoBot2 << (C,#ADD1B2) SumoBot >>
+participant CC
+
+title GamePlay
+== CountDown == 
+CC -> CC : Display("3...2...1... GO!")
+== Battle ==
+loop While 'No Attack'
+    CC -> Styringsenhed_p1 : GetDirectionAndSpeed()
+    activate Styringsenhed_p1
+    Styringsenhed_p1 --> CC : Direction And Speed
+    deactivate Styringsenhed_p1
+    CC -> Styringsenhed_p2 : GetDirectionAndSpeed()
+    activate Styringsenhed_p2
+    Styringsenhed_p2 --> CC : Direction And Speed
+    deactivate Styringsenhed_p2
+    CC -> SumoBot1 : SetDirectionAndSpeed(direction,speed)
+        activate SumoBot1
+    SumoBot1 --> CC : No Attack
+    deactivate SumoBot1
+    
+    CC -> SumoBot2 : SetDirectionAndSpeed(direction,speed)
+        activate SumoBot2
+
+    SumoBot2 --> CC : No Attack
+    deactivate SumoBot2
+end loop
+== Life Lost == 
+    CC -> SumoBot1 : SetDirectionAndSpeed(direction,speed)
+    activate SumoBot1
+
+    SumoBot1 -> CC : ATTACK!!
+    activate CC
+    CC--> SumoBot1 : Acknowledge attack
+
+    SumoBot1 -> SumoBot1 : SubstractLife()
+
+    SumoBot1 --> CC : Ok
+        deactivate CC
+    deactivate SumoBot1
+
+    CC -> SumoBot1 : Stop()
+    activate SumoBot1
+    SumoBot1 --> CC : Stopped
+    deactivate SumoBot1
+    CC -> SumoBot2 : Stop()
+    activate SumoBot2
+    SumoBot2 --> CC : Stopped
+    deactivate SumoBot2
+    
+    CC -> CC : Display("Player 1 lost one life..")
+
+@enduml
