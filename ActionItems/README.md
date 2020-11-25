@@ -22,7 +22,7 @@
 - [ ] Tilføj til krav hvad SumoBot må veje
 - Resultat: Kravspec indeholder SumoBot’s vægt
 - Deltagere: **Frederik**
-- Status: 99%
+- Status: 100%
 
 - [ ] Alle IBD’er og BDD’er strømlines ift. navngivning og signaler
 - Resultat: Alle IBD’er og BDD’er er strømlinet. 
