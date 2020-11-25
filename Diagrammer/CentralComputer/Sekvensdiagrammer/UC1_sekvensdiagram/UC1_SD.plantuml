@@ -35,7 +35,7 @@ loop While Remaining Lives
         activate SumoBot
         SumoBot --> UC1 : Lifes
         deactivate SumoBot
-        UC1 -> Display : LostLife(life,life)
+        UC1 -> Display : LostLife(&SumoBot, &SumoBot)
         activate Display
         Display --> UC1 :
         deactivate Display 
@@ -45,20 +45,15 @@ loop While Remaining Lives
         Startknap --> UC1 : Players Ready
         deactivate Startknap
 '***Pkt 7***
-        UC1 -> Display : StartCountDown()
+        UC1 -> Display : StartCountDown(int Count)
         activate Display
         Display --> UC1 : GO!
         deactivate Display
     end opt
 end loop
 '***Pkt 9***
-        UC1 -> Display : showWinner(SumoBot)
+        UC1 -> Display : showWinner(&SumoBot)
         activate Display
         Display --> UC1 :
         deactivate Display    
-
-
-
-
-
 @enduml
