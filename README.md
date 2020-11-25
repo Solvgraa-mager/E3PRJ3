@@ -12,6 +12,29 @@
 
 # Dagsorden
 
+
+## 2020-11-25
+
+- **Deltagere**: Daniel, Simon, Frederik, Villiam, Adam, Rasmus, John, David
+
+- **Mødeleder**: Mr. Daniel Schultz
+
+- **Placering**: [Zoom](https://aarhusuniversity.zoom.us/j/66634576248)
+
+1. Gannemgang af journal arbejdet.
+
+- Nye Use case
+
+- Struktur - Kæft det er flot siger John
+
+- Analyse
+
+- Design, Mangler der er overordnet struktur her?
+
+2. Action items til næste uge!
+
+3. Evt
+
 ## 2020-11-4
 
 - **Deltagere**: Daniel, Simon, Frederik, Villiam, Adam, Rasmus, John, David
