@@ -3,23 +3,23 @@ title CC Class diagram for UC1
 
 
 class UC1 <<controller>>{
-    Run()
+    +Run() : int
 }
 
 class Attacksensor<<Boundary>>{
-    bool attackStatus
-    bool getAttackStatus(Dir, Speed) 
+    -attackStatus : int
+    +getAttackStatus() : bool 
 }
 
 class Motor <<Boundary>>{
-    int dir
-    int speed
-    void setDirSpeed()
+    -dir : int
+    -speed : int
+    +setDirSpeed() : void
 }
 class CentralComputerIF <<Boundary>>{
-    int dir
-    int speed
-    float getDirSpeed(attackStatus)
+    -dir : int
+    -speed : int
+    +getDirSpeed() : int
 }
 
 CentralComputerIF -- UC1
