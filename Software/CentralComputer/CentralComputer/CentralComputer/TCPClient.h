@@ -12,7 +12,8 @@ public:
 	int disconnect();
 	~TCPClient();
 private:
-	string IP; 
-	int socket;	
+	string IP_; 
+	int port_; 
+	int socket_;	
 };
 

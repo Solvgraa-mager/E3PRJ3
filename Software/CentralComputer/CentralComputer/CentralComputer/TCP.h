@@ -9,16 +9,20 @@
 #include <string>
 #include "Wifi.h"
 
+using namespace std;
+
 class TCP :
 	public Wifi
 {
 public:
 	TCP();
 	int send(string msg) override;
+	int getPort(); 
+	void setPort(int port);
 	int receive() override;
 	~TCP();
 private:
-	int port; 
-	int buffer_size;
-	char buffer[MAX_BUFFER_SIZE]; 
+	int port_; 
+	int buffer_size_;
+	char buffer[MAX_BUFFER_SIZE]_; 
 };

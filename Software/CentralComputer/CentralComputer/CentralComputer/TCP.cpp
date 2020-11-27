@@ -19,6 +19,18 @@ int TCP::receive()
 	return 0;
 }
 
+int TCP::getPort()
+{
+	return port;
+}
+
+void TCP::setPort(int port)
+{
+	port_ = port;
+}
 TCP::~TCP()
 {
 }
+
+	int getPort(); 
+	void setPort();
