@@ -7,7 +7,7 @@ class I2CMaster :
 {
 	I2CMaster();
 	int send() override;
-	int receive override;
+	int receive() override;
 	~I2CMaster();
 };
 

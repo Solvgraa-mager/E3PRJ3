@@ -139,7 +139,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Communication.cpp" />
+    <ClCompile Include="I2C.cpp" />
+    <ClCompile Include="I2CMaster.cpp" />
+    <ClCompile Include="I2CSlave.cpp" />
     <ClCompile Include="SPI.cpp" />
+    <ClCompile Include="SPIMaster.cpp" />
+    <ClCompile Include="SPISlave.cpp" />
     <ClCompile Include="TCP.cpp" />
     <ClCompile Include="TCPClient.cpp" />
     <ClCompile Include="TCPServer.cpp" />
@@ -147,7 +152,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Communication.h" />
+    <ClInclude Include="I2C.h" />
+    <ClInclude Include="I2CMaster.h" />
+    <ClInclude Include="I2CSlave.h" />
     <ClInclude Include="SPI.h" />
+    <ClInclude Include="SPIMaster.h" />
+    <ClInclude Include="SPISlave.h" />
     <ClInclude Include="TCP.h" />
     <ClInclude Include="TCPClient.h" />
     <ClInclude Include="TCPServer.h" />

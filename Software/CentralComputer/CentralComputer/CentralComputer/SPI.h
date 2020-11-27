@@ -5,12 +5,13 @@ class SPI :
 {
 public:
 	SPI();
-	~SPI()
+	~SPI();
 private:
 	int MOSI_GPIO;
 	int MISO_GPIO;
 	int clk_GPIO;
 	int SS_GPIO; 
 	int buffer_Size;
+	int clkFrequency;
 };
 

@@ -1,12 +1,14 @@
 #pragma once
-#include "SPI.h"
-class I2Slave :
-	public SPI
+#include "I2C.h"
+class I2CSlave :
+	public I2C
 {
 public:
-	SPISlave();
+	I2CSlave();
 	int send() override;
 	int receive() override;
+	~I2CSlave();
 private:
+	int address;
 };
 
