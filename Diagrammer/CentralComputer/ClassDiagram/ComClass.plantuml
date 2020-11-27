@@ -1,0 +1,81 @@
+@startuml
+class Communication{
+    +Communication() 
+    +Send() {abstract}
+    +Recieve() {abstract}
+    ~Communication()
+}
+class Wifi{
+    +CreateHotspot()
+    +ConnectToWifi()
+    -SSID
+    -Passphrase
+}
+class TCP{
+    +Send() 
+    +Recieve()
+    -int Port
+    -int Buffer_Size
+    -char[] buffer
+}
+class TCPClient{
+    +Init()
+    +Client(IP, Port)
+    +ConnectToServer()
+    +Disconnect()
+    -string IP
+    -int Socket
+}
+class TCPServer{
+    +Init()
+    +Server()
+    +OpenServer()
+    +CloseServer()
+    -int Socket[]
+    -int ClientCount
+}
+Class SPI{
+    +Init()
+    -int MOSI_Gpio
+    -int MISO_Gpio
+    -int Clk_Gpio
+    -int SS_Gpio
+    -int Buffer_Size
+}
+Class SPIMaster{
+    +Send()
+    +Recieve()
+}
+Class SPISlave{
+    +Send()
+    +Recieve()
+}
+class I2C{
+    +Init()
+    -SDA_Gpio
+    -SCL_Gpio
+}
+class I2CMaster{
+    +Send()
+    +Reveive()
+    -int Address[]
+    -ClientCount
+
+}
+class I2CSlave{
+    +Send()
+    +Reveive()
+}
+
+Communication <|- Wifi
+Wifi <|- TCP
+SPI -|> Communication
+TCP <|-- TCPClient
+TCP <|--TCPServer
+SPI <|--SPIMaster
+SPI <|--SPISlave
+Communication <|--I2C
+I2C <|-- I2CMaster
+I2C <|-- I2CSlave
+
+@enduml

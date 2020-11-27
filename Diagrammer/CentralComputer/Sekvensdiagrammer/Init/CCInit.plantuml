@@ -1,0 +1,10 @@
+@startuml
+title Init 
+
+actor SumoBot
+actor Styringsenhed
+participant CentralComputer
+
+
+
+@enduml
