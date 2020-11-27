@@ -33,7 +33,6 @@ class TCPServer{
     -int ClientCount
 }
 Class SPI{
-    +Init()
     -int MOSI_Gpio
     -int MISO_Gpio
     -int Clk_Gpio
@@ -49,7 +48,6 @@ Class SPISlave{
     +Recieve()
 }
 class I2C{
-    +Init()
     -SDA_Gpio
     -SCL_Gpio
 }
@@ -58,7 +56,6 @@ class I2CMaster{
     +Reveive()
     -int Address[]
     -ClientCount
-
 }
 class I2CSlave{
     +Send()
