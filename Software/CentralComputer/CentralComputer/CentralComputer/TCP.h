@@ -25,5 +25,5 @@ public:
 private:
 	int port_; 
 	int buffer_size_;
-	char buffer[MAX_BUFFER_SIZE]_; 
+	char buffer_[MAX_BUFFER_SIZE];
 };
