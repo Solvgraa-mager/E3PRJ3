@@ -1,38 +1,61 @@
 #include "TCPClient.h"
 
-#include <iostream>
-#include <sys/types.h>
-#include <unistd.h>
-#include <sys/socket.h>
-#include <netdb.h>
-#include <arpa/inet.h>
-#include <string.h>
-#include <string>
 
-TCPClient::TCPClient(string IP, int port_input)
+TCPClient::TCPClient(string IP, int port)
 {
 	//	Create a socket
     socket_ = socket(AF_INET, SOCK_STREAM, 0);
-	port = port_input; 
+	TCP::setPort(port); 
+	IP_ = IP;
 }
 
 int TCPClient::connectToServer()
 {
-	//	Create a hint structure for the server we're connecting with
-    int port = 54000;
-    string ipAddress = "192.168.0.1";
-
     sockaddr_in hint;
     hint.sin_family = AF_INET;
-    hint.sin_port = htons(port);
-    inet_pton(AF_INET, ipAddress.c_str(), &hint.sin_addr);
+    hint.sin_port = htons(port_);
+    inet_pton(AF_INET, IP_.c_str(), &hint.sin_addr);
 
     //	Connect to the server on the socket
-    int connectRes = connect(sock, (sockaddr*)&hint, sizeof(hint));
+    int connectRes = connect(socket_, (sockaddr*)&hint, sizeof(hint));
     if (connectRes == -1)
     {
         return 1;
     }
+
+	//	While loop:
+    string userInput;
+
+
+    do {
+        //		Enter lines of text
+        cout << "> ";
+        getline(cin, userInput);
+
+        //		Send to server
+        int sendRes = send(socket_, userInput.c_str(), userInput.size() + 1, 0);
+        if (sendRes == -1)
+        {
+            cout << "Could not send to server! Whoops!\r\n";
+            continue;
+        }
+
+        //		Wait for response
+        memset(TCP::buffer, 0, 4096);
+        int bytesReceived = recv(socket_, buf, 4096, 0);
+        if (bytesReceived == -1)
+        {
+            cout << "There was an error getting response from server\r\n";
+        }
+        else
+        {
+            //		Display response
+            cout << "SERVER> " << string(buf, bytesReceived) << "\r\n";
+        }
+    } while(true);
+
+    //	Close the socket
+    close(sock);
 
 	return 0;
 }

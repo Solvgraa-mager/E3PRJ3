@@ -28,6 +28,11 @@ void TCP::setPort(int port)
 {
 	port_ = port;
 }
+
+char* TCP::getBuffer()
+{
+	return buffer;
+}
 TCP::~TCP()
 {
 }

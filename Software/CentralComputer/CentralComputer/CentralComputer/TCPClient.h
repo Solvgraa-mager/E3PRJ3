@@ -7,7 +7,7 @@ class TCPClient :
 	public TCP
 {
 public:
-	TCPClient();
+	TCPClient(string IP, int port_input);
 	int connectToServer(); 
 	int disconnect();
 	~TCPClient();

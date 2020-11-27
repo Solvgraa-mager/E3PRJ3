@@ -19,6 +19,7 @@ public:
 	int send(string msg) override;
 	int getPort(); 
 	void setPort(int port);
+	char* getBuffer();
 	int receive() override;
 	~TCP();
 private:
