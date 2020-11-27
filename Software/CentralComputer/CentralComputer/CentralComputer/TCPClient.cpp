@@ -23,45 +23,12 @@ int TCPClient::connectToServer()
         return 1;
     }
 
-	//	While loop:
-    string userInput;
-
-
-    do {
-        //		Enter lines of text
-        cout << "> ";
-        getline(cin, userInput);
-
-        //		Send to server
-        int sendRes = send(socket_, userInput.c_str(), userInput.size() + 1, 0);
-        if (sendRes == -1)
-        {
-            cout << "Could not send to server! Whoops!\r\n";
-            continue;
-        }
-
-        //		Wait for response
-        memset(TCP::buffer, 0, 4096);
-        int bytesReceived = recv(socket_, buf, 4096, 0);
-        if (bytesReceived == -1)
-        {
-            cout << "There was an error getting response from server\r\n";
-        }
-        else
-        {
-            //		Display response
-            cout << "SERVER> " << string(buf, bytesReceived) << "\r\n";
-        }
-    } while(true);
-
-    //	Close the socket
-    close(sock);
-
 	return 0;
 }
 
 int TCPClient::disconnect()
 {
+	close(socket_);
 	return 0;
 }
 
