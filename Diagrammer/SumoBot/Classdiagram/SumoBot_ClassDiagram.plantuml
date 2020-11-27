@@ -1,5 +1,5 @@
 @startuml
-title CC Class diagram for UC1
+title SumoBot Class diagram for UC1
 
 
 class UC1 <<controller>>{
