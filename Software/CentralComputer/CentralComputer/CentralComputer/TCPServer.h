@@ -9,9 +9,10 @@ public:
 	TCPServer();
 	int openServer();
 	int closeServer();
+
 	~TCPServer();
 private: 
-	int Socket[MAX_CLIENT_COUNT]; 
-	int clientCount; 
+	int clientSocket_[MAX_CLIENT_COUNT]; 
+	int clientCount_; 
 };
 
