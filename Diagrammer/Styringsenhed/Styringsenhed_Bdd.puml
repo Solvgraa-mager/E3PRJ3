@@ -1,0 +1,17 @@
+@startuml
+skinparam BackgroundColor transparent
+
+title BDD for Styringsenhed
+
+object "Styringsenhed" as styringsenhed
+object "Mikrofon" as mikrofon
+object "Analog filterbehandlig" as filter
+object "Joystick" as joystick
+object "Central Computer IF" as centralComputerIF
+
+styringsenhed *-- filter
+    filter *-- mikrofon
+styringsenhed *-- joystick
+styringsenhed *-- centralComputerIF
+
+@enduml
