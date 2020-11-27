@@ -19,16 +19,14 @@ class TCP{
     -char[] buffer
 }
 class TCPClient{
-    +Init()
-    +Client(IP, Port)
+    +TCPClient(IP, Port)
     +ConnectToServer()
     +Disconnect()
     -string IP
     -int Socket
 }
 class TCPServer{
-    +Init()
-    +Server()
+    +TCPServer()
     +OpenServer()
     +CloseServer()
     -int Socket[]

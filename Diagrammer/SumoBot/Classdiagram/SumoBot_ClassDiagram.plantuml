@@ -1,0 +1,29 @@
+@startuml
+title CC Class diagram for UC1
+
+
+class UC1 <<controller>>{
+    Run()
+}
+
+class Attacksensor<<Boundary>>{
+    bool attackStatus
+    bool getAttackStatus(Dir, Speed) 
+}
+
+class Motor <<Boundary>>{
+    int dir
+    int speed
+    void setDirSpeed()
+}
+class CentralComputerIF <<Boundary>>{
+    int dir
+    int speed
+    float getDirSpeed(attackStatus)
+}
+
+CentralComputerIF -- UC1
+UC1 -- Motor
+UC1 - Attacksensor
+
+@enduml
