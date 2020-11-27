@@ -3,19 +3,18 @@
 
 #define omega_n (cpow(cexp(-2 * M_PI * I / n), (k / 2) * v))
 #define omega_N (cpow(cexp(-2 * M_PI * I / NO_OF_SAMPLES), (k / 2) * v))
-void
+
+
+uint16*
 DoFFT(uint16 inputArray[])
 {
   float complex coefficientArray[NO_OF_SAMPLES] = { 0 };
+  uint16 fftResult[n] = {0};
   int16 a[n] = { 0 };
   int16 b[n] = { 0 };
-  int32 mag[n] = { 0 };
-  int32 phase[n] = { 0 };
+  uint16 mag[n] = { 0 };
 
   char uartBuffer[256];
-  // Pure aesthetics  - no functional use
-  //  UART_1_PutString("FFT started.... \r\n");
-  // The real deal
 
   // HANNING !
   for (int i = 0; i < NO_OF_SAMPLES + 1; i++) {
@@ -54,18 +53,22 @@ DoFFT(uint16 inputArray[])
     };
   }
 
-
+// Creating the a0 coefficient
   a[0] = floor(2 * coefficientArray[0]);
   b[0] = 0;
   mag[0] = floor(cabsf(a[0] + b[0] * I));
 
+  // Creating coefficients
   for (uint8 k = 1; k < n; k++) {
-    a[k] = floor(2 * crealf(coefficientArray[k]));
-    b[k] = floor(-2 * cimagf(coefficientArray[k]));
+    // a[k] = floor(2 * crealf(coefficientArray[k]));
+    // b[k] = floor(-2 * cimagf(coefficientArray[k]));
     mag[k] = cabsf(coefficientArray[k]);
+    fftResult[k] = mag[k];
     //        mag[k] = cabsf(a[k]+b[k]*I);
-    phase[k] = cargf(coefficientArray[k]);
+   // phase[k] = cargf(coefficientArray[k]);
   };
+
+// Printing stuff
 //  UART_1_PutString("a\t b\t mag\t phase\n");
 //  for (uint8 i = 0; i < n; i++) {
 //    snprintf(uartBuffer,
@@ -77,4 +80,5 @@ DoFFT(uint16 inputArray[])
 //             phase[i]);
 //    UART_1_PutString(uartBuffer);
 //  };
+return fftResult;
 }

@@ -251,6 +251,7 @@
   <Data key="DataVersionKey" value="2" />
   <Group key="DWRInstGuidMapping">
     <Group key="Pin">
+      <Data key="6bb974fa-eaf5-4425-baa2-d7656c7274b4" value="ADC_EOC" />
       <Data key="8d318d8b-cf7b-4b6b-b02c-ab1c5c49d0ba" value="SW" />
       <Data key="220a0222-c10c-44cc-8e74-584023227521/20681f4c-d171-47ae-a1cb-d832cd711191" value="ADC_DelSig_Bypass_P03" />
       <Data key="1305c1b2-d2ac-443b-9c91-f34cb722064f" value="dma_done_test" />
@@ -3344,6 +3345,11 @@
     </Group>
   </Group>
   <Group key="Pin2">
+    <Group key="6bb974fa-eaf5-4425-baa2-d7656c7274b4">
+      <Group key="0">
+        <Data key="Port Format" value="1,6" />
+      </Group>
+    </Group>
     <Group key="8d318d8b-cf7b-4b6b-b02c-ab1c5c49d0ba">
       <Group key="0">
         <Data key="Port Format" value="0,1" />
