@@ -21,7 +21,7 @@ int TCP::receive()
 
 int TCP::getPort()
 {
-	return port;
+	return port_;
 }
 
 void TCP::setPort(int port)
