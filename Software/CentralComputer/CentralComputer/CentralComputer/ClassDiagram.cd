@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Communication">
+    <Position X="6" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAQAAAAAAEAAAAAAAAAAAAAAAAEAIAAAA=</HashCode>
+      <FileName>Communication.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="I2C">
+    <Position X="6" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAQAQAAAAAAAAAMAAAAAAAAAAAAAEAAAAAA=</HashCode>
+      <FileName>I2C.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="I2CMaster">
+    <Position X="4.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAQEAAAAAA=</HashCode>
+      <FileName>I2CMaster.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="I2CSlave">
+    <Position X="7" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIAAQAAAAAAABAAAAAIAAAAAAAAAEAAAAAA=</HashCode>
+      <FileName>I2CSlave.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SPI">
+    <Position X="1.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAgAAAAAAAgAAAAAAAEAAIAAACAAAAAAAgAAAAA=</HashCode>
+      <FileName>SPI.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SPIMaster">
+    <Position X="0.5" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAEBQAAAA=</HashCode>
+      <FileName>SPIMaster.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SPISlave">
+    <Position X="2.5" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAQAAAAAAAAAAAAAAAAAAAAAAAEAAAAAA=</HashCode>
+      <FileName>SPISlave.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TCP">
+    <Position X="9.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAYAIAAAAAAAEAAAAAAAgAAABAEAAAAAA=</HashCode>
+      <FileName>TCP.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TCPClient">
+    <Position X="9.75" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAEAAAAAAAAAAAAAAAAAIAAAAAAAAAEAAAAEAAA=</HashCode>
+      <FileName>TCPClient.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TCPServer">
+    <Position X="12.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAAAAAAAAEAEAAAAAAAgAAAQAAAAAAAACAAAA=</HashCode>
+      <FileName>TCPServer.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Wifi">
+    <Position X="10.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAQAAAAAAAAAAAAAAAAAAAAAABAAAAQAACAEAAAAAA=</HashCode>
+      <FileName>Wifi.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

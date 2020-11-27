@@ -1,15 +1,20 @@
 #include "I2CSlave.h"
 
-SPISlave::SPISlave()
+I2CSlave::I2CSlave()
 {
+
 }
 
-int SPISlave::send()
+int I2CSlave::send(string msg)
 {
 	return 0;
 }
 
-int SPISlave::receive()
+int I2CSlave::receive()
 {
 	return 0;
+}
+
+I2CSlave::~I2CSlave()
+{
 }

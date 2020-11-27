@@ -5,7 +5,7 @@ class SPIMaster :
 {
 public:
 	SPIMaster();
-	int send() override;
+	int send(string msg) override;
 	int receive() override;
 	~SPIMaster();
 private:

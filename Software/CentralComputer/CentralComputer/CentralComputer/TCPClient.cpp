@@ -2,10 +2,12 @@
 
 TCPClient::TCPClient()
 {
+
 }
 
 int TCPClient::connectToServer()
 {
+
 	return 0;
 }
 

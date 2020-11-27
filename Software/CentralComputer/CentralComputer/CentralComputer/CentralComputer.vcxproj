@@ -138,6 +138,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="CentralComputerIF.cpp" />
     <ClCompile Include="Communication.cpp" />
     <ClCompile Include="I2C.cpp" />
     <ClCompile Include="I2CMaster.cpp" />
@@ -148,9 +149,11 @@
     <ClCompile Include="TCP.cpp" />
     <ClCompile Include="TCPClient.cpp" />
     <ClCompile Include="TCPServer.cpp" />
+    <ClCompile Include="Test.cpp" />
     <ClCompile Include="Wifi.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CentralComputerIF.h" />
     <ClInclude Include="Communication.h" />
     <ClInclude Include="I2C.h" />
     <ClInclude Include="I2CMaster.h" />

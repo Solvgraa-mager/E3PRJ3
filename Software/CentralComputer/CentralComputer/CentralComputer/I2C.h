@@ -5,9 +5,9 @@ class I2C :
 {
 public:
 	I2C();
-	int virtual send() = 0;
+	int virtual send(string msg) = 0;
 	int virtual receive() = 0;
-	I2C();
+	~I2C();
 private:
 	int SDA_Gipos;
 	int SCL_Gpio;

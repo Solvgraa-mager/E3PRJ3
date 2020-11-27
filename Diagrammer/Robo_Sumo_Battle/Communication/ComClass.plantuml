@@ -14,30 +14,30 @@ class Wifi{
 class TCP{
     +Send() 
     +Recieve()
-    -int Port
-    -int Buffer_Size
-    -char[] buffer
+    -Port : int
+    -Buffer_Size : int
+    -buffer : char[] 
 }
 class TCPClient{
     +TCPClient(IP, Port)
     +ConnectToServer()
     +Disconnect()
-    -string IP
-    -int Socket
+    -IP : string 
+    -Socket : int 
 }
 class TCPServer{
     +TCPServer()
     +OpenServer()
     +CloseServer()
-    -int Socket[]
-    -int ClientCount
+    -Socket : int[]
+    -ClientCount : int 
 }
 Class SPI{
-    -int MOSI_Gpio
-    -int MISO_Gpio
-    -int Clk_Gpio
-    -int SS_Gpio
-    -int Buffer_Size
+    -MOSI_Gpio : int 
+    -MISO_Gpio : int 
+    -Clk_Gpio : int 
+    -SS_Gpio : int 
+    -Buffer_Size : int 
 }
 Class SPIMaster{
     +Send()
@@ -54,8 +54,8 @@ class I2C{
 class I2CMaster{
     +Send()
     +Reveive()
-    -int Address[]
-    -ClientCount
+    -Address[] : int 
+    -ClientCount : int 
 }
 class I2CSlave{
     +Send()

@@ -4,7 +4,7 @@ Communication::Communication()
 {
 }
 
-int Communication::send()
+int Communication::send(string msg)
 {
 	return 0;
 }

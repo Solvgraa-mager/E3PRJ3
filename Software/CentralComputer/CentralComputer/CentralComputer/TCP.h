@@ -6,12 +6,11 @@ class TCP :
 {
 public:
 	TCP();
-	int send() override;
+	int send(string msg) override;
 	int receive() override;
 	~TCP();
 private:
 	int port; 
 	int buffer_size;
-	char buffer[BUFFER_SIZE]; 
+	char buffer[MAX_BUFFER_SIZE]; 
 };
-

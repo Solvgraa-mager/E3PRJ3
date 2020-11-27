@@ -1,5 +1,7 @@
 #pragma once
+
 #include "TCP.h"
+
 class TCPServer :
 	public TCP
 {
@@ -9,7 +11,7 @@ public:
 	int closeServer();
 	~TCPServer();
 private: 
-	int Socket[CLIENT_COUNT]; 
+	int Socket[MAX_CLIENT_COUNT]; 
 	int clientCount; 
 };
 

@@ -1,5 +1,8 @@
 #pragma once
 #include "TCP.h"
+
+#include "TCP.h"
+
 class TCPClient :
 	public TCP
 {
