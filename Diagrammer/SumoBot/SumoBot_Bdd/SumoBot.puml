@@ -10,7 +10,6 @@ object "PSU" as PSU
 object "Batteri" as Batteri
 object "MicroController" as muc_SumoBot
 object "Attack Sensor" as AttackSensor
-object "Central Computer IF" as central_computer_IF
 
 SumoBot *-- Motor
   Motor *-- Motorstyring
@@ -18,6 +17,5 @@ SumoBot *-- PSU
   PSU *-- Batteri
 SumoBot *-- muc_SumoBot
 SumoBot *-- AttackSensor
-SumoBot *-- central_computer_IF
 
 @enduml
