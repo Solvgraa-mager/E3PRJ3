@@ -1,11 +1,10 @@
 clear; clc;
-
 N = 512
 realFs = 44.1e3%% Det var ikke muligt at gøre andet.
 fs = 10e3%% Ønsket samplefrekvens.
 fnyquist = fs / 2%% Nyquist
 
-SampleOffset = 0 * fs%% Avoid transients..
+SampleOffset = 1.2 * fs%% Avoid transients..
 fsFactor = floor(realFs / fs)
 tempN = N * fsFactor%% Antal samples vi kigger på
 % Load tone 1
@@ -26,6 +25,22 @@ data4_2 = audioread('Tone4_2.wav', [1 + SampleOffset, tempN + SampleOffset]);
 data4_3 = audioread('Tone4_3.wav', [1 + SampleOffset, tempN + SampleOffset]);
 
 %% Pseudo 10 khz samplingrate
+data1_1 = data1_1(:, 1);
+data1_2 = data1_2(:, 1);
+data1_3 = data1_3(:, 1);
+
+data2_1 = data2_1(:, 1);
+data2_2 = data2_2(:, 1);
+data2_3 = data2_3(:, 1);
+
+data3_1 = data3_1(:, 1);
+data3_2 = data3_2(:, 1);
+data3_3 = data3_3(:, 1);
+
+data4_1 = data4_1(:, 1);
+data4_2 = data4_2(:, 1);
+data4_3 = data4_3(:, 1);
+
 data1_1 = data1_1(1:fsFactor:end) .* hann(N);
 data1_2 = data1_2(1:fsFactor:end) .* hann(N);
 data1_3 = data1_3(1:fsFactor:end) .* hann(N);
@@ -103,10 +118,9 @@ plot(time_vek, [data4_1, data4_2, data4_3])
 title('Tone 4')
 xlabel('Tid [s]')
 axis tight
-sgtitle('Mundharmonika toner med Hann vindue tilføjet')
 printTarget = gcf;
 saveas(printTarget, ['figs/TimePlot_N_' num2str(N)], 'epsc')
-saveas(printTarget, ['figs/TimePlot_N_' num2str(N)], 'png')
+saveas(printTarget, ['figs/preview/TimePlot_N_' num2str(N)], 'png')
 
 %% FFT af Tone 1
 figure(2); clf;
@@ -180,7 +194,7 @@ ylabel('Amplitude [dB]')
 sgtitle([num2str(N / 2), ' bins FFT toner genereret af mundharmonika.'])
 printTarget = gcf;
 saveas(printTarget, ['figs/FFT_N_' num2str(N)], 'epsc')
-saveas(printTarget, ['figs/FFT_N_' num2str(N)], 'png')
+saveas(printTarget, ['figs/preview/FFT_N_' num2str(N)], 'png')
 
 figure(3); clf
 subplot(2, 1, 1)
@@ -194,9 +208,9 @@ for idx = 1:size(data4_fft, 2)
 end
 
 grid on
-xlim([0 3e3])
+xlim([0 5e3])
 ylim([-100 0])
-legend('Tone 1', 'Tone 2', 'Tone 3', 'Tone 4', 'location', 'southwest');
+legend('Tone 1', 'Tone 2', 'Tone 3', 'Tone 4');
 xlabel('Frekvens [Hz]')
 ylabel('Amplitude [dB]')
 hold off
@@ -217,10 +231,10 @@ grid on
 xlim([0 1.2e3])
 ylim([-100 0])
 hold off
-legend('Tone 1', 'Tone 2', 'Tone 3', 'Tone 4', 'location', 'southwest');
+legend('Tone 1', 'Tone 2', 'Tone 3', 'Tone 4', 'location', 'northwest');
 printTarget = gcf;
 saveas(printTarget, ['figs/FFT_Close_N_' num2str(N)], 'epsc')
-saveas(printTarget, ['figs/FFT_Close_N_' num2str(N)], 'png')
+saveas(printTarget, ['figs/preview/FFT_Close_N_' num2str(N)], 'png')
 
 figure(4); clf
 subplot(2, 1, 1)
@@ -234,7 +248,7 @@ for idx = 1:size(data4_fft, 2)
 end
 
 grid on
-xlim([0 3e3])
+xlim([0 5e3])
 ylim([-100 0])
 % legend('Tone 1','Tone 2','Tone 3','Tone 4');
 xlabel('Frekvens [Hz]')
@@ -259,5 +273,5 @@ ylim([-100 0])
 hold off
 printTarget = gcf;
 saveas(printTarget, ['figs/FFT_Bar_N_' num2str(N), '_Bins_', num2str(N / 2)], 'epsc')
-saveas(printTarget, ['figs/FFT_Bar_N_' num2str(N), '_Bins_', num2str(N / 2)], 'png')
+saveas(printTarget, ['figs/preview/FFT_Bar_N_' num2str(N), '_Bins_', num2str(N / 2)], 'png')
 % legend('Tone 1','Tone 2','Tone 3','Tone 4','location','northwest');
