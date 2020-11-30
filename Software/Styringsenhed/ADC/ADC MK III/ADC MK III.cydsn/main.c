@@ -40,7 +40,6 @@ handleByteReceived(uint8 byteReceived);
 CY_ISR_PROTO(ISR_DMA_Done);
 
 char uartBuffer[256];
-uint16 ADCToFFT[NO_OF_SAMPLES] = {0};
 uint16* fftResult; // FFT Result pointer.
 uint16 ADC_Sample[NO_OF_SAMPLES] = { 0 };
 
@@ -48,7 +47,6 @@ int
 main(void)
 {
   CyGlobalIntEnable; /* Enable global interrupts. */
-
   ISR_DMA_Done_StartEx(ISR_DMA_Done);
     ADC_DelSig_Start(); 
     ADC_DelSig_StartConvert(); 
@@ -122,14 +120,18 @@ handleByteReceived(uint8 byteReceived)
 
 CY_ISR(ISR_DMA_Done)
 {
-   UART_1_PutString("In ISR DMA DONE\n");
-    dma_done_test_Write(1);
-// We need a buffer...
-    fftResult = DoFFT(ADC_Sample);
-    UART_1_PutString("Magnitude resultat\n");
-    for (size_t i = 0; i < NO_OF_SAMPLES/2; i++) {
-        snprintf(uartBuffer,sizeof(uartBuffer),"%d: %d\n",i,fftResult[i]);
-        UART_1_PutString(uartBuffer);
+  uint16* ADCToFFT;
+
+  UART_1_PutString("In ISR DMA DONE\n");
+  dma_done_test_Write(1);
+  ADCToFFT = ADC_Sample;
+
+  fftResult = DoFFT(ADCToFFT);
+  
+  UART_1_PutString("Magnitude resultat\n");
+  for (size_t i = 0; i < NO_OF_SAMPLES / 2; i++) {
+    snprintf(uartBuffer, sizeof(uartBuffer), "%d: %d\n", i, fftResult[i]);
+    UART_1_PutString(uartBuffer);
     }
      
        UART_1_PutString("BYE BYE ISR DMA DONE\n");    
