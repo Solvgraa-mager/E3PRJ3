@@ -1,13 +1,13 @@
-Loading plugins phase: Elapsed time ==> 0s.871ms
+Loading plugins phase: Elapsed time ==> 1s.711ms
 <CYPRESSTAG name="CyDsfit arguments...">
 cydsfit arguments: -.fdsnotice -.fdswarpdepfile=warp_dependencies.txt -.fdselabdepfile=elab_dependencies.txt -.fdsbldfile=generated_files.txt -.fdsreffile=referenced_files.txt -p C:\E3PRJ3\Software\Styringsenhed\ADC\ADC MK III\ADC MK III.cydsn\ADC MK III.cyprj -d CY8C5888LTI-LP097 -s C:\E3PRJ3\Software\Styringsenhed\ADC\ADC MK III\ADC MK III.cydsn\Generated_Source\PSoC5 -- -yv2 -q10 -ygs -o2 -v3 -.fftcfgtype=LE
 </CYPRESSTAG>
 <CYPRESSTAG name="Design elaboration results...">
 </CYPRESSTAG>
-Elaboration phase: Elapsed time ==> 3s.155ms
+Elaboration phase: Elapsed time ==> 3s.790ms
 <CYPRESSTAG name="HDL generation results...">
 </CYPRESSTAG>
-HDL generation phase: Elapsed time ==> 0s.126ms
+HDL generation phase: Elapsed time ==> 0s.200ms
 <CYPRESSTAG name="Synthesis results...">
 
      | | | | | | |
@@ -41,7 +41,7 @@ Options  :    -yv2 -q10 -ygs -o2 -v3 -.fftcfgtype=LE -ya -.fftprj=C:\E3PRJ3\Soft
 ======================================================================
 
 vlogfe V6.3 IR 41:  Verilog parser
-Fri Nov 27 09:58:52 2020
+Tue Dec 01 07:51:48 2020
 
 
 ======================================================================
@@ -51,7 +51,7 @@ Options  :    -yv2 -q10 ADC MK III.v
 ======================================================================
 
 vpp V6.3 IR 41:  Verilog Pre-Processor
-Fri Nov 27 09:58:52 2020
+Tue Dec 01 07:51:48 2020
 
 Flattening file 'C:\Program Files (x86)\Cypress\PSoC Creator\4.3\PSoC Creator\psoc\content\CyPrimitives\cyprimitives.cylib\cy_virtualmux_v1_0\cy_virtualmux_v1_0.v'
 Flattening file 'C:\Program Files (x86)\Cypress\PSoC Creator\4.3\PSoC Creator\psoc\content\CyComponentLibrary\CyComponentLibrary.cylib\B_UART_v2_50\B_UART_v2_50.v'
@@ -100,7 +100,7 @@ Options  :    -yv2 -q10 -ygs -o2 -v3 -.fftcfgtype=LE -ya -.fftprj=C:\E3PRJ3\Soft
 ======================================================================
 
 tovif V6.3 IR 41:  High-level synthesis
-Fri Nov 27 09:58:53 2020
+Tue Dec 01 07:51:49 2020
 
 Linking 'C:\Program Files (x86)\Cypress\PSoC Creator\4.3\PSoC Creator\warp\lib\common\std.vhd'.
 Linking 'C:\Program Files (x86)\Cypress\PSoC Creator\4.3\PSoC Creator\warp\lib\common\cypress.vhd'.
@@ -137,7 +137,7 @@ Options  :    -yv2 -q10 -ygs -o2 -v3 -.fftcfgtype=LE -ya -.fftprj=C:\E3PRJ3\Soft
 ======================================================================
 
 topld V6.3 IR 41:  Synthesis and optimization
-Fri Nov 27 09:58:54 2020
+Tue Dec 01 07:51:49 2020
 
 Linking 'C:\Program Files (x86)\Cypress\PSoC Creator\4.3\PSoC Creator\warp\lib\common\std.vhd'.
 Linking 'C:\Program Files (x86)\Cypress\PSoC Creator\4.3\PSoC Creator\warp\lib\common\cypress.vhd'.
@@ -244,8 +244,24 @@ Aliasing \ADC_DelSig:Net_482\ to \UART_1:BUART:tx_hd_send_break\
 Aliasing \ADC_DelSig:Net_252\ to \UART_1:BUART:tx_hd_send_break\
 Aliasing \ADC_DelSig:soc\ to one
 Aliasing tmpOE__Floejtelyd_net_0 to one
+Aliasing \VDAC8_2:Net_83\ to \UART_1:BUART:tx_hd_send_break\
+Aliasing \VDAC8_2:Net_81\ to \UART_1:BUART:tx_hd_send_break\
+Aliasing \VDAC8_2:Net_82\ to \UART_1:BUART:tx_hd_send_break\
+Aliasing tmpOE__Bin_Test_3_net_0 to one
+Aliasing tmpOE__Bin_Test_1_net_0 to one
 Aliasing tmpOE__dma_done_test_net_0 to one
 Aliasing tmpOE__ADC_EOC_net_0 to one
+Aliasing tmpOE__Bin_Test_4_net_0 to one
+Aliasing \VDAC8_1:Net_83\ to \UART_1:BUART:tx_hd_send_break\
+Aliasing \VDAC8_1:Net_81\ to \UART_1:BUART:tx_hd_send_break\
+Aliasing \VDAC8_1:Net_82\ to \UART_1:BUART:tx_hd_send_break\
+Aliasing \VDAC8_3:Net_83\ to \UART_1:BUART:tx_hd_send_break\
+Aliasing \VDAC8_3:Net_81\ to \UART_1:BUART:tx_hd_send_break\
+Aliasing \VDAC8_3:Net_82\ to \UART_1:BUART:tx_hd_send_break\
+Aliasing tmpOE__Bin_Test_2_net_0 to one
+Aliasing \VDAC8_4:Net_83\ to \UART_1:BUART:tx_hd_send_break\
+Aliasing \VDAC8_4:Net_81\ to \UART_1:BUART:tx_hd_send_break\
+Aliasing \VDAC8_4:Net_82\ to \UART_1:BUART:tx_hd_send_break\
 Aliasing \UART_1:BUART:reset_reg\\D\ to \UART_1:BUART:tx_hd_send_break\
 Aliasing \UART_1:BUART:rx_break_status\\D\ to \UART_1:BUART:tx_hd_send_break\
 Removing Lhs of wire \UART_1:Net_61\[2] = \UART_1:Net_9\[1]
@@ -350,15 +366,31 @@ Removing Lhs of wire \ADC_DelSig:Net_482\[320] = zero[27]
 Removing Lhs of wire \ADC_DelSig:Net_252\[353] = zero[27]
 Removing Lhs of wire \ADC_DelSig:soc\[355] = one[4]
 Removing Lhs of wire tmpOE__Floejtelyd_net_0[359] = one[4]
-Removing Lhs of wire tmpOE__dma_done_test_net_0[366] = one[4]
-Removing Lhs of wire tmpOE__ADC_EOC_net_0[372] = one[4]
-Removing Lhs of wire \UART_1:BUART:reset_reg\\D\[377] = zero[27]
-Removing Lhs of wire \UART_1:BUART:rx_bitclk\\D\[392] = \UART_1:BUART:rx_bitclk_pre\[129]
-Removing Lhs of wire \UART_1:BUART:rx_parity_error_pre\\D\[401] = \UART_1:BUART:rx_parity_error_pre\[206]
-Removing Lhs of wire \UART_1:BUART:rx_break_status\\D\[402] = zero[27]
+Removing Lhs of wire \VDAC8_2:Net_83\[366] = zero[27]
+Removing Lhs of wire \VDAC8_2:Net_81\[367] = zero[27]
+Removing Lhs of wire \VDAC8_2:Net_82\[368] = zero[27]
+Removing Lhs of wire tmpOE__Bin_Test_3_net_0[373] = one[4]
+Removing Lhs of wire tmpOE__Bin_Test_1_net_0[380] = one[4]
+Removing Lhs of wire tmpOE__dma_done_test_net_0[387] = one[4]
+Removing Lhs of wire tmpOE__ADC_EOC_net_0[393] = one[4]
+Removing Lhs of wire tmpOE__Bin_Test_4_net_0[399] = one[4]
+Removing Lhs of wire \VDAC8_1:Net_83\[406] = zero[27]
+Removing Lhs of wire \VDAC8_1:Net_81\[407] = zero[27]
+Removing Lhs of wire \VDAC8_1:Net_82\[408] = zero[27]
+Removing Lhs of wire \VDAC8_3:Net_83\[412] = zero[27]
+Removing Lhs of wire \VDAC8_3:Net_81\[413] = zero[27]
+Removing Lhs of wire \VDAC8_3:Net_82\[414] = zero[27]
+Removing Lhs of wire tmpOE__Bin_Test_2_net_0[418] = one[4]
+Removing Lhs of wire \VDAC8_4:Net_83\[424] = zero[27]
+Removing Lhs of wire \VDAC8_4:Net_81\[425] = zero[27]
+Removing Lhs of wire \VDAC8_4:Net_82\[426] = zero[27]
+Removing Lhs of wire \UART_1:BUART:reset_reg\\D\[429] = zero[27]
+Removing Lhs of wire \UART_1:BUART:rx_bitclk\\D\[444] = \UART_1:BUART:rx_bitclk_pre\[129]
+Removing Lhs of wire \UART_1:BUART:rx_parity_error_pre\\D\[453] = \UART_1:BUART:rx_parity_error_pre\[206]
+Removing Lhs of wire \UART_1:BUART:rx_break_status\\D\[454] = zero[27]
 
 ------------------------------------------------------
-Aliased 0 equations, 108 wires.
+Aliased 0 equations, 124 wires.
 ------------------------------------------------------
 
 ----------------------------------------------------------
@@ -506,12 +538,12 @@ Aliasing \UART_1:BUART:rx_addr_match_status\\D\ to zero
 Removing Rhs of wire \UART_1:BUART:rx_bitclk_enable\[93] = \UART_1:BUART:rx_bitclk\[141]
 Removing Lhs of wire \UART_1:BUART:rx_status_0\[192] = zero[27]
 Removing Lhs of wire \UART_1:BUART:rx_status_6\[201] = zero[27]
-Removing Lhs of wire \UART_1:BUART:tx_ctrl_mark_last\\D\[384] = \UART_1:BUART:tx_ctrl_mark_last\[84]
-Removing Lhs of wire \UART_1:BUART:rx_markspace_status\\D\[396] = zero[27]
-Removing Lhs of wire \UART_1:BUART:rx_parity_error_status\\D\[397] = zero[27]
-Removing Lhs of wire \UART_1:BUART:rx_addr_match_status\\D\[399] = zero[27]
-Removing Lhs of wire \UART_1:BUART:rx_markspace_pre\\D\[400] = \UART_1:BUART:rx_markspace_pre\[205]
-Removing Lhs of wire \UART_1:BUART:rx_parity_bit\\D\[405] = \UART_1:BUART:rx_parity_bit\[211]
+Removing Lhs of wire \UART_1:BUART:tx_ctrl_mark_last\\D\[436] = \UART_1:BUART:tx_ctrl_mark_last\[84]
+Removing Lhs of wire \UART_1:BUART:rx_markspace_status\\D\[448] = zero[27]
+Removing Lhs of wire \UART_1:BUART:rx_parity_error_status\\D\[449] = zero[27]
+Removing Lhs of wire \UART_1:BUART:rx_addr_match_status\\D\[451] = zero[27]
+Removing Lhs of wire \UART_1:BUART:rx_markspace_pre\\D\[452] = \UART_1:BUART:rx_markspace_pre\[205]
+Removing Lhs of wire \UART_1:BUART:rx_parity_bit\\D\[457] = \UART_1:BUART:rx_parity_bit\[211]
 
 ------------------------------------------------------
 Aliased 0 equations, 9 wires.
@@ -550,14 +582,14 @@ CYPRESS_DIR    : C:\Program Files (x86)\Cypress\PSoC Creator\4.3\PSoC Creator\wa
 Warp Program   : C:\Program Files (x86)\Cypress\PSoC Creator\4.3\PSoC Creator\warp\bin\warp.exe
 Warp Arguments : -yv2 -q10 -ygs -o2 -v3 -.fftcfgtype=LE -ya "-.fftprj=C:\E3PRJ3\Software\Styringsenhed\ADC\ADC MK III\ADC MK III.cydsn\ADC MK III.cyprj" -dcpsoc3 "ADC MK III.v" -verilog
 </CYPRESSTAG>
-Warp synthesis phase: Elapsed time ==> 2s.118ms
+Warp synthesis phase: Elapsed time ==> 2s.097ms
 <CYPRESSTAG name="Fitter results...">
 <CYPRESSTAG name="Fitter startup details...">
-cyp3fit: V4.3.0.1445, Family: PSoC3, Started at: Friday, 27 November 2020 09:58:54
+cyp3fit: V4.3.0.1445, Family: PSoC3, Started at: Tuesday, 01 December 2020 07:51:50
 Options: -yv2 -q10 -ygs -o2 -v3 -.fftcfgtype=LE -ya -.fftprj=C:\E3PRJ3\Software\Styringsenhed\ADC\ADC MK III\ADC MK III.cydsn\ADC MK III.cyprj -d CY8C5888LTI-LP097 ADC MK III.v -verilog
 </CYPRESSTAG>
 <CYPRESSTAG name="Design parsing">
-Design parsing phase: Elapsed time ==> 0s.029ms
+Design parsing phase: Elapsed time ==> 0s.038ms
 </CYPRESSTAG>
 <CYPRESSTAG name="Tech Mapping">
 <CYPRESSTAG name="Initial Mapping" icon="FILE_RPT_TECHM">
@@ -813,6 +845,86 @@ Design Equations
         {
         }
 
+    Pin : Name = Bin_Test_3(0)
+        Attributes:
+            In Group/Port: True
+            In Sync Option: AUTO
+            Out Sync Option: AUTO
+            Interrupt generated: False
+            Interrupt mode: NONE
+            Drive mode: HI_Z_ANALOG
+            VTrip: EITHER
+            Slew: FAST
+            Input Sync needed: False
+            Output Sync needed: False
+            SC shield enabled: False
+            POR State: ANY
+            LCD Mode: COMMON
+            Register Mode: RegComb
+            CaSense Mode: NEITHER
+            Treat as pin: True
+            Is OE Registered: False
+            Uses Analog: True
+            Can contain Digital: False
+            Is SIO: False
+            SIO Output Buf: NONREGULATED
+            SIO Input Buf: SINGLE_ENDED
+            SIO HiFreq: LOW
+            SIO Hyst: DISABLED
+            SIO Vtrip: MULTIPLIER_0_5
+            SIO Multiplier Index: 0
+            SIO RefSel: VCC_IO
+            Required Capabilities: ANALOG
+            Initial Value: 0
+            IO Voltage: 0
+        PORT MAP (
+            pa_out => Bin_Test_3(0)__PA ,
+            analog_term => Net_54 ,
+            pad => Bin_Test_3(0)_PAD );
+        Properties:
+        {
+        }
+
+    Pin : Name = Bin_Test_1(0)
+        Attributes:
+            In Group/Port: True
+            In Sync Option: AUTO
+            Out Sync Option: AUTO
+            Interrupt generated: False
+            Interrupt mode: NONE
+            Drive mode: HI_Z_ANALOG
+            VTrip: EITHER
+            Slew: FAST
+            Input Sync needed: False
+            Output Sync needed: False
+            SC shield enabled: False
+            POR State: ANY
+            LCD Mode: COMMON
+            Register Mode: RegComb
+            CaSense Mode: NEITHER
+            Treat as pin: True
+            Is OE Registered: False
+            Uses Analog: True
+            Can contain Digital: False
+            Is SIO: False
+            SIO Output Buf: NONREGULATED
+            SIO Input Buf: SINGLE_ENDED
+            SIO HiFreq: LOW
+            SIO Hyst: DISABLED
+            SIO Vtrip: MULTIPLIER_0_5
+            SIO Multiplier Index: 0
+            SIO RefSel: VCC_IO
+            Required Capabilities: ANALOG
+            Initial Value: 0
+            IO Voltage: 0
+        PORT MAP (
+            pa_out => Bin_Test_1(0)__PA ,
+            analog_term => Net_46 ,
+            pad => Bin_Test_1(0)_PAD );
+        Properties:
+        {
+        }
+
     Pin : Name = dma_done_test(0)
         Attributes:
             In Group/Port: True
@@ -887,8 +999,88 @@ Design Equations
             IO Voltage: 0
         PORT MAP (
             pa_out => ADC_EOC(0)__PA ,
-            pin_input => Net_13 ,
+            pin_input => Net_62 ,
             pad => ADC_EOC(0)_PAD );
+        Properties:
+        {
+        }
+
+    Pin : Name = Bin_Test_4(0)
+        Attributes:
+            In Group/Port: True
+            In Sync Option: AUTO
+            Out Sync Option: AUTO
+            Interrupt generated: False
+            Interrupt mode: NONE
+            Drive mode: HI_Z_ANALOG
+            VTrip: EITHER
+            Slew: FAST
+            Input Sync needed: False
+            Output Sync needed: False
+            SC shield enabled: False
+            POR State: ANY
+            LCD Mode: COMMON
+            Register Mode: RegComb
+            CaSense Mode: NEITHER
+            Treat as pin: True
+            Is OE Registered: False
+            Uses Analog: True
+            Can contain Digital: False
+            Is SIO: False
+            SIO Output Buf: NONREGULATED
+            SIO Input Buf: SINGLE_ENDED
+            SIO HiFreq: LOW
+            SIO Hyst: DISABLED
+            SIO Vtrip: MULTIPLIER_0_5
+            SIO Multiplier Index: 0
+            SIO RefSel: VCC_IO
+            Required Capabilities: ANALOG
+            Initial Value: 0
+            IO Voltage: 0
+        PORT MAP (
+            pa_out => Bin_Test_4(0)__PA ,
+            analog_term => Net_57 ,
+            pad => Bin_Test_4(0)_PAD );
+        Properties:
+        {
+        }
+
+    Pin : Name = Bin_Test_2(0)
+        Attributes:
+            In Group/Port: True
+            In Sync Option: AUTO
+            Out Sync Option: AUTO
+            Interrupt generated: False
+            Interrupt mode: NONE
+            Drive mode: HI_Z_ANALOG
+            VTrip: EITHER
+            Slew: FAST
+            Input Sync needed: False
+            Output Sync needed: False
+            SC shield enabled: False
+            POR State: ANY
+            LCD Mode: COMMON
+            Register Mode: RegComb
+            CaSense Mode: NEITHER
+            Treat as pin: True
+            Is OE Registered: False
+            Uses Analog: True
+            Can contain Digital: False
+            Is SIO: False
+            SIO Output Buf: NONREGULATED
+            SIO Input Buf: SINGLE_ENDED
+            SIO HiFreq: LOW
+            SIO Hyst: DISABLED
+            SIO Vtrip: MULTIPLIER_0_5
+            SIO Multiplier Index: 0
+            SIO RefSel: VCC_IO
+            Required Capabilities: ANALOG
+            Initial Value: 0
+            IO Voltage: 0
+        PORT MAP (
+            pa_out => Bin_Test_2(0)__PA ,
+            analog_term => Net_51 ,
+            pad => Bin_Test_2(0)_PAD );
         Properties:
         {
         }
@@ -1473,7 +1665,7 @@ Design Equations
 
     drqcell: Name =DMA_1
         PORT MAP (
-            dmareq => Net_13 ,
+            dmareq => Net_62 ,
             termin => zero ,
             termout => Net_16 );
         Properties:
@@ -1499,7 +1691,7 @@ Design Equations
 
     interrupt: Name =\ADC_DelSig:IRQ\
         PORT MAP (
-            interrupt => Net_13 );
+            interrupt => Net_62 );
         Properties:
         {
             int_type = "10"
@@ -1529,7 +1721,7 @@ Analog Clocks                 :    1 :    3 :    4 : 25.00 %
 CapSense Buffers              :    0 :    2 :    2 :  0.00 %
 Digital Filter Block          :    0 :    1 :    1 :  0.00 %
 Interrupts                    :    3 :   29 :   32 :  9.38 %
-IO                            :    8 :   40 :   48 : 16.67 %
+IO                            :   12 :   36 :   48 : 25.00 %
 Segment LCD                   :    0 :    1 :    1 :  0.00 %
 CAN 2.0b                      :    0 :    1 :    1 :  0.00 %
 I2C                           :    0 :    1 :    1 :  0.00 %
@@ -1553,34 +1745,57 @@ LPF                           :    0 :    2 :    2 :  0.00 %
 SAR ADC                       :    0 :    2 :    2 :  0.00 %
 Analog (SC/CT) Blocks         :    0 :    4 :    4 :  0.00 %
 DAC                           :      :      :      :        
-  VIDAC                       :    0 :    4 :    4 :  0.00 %
+  VIDAC                       :    4 :    0 :    4 : 100.00 %
 </CYPRESSTAG>
-Technology Mapping: Elapsed time ==> 0s.139ms
-Tech Mapping phase: Elapsed time ==> 0s.332ms
+Technology Mapping: Elapsed time ==> 0s.180ms
+Tech Mapping phase: Elapsed time ==> 0s.334ms
 </CYPRESSTAG>
 <CYPRESSTAG name="Analog Placement">
 Info: apr.M0002: Analog signal "\ADC_DelSig:Net_35\" is connected to one terminal only. (App=cydsfit)
 Initial Analog Placement Results:
 IO_6@[IOP=(1)][IoId=(6)] : ADC_EOC(0) (fixed)
+IO_1@[IOP=(2)][IoId=(1)] : Bin_Test_1(0) (fixed)
+IO_2@[IOP=(2)][IoId=(2)] : Bin_Test_2(0) (fixed)
+IO_3@[IOP=(2)][IoId=(3)] : Bin_Test_3(0) (fixed)
+IO_4@[IOP=(2)][IoId=(4)] : Bin_Test_4(0) (fixed)
 IO_0@[IOP=(0)][IoId=(0)] : Floejtelyd(0) (fixed)
 IO_6@[IOP=(12)][IoId=(6)] : Rx_1(0) (fixed)
 IO_7@[IOP=(12)][IoId=(7)] : Tx_1(0) (fixed)
 IO_2@[IOP=(1)][IoId=(2)] : dma_done_test(0) (fixed)
 DSM[0]@[FFB(DSM,0)] : \ADC_DelSig:DSM\
 Vref[6]@[FFB(Vref,6)] : \ADC_DelSig:vRef_2\
+VIDAC[1]@[FFB(VIDAC,1)] : \VDAC8_1:viDAC8\
+VIDAC[3]@[FFB(VIDAC,3)] : \VDAC8_2:viDAC8\
+VIDAC[2]@[FFB(VIDAC,2)] : \VDAC8_3:viDAC8\
+VIDAC[0]@[FFB(VIDAC,0)] : \VDAC8_4:viDAC8\
+Log: apr.M0058: The analog placement iterative improvement is 31% done. (App=cydsfit)
+Log: apr.M0058: The analog placement iterative improvement is 60% done. (App=cydsfit)
+Log: apr.M0058: The analog placement iterative improvement is 95% done. (App=cydsfit)
 Analog Placement Results:
 IO_6@[IOP=(1)][IoId=(6)] : ADC_EOC(0) (fixed)
+IO_1@[IOP=(2)][IoId=(1)] : Bin_Test_1(0) (fixed)
+IO_2@[IOP=(2)][IoId=(2)] : Bin_Test_2(0) (fixed)
+IO_3@[IOP=(2)][IoId=(3)] : Bin_Test_3(0) (fixed)
+IO_4@[IOP=(2)][IoId=(4)] : Bin_Test_4(0) (fixed)
 IO_0@[IOP=(0)][IoId=(0)] : Floejtelyd(0) (fixed)
 IO_6@[IOP=(12)][IoId=(6)] : Rx_1(0) (fixed)
 IO_7@[IOP=(12)][IoId=(7)] : Tx_1(0) (fixed)
 IO_2@[IOP=(1)][IoId=(2)] : dma_done_test(0) (fixed)
 DSM[0]@[FFB(DSM,0)] : \ADC_DelSig:DSM\
 Vref[6]@[FFB(Vref,6)] : \ADC_DelSig:vRef_2\
+VIDAC[0]@[FFB(VIDAC,0)] : \VDAC8_1:viDAC8\
+VIDAC[3]@[FFB(VIDAC,3)] : \VDAC8_2:viDAC8\
+VIDAC[2]@[FFB(VIDAC,2)] : \VDAC8_3:viDAC8\
+VIDAC[1]@[FFB(VIDAC,1)] : \VDAC8_4:viDAC8\
 
-Analog Placement phase: Elapsed time ==> 0s.037ms
+Analog Placement phase: Elapsed time ==> 3s.824ms
 </CYPRESSTAG>
 <CYPRESSTAG name="Analog Routing">
-Analog Routing phase: Elapsed time ==> 0s.002ms
+Net "Net_51" overuses wire "dsm0+ Wire"
+Net "Net_17" overuses wire "dsm0+ Wire"
+Net "Net_51" overuses wire "dsm0+ Wire"
+Net "Net_17" overuses wire "dsm0+ Wire"
+Analog Routing phase: Elapsed time ==> 0s.055ms
 </CYPRESSTAG>
 <CYPRESSTAG name="Analog Code Generation">
 ============ Analog Final Answer Routes ============
@@ -1593,6 +1808,42 @@ Map of net to items {
     common_vssa
   }
   Net: \ADC_DelSig:Net_35\ {
+  }
+  Net: Net_46 {
+    vidac_0_vout
+    agl1_x_vidac_0_vout
+    agl1
+    agl1_x_p2_1
+    p2_1
+  }
+  Net: Net_51 {
+    vidac_3_vout
+    agr5_x_vidac_3_vout
+    agr5
+    agl5_x_agr5
+    agl5
+    agl5_x_sc_2_vin
+    sc_2_vin
+    agl2_x_sc_2_vin
+    agl2
+    agl2_x_p2_2
+    p2_2
+  }
+  Net: Net_54 {
+    vidac_2_vout
+    amuxbusl_x_vidac_2_vout
+    amuxbusl
+    amuxbusl_x_p2_3
+    p2_3
+  }
+  Net: Net_57 {
+    vidac_1_vout
+    agr0_x_vidac_1_vout
+    agr0
+    agl0_x_agr0
+    agl0
+    agl0_x_p2_4
+    p2_4
   }
   Net: Net_17 {
     dsm_0_vplus
@@ -1609,6 +1860,14 @@ Map of net to items {
   }
   Net: \ADC_DelSig:Net_34\ {
   }
+  Net: \VDAC8_1:Net_77\ {
+  }
+  Net: \VDAC8_2:Net_77\ {
+  }
+  Net: \VDAC8_3:Net_77\ {
+  }
+  Net: \VDAC8_4:Net_77\ {
+  }
   Net: AmuxNet::\ADC_DelSig:AMux\ {
     dsm_0_vminus
     dsm_0_vminus_x_dsm_0_vminus_vssa
@@ -1617,6 +1876,34 @@ Map of net to items {
   }
 }
 Map of item to net {
+  vidac_0_vout                                     -> Net_46
+  agl1_x_vidac_0_vout                              -> Net_46
+  agl1                                             -> Net_46
+  agl1_x_p2_1                                      -> Net_46
+  p2_1                                             -> Net_46
+  vidac_3_vout                                     -> Net_51
+  agr5_x_vidac_3_vout                              -> Net_51
+  agr5                                             -> Net_51
+  agl5_x_agr5                                      -> Net_51
+  agl5                                             -> Net_51
+  agl5_x_sc_2_vin                                  -> Net_51
+  sc_2_vin                                         -> Net_51
+  agl2_x_sc_2_vin                                  -> Net_51
+  agl2                                             -> Net_51
+  agl2_x_p2_2                                      -> Net_51
+  p2_2                                             -> Net_51
+  vidac_2_vout                                     -> Net_54
+  amuxbusl_x_vidac_2_vout                          -> Net_54
+  amuxbusl                                         -> Net_54
+  amuxbusl_x_p2_3                                  -> Net_54
+  p2_3                                             -> Net_54
+  vidac_1_vout                                     -> Net_57
+  agr0_x_vidac_1_vout                              -> Net_57
+  agr0                                             -> Net_57
+  agl0_x_agr0                                      -> Net_57
+  agl0                                             -> Net_57
+  agl0_x_p2_4                                      -> Net_57
+  p2_4                                             -> Net_57
   dsm_0_vplus                                      -> Net_17
   agl4_x_dsm_0_vplus                               -> Net_17
   agl4                                             -> Net_17
@@ -1658,11 +1945,11 @@ Dump of CyP35AnalogRoutingResultsDB
 IsVddaHalfUsedForComp = False
 IsVddaHalfUsedForSar0 = False
 IsVddaHalfUsedForSar1 = False
-Analog Code Generation phase: Elapsed time ==> 0s.633ms
+Analog Code Generation phase: Elapsed time ==> 1s.138ms
 </CYPRESSTAG>
 <CYPRESSTAG name="Digital Placement">
 <CYPRESSTAG name="Detailed placement messages">
-I2076: Total run-time: 2.1 sec.
+I2076: Total run-time: 3.1 sec.
 
 </CYPRESSTAG>
 <CYPRESSTAG name="PLD Packing">
@@ -1686,14 +1973,14 @@ PLD Packing Summary
 <CYPRESSTAG name="Packed PLD Contents">
 Packed PLD Contents not displayed at this verbose level.</CYPRESSTAG>
 </CYPRESSTAG>
-PLD Packing: Elapsed time ==> 0s.002ms
+PLD Packing: Elapsed time ==> 0s.008ms
 </CYPRESSTAG>
 <CYPRESSTAG name="Partitioning">
 <CYPRESSTAG name="Initial Partitioning Summary">
 Initial Partitioning Summary not displayed at this verbose level.</CYPRESSTAG>
 <CYPRESSTAG name="Final Partitioning Summary">
 Final Partitioning Summary not displayed at this verbose level.</CYPRESSTAG>
-Partitioning: Elapsed time ==> 0s.075ms
+Partitioning: Elapsed time ==> 0s.195ms
 </CYPRESSTAG>
 <CYPRESSTAG name="Final Placement Summary">
 
@@ -2440,7 +2727,7 @@ Intr container @ [IntrContainer=(0)]:
   Intr@ [IntrContainer=(0)][IntrId=(29)] 
     interrupt: Name =\ADC_DelSig:IRQ\
         PORT MAP (
-            interrupt => Net_13 );
+            interrupt => Net_62 );
         Properties:
         {
             int_type = "10"
@@ -2450,7 +2737,7 @@ Drq container @ [DrqContainer=(0)]:
   Dma@ [DrqContainer=(0)][DrqId=(10)] 
     drqcell: Name =DMA_1
         PORT MAP (
-            dmareq => Net_13 ,
+            dmareq => Net_62 ,
             termin => zero ,
             termout => Net_16 );
         Properties:
@@ -2577,13 +2864,177 @@ Pin : Name = ADC_EOC(0)
         IO Voltage: 0
     PORT MAP (
         pa_out => ADC_EOC(0)__PA ,
-        pin_input => Net_13 ,
+        pin_input => Net_62 ,
         pad => ADC_EOC(0)_PAD );
     Properties:
     {
     }
 
 Port 2 contains the following IO cells:
+[IoId=1]: 
+Pin : Name = Bin_Test_1(0)
+    Attributes:
+        In Group/Port: True
+        In Sync Option: AUTO
+        Out Sync Option: AUTO
+        Interrupt generated: False
+        Interrupt mode: NONE
+        Drive mode: HI_Z_ANALOG
+        VTrip: EITHER
+        Slew: FAST
+        Input Sync needed: False
+        Output Sync needed: False
+        SC shield enabled: False
+        POR State: ANY
+        LCD Mode: COMMON
+        Register Mode: RegComb
+        CaSense Mode: NEITHER
+        Treat as pin: True
+        Is OE Registered: False
+        Uses Analog: True
+        Can contain Digital: False
+        Is SIO: False
+        SIO Output Buf: NONREGULATED
+        SIO Input Buf: SINGLE_ENDED
+        SIO HiFreq: LOW
+        SIO Hyst: DISABLED
+        SIO Vtrip: MULTIPLIER_0_5
+        SIO Multiplier Index: 0
+        SIO RefSel: VCC_IO
+        Required Capabilities: ANALOG
+        Initial Value: 0
+        IO Voltage: 0
+    PORT MAP (
+        pa_out => Bin_Test_1(0)__PA ,
+        analog_term => Net_46 ,
+        pad => Bin_Test_1(0)_PAD );
+    Properties:
+    {
+    }
+
+[IoId=2]: 
+Pin : Name = Bin_Test_2(0)
+    Attributes:
+        In Group/Port: True
+        In Sync Option: AUTO
+        Out Sync Option: AUTO
+        Interrupt generated: False
+        Interrupt mode: NONE
+        Drive mode: HI_Z_ANALOG
+        VTrip: EITHER
+        Slew: FAST
+        Input Sync needed: False
+        Output Sync needed: False
+        SC shield enabled: False
+        POR State: ANY
+        LCD Mode: COMMON
+        Register Mode: RegComb
+        CaSense Mode: NEITHER
+        Treat as pin: True
+        Is OE Registered: False
+        Uses Analog: True
+        Can contain Digital: False
+        Is SIO: False
+        SIO Output Buf: NONREGULATED
+        SIO Input Buf: SINGLE_ENDED
+        SIO HiFreq: LOW
+        SIO Hyst: DISABLED
+        SIO Vtrip: MULTIPLIER_0_5
+        SIO Multiplier Index: 0
+        SIO RefSel: VCC_IO
+        Required Capabilities: ANALOG
+        Initial Value: 0
+        IO Voltage: 0
+    PORT MAP (
+        pa_out => Bin_Test_2(0)__PA ,
+        analog_term => Net_51 ,
+        pad => Bin_Test_2(0)_PAD );
+    Properties:
+    {
+    }
+
+[IoId=3]: 
+Pin : Name = Bin_Test_3(0)
+    Attributes:
+        In Group/Port: True
+        In Sync Option: AUTO
+        Out Sync Option: AUTO
+        Interrupt generated: False
+        Interrupt mode: NONE
+        Drive mode: HI_Z_ANALOG
+        VTrip: EITHER
+        Slew: FAST
+        Input Sync needed: False
+        Output Sync needed: False
+        SC shield enabled: False
+        POR State: ANY
+        LCD Mode: COMMON
+        Register Mode: RegComb
+        CaSense Mode: NEITHER
+        Treat as pin: True
+        Is OE Registered: False
+        Uses Analog: True
+        Can contain Digital: False
+        Is SIO: False
+        SIO Output Buf: NONREGULATED
+        SIO Input Buf: SINGLE_ENDED
+        SIO HiFreq: LOW
+        SIO Hyst: DISABLED
+        SIO Vtrip: MULTIPLIER_0_5
+        SIO Multiplier Index: 0
+        SIO RefSel: VCC_IO
+        Required Capabilities: ANALOG
+        Initial Value: 0
+        IO Voltage: 0
+    PORT MAP (
+        pa_out => Bin_Test_3(0)__PA ,
+        analog_term => Net_54 ,
+        pad => Bin_Test_3(0)_PAD );
+    Properties:
+    {
+    }
+
+[IoId=4]: 
+Pin : Name = Bin_Test_4(0)
+    Attributes:
+        In Group/Port: True
+        In Sync Option: AUTO
+        Out Sync Option: AUTO
+        Interrupt generated: False
+        Interrupt mode: NONE
+        Drive mode: HI_Z_ANALOG
+        VTrip: EITHER
+        Slew: FAST
+        Input Sync needed: False
+        Output Sync needed: False
+        SC shield enabled: False
+        POR State: ANY
+        LCD Mode: COMMON
+        Register Mode: RegComb
+        CaSense Mode: NEITHER
+        Treat as pin: True
+        Is OE Registered: False
+        Uses Analog: True
+        Can contain Digital: False
+        Is SIO: False
+        SIO Output Buf: NONREGULATED
+        SIO Input Buf: SINGLE_ENDED
+        SIO HiFreq: LOW
+        SIO Hyst: DISABLED
+        SIO Vtrip: MULTIPLIER_0_5
+        SIO Multiplier Index: 0
+        SIO RefSel: VCC_IO
+        Required Capabilities: ANALOG
+        Initial Value: 0
+        IO Voltage: 0
+    PORT MAP (
+        pa_out => Bin_Test_4(0)__PA ,
+        analog_term => Net_57 ,
+        pad => Bin_Test_4(0)_PAD );
+    Properties:
+    {
+    }
+
 Port 3 contains the following IO cells:
 Port 12 contains the following IO cells:
 [IoId=6]: 
@@ -2730,7 +3181,7 @@ DSM group 0:
         Properties:
         {
             cy_registers = ""
-            resolution = 16
+            resolution = 8
         }
 Decimator group 0: 
     Decimator Block @ F(Decimator,0): 
@@ -2743,7 +3194,7 @@ Decimator group 0:
             mod_dat_0 => \ADC_DelSig:mod_dat_0\ ,
             ext_start => __ONE__ ,
             modrst => \ADC_DelSig:mod_reset\ ,
-            interrupt => Net_13 );
+            interrupt => Net_62 );
         Properties:
         {
             cy_registers = ""
@@ -2758,7 +3209,51 @@ SC group 0: empty
 SPC group 0: empty
 Timer group 0: empty
 USB group 0: empty
-VIDAC group 0: empty
+VIDAC group 0: 
+    VIDAC Block @ F(VIDAC,0): 
+    vidaccell: Name =\VDAC8_1:viDAC8\
+        PORT MAP (
+            vout => Net_46 ,
+            iout => \VDAC8_1:Net_77\ );
+        Properties:
+        {
+            cy_registers = ""
+            is_all_if_any = 0
+            reg_data = 0
+        }
+    VIDAC Block @ F(VIDAC,1): 
+    vidaccell: Name =\VDAC8_4:viDAC8\
+        PORT MAP (
+            vout => Net_57 ,
+            iout => \VDAC8_4:Net_77\ );
+        Properties:
+        {
+            cy_registers = ""
+            is_all_if_any = 0
+            reg_data = 0
+        }
+    VIDAC Block @ F(VIDAC,2): 
+    vidaccell: Name =\VDAC8_3:viDAC8\
+        PORT MAP (
+            vout => Net_54 ,
+            iout => \VDAC8_3:Net_77\ );
+        Properties:
+        {
+            cy_registers = ""
+            is_all_if_any = 0
+            reg_data = 0
+        }
+    VIDAC Block @ F(VIDAC,3): 
+    vidaccell: Name =\VDAC8_2:viDAC8\
+        PORT MAP (
+            vout => Net_51 ,
+            iout => \VDAC8_2:Net_77\ );
+        Properties:
+        {
+            cy_registers = ""
+            is_all_if_any = 0
+            reg_data = 0
+        }
 OpAmp group 0: empty
 CsAbuf group 0: empty
 Vref group 0: 
@@ -2807,7 +3302,12 @@ Port | Pin | Fixed |      Type |       Drive Mode |             Name | Connectio
    0 |   0 |     * |      NONE |      HI_Z_ANALOG |    Floejtelyd(0) | Analog(Net_17)
 -----+-----+-------+-----------+------------------+------------------+---------------
    1 |   2 |     * |      NONE |         CMOS_OUT | dma_done_test(0) | In(Net_16)
-     |   6 |     * |      NONE |         CMOS_OUT |       ADC_EOC(0) | In(Net_13)
+     |   6 |     * |      NONE |         CMOS_OUT |       ADC_EOC(0) | In(Net_62)
+-----+-----+-------+-----------+------------------+------------------+---------------
+   2 |   1 |     * |      NONE |      HI_Z_ANALOG |    Bin_Test_1(0) | Analog(Net_46)
+     |   2 |     * |      NONE |      HI_Z_ANALOG |    Bin_Test_2(0) | Analog(Net_51)
+     |   3 |     * |      NONE |      HI_Z_ANALOG |    Bin_Test_3(0) | Analog(Net_54)
+     |   4 |     * |      NONE |      HI_Z_ANALOG |    Bin_Test_4(0) | Analog(Net_57)
 -----+-----+-------+-----------+------------------+------------------+---------------
   12 |   6 |     * |      NONE |     HI_Z_DIGITAL |          Rx_1(0) | FB(Net_7)
      |   7 |     * |      NONE |         CMOS_OUT |          Tx_1(0) | In(Net_2)
@@ -2815,33 +3315,33 @@ Port | Pin | Fixed |      Type |       Drive Mode |             Name | Connectio
 </CYPRESSTAG>
 </CYPRESSTAG>
 </CYPRESSTAG>
-Digital component placer commit/Report: Elapsed time ==> 0s.087ms
-Digital Placement phase: Elapsed time ==> 2s.985ms
+Digital component placer commit/Report: Elapsed time ==> 0s.201ms
+Digital Placement phase: Elapsed time ==> 5s.141ms
 </CYPRESSTAG>
 <CYPRESSTAG name="Digital Routing">
 "C:\Program Files (x86)\Cypress\PSoC Creator\4.3\PSoC Creator\bin/sjrouter.exe" --xml-path "C:\Program Files (x86)\Cypress\PSoC Creator\4.3\PSoC Creator\dev\psoc5/psoc5lp/route_arch-rrg.cydata" --vh2-path "ADC MK III_r.vh2" --pcf-path "ADC MK III.pco" --des-name "ADC MK III" --dsf-path "ADC MK III.dsf" --sdc-path "ADC MK III.sdc" --lib-path "ADC MK III_r.lib"
 Routing successful.
-Digital Routing phase: Elapsed time ==> 4s.547ms
+Digital Routing phase: Elapsed time ==> 6s.184ms
 </CYPRESSTAG>
 <CYPRESSTAG name="Bitstream Generation">
-Bitstream Generation phase: Elapsed time ==> 0s.694ms
+Bitstream Generation phase: Elapsed time ==> 1s.057ms
 </CYPRESSTAG>
 <CYPRESSTAG name="Bitstream Verification">
-Bitstream Verification phase: Elapsed time ==> 0s.110ms
+Bitstream Verification phase: Elapsed time ==> 0s.183ms
 </CYPRESSTAG>
 <CYPRESSTAG name="Static timing analysis">
 Timing report is in ADC MK III_timing.html.
-Static timing analysis phase: Elapsed time ==> 1s.014ms
+Static timing analysis phase: Elapsed time ==> 1s.495ms
 </CYPRESSTAG>
 <CYPRESSTAG name="Data reporting">
 Data reporting phase: Elapsed time ==> 0s.000ms
 </CYPRESSTAG>
 <CYPRESSTAG name="Database update...">
-Design database save phase: Elapsed time ==> 0s.713ms
+Design database save phase: Elapsed time ==> 0s.886ms
 </CYPRESSTAG>
-cydsfit: Elapsed time ==> 11s.284ms
+cydsfit: Elapsed time ==> 20s.548ms
 </CYPRESSTAG>
-Fitter phase: Elapsed time ==> 11s.285ms
-API generation phase: Elapsed time ==> 3s.754ms
-Dependency generation phase: Elapsed time ==> 0s.067ms
-Cleanup phase: Elapsed time ==> 0s.001ms
+Fitter phase: Elapsed time ==> 20s.549ms
+API generation phase: Elapsed time ==> 4s.972ms
+Dependency generation phase: Elapsed time ==> 0s.093ms
+Cleanup phase: Elapsed time ==> 0s.002ms

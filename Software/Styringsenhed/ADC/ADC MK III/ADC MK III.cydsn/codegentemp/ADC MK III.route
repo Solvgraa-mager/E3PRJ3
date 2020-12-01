@@ -886,7 +886,7 @@ net ClockBlock_BUS_CLK
 	switch ":clockblockcell.clk_bus_glb==>:interrupt_0.clock"
 	term   ":interrupt_0.clock"
 end ClockBlock_BUS_CLK
-net Net_13
+net Net_62
 	term   ":decimatorcell.interrupt"
 	switch ":decimatorcell.interrupt==>Stub-:dsiswitch_bottom@[DSI=(1,2)][side=bottom]:dsihc_bottom:v20+:dsiswitch_bottom@[DSI=(1,2)][side=bottom]:dsihc_bottom:v22"
 	switch "OStub-:dsiswitch_bottom@[DSI=(1,2)][side=bottom]:dsihc_bottom:v20+:dsiswitch_bottom@[DSI=(1,2)][side=bottom]:dsihc_bottom:v22"
@@ -908,7 +908,7 @@ net Net_13
 	switch "Stub-:dsiswitch_bottom@[DSI=(1,2)][side=bottom]:dsihc_bottom:v20+:dsiswitch_bottom@[DSI=(1,2)][side=bottom]:dsihc_bottom:v22==>:interrupt_idmux_29.in_0"
 	switch ":interrupt_idmux_29.interrupt_idmux_29__out==>:interrupt_29.interrupt"
 	term   ":interrupt_29.interrupt"
-end Net_13
+end Net_62
 net Net_16
 	term   ":dma_10.termout"
 	switch ":dma_10.termout==>:dma_termout0_demux_10.in"

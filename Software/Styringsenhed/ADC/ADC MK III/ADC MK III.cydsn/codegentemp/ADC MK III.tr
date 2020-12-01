@@ -23,8 +23,8 @@
 Number of clocks: 11
 Clock: ADC_DelSig_Ext_CP_Clk               | N/A                   | Target: 24.00 MHz   | 
 Clock: ADC_DelSig_Ext_CP_Clk(routed)       | N/A                   | Target: 24.00 MHz   | 
-Clock: ADC_DelSig_theACLK                  | N/A                   | Target: 0.63 MHz    | 
-Clock: ADC_DelSig_theACLK(fixed-function)  | N/A                   | Target: 0.63 MHz    | 
+Clock: ADC_DelSig_theACLK                  | N/A                   | Target: 0.16 MHz    | 
+Clock: ADC_DelSig_theACLK(fixed-function)  | N/A                   | Target: 0.16 MHz    | 
 Clock: CyBUS_CLK                           | Frequency: 57.24 MHz  | Target: 24.00 MHz   | 
 Clock: CyILO                               | N/A                   | Target: 0.00 MHz    | 
 Clock: CyIMO                               | N/A                   | Target: 3.00 MHz    | 
