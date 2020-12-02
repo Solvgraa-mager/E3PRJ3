@@ -6,7 +6,7 @@ class TCPServer :
 	public TCP
 {
 public:
-	TCPServer();
+	TCPServer(int clientCount);
 	int openServer();
 	int closeServer();
 

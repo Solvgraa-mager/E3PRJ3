@@ -17,7 +17,7 @@ int TCPServer::openServer()
     // Bind the ip address and port to a socket
     sockaddr_in hint;
     hint.sin_family = AF_INET;
-    hint.sin_port = htons(TCP.getport());//Get port nummer fra TCP classen.
+    hint.sin_port = htons(TCP::getPort());//Get port nummer fra TCP classen.
 
     inet_pton(AF_INET, "0.0.0.0", &hint.sin_addr);
  
@@ -28,7 +28,7 @@ int TCPServer::openServer()
  
     // Wait for a connection
     sockaddr_in client;
-    socklen_t clientSize = sizeof(client);socket
+    socklen_t clientSize = sizeof(client);
  
     clientSocket_[clientCount_] = accept(listening, (sockaddr*)&client, &clientSize);
  

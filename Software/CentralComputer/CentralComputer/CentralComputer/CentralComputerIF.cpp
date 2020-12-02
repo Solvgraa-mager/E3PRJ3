@@ -3,6 +3,7 @@
 
 CentralComputerIF::CentralComputerIF(Communication *com_ptr)
 {
+	cout << "CentralComputerIF constructor called" << endl;
 	com = com_ptr;
 }
 

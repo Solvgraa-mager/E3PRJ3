@@ -4,9 +4,12 @@
 TCPClient::TCPClient(string IP, int port)
 {
 	//	Create a socket
+    cout << "TCPClient Constructor envoked" << endl;
     socket_ = socket(AF_INET, SOCK_STREAM, 0);
+    cout << "socket_ = " << socket_ << endl;
 	TCP::setPort(port); 
 	IP_ = IP;
+    cout << "IP set to: " << IP_ << endl;
 }
 
 int TCPClient::connectToServer()

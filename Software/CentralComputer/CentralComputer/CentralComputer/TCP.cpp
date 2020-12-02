@@ -31,7 +31,7 @@ void TCP::setPort(int port)
 
 char* TCP::getBuffer()
 {
-	return buffer;
+	return buffer_;
 }
 TCP::~TCP()
 {

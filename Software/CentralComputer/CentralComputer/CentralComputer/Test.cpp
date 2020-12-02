@@ -1,5 +1,6 @@
 #include "CentralComputerIF.h"
 #include "TCPClient.h"
+#include <string.h>
 
 int main(void)
 {
