@@ -14,15 +14,17 @@ TCPClient::TCPClient(string IP, int port)
 
 int TCPClient::connectToServer()
 {
-    sockaddr_in hint;
-    hint.sin_family = AF_INET;
-    hint.sin_port = htons(port_);
-    inet_pton(AF_INET, IP_.c_str(), &hint.sin_addr);
+    cout << "ConnectToServer() envoked" << endl;
+    _hint.sin_family = AF_INET;
+    _hint.sin_port = htons(port_);
+    inet_pton(AF_INET, IP_.c_str(), &_hint.sin_addr);
 
+    cout << "Connecting..." << endl;
     //	Connect to the server on the socket
-    int connectRes = connect(socket_, (sockaddr*)&hint, sizeof(hint));
+    int connectRes = connect(socket_, (sockaddr*)&_hint, sizeof(_hint));
     if (connectRes == -1)
     {
+        cout << "connect returned -1" << endl;
         return 1;
     }
 

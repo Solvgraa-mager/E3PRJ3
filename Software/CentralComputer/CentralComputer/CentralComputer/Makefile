@@ -1,4 +1,4 @@
-CC = gcc
+
 
 all: 
 	arm-rpizw-g++ -o Test *.cpp

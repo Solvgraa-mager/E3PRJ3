@@ -12,6 +12,7 @@ public:
 	int disconnect();
 	~TCPClient();
 private:
+    sockaddr_in _hint;
 	string IP_; 
 	int port_; 
 	int socket_;	
