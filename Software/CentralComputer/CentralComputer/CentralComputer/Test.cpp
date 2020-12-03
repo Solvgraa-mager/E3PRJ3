@@ -6,10 +6,11 @@
 
 int main(void)
 {
-	SPIMaster S1;
+	SPIMaster S1(0,10000);
 	cout << "Object created" << endl;
-	S1.send("123");
+	while(1){
+	S1.send("1234567890");
 	cout << "Send returned" << endl;
-
+	}
 	return 0;
 }

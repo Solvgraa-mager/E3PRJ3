@@ -6,7 +6,7 @@ class SPIMaster :
 public:
 	SPIMaster(int channel, int speed);
 	int send(string msg) override;
-	int sendChar(char msg); 
+	int sendChar(unsigned char msg); 
 	int receive() override;
 	~SPIMaster();
 private:

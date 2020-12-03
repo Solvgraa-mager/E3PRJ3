@@ -1,6 +1,7 @@
 #include "SPISlave.h"
 
-SPISlave::SPISlave()
+SPISlave::SPISlave(int channel, int speed)
+	:SPI(channel, speed)
 {
 }
 
