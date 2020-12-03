@@ -4,17 +4,22 @@
 
 #include <linux/types.h>
 
-SPIMaster::SPIMaster(int channel, int speed)
-	:SPI::SPI(channel,speed)
+SPIMaster::SPIMaster(int channel, int speed, int bufferSize)
+	:SPI::SPI(channel,speed, bufferSize)
 {
 }
 
 int SPIMaster::send(string msg)
 {
-	int n = msg.length();
-	char buffer[n];
+	//Tjek om størrelsen af msg er lig med buffersize
+	if((msg.length() + 1) != SPI::getBufferSize())
+	{
+		cout << "msg does not match wordlength"<<endl; 
+		return -1; 
+	}
+	char buffer[SPI::getBufferSize()];
 	strcpy(buffer,msg.c_str());
-	wiringPiSPIDataRW(0,(unsigned char*)buffer,sizeof(buffer));
+	wiringPiSPIDataRW(0,(unsigned char*)buffer,SPI::getBufferSize());
 	return 0;
 }
 

@@ -6,7 +6,7 @@
 
 int main(void)
 {
-	SPIMaster S1(0,10000);
+	SPIMaster S1(0,10000,4);
 	cout << "Object created" << endl;
 	while(1){
 	S1.send("123");
