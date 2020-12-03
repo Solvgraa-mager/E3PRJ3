@@ -20,7 +20,7 @@ public:
 	int getPort(); 
 	void setPort(int port);
 	char* getBuffer();
-	int receive() override;
+	int receive(char *buffer, int length) override;
 	~TCP();
 private:
 	int port_; 

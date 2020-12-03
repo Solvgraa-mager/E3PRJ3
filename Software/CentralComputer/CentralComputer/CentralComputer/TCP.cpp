@@ -13,7 +13,7 @@ int TCP::send(string msg)
 	return 0;
 }
 
-int TCP::receive()
+int TCP::receive(char *buffer, int length)
 {
 	cout << "TCP - recevied" << endl;
 	return 0;

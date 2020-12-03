@@ -7,7 +7,7 @@ class I2CSlave :
 public:
 	I2CSlave();
 	int send(string msg) override;
-	int receive() override;
+	int receive(char *buffer, int length) override;
 	~I2CSlave();
 private:
 	int address;

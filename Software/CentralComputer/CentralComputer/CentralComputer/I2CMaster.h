@@ -8,7 +8,7 @@ class I2CMaster :
 public:
 	I2CMaster();
 	int send(string msg) override;
-	int receive() override;
+	int receive(char *buffer, int length) override;
 	~I2CMaster();
 private:
 	int address[MAX_CLIENT_COUNT];

@@ -11,7 +11,7 @@ class Communication
 public:
 	Communication();
 	virtual int send(string msg) = 0;
-	virtual int receive() = 0;
+	virtual int receive(char *buffer, int length) = 0;
 	~Communication();
 private:
 };

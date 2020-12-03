@@ -26,8 +26,13 @@ int SPIMaster::sendChar(unsigned char msg)
 	return 0;
 }
 
-int SPIMaster::receive()
+int SPIMaster::receive(char *buffer, int length)
 {
+	unsigned char receieveBuffer[length]; 
+	memset(receieveBuffer,0,length);
+	wiringPiSPIDataRW(0,receieveBuffer,length);
+	strcpy(buffer,(char*)receieveBuffer);
+	cout << "Received: " << buffer << endl; 
 	return 0;
 }
 

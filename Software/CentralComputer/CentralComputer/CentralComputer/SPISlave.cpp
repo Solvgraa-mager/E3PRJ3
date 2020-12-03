@@ -10,7 +10,7 @@ int SPISlave::send(string msg)
 	return 0;
 }
 
-int SPISlave::receive()
+int SPISlave::receive(char *buffer, int length)
 {
 	return 0;
 }
