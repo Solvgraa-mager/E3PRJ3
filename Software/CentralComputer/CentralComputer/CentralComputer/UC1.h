@@ -4,7 +4,18 @@
 #include "SumoBot.h"
 #include "Styringsenhed.h"
 
+const int PLAYER_COUNT = 2;
+
 using namespace std; 
+
+struct Player {
+	int direction;
+	int speed;
+	int life;
+	bool attack; 
+	SumoBot* SBptr;
+	Styringsenhed* SEptr;
+};
 
 class UC1
 {
@@ -15,9 +26,6 @@ public:
 private:
 	Startknap* _SK; 
 	Display* _D;
-	SumoBot* _SB1; 
-	SumoBot* _SB2;
-	Styringsenhed* _SE1; 
-	Styringsenhed* _SE2; 
+	Player _player[2];
 };
 
