@@ -4,33 +4,54 @@ title CD_UC1
 class UC1 <<controller>>{
     +UC1()
     +Run()
+    +~UC1()
+    -Startknap* _SK
+    -Display* _D
+    -Player _player[2]
 }
 
 class Startknap <<Domain>>{
 -bool Status
 +WaitForStart()
 }
+
 class Display<<Boundary>>{
     +StartCountDown(int count)
     +LostLife(&SumoBot,&SumoBot)
     +ShowWinner(&SumoBot)
+    +writeToScreen(string msg)
 }
 
 class SumoBot <<Boundary>>{
-    - int Liv
-    -float Retning
-    -int Hastighed
-    -bool AttackStatus
-    +SetDirectionAndSpeed(Dir,Speed)
+    - int _lifes
+    -int _retning
+    -int _speed
+    -bool _attackStatus
+    +SumoBot()
+    +SetDirectionAndSpeed(int Dir,int Speed)
     +SubstractLife()
     +GetLives()
-    - *Communication
+    - *TCPServer
 }
 class Styringsenhed <<Boundary>>{
-   - float Retning
-    -int Hastighed
-    +GetDirectionAndSpeed()
+   - int _speed
+    -int _direction
+    +Styringsenhed()
+    +GetDirectionAndSpeed(int &dir, int &speed)
+    +Styringsenhed()
 }
+
+class Player <<Struct>> {
+int direction
+int speed
+int life
+bool attack
+SumoBot* SBptr
+Styringsenhed* SEptr
+hide members
+show fields
+}
+hide <<Struct>> circle
 
 Startknap"2" -- UC1
 UC1 -- "2"Styringsenhed
