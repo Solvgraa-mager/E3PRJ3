@@ -6,8 +6,6 @@
 Display::Display(int rows, int cols, int bits, int rs, int strb, 
 			int d0, int d1, int d2, int d3, int d4, int d5, int d6, int d7)
 {
-	I2CMaster IM;
-
 	_rows = rows; _cols = cols; _bits = bits; _rs = rs; _strb = strb;
 
 	_data[0] = d0; _data[1] = d1; _data[2] = d2; _data[3] = d3;
@@ -32,14 +30,14 @@ void Display::startCountDown(int count)
 	}
 }
 
-void Display::lostLife(SumoBot* S1, SumoBot* S2)
+void Display::lostLife(int player, SumoBot* S1, SumoBot* S2)
 {
 	//Define texts
-	string prefix = "Lifes:\n";
+	string prefix = " lost a life!\nLifes:\n";
 	string P1text = "P1:  \n";
 	string P2text = "P2:  ";
 	//Concatenate texts
-	string msg = prefix+ to_string(S1->getLife())+P2text+to_string(S2->getLife());
+	string msg = to_string(player) + prefix+ to_string(S1->getLife())+P2text+to_string(S2->getLife());
 	cout << "DISPLAY: Printing: " << msg << endl; 
 	//Write to screen
 	writeToScreen(msg);
@@ -87,6 +85,7 @@ int Display::writeToScreen(string msg)
 			return -2;
 		}
 	}
+	return 0;
 }
 
 

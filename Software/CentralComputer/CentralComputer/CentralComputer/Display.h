@@ -11,7 +11,7 @@ public:
 	Display(int rows, int cols, int bits, int rs, int strb,
 		int d0, int d1, int d2, int d3, int d4, int d5, int d6, int d7);
 	void startCountDown(int count);
-	void lostLife(SumoBot *S1, SumoBot *S2);
+	void lostLife(int player, SumoBot *S1, SumoBot *S2);
 	void showWinner(int winner);
 	int  writeToScreen(string msg);
 private:

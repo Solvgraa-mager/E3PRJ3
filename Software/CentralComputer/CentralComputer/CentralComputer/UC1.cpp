@@ -36,7 +36,7 @@ void UC1::run()
 			if (_player[i].attack)
 			{
 				_player[i].SBptr->substractLife();
-				_D->lostLife(_SB1, _SB2);
+				_D->lostLife((i+1),_player[i].SBptr, _player[(i ? 0 : 1)].SBptr);
 				_player[i].attack = false;
 				_SK->waitForStart();
 				_D->startCountDown(10);
