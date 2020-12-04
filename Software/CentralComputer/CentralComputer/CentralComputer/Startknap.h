@@ -1,12 +1,14 @@
 #pragma once
+#include "wiringPi/wiringPi.h"
 
 class Startknap
 {
 public:
-	Startknap();
+	Startknap(int gpio1, int gpio2);
 	void waitForStart();
 	~Startknap();
 private:
-	bool _status;
+	int _gpio[2];
+	bool _status[2];
 };
 

@@ -5,8 +5,8 @@ class I2C :
 {
 public:
 	I2C();
-	int virtual send(string msg) = 0;
-	int virtual receive() = 0;
+	int send(string msg);
+	int receive();
 	~I2C();
 private:
 	int SDA_Gipos;
