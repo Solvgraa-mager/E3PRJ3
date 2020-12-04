@@ -4,8 +4,9 @@
 
 SPI::SPI(int channel, int speed, int bufferSize)
 {
-    _fd = wiringPiSPISetup(0, 10000);
+    _fd = wiringPiSPISetup(channel, 10000);
     _buffer_size = bufferSize; 
+    _channel = channel; 
 }
 int SPI::getBufferSize(){
     return _buffer_size;
@@ -18,6 +19,9 @@ int SPI::getclkFreq(){
 }
 void SPI::setClkFreq(int clkFreq){
     _clkFrequency = clkFreq;
+}
+int SPI::getChannel(){
+    return _channel;
 }
 
 int SPI::getfd()

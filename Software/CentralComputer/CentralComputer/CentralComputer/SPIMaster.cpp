@@ -14,28 +14,43 @@ int SPIMaster::send(string msg)
 	//Tjek om størrelsen af msg er lig med buffersize
 	if((msg.length() + 1) != SPI::getBufferSize())
 	{
-		cout << "msg does not match wordlength"<<endl; 
+		cout << "SPIMaster msg does not match wordlength"<<endl; 
 		return -1; 
 	}
 	char buffer[SPI::getBufferSize()];
 	strcpy(buffer,msg.c_str());
-	wiringPiSPIDataRW(0,(unsigned char*)buffer,SPI::getBufferSize());
+	if(wiringPiSPIDataRW(SPI::getChannel(),
+				(unsigned char*)buffer,SPI::getBufferSize()) < 0)
+	{
+		cout << "SPIMaster: Could not send message" << endl; 
+		return -2; 
+	}
+	
 	return 0;
 }
 
 int SPIMaster::sendChar(unsigned char msg)
 {
 	unsigned char *buf = &msg;
-	wiringPiSPIDataRW(0,buf,1);
-	cout << "Send!" << endl;
+	if (wiringPiSPIDataRW(0,buf,1)<0)
+	{
+		cout << "SPIMaster: Could not send byte" << endl; 
+		return -1; 
+	}
 	return 0;
 }
 
 int SPIMaster::receive(char *buffer, int length)
 {
+	int err = 0; 
 	unsigned char receieveBuffer[length]; 
 	memset(receieveBuffer,0,length);
-	wiringPiSPIDataRW(0,receieveBuffer,length);
+	err = wiringPiSPIDataRW(SPI::getChannel(),receieveBuffer,length);
+	if(err < 0)
+	{
+		cout << "SPIMaster: Could not receive data" << endl; 
+		return -1; 
+	}
 	strcpy(buffer,(char*)receieveBuffer);
 	cout << "Received: " << buffer << endl; 
 	return 0;
