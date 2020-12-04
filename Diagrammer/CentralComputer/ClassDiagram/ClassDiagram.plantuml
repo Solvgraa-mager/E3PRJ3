@@ -1,8 +1,10 @@
 @startuml
 title CD_UC1
 
+skinparam wrapWidth 200
+
 class UC1 <<controller>>{
-    +UC1()
+    +UC1(Startknap* SK, Display *D, SumoBot *S1,SumoBot *S2, Styringsenhed *SE1, Styringsenhed *SE2)
     +Run()
     +~UC1()
     -Startknap* _SK
@@ -11,8 +13,12 @@ class UC1 <<controller>>{
 }
 
 class Startknap <<Domain>>{
--bool Status
+-_gpio[2] : int
+-_Status[2] : bool
++Startknap(int gpio1, int gpio2)
 +WaitForStart()
++~Startknap()
+
 }
 
 class Display<<Boundary>>{
@@ -23,31 +29,31 @@ class Display<<Boundary>>{
 }
 
 class SumoBot <<Boundary>>{
-    - int _lifes
-    -int _retning
-    -int _speed
-    -bool _attackStatus
+    - _lifes : int
+    -_retning : int
+    -_speed : int
+    -_attackStatus : bool
     +SumoBot()
     +SetDirectionAndSpeed(int Dir,int Speed)
     +SubstractLife()
     +GetLives()
-    - *TCPServer
+    - _TCPS : *TCPServer
 }
 class Styringsenhed <<Boundary>>{
-   - int _speed
-    -int _direction
+   - _speed : int
+    -_direction : int
     +Styringsenhed()
     +GetDirectionAndSpeed(int &dir, int &speed)
     +Styringsenhed()
 }
 
 class Player <<Struct>> {
-int direction
-int speed
-int life
-bool attack
-SumoBot* SBptr
-Styringsenhed* SEptr
+direction : int
+speed : int
+life : int
+attack : bool 
+SBptr : SumoBot*
+SEptr : Styringsenhed*
 hide members
 show fields
 }

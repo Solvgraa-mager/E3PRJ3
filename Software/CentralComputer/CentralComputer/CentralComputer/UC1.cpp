@@ -4,10 +4,10 @@ UC1::UC1(Startknap* SK, Display* D, SumoBot* SB1, SumoBot* SB2, Styringsenhed* S
 {
 	_SK = SK; 
 	_D = D; 
-	_SB1 = SB1; 
-	_SB2 = SB2; 
-	_SE1 = SE1; 
-	_SE2 = SE2; 
+	_player[0].SBptr = SB1; 
+	_player[1].SBptr = SB2;
+	_player[0].SEptr = SE1;
+	_player[1].SEptr = SE2;
 
 	//Define initial direction, speed, attack-status,SumoBot ptr and Styringsenheds ptr for UC1
 	_player[0] = { 0,0,3,false,_SB1,_SE1};
@@ -45,8 +45,8 @@ void UC1::run()
 	}
 	//Pass loosing SumoBot to Display to show
 	_D->showWinner(
-		(!_SB1->getLife() ? _SB1 :
-		(!_SB2->getLife() ? _SB2 : 0)) );
+		(!_player[0].SBptr->getLife() ? 1 :
+		(!_player[1].SBptr->getLife() ? 2 : 0)) );
 }
 
 UC1::~UC1()
