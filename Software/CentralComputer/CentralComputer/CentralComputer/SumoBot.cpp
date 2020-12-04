@@ -1,7 +1,11 @@
 
 #include "SumoBot.h"
 
-int SumoBot::setDirectionAndSpeed(int dir, int speed)
+SumoBot::SumoBot()
+{
+}
+
+bool SumoBot::setDirectionAndSpeed(int dir, int speed)
 {
 	return 0;
 }

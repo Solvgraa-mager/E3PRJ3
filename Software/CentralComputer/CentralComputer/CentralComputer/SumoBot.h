@@ -1,8 +1,9 @@
 #pragma once
 class SumoBot
 {
+public:
 	SumoBot();
-	int setDirectionAndSpeed(int dir, int speed);
+	bool setDirectionAndSpeed(int dir, int speed);
 	int substractLife();
 	int getLife();
 	~SumoBot();
