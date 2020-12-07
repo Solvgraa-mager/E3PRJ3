@@ -16,6 +16,7 @@ int main(void)
 	TCPC1.receiveMsg();// modtager fra aktiveret server
 	TCPC1.sendMsg("1:Speed 100. Dir 90"); //sender til server 1, og aktivere
 	TCPC1.receiveMsg();//modtager fra aktiveret server.
+	sleep(2);
 	}
 	return 0;
 }

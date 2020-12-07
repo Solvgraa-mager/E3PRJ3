@@ -76,8 +76,8 @@ int TCPServer::sendMsg(string msg)
 {
 
     // Echo message back to client
-    send(clientSocket_, msg, sizeof(msg) + 1, 0);
-
+    send(clientSocket_, msg.c_str(), msg.size() + 1, 0); //+1 for \0
+    cout << msg << "is: " << msg.size() << "long" << endl;
 	return 0;
 }
 
