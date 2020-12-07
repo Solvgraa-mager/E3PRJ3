@@ -2,7 +2,7 @@
 class Styringsenhed
 {
 public:
-	Styringsenhed(int channel, int speed, int bufferSize);
+	Styringsenhed(int channel, int Comspeed, int bufferSize);
 	int getDirectionAndSpeed(int& dir, int& speed);
 	~Styringsenhed();
 private:
