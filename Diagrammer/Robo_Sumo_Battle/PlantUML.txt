@@ -13,10 +13,10 @@ object "Central Computer" as central_computer
 object "SumoBot" as sumobot
     sumobot : <b>Parts:</b>
     sumobot : Motor
+    sumobot : Motorstyring
     sumobot : Attack Sensor
     sumobot : PSU
     sumobot : Microcontroller
-    sumobot : Central Computer IF
 object "Styringsenhed" as styringsenhed
     styringsenhed : <b>Parts:</b>
     styringsenhed : Joystik

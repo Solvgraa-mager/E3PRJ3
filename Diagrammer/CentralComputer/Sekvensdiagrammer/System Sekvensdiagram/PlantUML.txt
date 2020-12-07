@@ -3,7 +3,7 @@
 actor Bruger #red
 participant CC
 participant Display
-actor SumoBot
+participant SumoBot
 
 == Initialization == 
 
