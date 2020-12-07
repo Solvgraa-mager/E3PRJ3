@@ -1,4 +1,5 @@
 #include "UC1.h"
+#include "TCPServer.h"
 
 UC1::UC1(Startknap* SK, Display* D, SumoBot* SB1, SumoBot* SB2, Styringsenhed* SE1, Styringsenhed* SE2)
 {
@@ -10,8 +11,8 @@ UC1::UC1(Startknap* SK, Display* D, SumoBot* SB1, SumoBot* SB2, Styringsenhed* S
 	_player[1].SEptr = SE2;
 
 	//Define initial direction, speed, attack-status,SumoBot ptr and Styringsenheds ptr for UC1
-	_player[0] = { 0,0,3,false,_SB1,_SE1};
-	_player[1] = { 0,0,3,false,_SB2,_SE2};
+	_player[0] = { 0,0,3,false,_player[0].SBptr,_player[0].SEptr};
+	_player[1] = { 0,0,3,false,_player[1].SBptr,_player[1].SEptr };
 
 	_D->writeToScreen("Welcome to Robo Sumo Battle");
 }

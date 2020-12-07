@@ -2,11 +2,12 @@
 class Styringsenhed
 {
 public:
-	Styringsenhed();
+	Styringsenhed(int channel, int speed, int bufferSize);
 	int getDirectionAndSpeed(int& dir, int& speed);
 	~Styringsenhed();
 private:
-	int retning; 
-	int speed; 
+	SPIMaster* _SPIM; 
+	int _direction; 
+	int _speed; 
 };
 
