@@ -7,7 +7,7 @@
 class CentralComputerIF
 {
 public:
-	CentralComputerIF(string IPAddress, int TCPClientPort);
+	CentralComputerIF(string SSID, string passphrase, string IPAddress, int TCPClientPort);
 	int getDirSpeed(string msg, char *buffer, int length);
 	~CentralComputerIF();
 private:

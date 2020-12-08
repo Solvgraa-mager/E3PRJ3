@@ -1,12 +1,13 @@
 
 #include "CentralComputerIF.h"
 
-CentralComputerIF::CentralComputerIF(string IPAddress, int TCPClientPort)
+CentralComputerIF::CentralComputerIF(string SSID, string passphrase, string IPAddress, int playerNr)
 {
 	cout << "CentralComputerIF constructor called" << endl;
 
 	_TCPC = new TCPClient();
-	_TCPC->connectToServer(IPAddress, TCPClientPort);
+	_TCPC->connectToWifi("SSID", "passphrase");
+	_TCPC->connectToServer(IPAddress, playerNr+54000);
 }
 
 int CentralComputerIF::getDirSpeed(string msg, char *buffer, int length)
