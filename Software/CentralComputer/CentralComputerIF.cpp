@@ -6,7 +6,7 @@ CentralComputerIF::CentralComputerIF(string SSID, string passphrase, string IPAd
 	cout << "CentralComputerIF constructor called" << endl;
 
 	_TCPC = new TCPClient();
-	_TCPC->connectToWifi("SSID", "passphrase");
+	_TCPC->connectToWifi(SSID, passphrase);
 	_TCPC->connectToServer(IPAddress, playerNr+54000);
 }
 

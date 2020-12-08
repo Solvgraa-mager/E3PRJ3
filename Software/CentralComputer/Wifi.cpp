@@ -46,7 +46,7 @@ int Wifi::connectToWifi(string SSID, string passphrase)
 	if ((err == -1) || (err == 127)) 
 		return -1;
 
-	if (SSID == "CC") 
+	if (SSID == "SumoBot") 
 	{
 		string CC_AP_name = "wifi_b827ebb30ece_76696c6c69616d626f_managed_psk"; //ikke rigtig AP navn for CC
 		err = system(("connmanctl connect " + CC_AP_name).c_str());
@@ -97,4 +97,16 @@ Wifi::~Wifi()
 		cout << "WIFI DESTRUCTOR SYSTEM COMMAND ERRO: "	 << err;
 
 	
+}
+
+int Wifi::sendMsg(string msg)
+{
+	cout << "Need at communicatione method. f.eks. TCP" << endl;
+	return 0; 
+}
+
+int Wifi::receiveMsg(string msg)
+{
+	cout << "Need at communicatione method. f.eks. TCP" << endl;
+	return 0; 
 }

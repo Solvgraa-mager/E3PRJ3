@@ -6,13 +6,8 @@
 
 int main(void)
 {   
-
-
-
-
+    string buffer;
 	CentralComputerIF C1("SSID", "passshrase", "192.168.0.1", 54001);
-    
-
     C1.getDirSpeed()
 
 
