@@ -5,7 +5,7 @@
 class SumoBot
 {
 public:
-	SumoBot(int lifes, int TCPServerPort);
+	SumoBot(int lifes, int player);
 	bool setDirectionAndSpeed(int dir, int speed);
 	int substractLife();
 	int getLife();

@@ -1,14 +1,19 @@
 #include "UC1.h"
+#include "Wifi.h"
 #include "TCPServer.h"
 
-UC1::UC1(Startknap* SK, Display* D, SumoBot* SB1, SumoBot* SB2, Styringsenhed* SE1, Styringsenhed* SE2)
+UC1::UC1(Startknap* SK, Display* D)
 {
+	//Connect to wifi
+
+
 	_SK = SK; 
 	_D = D; 
-	_player[0].SBptr = SB1; 
-	_player[1].SBptr = SB2;
-	_player[0].SEptr = SE1;
-	_player[1].SEptr = SE2;
+	_player[0].SBptr = new SumoBot(3,1); 
+	_player[1].SBptr = new SumoBot(3,2);
+
+	_player[0].SEptr = new Styringsenhed(1,10000,1);
+	_player[1].SEptr = new Styringsenhed(2,10000,3);
 
 	//Define initial direction, speed, attack-status,SumoBot ptr and Styringsenheds ptr for UC1
 	_player[0] = { 0,0,3,false,_player[0].SBptr,_player[0].SEptr};
@@ -53,4 +58,9 @@ void UC1::run()
 UC1::~UC1()
 {
 	_D->writeToScreen("Goodbye..");
+	delete _player[0].SBptr;
+	delete _player[1].SBptr;
+	delete _player[0].SEptr;
+	delete _player[1].SEptr;
+	delete _W1;
 }
