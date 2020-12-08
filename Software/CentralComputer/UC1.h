@@ -28,6 +28,6 @@ private:
 	Startknap* _SK; 
 	Display* _D;
 	Player _player[2];
-	Wifi _W1;
+	Wifi* _W1;
 };
 

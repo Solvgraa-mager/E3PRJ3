@@ -5,8 +5,9 @@
 UC1::UC1(Startknap* SK, Display* D)
 {
 	//Connect to wifi
-
-
+	_W1 = new Wifi();
+	_W1->createHotspot("SumoBot", "12345678");
+	
 	_SK = SK; 
 	_D = D; 
 	_player[0].SBptr = new SumoBot(3,1); 

@@ -105,7 +105,7 @@ int Wifi::sendMsg(string msg)
 	return 0; 
 }
 
-int Wifi::receiveMsg(string msg)
+int Wifi::receiveMsg(char *buffer, int length)
 {
 	cout << "Need at communicatione method. f.eks. TCP" << endl;
 	return 0; 
