@@ -1,19 +1,23 @@
 #include "Display.h"
 #include <string>
 #include "wiringPi/wiringPi.h"
-#include "wiringPi/devLib/lcd.h"
+#include "wiringPi/lcd.h"
 
 Display::Display(int rows, int cols, int bits, int rs, int strb, 
 			int d0, int d1, int d2, int d3, int d4, int d5, int d6, int d7)
 {
+
 	_rows = rows; _cols = cols; _bits = bits; _rs = rs; _strb = strb;
 
 	_data[0] = d0; _data[1] = d1; _data[2] = d2; _data[3] = d3;
 	_data[4] = d4; _data[5] = d5; _data[6] = d6; _data[7] = d7;
 
+	_displayfd = 0; 
+	/*
 	_displayfd = lcdInit(rows, cols, bits, rs, strb,
 		_data[0], _data[0], _data[0], _data[0],
 		_data[0], _data[0], _data[0], _data[0]);
+	*/
 
 }
 
@@ -47,6 +51,8 @@ void Display::showWinner(int winner)
 {
 	string prefix = "Winner\nis\n";
 	string msg = prefix + to_string(winner);
+	writeToScreen(msg);
+	
 }
 
 int Display::writeToScreen(string msg)
@@ -64,11 +70,12 @@ int Display::writeToScreen(string msg)
 	
 	int x, y;
 	//Set LCD cursor to start
-	lcdHome(_displayfd);
+	
+	//lcdHome(_displayfd);
 
 	for (int i = 0; i >= msg.length(); i++)
 	{
-		putchar(msg[i]);
+		//putchar(msg[i]);
 
 		//Update position on display. Change line if x == _cols or new line char.
 		if (x >= _cols || msg[i+1] == '\n')
@@ -76,7 +83,7 @@ int Display::writeToScreen(string msg)
 			y++;
 			x = 0;
 		}
-		lcdPosition(_displayfd, x++, y);
+		//lcdPosition(_displayfd, x++, y);
 
 		//If more than _rows new lines return
 		if (y > _rows)
@@ -84,6 +91,7 @@ int Display::writeToScreen(string msg)
 			cout << "DISPLAY: Display only has " << _rows << endl;
 			return -2;
 		}
+		cout << "DISPLAY: " << msg << endl; 
 	}
 	return 0;
 }
