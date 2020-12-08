@@ -1,5 +1,5 @@
 #include "SPIMaster.h"
-#include "wiringPiSPI.h"
+#include "wiringPi/wiringPiSPI.h"
 #include "string.h"
 
 #include <linux/types.h>

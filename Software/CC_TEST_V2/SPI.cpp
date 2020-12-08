@@ -1,5 +1,5 @@
 #include "SPI.h"
-#include "wiringPiSPI.h"
+#include "wiringPi/wiringPiSPI.h"
 
 
 SPI::SPI(int channel, int speed, int bufferSize)
