@@ -1,8 +1,0 @@
-CC = gcc
-
-all: 
-	arm-rpizw-gcc -o SW2Test SW2Test.c
-
-
-clean:
-	rm -f *.o ooc
