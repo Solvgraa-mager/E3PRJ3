@@ -6,10 +6,23 @@
 
 int main(void)
 {   
-    string buffer;
-	CentralComputerIF C1("SSID", "passshrase", "192.168.0.1", 54001);
-    C1.getDirSpeed()
+    int bufferLength = 8;
+    char buffer[bufferLength];
 
+    string SSID = "";
+    string passphrase = "";
+    string IPaddress = "";
+    int playerNr = 1;
+    string attackStatus = "1";
+
+	CentralComputerIF C1(SSID, passphrase, IPaddress, playerNr);
+
+
+    while(true)
+    {
+    C1.getDirSpeed(attackStatus, buffer, bufferLength);
+    cout << buffer << endl; 
+    }
 
 	return 0;
 }
