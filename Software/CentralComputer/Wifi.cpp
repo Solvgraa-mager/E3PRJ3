@@ -24,7 +24,6 @@ int Wifi::createHotspot(string SSID, string passphrase)
 	return 0;
 }
 
-
 int Wifi::closeHotspot()
 {
 	

@@ -8,7 +8,7 @@
 int main(void)
 {
 	Startknap SK(12,16);
-	SK.waitForStart();
+	//SK.waitForStart();
 	Display D(4,20,8,1,1,1,1,1,1,1,1,1,1);
 	UC1 U(&SK,&D);
 	U.run();
