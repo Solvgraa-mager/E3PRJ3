@@ -1,0 +1,20 @@
+
+
+#all: 
+#	arm-rpizw-g++ -lpthread -I/home/stud/TEST_WORK/CC_TEST_V2/wiringPi *.cpp -L/home/stud/TEST_WORK/CC_TEST_V2 -lwiringPi -o Test
+
+clean:
+	rm -f *.o ooc
+
+
+src = $(wildcard *.c)
+obj = $(src:.c=.o)
+
+LDFLAGS = -lGL -lglut -lpng -lz -lm
+
+myprog: $(obj)
+    $(CC) -o $@ $^ $(LDFLAGS)
+
+.PHONY: clean
+clean:
+    rm -f $(obj) myprog
