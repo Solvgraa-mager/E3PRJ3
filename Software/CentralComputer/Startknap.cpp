@@ -27,6 +27,7 @@ void Startknap::waitForStart()
 	string prefix = "/sys/class/gpio/gpio";
 	string postfix = "/value";
 	char readBuffer;
+	_status[0] = false, _status[1] = false;
 
 	//Loop terminates when both players' status are 1 otherwise busy waiting for them
 	while (_status[0] != true || _status[1] != true)
@@ -41,10 +42,16 @@ void Startknap::waitForStart()
 				close(gpio_fd);
 			}
 	}
-	cout << "Both players ready" << endl; 
+	cout << "STARTKNAP: Both players ready" << endl; 
 }
 
 Startknap::~Startknap()
 {
-	//GPIOs not needs to be free'd
+	//GPIOs free'd
+	string prefix = "echo "; 
+	string postfix = "> /sys/class/gpio/unexport";
+	string exportGpioCall = prefix + to_string(_gpio[0]) + postfix;
+	system(exportGpioCall.c_str());
+	exportGpioCall = prefix + to_string(_gpio[1]) + postfix;
+	system(exportGpioCall.c_str());	
 }

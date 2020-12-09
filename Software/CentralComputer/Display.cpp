@@ -1,5 +1,6 @@
 #include "Display.h"
 #include <string>
+#include <unistd.h>
 #include "wiringPi/wiringPi.h"
 #include "wiringPi/lcd.h"
 
@@ -27,29 +28,31 @@ void Display::startCountDown(int count)
 	for (int i = 0; i < count; i++)
 	{
 		//Center message on screen
-		msgToSend = "\n   " + i;
+		msgToSend =to_string(i);
 		//Display message
 		writeToScreen(msgToSend);
-		sleep(1);
+		//Sleep 1 sec
+		usleep(1000000);
 	}
 }
 
 void Display::lostLife(int player, SumoBot* S1, SumoBot* S2)
 {
 	//Define texts
+	string preprefix = "player "; 
 	string prefix = " lost a life!\nLifes:\n";
-	string P1text = "P1:  \n";
-	string P2text = "P2:  ";
+	string P1text = "P1:  ";
+	string P2text = "\nP2:  ";
+	string newline = "\n";
 	//Concatenate texts
-	string msg = to_string(player) + prefix+ to_string(S1->getLife())+P2text+to_string(S2->getLife());
-	cout << "DISPLAY: Printing: " << msg << endl; 
+	string msg = preprefix+to_string(player)+prefix+P1text+to_string(S1->getLife())+P2text+to_string(S2->getLife())+newline;
 	//Write to screen
 	writeToScreen(msg);
 }
 
 void Display::showWinner(int winner)
 {
-	string prefix = "Winner\nis\n";
+	string prefix = "Winner is ";
 	string msg = prefix + to_string(winner);
 	writeToScreen(msg);
 	
@@ -57,7 +60,6 @@ void Display::showWinner(int winner)
 
 int Display::writeToScreen(string msg)
 {
-	
 	//Validate
 	if (msg.length() > (_rows * _cols))
 	{
@@ -72,7 +74,6 @@ int Display::writeToScreen(string msg)
 	//Set LCD cursor to start
 	
 	//lcdHome(_displayfd);
-
 	for (int i = 0; i >= msg.length(); i++)
 	{
 		//putchar(msg[i]);
@@ -91,8 +92,8 @@ int Display::writeToScreen(string msg)
 			cout << "DISPLAY: Display only has " << _rows << endl;
 			return -2;
 		}
-		cout << "DISPLAY: " << msg << endl; 
 	}
+	cout << "DISPLAY: " << msg << endl; 
 	return 0;
 }
 

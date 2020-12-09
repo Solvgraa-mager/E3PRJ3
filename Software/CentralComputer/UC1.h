@@ -12,7 +12,6 @@ using namespace std;
 struct Player {
 	int direction;
 	int speed;
-	int life;
 	bool attack; 
 	SumoBot* SBptr;
 	Styringsenhed* SEptr;

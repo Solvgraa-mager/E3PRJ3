@@ -1,10 +1,12 @@
 #include "Styringsenhed.h"
 #include "SPIMaster.h"
+#include <bitset>
+
 
 Styringsenhed::Styringsenhed(int channel, int Comspeed, int bufferSize)
 {
 	_direction = 0; _speed = 0; 
-	_SPIM = new SPIMaster(channel, Comspeed, bufferSize); 
+	//_SPIM = new SPIMaster(channel, Comspeed, bufferSize); 
 }
 
 int Styringsenhed::getDirectionAndSpeed(int& dir, int& speed)
@@ -22,12 +24,12 @@ int Styringsenhed::getDirectionAndSpeed(int& dir, int& speed)
 	*/
 
 	//Input for test purposes
-	cout << "Input char from Styringsenhed " << endl; 
+	cout << "Input char from Styringsenhed "; 
 	cout << ">"; 
 	cin >> receiveBuffer; 
 
 	//Extract direction 
-	dirBuffer = (receiveBuffer && 0b00000111);
+	dirBuffer = (receiveBuffer & 0b00000111);
 	if (dirBuffer == 0b111)
 		_direction = 90;
 	else if (dirBuffer == 0b110)
@@ -49,7 +51,7 @@ int Styringsenhed::getDirectionAndSpeed(int& dir, int& speed)
 		dir *= (-1);
 
 	//Extract speed
-	speedBuffer = ((receiveBuffer && 0b01110000) >> 4); 
+	speedBuffer = ((receiveBuffer & 0b01110000) >> 4); 
 	if (speedBuffer == 0b111)
 		_speed = 100;
 	else if (speedBuffer == 0b110)
@@ -70,7 +72,8 @@ int Styringsenhed::getDirectionAndSpeed(int& dir, int& speed)
 	if (!((receiveBuffer && 0b10000000) >> 7))
 		speed *= (-1);
 
-	speed = _speed; 
+	cout << "Received speed: " << _speed << " and Direction: "<< _direction << endl;
+ 	speed = _speed; 
 	dir = _direction; 
 	
 	return 0;

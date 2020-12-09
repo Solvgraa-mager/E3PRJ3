@@ -9,7 +9,8 @@ SumoBot::SumoBot(int lifes, int player)
 
 	//Create TCP-Server 
 	_TCPS = new TCPServer();
-	_TCPS->openServer(54000 + player); 
+	_TCPS->openServer(54000 + player);
+	cout << "SumoBot player " << player << " connected!" << endl;
 
 }
 
@@ -22,7 +23,7 @@ bool SumoBot::setDirectionAndSpeed(int dir, int speed)
 	string msg = to_string(_direction)+divider+to_string(_speed);
 
 	//Communication
-	char attackStatusBuffer; 
+	char attackStatusBuffer[2];
 	
 	cout << "Sending speed: " << _speed << " and direction: " << _direction << endl; 
 	if (_TCPS->sendMsg(msg.c_str()) < 0)
@@ -30,15 +31,15 @@ bool SumoBot::setDirectionAndSpeed(int dir, int speed)
 		cout << "SUMOBOT: Send failed!" << endl; 
 		return -1; 
 	}
-	if (_TCPS->receiveMsg(&attackStatusBuffer, 1) < 0)
+	if (_TCPS->receiveMsg(attackStatusBuffer, 2) < 0)
 	{
 		cout << "SUMOBOT: Receive failed!" << endl; 
 		return -2;
 	}
 
-	_attackStatus = attackStatusBuffer - '0';
-
-	return _attackStatus;
+	_attackStatus = attackStatusBuffer[0] - '0';
+	
+	return (_attackStatus ? true : false);
 }
 
 int SumoBot::substractLife()
