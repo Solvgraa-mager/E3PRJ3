@@ -36,6 +36,8 @@ void UC1::run()
 			//If attack has happened
 			if (_player[i].attack)
 			{
+				_player[0].SBptr->setDirectionAndSpeed(0,0);
+				_player[1].SBptr->setDirectionAndSpeed(0,0);
 				_player[i].SBptr->substractLife();
 				_D->lostLife((i+1),_player[i].SBptr, _player[(i ? 0 : 1)].SBptr);
 				_player[i].attack = false;
