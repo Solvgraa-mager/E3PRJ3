@@ -9,13 +9,14 @@ public:
 	Wifi();
 	int createHotspot(string SSID, string passphrase);
 	int closeHotspot();
-	int connectToWifi(string SSID, string passphrase);
-	int disconnectToWifi(string SSID);
+	int connectToWifi(string SSID, string passphrase, string MAC);
+	int disconnectToWifi();
 	virtual int sendMsg(string msg);
 	virtual int receiveMsg(char *buffer, int length);
 	~Wifi();
 private:
 	string SSID_;
 	string passphrase_;
+	string MAC_;
 };
 

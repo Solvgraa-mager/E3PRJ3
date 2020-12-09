@@ -1,0 +1,17 @@
+@startuml
+participant UC1
+participant Wifi
+actor Connman #red
+
+UC1 -> Wifi : disconnectToWifi()
+Wifi -> Wifi : "convert SSID to Hex value"
+Wifi -> Connman : disconnect(MAC, SSIDHexValue)
+Connman -> Connman : "dsiconnecting hotspot"
+opt disconnection faild
+    Connman --> Wifi : "disconnection faild"
+    Wifi --> UC1 : return -1. "disconnection faild"
+end
+Connman --> Wifi : "disconnected"
+Wifi --> UC1 : return 0. "disconnected"
+
+@enduml

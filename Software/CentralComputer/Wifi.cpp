@@ -4,8 +4,9 @@
 
 Wifi::Wifi()
 {
-	SSID_ = "00000000"; 
+	SSID_ 		= "00000000"; 
 	passphrase_ = "00000000";
+	MAC_ 		= "00000000";
 }
 
 int Wifi::createHotspot(string SSID, string passphrase)
@@ -36,23 +37,20 @@ int Wifi::closeHotspot()
 
 
 
-int Wifi::connectToWifi(string SSID, string passphrase)
+int Wifi::connectToWifi(string SSID, string passphrase, string MAC)
 {
-	 SSID_ = SSID;
+	SSID_ = SSID; 				//Gemmer SSID
+	passphrase_ = passphrase;	//Gemmer passphase
+	MAC_ = MAC					//Gemmer MAC addresse
 
 	int err = system("connmanctl scan wifi");
-
 	if ((err == -1) || (err == 127)) 
 		return -1;
 
-	if (SSID == "SumoBot") 
+	if (SSID == "SumoBot")//midlertidig løsning på SumoBot til Hex value.
 	{	
-		string MAC;
-		cout << "enter your MAC addres:";
-		cin >> MAC; 
-		cout << endl;
-		string CC_AP_name = "wifi_"+MAC+"_53756d6f426f74_managed_psk"; //ikke rigtig AP navn for CC
-		err = system(("connmanctl connect " + CC_AP_name).c_str());
+		string SumoBot_hex = "53756d6f426f74"; //Text to Hex value. SumoBot = 53756d6f426f74
+		err = system(("connmanctl connect wifi_"+MAC+SumoBot_hex"__managed_psk").c_str()); //connman connect to hotspot
 		if ((err == -1) || (err == 127)) 
 		return -2;
 
@@ -68,16 +66,17 @@ int Wifi::connectToWifi(string SSID, string passphrase)
 	return 0;
 }
 
-int Wifi::disconnectToWifi(string SSID)
+int Wifi::disconnectToWifi(string SSID, string MAC)
 {
 	int err;
 	
-	if (SSID == "CC") 
+	if (SSID == "SumoBot")
 	{
-		string CC_AP_name = "wifi_b827eb5189ef_53756d6f426f74_managed_psk"; //ikke rigtig AP navn for CC
-		err = system(("connmanctl disconnect " + CC_AP_name).c_str());
+		string SumoBot_hex = "53756d6f426f74"; //Text to Hex value. SumoBot = 53756d6f426f74
+		err = system(("connmanctl disconnect wifi_"+MAC+SumoBot_hex"__managed_psk").c_str()); //connman connect to hotspot
 		if ((err == -1) || (err == 127)) 
-			return -1;
+		return -2;
+
 	}
 	else
 	{
@@ -93,13 +92,10 @@ Wifi::~Wifi()
 	int err; 
 	err = disconnectToWifi(SSID_);
 	if (err == -1) 
-		cout << "WIFI DESTRUCTOR DISCONNECT ERROR: " << err;
 
 	err = system("connman-hotspot disable");
 	if ((err == -1) || (err == 127)) 
-		cout << "WIFI DESTRUCTOR SYSTEM COMMAND ERRO: "	 << err;
 
-	
 }
 
 int Wifi::sendMsg(string msg)
