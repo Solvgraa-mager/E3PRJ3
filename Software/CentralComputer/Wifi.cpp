@@ -46,8 +46,12 @@ int Wifi::connectToWifi(string SSID, string passphrase)
 		return -1;
 
 	if (SSID == "SumoBot") 
-	{
-		string CC_AP_name = "wifi_b827ebb30ece_76696c6c69616d626f_managed_psk"; //ikke rigtig AP navn for CC
+	{	
+		string MAC;
+		cout << "enter your MAC addres:";
+		cin >> MAC; 
+		cout << endl;
+		string CC_AP_name = "wifi_"+MAC+"_53756d6f426f74_managed_psk"; //ikke rigtig AP navn for CC
 		err = system(("connmanctl connect " + CC_AP_name).c_str());
 		if ((err == -1) || (err == 127)) 
 		return -2;
@@ -70,7 +74,7 @@ int Wifi::disconnectToWifi(string SSID)
 	
 	if (SSID == "CC") 
 	{
-		string CC_AP_name = "wifi_b827ebb30ece_76696c6c69616d626f_managed_psk"; //ikke rigtig AP navn for CC
+		string CC_AP_name = "wifi_b827eb5189ef_53756d6f426f74_managed_psk"; //ikke rigtig AP navn for CC
 		err = system(("connmanctl disconnect " + CC_AP_name).c_str());
 		if ((err == -1) || (err == 127)) 
 			return -1;
