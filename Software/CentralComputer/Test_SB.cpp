@@ -8,30 +8,32 @@
  int main(void)
  {   
    
-    int bufferLength = 8;
-    char buffer[bufferLength];  //Receiver buffer;
-    memset(buffer, 0, bufferLength);
+  int receiverBufferLength = 8;
+  char receiverBuffer[receiverBufferLength];  //Receiver buffer;
+  memset(receiverBuffer, 0, receiverBufferLength); //fill receiverBuffer with 0;
+   
+  
+  string SSID = "SumoBot";
+  string passphrase = "12345678";
+  string IPaddress = "192.168.0.1"; //CC_RPI IPaddress
 
-    string SSID = "SumoBot";
-    string passphrase = "12345678";
-    string IPaddress = "192.168.0.1"; //CC_RPI IPaddress
-    int playerNr;
+  string attackStatus = "0";
 
-    cout << "Enter player Nr: "; cin >> playerNr; cout << endl;
-    string attackStatus = "0";
+  int playerNr;
+  cout << "Enter player Nr: "; cin >> playerNr; cout << endl;
 
  	CentralComputerIF C1(SSID, passphrase, IPaddress, playerNr); //connect to CC
 
-     while(true)
-     {
+  while(true)
+  {
 
-         cout << "AttackStauts = "; cin >> attackStatus; cout << endl;//get attackStatus
+    cout << "AttackStauts = "; cin >> attackStatus; cout << endl;//get attackStatus
 
-         C1.getDirSpeed(attackStatus, buffer, bufferLength); //Send attackStatus, Receive dir|speed.
+    C1.getDirSpeed(attackStatus, receiverBuffer, receiverBufferLength); //Send attackStatus, Receive dir|speed.
 
-         cout << buffer << endl; //dir|speed
+    cout << receiverBuffer << endl; //dir|speed
 
-     }
+  }
 
    return 0;
  }
