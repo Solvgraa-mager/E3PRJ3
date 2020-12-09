@@ -24,9 +24,17 @@
 
  	CentralComputerIF C1(SSID, passphrase, IPaddress, playerNr); //connect to CC
 
+  int count;
+
   while(true)
   {
     C1.getDirSpeed(attackStatus, receiverBuffer, receiverBufferLength); //Send attackStatus, Receive dir|speed.
+    
+    if (count == 10)
+      attackStatus = "1";
+    else
+      attackStatus = "0";
+    count ++;
   }
 
    return 0;
