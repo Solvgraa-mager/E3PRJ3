@@ -12,12 +12,19 @@ int Styringsenhed::getDirectionAndSpeed(int& dir, int& speed)
 	char receiveBuffer = 0; 
 	char dirBuffer = 0; 
 	char speedBuffer = 0; 
-
+	
+	/*
 	if (_SPIM->receiveMsg(&receiveBuffer, 1) < 0)
 	{
 		cout << "STYRINGSENHED: Receive failed" << endl; 
 		return -1; 
 	}
+	*/
+
+	//Input for test purposes
+	cout << "Input char from Styringsenhed " << endl; 
+	cout << ">"; 
+	cin >> receiveBuffer; 
 
 	//Extract direction 
 	dirBuffer = (receiveBuffer && 0b00000111);

@@ -9,7 +9,7 @@ SumoBot::SumoBot(int lifes, int player)
 
 	//Create TCP-Server 
 	_TCPS = new TCPServer();
-	_TCPS->openServer(player); 
+	_TCPS->openServer(54000 + player); 
 
 }
 
