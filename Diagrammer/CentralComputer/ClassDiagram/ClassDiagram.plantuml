@@ -22,22 +22,31 @@ class Startknap <<Domain>>{
 }
 
 class Display<<Boundary>>{
+    +Display(int rows, int cols, int bits, int rs, int strb,int d0, int d1, int d2, int d3, int d4, int d5, int d6, int d7)
     +StartCountDown(int count)
-    +LostLife(&SumoBot,&SumoBot)
-    +ShowWinner(&SumoBot)
+    +LostLife(int player,&SumoBot,&SumoBot)
+    +ShowWinner(int player)
     +writeToScreen(string msg)
+    - _displayfd : int
+	- _rows : int
+	- _cols : int
+	- _bits : int
+	- _rs : int
+	- _strb : int
+	- _data[8] : int
 }
 
 class SumoBot <<Boundary>>{
+    - _TCPS : TCPServer*
     - _lifes : int
     -_retning : int
     -_speed : int
     -_attackStatus : bool
+
     +SumoBot()
-    +SetDirectionAndSpeed(int Dir,int Speed)
+    +SetDirectionAndSpeed(int dir,int speed)
     +SubstractLife()
     +GetLives()
-    - _TCPS : *TCPServer
 }
 class Styringsenhed <<Boundary>>{
    - _speed : int

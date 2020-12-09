@@ -1,0 +1,30 @@
+@startuml
+
+actor UC1 #red
+participant Display
+participant wiringPi
+actor LCD #red
+
+skinparam wrapWidth 150
+
+UC1 -> Display : writeToSCreen(string msg)
+opt if msg.lenght > (_rows*_cols)
+    Display->UC1 : return -1 (Msg to long)
+end
+
+Display -> wiringPi : lcdHome()
+wiringPi -> LCD : Cursor left upper corner
+wiringPi --> Display : 
+
+note over Display : x = horisontal cursor position, y = vertical cursor position
+
+loop for each char in string
+    opt if x > _cols || next char == '\ n' 
+        Display -> wiringPi : 
+    end opt
+
+end loop
+
+
+
+@enduml

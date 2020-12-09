@@ -14,11 +14,11 @@ Display::Display(int rows, int cols, int bits, int rs, int strb,
 	_data[4] = d4; _data[5] = d5; _data[6] = d6; _data[7] = d7;
 
 	_displayfd = 0; 
-	/*
+	
 	_displayfd = lcdInit(rows, cols, bits, rs, strb,
 		_data[0], _data[0], _data[0], _data[0],
 		_data[0], _data[0], _data[0], _data[0]);
-	*/
+	
 
 }
 

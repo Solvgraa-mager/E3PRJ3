@@ -9,13 +9,14 @@ UC1::UC1(Startknap* SK, Display* D)
 	_W1->createHotspot("SumoBot", "12345678");
 	cout << "Hotspot made" << endl;
 	
+	//Assign attributes
 	_SK = SK; 
 	_D = D; 
 
 	//Define initial direction, speed, attack-status,SumoBot ptr and Styringsenheds ptr for UC1
 	_player[0] = { 0,0,false,new SumoBot(3,1),new Styringsenhed(1,10000,1)};
-	_player[1] = { 0,0,false,new SumoBot(3,2),new Styringsenhed(2,10000,3)};
-	cout << "SumoBot og Syringsenhed constructed" << endl;
+	_player[1] = { 0,0,false,new SumoBot(3,2),new Styringsenhed(2,10000,1)};
+	cout << "SumoBot og Styringsenhed constructed" << endl;
 	_D->writeToScreen("Welcome to Robo Sumo Battle");
 }
 
