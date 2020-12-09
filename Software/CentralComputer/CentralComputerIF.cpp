@@ -24,7 +24,7 @@ int CentralComputerIF::getDirSpeed(string msg, char *buffer, int length)
 	//Synes vi skal sende de atributter der fåes ved Styringsenheden.
 	//*********************
 
-	cout << "Sending Attack status Back" << msg << endl; 
+	cout << "Sending Attack status Back " << msg << endl; 
 	_TCPC->sendMsg(msg);
 	return 0;
 }
