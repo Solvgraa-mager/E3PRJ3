@@ -26,13 +26,7 @@
 
   while(true)
   {
-
-    cout << "AttackStauts = "; cin >> attackStatus; cout << endl;//get attackStatus
-
     C1.getDirSpeed(attackStatus, receiverBuffer, receiverBufferLength); //Send attackStatus, Receive dir|speed.
-
-    cout << receiverBuffer << endl; //dir|speed
-
   }
 
    return 0;
