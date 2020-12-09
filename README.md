@@ -109,5 +109,3 @@
 
 Tryk [HER](https://github.com/Solvgraa-mager/E3PRJ3/blob/master/Diagrammer/Tidsplan/GanntTidsplan.puml) for at ændre i tidsplanen. Tryk på tidsplanen for at se den i fuld størrelse. Syntaxen beskrives nærmere i [README](Diagrammer/Tidsplan/README.md)filen.
 
-![UC1  UC1(Startknap  SK, Display  D)](https://github.com/Solvgraa-mager/E3PRJ3/tree/master/Software/png/bLHHQzim47xNhpYy5pV4KA_hDimOfGrZq9THR-InAD8b4PKb8rqQykztIkpKAbl7_23mwVlklhllx9j8Cj2kiu8CMOHVTtNJy56sAVxaP3-3zduE2nDxAmypM5m84P-CwsMG7Uo3x9T6qnRgwqiXf28Vu0S3CS2x1zGW64T6cLuwIicpzyVbg_U5KDvQL6IyYz3kEd_hAO_H8HYtYUYsg8KOIbLVKsveu1_AMPzvbdHi4qGwcCagO3PZyjAiJNaXD4vXBvoaDb6-LDMHqsJffhGHEIHlG0Na-7TFiVTK5aDZnHoA-ltLX-kFdpuN_rCtBmMvZg7mC9a6Yg4iT59Z8Pndd7_cgzF4xgoC4IHHCAiTOOJ7zXwaqsm6h9173NnlDewzN0VVmT5t90nnacfeYDDzO_zPtHRwKtrzSB8p2gIrNida8VZr6P_gP8wUJHaHHsCSxiT0MS-l_ZwgSMD6TdLQZ2b-XFnfPhcKbzBJC0keB_cPrs_8o9OqprgTTpLJbJ7UzdDipczU2LRyWL3OAK9TdFTlmPHzC8G_VSjhYAuibcYLxn38muDV-Iebh6vv1Ipo6jwWq_m_-0q0 "UC1  UC1(Startknap  SK, Display  D)")
-
