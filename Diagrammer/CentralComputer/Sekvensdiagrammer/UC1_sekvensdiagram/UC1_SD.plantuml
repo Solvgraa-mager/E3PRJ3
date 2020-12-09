@@ -6,19 +6,21 @@ participant Display
 collections SumoBot
 collections Styringsenhed
 
+title SD_UC1
+
 ' ***Pkt 1***
-UC1 -> Startknap: WaitForStart()
+UC1 -> Startknap: waitForStart()
 activate Startknap
 UC1 <-- Startknap: players Ready
 deactivate Startknap
 ' ***Pkt 2***
-UC1 -> Display: StartCountDown()
+UC1 -> Display: startCountDown(3)
 activate Display
 UC1 <-- Display: GO!
 deactivate Display
 loop While Remaining Lives
 ' ***Pkt 3***
-    UC1 -> Styringsenhed: GetDirectionSpeed()
+    UC1 -> Styringsenhed: GetDirectionSpeed(&dir,&speed)
     activate Styringsenhed
     UC1 <-- Styringsenhed: Direction, Speed
     deactivate Styringsenhed
@@ -35,7 +37,7 @@ loop While Remaining Lives
         activate SumoBot
         SumoBot --> UC1 : Lifes
         deactivate SumoBot
-        UC1 -> Display : LostLife(&SumoBot, &SumoBot)
+        UC1 -> Display : LostLife(player, &SumoBot, &SumoBot)
         activate Display
         Display --> UC1 :
         deactivate Display 
@@ -45,14 +47,14 @@ loop While Remaining Lives
         Startknap --> UC1 : Players Ready
         deactivate Startknap
 '***Pkt 7***
-        UC1 -> Display : StartCountDown(int Count)
+        UC1 -> Display : StartCountDown(3)
         activate Display
         Display --> UC1 : GO!
         deactivate Display
     end opt
 end loop
 '***Pkt 9***
-        UC1 -> Display : showWinner(&SumoBot)
+        UC1 -> Display : showWinner(player)
         activate Display
         Display --> UC1 :
         deactivate Display    

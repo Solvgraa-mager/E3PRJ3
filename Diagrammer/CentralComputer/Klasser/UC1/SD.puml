@@ -1,0 +1,26 @@
+@startuml
+title UC1::UC1(Startknap* SK, Display* D)
+
+skinparam wrapWidth 200
+
+
+actor Player #Red 
+participant UC1
+participant _W1
+
+Player -> UC1 : UC1(Startknap* SK, Display* D)
+activate UC1 
+UC1 -> _W1 ** : Wifi()
+activate _W1
+UC1 <-- _W1 :
+deactivate _W1
+UC1 -> _W1 : createHotspot("SumoBot", "12345678")
+activate _W1
+UC1 <-- _W1 :
+deactivate _W1 
+UC1 -> Player : "Hotspot made"
+note over UC1 : Class attributes SK and D being set
+
+
+
+@enduml
