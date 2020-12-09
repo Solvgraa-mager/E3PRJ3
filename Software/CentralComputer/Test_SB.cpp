@@ -5,69 +5,37 @@
 #include <string>
 
 
-
-int main(void)
-{   
+ int main(void)
+ {   
    
-    int bufferLength = 8;
-    char buffer[bufferLength];  //Receiver buffer;
-    memset(buffer, 0, bufferLength);
+     int bufferLength = 8;
+     char buffer[bufferLength];  //Receiver buffer;
+     memset(buffer, 0, bufferLength);
 
-    string SSID = "SumoBot";
-    string passphrase = "12345678";
-    string IPaddress = "192.168.0.1"; //CC_RPI IPaddress
-    int playerNr = 2;
+     string SSID = "SumoBot";
+     string passphrase = "12345678";
+     string IPaddress = "192.168.0.1"; //CC_RPI IPaddress
+     int playerNr = 2;
 
-    string attackStatus = "0";
- 
-	CentralComputerIF C1(SSID, passphrase, IPaddress, playerNr); //connect to CC
+     string attackStatus = "0";
 
-    while(true)
-    {
+ 	CentralComputerIF C1(SSID, passphrase, IPaddress, playerNr); //connect to CC
 
-        cout << "AttackStauts = " << attackStatus << endl;
+     while(true)
+     {
 
-        C1.getDirSpeed(attackStatus, buffer, bufferLength); //Send attackStatus, Receive dir|speed.
+         cout << "AttackStauts = ";
+         getline(cin, attackStatus); //get attackStatus
+         cout << endl;
 
-        cout << buffer << endl; //dir|speed
+         C1.getDirSpeed(attackStatus, buffer, bufferLength); //Send attackStatus, Receive dir|speed.
 
-    }
+         cout << buffer << endl; //dir|speed
 
-  return 0;
-}
+     }
 
-
-// int main(void)
-// {   
-   
-//     int bufferLength = 8;
-//     char buffer[bufferLength];  //Receiver buffer;
-//     memset(buffer, 0, bufferLength);
-
-//     string SSID = "SumoBot";
-//     string passphrase = "12345678";
-//     string IPaddress = "192.168.0.1"; //CC_RPI IPaddress
-//     int playerNr = 1;
-
-//     string attackStatus = "0";
-
-// 	CentralComputerIF C1(SSID, passphrase, IPaddress, playerNr); //connect to CC
-
-//     while(true)
-//     {
-
-//         cout << "AttackStauts = ";
-//         getlin(cin, attackStatus); //get attackStatus
-//         cout << endl;
-
-//         C1.getDirSpeed(attackStatus, buffer, bufferLength); //Send attackStatus, Receive dir|speed.
-
-//         cout << buffer << endl; //dir|speed
-
-//     }
-
-//   return 0;
-// }
+   return 0;
+ }
 
 
 

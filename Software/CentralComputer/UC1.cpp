@@ -7,6 +7,7 @@ UC1::UC1(Startknap* SK, Display* D)
 	//Connect to wifi
 	_W1 = new Wifi();
 	_W1->createHotspot("SumoBot", "12345678");
+	cout << "Hotspot made" << endl;
 	
 	_SK = SK; 
 	_D = D; 
