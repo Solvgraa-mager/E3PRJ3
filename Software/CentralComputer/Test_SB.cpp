@@ -7,34 +7,31 @@
 
  int main(void)
  {   
-   
+  
+ //Allocations  
   int receiverBufferLength = 8;
   char receiverBuffer[receiverBufferLength];  //Receiver buffer;
   memset(receiverBuffer, 0, receiverBufferLength); //fill receiverBuffer with 0;
-   
+  bool attackStatus;
+  int count;
   
+  //Info for Wifi Connection
   string SSID = "SumoBot";
   string passphrase = "12345678";
   string IPaddress = "192.168.0.1"; //CC_RPI IPaddress
 
-  string attackStatus = "0";
-
-  int playerNr;
-  cout << "Enter player Nr: "; cin >> playerNr; cout << endl;
-
- 	CentralComputerIF C1(SSID, passphrase, IPaddress, playerNr); //connect to CC
-
-  int count;
+  CentralComputerIF C1(SSID, passphrase, IPaddress, 1); //connect to Wifi og vha TCP til Central Computer. Det sidste parameter er player-number
 
   while(true)
   {
-    C1.getDirSpeed(attackStatus, receiverBuffer, receiverBufferLength); //Send attackStatus, Receive dir|speed.
+    C1.getDirSpeed((attackStatus == true ? "1" : "0"), receiverBuffer, receiverBufferLength); //Send attackStatus, Receive dir|speed.
     
-    if (count == 10)
-      attackStatus = "1";
-    else
-      attackStatus = "0";
-    count ++;
+    //Her skal være noget kode som opdateret attackStatus ift. om I er blevet attacked
+
+    //Her skal være noget kode som skiller receiveBuffer ad. Eksempel på receiveBuffer "30|-45"
+    //fscanf("%i|%i", speed, direction)
+
+     //Her skal være noget kode som får motoren til at køre jf speed og dir
   }
 
    return 0;
