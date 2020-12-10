@@ -1,0 +1,24 @@
+@startuml
+participant UC1
+participant TCPServer
+participant TCPClient
+
+UC1 -> TCPServer : receiveMsg(buffer, bufferLengt)
+loop while no message received
+    TCPServer -> TCPServer : "check clientsocket if msg received"
+end
+TCPServer <- TCPClient : send(msg)
+activate TCPServer
+TCPServer -> TCPServer :"read bufferlenght chars of msg"
+TCPServer -> TCPServer : "put msg in buffer"
+TCPServer -> TCPServer : "save amount of bytes received"
+
+alt bytes receives == -1
+    UC1 <-- TCPServer : return -1. "receive error"
+else bytes received == 0
+    UC1 <-- TCPServer : return -2. "client disconnected"
+else bytes recieved > 0
+    UC1 <-- TCPServer : return 0. "new message in buffer"
+    deactivate TCPServer
+end
+@enduml

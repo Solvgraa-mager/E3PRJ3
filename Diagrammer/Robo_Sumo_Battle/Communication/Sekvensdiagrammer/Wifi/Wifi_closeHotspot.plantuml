@@ -1,15 +1,17 @@
 @startuml
+title Wifi::closeHotspot()
 participant UC1
 participant Wifi
 actor Connman #red
 
 UC1 -> Wifi : closeHotspot()
 Wifi -> Connman : hotspot disable
-Connman -> Connman : "diable hotspot"
+activate Connman
 opt faild to disable hotspot
     Connman --> Wifi : "faild to disable hotspot"
     Wifi --> UC1 : return -1. "faild to disable hotspot"
 end
+deactivate Connman
 Connman --> Wifi : "hotspot disabled"
 Wifi --> UC1 : return 0. "hotspot disabled"
 

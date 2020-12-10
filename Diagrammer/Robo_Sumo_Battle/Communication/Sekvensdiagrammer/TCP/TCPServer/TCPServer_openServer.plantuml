@@ -1,0 +1,33 @@
+@startuml
+participant UC1
+participant TCPServer
+participant TCPClient
+
+UC1 -> TCPServer : openServer(port)
+TCPServer -> TCPServer : "create Socket, AF_INET standart"
+alt faild creating socket
+    UC1 <-- TCPServer : return -1. faild to create socket
+else socket created
+    UC1 <-- TCPServer : "socket created"    
+end
+TCPServer -> TCPServer : "bind ipaddress and port to socket"
+TCPServer -> TCPServer : "listening on socket"
+loop While client not connected
+    TCPServer -> TCPServer : "waiting on client conecting"
+    TCPServer <- TCPClient : "connecting on socket"
+    opt 
+        TCPClient -> TCPClient : "connection faild"
+    end
+    TCPServer -> TCPServer : "accept client connection"
+    TCPServer -> TCPServer : "save clientsocket"
+    alt connection not acaepted
+        TCPServer --> TCPClient : "connection not accepted"
+    else connection accepted
+        TCPServer --> TCPClient : "connected"
+    end
+end
+TCPServer -> TCPServer : "stop listning on socket"
+UC1 <-- TCPServer : "return 0. TCPServer op, client connected"
+
+
+@enduml

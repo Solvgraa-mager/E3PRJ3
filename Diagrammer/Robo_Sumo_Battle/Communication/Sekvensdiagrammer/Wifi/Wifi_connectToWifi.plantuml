@@ -1,4 +1,5 @@
 @startuml
+title Wifi::connectToWifi()
 participant UC1
 participant Wifi
 actor Connman #red
@@ -7,17 +8,26 @@ UC1 -> Wifi : connectToWifi(SSID,passphrase,MAC)
 Wifi -> Wifi : "save SSID, passphrase and MAC"
 Wifi -> Connman : scan wifi
 Connman -> Connman : "scannign wifi"
-opt Scaning faild
+alt Scaning faild
     Connman --> Wifi : "scanning faild"
     Wifi --> UC1 : return -1. "scanning faild"
+else Scanning complete
+    Connman --> Wifi : "scanning complete"
 end
+    
+
+
 Wifi -> Wifi : "convert SSID to Hex value"
 Wifi -> Connman : connect(MAC, SSIDHexValue)
 Connman -> Connman : "connecting to Hotspot"
-opt connection faild
+alt connection faild
     Connman --> Wifi : "connection faild"
     Wifi --> UC1 : return -2. "connection faild"
-end
+else
+    Connman --> Wifi : "connected"
+
+    
+     
 Connman --> Wifi : "enter passphrase"
 Wifi -> Connman : passphrase
 Connman -> Connman : "evaluating passphrase"

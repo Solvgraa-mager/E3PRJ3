@@ -1,0 +1,14 @@
+@startuml
+participant UC1
+participant TCPServer
+participant TCPClient
+
+UC1 -> TCPServer : sendMsg(msg)
+TCPServer -> TCPClient : send(msg)
+alt faild to send
+    UC1 <-- TCPServer : retunr -1."send message failde"
+else
+    UC1 <-- TCPServer : return 0. "message send"
+    TCPClient -> TCPClient : receiveMsg()
+end
+@enduml

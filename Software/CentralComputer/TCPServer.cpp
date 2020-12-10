@@ -74,7 +74,9 @@ int TCPServer::openServer(int port)
 
 int TCPServer::sendMsg(string msg)
 {
-    send(clientSocket_, msg.c_str(), msg.size() + 1, 0);
+    int err = send(clientSocket_, msg.c_str(), msg.size() + 1, 0);
+    if (err == -1)
+        return -1;
 	return 0;
 }
 
