@@ -1,0 +1,38 @@
+@startuml
+
+skinparam wrapWidth 200
+
+title setDirectionAndSpeed
+
+actor UC1 #Red
+participant SumoBot
+participant TCPServer
+
+UC1->SumoBot:setDirectionAndSpeed(dir, speed)
+
+SumoBot->SumoBot: _direction = dir, \n _speed = speed
+
+SumoBot -> SumoBot : msg = _direction & | & _speed
+note right of SumoBot : msg is direction and speed concatenated with delimiter verti-bar
+
+SumoBot -> TCPServer : sendMsg(msg)
+    opt 
+        TCPServer --> SumoBot : error
+        SumoBot --> UC1 : -1 = Send Fail! 
+        note over SumoBot : rest of sequence is cancelled
+    end opt
+
+TCPServer --> SumoBot : 
+
+SumoBot -> TCPServer : receiveMsg(attackStatus)
+    opt 
+        TCPServer --> SumoBot : error
+        SumoBot --> UC1 : -2 = Receive Fail! 
+        note over SumoBot : rest of sequence is cancelled
+    end opt
+TCPServer --> SumoBot : attackStatus
+SumoBot -> SumoBot : _attackStatus = \n attackStatus
+
+SumoBot --> UC1 : attackStatus 
+
+@enduml

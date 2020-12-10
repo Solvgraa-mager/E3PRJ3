@@ -1,0 +1,8 @@
+class Startknap <<Domain>>{
+-_gpio[2] : int
+-_Status[2] : bool
++Startknap(int gpio1, int gpio2)
++WaitForStart()
++~Startknap()
+
+}

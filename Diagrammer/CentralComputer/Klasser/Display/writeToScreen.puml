@@ -1,5 +1,7 @@
 @startuml
 
+title SD_writeToScreen
+
 actor UC1 #red
 participant Display
 participant wiringPi
@@ -19,12 +21,19 @@ wiringPi --> Display :
 note over Display : x = horisontal cursor position, y = vertical cursor position
 
 loop for each char in string
+    Display -> wiringPi : putChar(char)
+    wiringPi -> LCD : Show char
     opt if x > _cols || next char == '\ n' 
-        Display -> wiringPi : 
+        Display -> Display : y++
     end opt
-
+    Display -> wiringPi : lcdPosition(x,y)
+    wiringPi -> LCD : Move cursor to position
+    Display -> Display : x++
+    opt if y > _rows
+        Display --> UC1 : return -2 (Display only has _rows)
+    end opt
 end loop
-
+Display --> UC1 : 
 
 
 @enduml

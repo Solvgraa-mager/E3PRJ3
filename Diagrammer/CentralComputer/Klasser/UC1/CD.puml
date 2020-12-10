@@ -1,0 +1,12 @@
+@@startuml
+skinparam wrapWidth 200
+
+class UC1 <<controller>>{
+    +UC1(Startknap* SK, Display *D)
+    +Run()
+    +~UC1()
+    -Startknap* _SK
+    -Display* _D
+    -Player _player[2]
+}
+@@enduml

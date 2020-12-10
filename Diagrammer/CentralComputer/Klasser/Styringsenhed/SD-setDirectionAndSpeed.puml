@@ -1,0 +1,25 @@
+@startuml
+
+skinparam wrapWidth 200
+
+title setDirectionAndSpeed
+
+actor UC1 #Red
+participant Styringsenhed
+participant SPIMaster
+
+UC1 -> Styringsenhed : getDirectionAndSpeed(&dir, &speed)
+Styringsenhed -> SPIMaster : receiveMsg(&receiveBuffer)
+    opt 
+        SPIMaster --> Styringsenhed : error
+        Styringsenhed --> UC1 : -1 = Receive Fail! 
+        note over Styringsenhed : rest of sequence is cancelled
+    end opt
+SPIMaster --> Styringsenhed : 1 byte containing speed and direction
+Styringsenhed -> Styringsenhed : Parse received bytes numbers
+note right of Styringsenhed : Byte parsed in if/else if/else-like format with bitwise logic
+Styringsenhed -> Styringsenhed : Parse +/- sign of received byte \n
+Styringsenhed -> Styringsenhed : Update speed & direction \npassed by reference
+Styringsenhed --> UC1 : 0 = Succesful receive 
+
+@enduml

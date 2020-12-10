@@ -1,0 +1,13 @@
+@startuml
+
+skinparam wrapWidth 200
+
+class Styringsenhed <<Boundary>>{
+    -_speed : int
+    -_direction : int
+    -_SPIM : SPIMaster* 
+    +Styringsenhed(int channel, int comSpeed, int bufferSize)
+    +GetDirectionAndSpeed(int &dir, int &speed)
+    +Styringsenhed()
+}
+@enduml

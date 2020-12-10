@@ -1,0 +1,19 @@
+@startuml
+
+skinparam wrapWidth 200
+
+class SumoBot <<Boundary>>{
+    - _TCPS : TCPServer*
+    - _lifes : int
+    -_retning : int
+    -_speed : int
+    -_attackStatus : bool
+
+    +SumoBot(int lifes, int player)
+    +SetDirectionAndSpeed(int dir,int speed)
+    +SubstractLife()
+    +GetLives()
+    +~SumoBot()
+}
+
+@enduml

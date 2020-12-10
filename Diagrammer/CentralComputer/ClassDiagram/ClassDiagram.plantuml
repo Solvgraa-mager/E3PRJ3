@@ -4,7 +4,7 @@ title CD_UC1
 skinparam wrapWidth 200
 
 class UC1 <<controller>>{
-    +UC1(Startknap* SK, Display *D, SumoBot *S1,SumoBot *S2, Styringsenhed *SE1, Styringsenhed *SE2)
+    +UC1(Startknap* SK, Display *D)
     +Run()
     +~UC1()
     -Startknap* _SK
@@ -43,15 +43,17 @@ class SumoBot <<Boundary>>{
     -_speed : int
     -_attackStatus : bool
 
-    +SumoBot()
+    +SumoBot(int lifes, int player)
     +SetDirectionAndSpeed(int dir,int speed)
     +SubstractLife()
     +GetLives()
+    +~SumoBot()
 }
 class Styringsenhed <<Boundary>>{
-   - _speed : int
+    -_speed : int
     -_direction : int
-    +Styringsenhed()
+    -_SPIM : SPIMaster* 
+    +Styringsenhed(int channel, int comSpeed, int bufferSize)
     +GetDirectionAndSpeed(int &dir, int &speed)
     +Styringsenhed()
 }

@@ -1,0 +1,23 @@
+@startuml
+title waitForStart_SD
+
+actor UC1 #red
+participant Startknap
+actor Linux #Red
+
+UC1 -> Startknap : waitForStart()
+Startknap -> Startknap : _Status = false
+loop while no players havent pressed start
+    loop for all players
+        Startknap -> Linux : open("/sys/class/gpio/gpioX/value, O_RDONLY)
+        Linux --> Startknap : 
+        Startknap -> Linux : read(/sys/class/gpio/gpioX/value) 
+        Linux --> Startknap : GPIO value
+        Startknap -> Linux : close(/sys/class/gpio/gpioX/value)
+        Linux --> Startknap : 
+    end loop
+end loop
+
+Startknap --> UC1 :
+
+@enduml

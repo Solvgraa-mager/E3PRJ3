@@ -1,0 +1,31 @@
+@startuml
+
+skinparam wrapWidth 200
+
+title SumoBot_Constructor_Destructor
+
+actor UC1 #Red
+participant SumoBot
+participant TCPServer
+
+==Constructor== 
+
+UC1 -> SumoBot : SumoBot(lifes, player)
+SumoBot->SumoBot : _lifes = lifes
+SumoBot -> SumoBot : _speed = 0, _direction = 0
+SumoBot -> SumoBot : _attackStatus = false
+SumoBot -> TCPServer ** : new TCPServer()
+SumoBot -> TCPServer : openServer(54000 + player)
+TCPServer --> SumoBot : 
+loop while game on
+note over SumoBot, TCPServer : Game according to use case
+end loop
+
+==Destructor==
+
+UC1 -> SumoBot : ~SumoBot
+SumoBot -> TCPServer !! : 
+UC1 <-- SumoBot :
+destroy SumoBot
+
+@enduml

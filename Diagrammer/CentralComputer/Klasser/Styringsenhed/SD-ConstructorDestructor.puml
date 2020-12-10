@@ -1,0 +1,26 @@
+@startuml
+
+skinparam wrapWidth 200
+
+title Styringsenhed_Constructor_Destructor
+
+actor UC1 #Red
+participant Styringsenhed
+participant SPIMaster
+
+==Constructor== 
+
+UC1 -> Styringsenhed **: (channel, comSpeed, bufferSize)
+
+Styringsenhed -> Styringsenhed : _direction = 0\n _speed = 0
+Styringsenhed -> SPIMaster  **: SPIMaster(channel, comSpeed, buffer)
+
+loop while game on
+note over Styringsenhed, SPIMaster : Game according to use case
+end loop
+
+==Destructor==
+
+
+
+@enduml

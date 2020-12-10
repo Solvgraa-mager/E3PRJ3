@@ -6,7 +6,7 @@
 Styringsenhed::Styringsenhed(int channel, int Comspeed, int bufferSize)
 {
 	_direction = 0; _speed = 0; 
-	//_SPIM = new SPIMaster(channel, Comspeed, bufferSize); 
+	_SPIM = new SPIMaster(channel, Comspeed, bufferSize); 
 }
 
 int Styringsenhed::getDirectionAndSpeed(int& dir, int& speed)
@@ -15,14 +15,13 @@ int Styringsenhed::getDirectionAndSpeed(int& dir, int& speed)
 	char dirBuffer = 0; 
 	char speedBuffer = 0; 
 	
-	/*
+	//Receive message via SPI class
 	if (_SPIM->receiveMsg(&receiveBuffer, 1) < 0)
 	{
 		cout << "STYRINGSENHED: Receive failed" << endl; 
 		return -1; 
 	}
-	*/
-
+	
 	//Input for test purposes
 	cout << "Input char from Styringsenhed "; 
 	cout << ">"; 
@@ -47,7 +46,7 @@ int Styringsenhed::getDirectionAndSpeed(int& dir, int& speed)
 	else
 		dir = 0; 
 	//Convert right/left byte to +/-. + for right, - for left
-	if (!((receiveBuffer && 0b00001000) >> 3))
+	if (!(receiveBuffer << 3) && 0b10000000)
 		dir *= (-1);
 
 	//Extract speed
@@ -69,7 +68,7 @@ int Styringsenhed::getDirectionAndSpeed(int& dir, int& speed)
 	else
 		_speed = 0; 
 	//Convert forward/backward byte to +/-. + for forward, - for backwards
-	if (!((receiveBuffer && 0b10000000) >> 7))
+	if (!(receiveBuffer << 7) && 0b10000000)
 		speed *= (-1);
 
 	cout << "Received speed: " << _speed << " and Direction: "<< _direction << endl;
