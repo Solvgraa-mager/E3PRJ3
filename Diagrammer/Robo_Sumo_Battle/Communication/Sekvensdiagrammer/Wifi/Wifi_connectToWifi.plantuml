@@ -2,40 +2,43 @@
 title Wifi::connectToWifi()
 participant UC1
 participant Wifi
+actor Linux #red
 actor Connman #red
 
-UC1 -> Wifi : connectToWifi(SSID,passphrase,MAC)
-Wifi -> Wifi : "save SSID, passphrase and MAC"
-Wifi -> Connman : scan wifi
-Connman -> Connman : "scannign wifi"
-alt Scaning faild
-    Connman --> Wifi : "scanning faild"
-    Wifi --> UC1 : return -1. "scanning faild"
-else Scanning complete
-    Connman --> Wifi : "scanning complete"
-end
-    
+UC1 -> Wifi : connectToWifi(SSID, passphrase, MAC)
 
+Wifi -> Wifi : SSID_ = SSID, MAC_ = MAC
+Wifi -> Wifi : passphrase_ = passphrase
+Wifi -> Linux : connmanctl scan wifi
 
-Wifi -> Wifi : "convert SSID to Hex value"
-Wifi -> Connman : connect(MAC, SSIDHexValue)
-Connman -> Connman : "connecting to Hotspot"
-alt connection faild
-    Connman --> Wifi : "connection faild"
-    Wifi --> UC1 : return -2. "connection faild"
-else
-    Connman --> Wifi : "connected"
+Linux -> Connman : scan wifi
+Linux <-- Connman 
+opt 
+    Wifi <-- Linux : return -1 || 127
+    UC1 <-- Wifi : return -1 (scan faild)
+end 
+Wifi <-- Linux
 
-    
-     
-Connman --> Wifi : "enter passphrase"
-Wifi -> Connman : passphrase
-Connman -> Connman : "evaluating passphrase"
-opt wrong passphrase
-    Connman --> Wifi : "wrong passphrase"
-    Wifi --> UC1 : return - 3 "wrong passphrase"
-end
-Connman --> Wifi : "connected"
-Wifi --> UC1 : return 0. "connected"
+Wifi -> Wifi : SSID_hex = TextToHex(SSID_) 
+note over Wifi : converting SSID to Hex value.
+
+Wifi -> Linux : connmanctl connect wifi_MAC_SSID_hex_managed_psk
+Linux -> Connman : connect wifi_MAC_SSID_hex_managed_psk
+Linux <-- Connman 
+opt 
+    Wifi <-- Linux : return -1 || 127 
+    UC1 <-- Wifi : return -2 (connect faild)
+end 
+Wifi <-- Linux
+
+Wifi -> Linux :  echo passphrase
+Linux -> Connman : passphrase
+Linux <-- Connman 
+opt 
+    Wifi <-- Linux : return -1 || 127 
+    UC1 <-- Wifi : return -3 (passphrase faild)
+end 
+Wifi <-- Linux
+UC1 <-- Wifi : return 0 (connected)
 
 @enduml

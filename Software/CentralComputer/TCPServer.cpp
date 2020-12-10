@@ -8,32 +8,21 @@
 
 int TCPServer::openServer(int port)
 {
-    // Create a socket
+    // create socket
     int listening = socket(AF_INET, SOCK_STREAM, 0);
     if (listening == -1)
-    {
-        cerr << "Can't create a socket! Quitting" << endl;
-        return -1;
-    }
+        return -1; //socket faild create
+ 
+    //give socket an IP-address and port to bind
+    sockaddr_in hint; //create socket object from sock_in stuckaddr_in 
+    hint.sin_family = AF_INET; // AF_INET standart is used
+    hint.sin_port = htons(port); //insert used port to socket object
+    inet_pton(AF_INET, "0.0.0.0", &hint.sin_addr); //Inet function******
+ 
+    bind(listening, (sockaddr*)&hint, sizeof(hint));//binding socket to address
 
-    cout << "socket created" << endl;
- 
-    // Bind the ip address and port to a socket
-    sockaddr_in hint;
-    hint.sin_family = AF_INET;
-    hint.sin_port = htons(port);
-    inet_pton(AF_INET, "0.0.0.0", &hint.sin_addr);
- 
-    bind(listening, (sockaddr*)&hint, sizeof(hint));
-
-    
- 
     // Tell Winsock the socket is for listening
     listen(listening, SOMAXCONN);
-
-     cout << "listen on socket" << endl;
-
-
  
     // Wait for a connection
     cout << "Wait for a connection" << endl;
@@ -43,7 +32,7 @@ int TCPServer::openServer(int port)
     cout << "about to accept client on socket" << endl;
 
     clientSocket_ = accept(listening, (sockaddr*)&client, &clientSize);
- 
+
     cout << "accept client on socket" << endl;
 
     char host[NI_MAXHOST];      // Client's remote name
@@ -81,7 +70,7 @@ int TCPServer::sendMsg(string msg)
 }
 
 
-int TCPServer::receiveMsg(char *buffer, int length)
+int TCPServer::receiveMsg(char *buffer, int bufferLength)
 {
 
     memset(buffer, 0, length);//buffer fyldes med 0;

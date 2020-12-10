@@ -2,18 +2,17 @@
 title Wifi::closeHotspot()
 participant UC1
 participant Wifi
+actor Linux #red
 actor Connman #red
 
 UC1 -> Wifi : closeHotspot()
-Wifi -> Connman : hotspot disable
-activate Connman
+Wifi -> Linux : connman-hotspot disable
+Linux -> Connman : connman-hotspot disable
+Linux <-- Connman
 opt faild to disable hotspot
-    Connman --> Wifi : "faild to disable hotspot"
-    Wifi --> UC1 : return -1. "faild to disable hotspot"
+    Linux --> Wifi : return -1 | 127
+    Wifi --> UC1 : return -1. (faild to disable hotspot)
 end
-deactivate Connman
-Connman --> Wifi : "hotspot disabled"
-Wifi --> UC1 : return 0. "hotspot disabled"
-
+UC1 <- Wifi : return 0 (hotspot diabled)
 
 @enduml
