@@ -7,9 +7,10 @@ class UC1 <<controller>>{
     +UC1(Startknap* SK, Display *D)
     +Run()
     +~UC1()
-    -Startknap* _SK
-    -Display* _D
-    -Player _player[2]
+    - _SK : Startknap* 
+    - _D : Display*
+    - _player[2] : Player
+    - _W1 : Wifi*
 }
 
 class Startknap <<Domain>>{
@@ -44,9 +45,9 @@ class SumoBot <<Boundary>>{
     -_attackStatus : bool
 
     +SumoBot(int lifes, int player)
-    +SetDirectionAndSpeed(int dir,int speed)
+    +SetDirectionAndSpeed(int dir, int speed)
     +SubstractLife()
-    +GetLives()
+    +GetLife()
     +~SumoBot()
 }
 class Styringsenhed <<Boundary>>{
@@ -55,13 +56,12 @@ class Styringsenhed <<Boundary>>{
     -_SPIM : SPIMaster* 
     +Styringsenhed(int channel, int comSpeed, int bufferSize)
     +GetDirectionAndSpeed(int &dir, int &speed)
-    +Styringsenhed()
+    +~Styringsenhed()
 }
 
 class Player <<Struct>> {
 direction : int
 speed : int
-life : int
 attack : bool 
 SBptr : SumoBot*
 SEptr : Styringsenhed*

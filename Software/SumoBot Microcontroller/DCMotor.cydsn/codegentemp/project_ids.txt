@@ -1,6 +1,0 @@
-E:\UNI\3 semester\Github\E3PRJ3\Software\SumoBot Microcontroller\DCMotor.cydsn\DCMotor.cyprj|0aebc0ff-2b17-4c59-95d9-0ea91436f88c
-C:\Program Files (x86)\Cypress\PSoC Creator\4.3\PSoC Creator\psoc\content\default\CyAnnotationLibrary\CyAnnotationLibrary.cylib\CyAnnotationLibrary.cyprj|65830adb-ac97-433d-8b51-9562c6d5d550
-C:\Users\frede\Documents\PSoC Creator\4.3\Downloads ( 4.3).cylib\Downloads ( 4.3).cyprj|abd2925f-e8f5-4997-99e4-51321ffc5851
-C:\Program Files (x86)\Cypress\PSoC Creator\4.3\PSoC Creator\psoc\content\cycomponentlibraryupdates\CyComponentLibraryUpdates.cylib\CyComponentLibraryUpdates.cyprj|319863b8-f22c-4b5e-b315-b2bcfbfd9946
-C:\Program Files (x86)\Cypress\PSoC Creator\4.3\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CyComponentLibrary.cyprj|632a383a-5dcf-4a8e-bb3d-9150355bc047
-C:\Program Files (x86)\Cypress\PSoC Creator\4.3\PSoC Creator\psoc\content\cyprimitives\CyPrimitives.cylib\CyPrimitives.cyprj|113870a8-1008-4315-8e7f-8f9bad3510bd

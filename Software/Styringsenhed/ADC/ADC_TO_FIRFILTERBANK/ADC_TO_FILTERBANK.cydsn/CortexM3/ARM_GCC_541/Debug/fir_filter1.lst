@@ -1,0 +1,1329 @@
+ARM GAS  C:\Users\danie\AppData\Local\Temp\cck955PV.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"fir_filter1.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.firFixedInit,"ax",%progbits
+  20              		.align	2
+  21              		.global	firFixedInit
+  22              		.thumb
+  23              		.thumb_func
+  24              		.type	firFixedInit, %function
+  25              	firFixedInit:
+  26              	.LFB64:
+  27              		.file 1 "fir_filter1.c"
+   1:fir_filter1.c **** #include "fir_filter1.h"
+   2:fir_filter1.c **** 
+   3:fir_filter1.c **** /*I DETTE TILFÆLDE BRUGES DMA TIL AT FLYTTE DATA OG ALLOKERE.
+   4:fir_filter1.c **** DER PROCESSERES PÅ PAKKER AF NO_OF_SAMPLES OG IKKE PR. SAMPLE.
+   5:fir_filter1.c **** DERFOR BENYTTES firStoreNewInputSamples TIL AT GEMME BÅDE 
+   6:fir_filter1.c **** KOEFFICIENTER OG adc_SampleArray[NO_OF_SAMPLES] I ET ARRAY TIL FILTERET.
+   7:fir_filter1.c **** DERNÆST BRUGES */
+   8:fir_filter1.c **** 
+   9:fir_filter1.c **** //array til at holde både input samples og filter koefficienter
+  10:fir_filter1.c **** int16_t insamp[ BUFFER_LEN ];
+  11:fir_filter1.c **** //
+  12:fir_filter1.c **** // FIR init
+  13:fir_filter1.c **** void firFixedInit( void )
+  14:fir_filter1.c **** {
+  28              		.loc 1 14 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32 0000 08B5     		push	{r3, lr}
+  33              		.cfi_def_cfa_offset 8
+  34              		.cfi_offset 3, -8
+  35              		.cfi_offset 14, -4
+  15:fir_filter1.c ****  memset( insamp, 0, sizeof( insamp ) );
+  36              		.loc 1 15 0
+  37 0002 4FF48E72 		mov	r2, #284
+  38 0006 0021     		movs	r1, #0
+  39 0008 0148     		ldr	r0, .L3
+  40 000a FFF7FEFF 		bl	memset
+  41              	.LVL0:
+  42 000e 08BD     		pop	{r3, pc}
+ARM GAS  C:\Users\danie\AppData\Local\Temp\cck955PV.s 			page 2
+
+
+  43              	.L4:
+  44              		.align	2
+  45              	.L3:
+  46 0010 00000000 		.word	insamp
+  47              		.cfi_endproc
+  48              	.LFE64:
+  49              		.size	firFixedInit, .-firFixedInit
+  50              		.section	.text.firMoveProcSamples,"ax",%progbits
+  51              		.align	2
+  52              		.global	firMoveProcSamples
+  53              		.thumb
+  54              		.thumb_func
+  55              		.type	firMoveProcSamples, %function
+  56              	firMoveProcSamples:
+  57              	.LFB65:
+  16:fir_filter1.c **** }
+  17:fir_filter1.c **** 
+  18:fir_filter1.c **** //move processed samples
+  19:fir_filter1.c **** void firMoveProcSamples( int length )
+  20:fir_filter1.c **** {
+  58              		.loc 1 20 0
+  59              		.cfi_startproc
+  60              		@ args = 0, pretend = 0, frame = 0
+  61              		@ frame_needed = 0, uses_anonymous_args = 0
+  62              	.LVL1:
+  63 0000 08B5     		push	{r3, lr}
+  64              		.cfi_def_cfa_offset 8
+  65              		.cfi_offset 3, -8
+  66              		.cfi_offset 14, -4
+  21:fir_filter1.c ****     // shift input samples back in time for next time
+  22:fir_filter1.c ****     memmove( &insamp[0], &insamp[length],
+  67              		.loc 1 22 0
+  68 0002 044B     		ldr	r3, .L7
+  69 0004 7C22     		movs	r2, #124
+  70 0006 03EB4001 		add	r1, r3, r0, lsl #1
+  71 000a 1846     		mov	r0, r3
+  72              	.LVL2:
+  73 000c FFF7FEFF 		bl	memmove
+  74              	.LVL3:
+  75 0010 08BD     		pop	{r3, pc}
+  76              	.L8:
+  77 0012 00BF     		.align	2
+  78              	.L7:
+  79 0014 00000000 		.word	insamp
+  80              		.cfi_endproc
+  81              	.LFE65:
+  82              		.size	firMoveProcSamples, .-firMoveProcSamples
+  83              		.section	.text.firStoreNewSamples,"ax",%progbits
+  84              		.align	2
+  85              		.global	firStoreNewSamples
+  86              		.thumb
+  87              		.thumb_func
+  88              		.type	firStoreNewSamples, %function
+  89              	firStoreNewSamples:
+  90              	.LFB66:
+  23:fir_filter1.c ****             (MAX_FLT_LEN - 1) * sizeof(int16_t) );
+  24:fir_filter1.c **** }
+ARM GAS  C:\Users\danie\AppData\Local\Temp\cck955PV.s 			page 3
+
+
+  25:fir_filter1.c **** 
+  26:fir_filter1.c **** //tager pakker af ADC data
+  27:fir_filter1.c **** int16_t *firStoreNewSamples( int16_t *inp, int length )
+  28:fir_filter1.c **** {
+  91              		.loc 1 28 0
+  92              		.cfi_startproc
+  93              		@ args = 0, pretend = 0, frame = 0
+  94              		@ frame_needed = 0, uses_anonymous_args = 0
+  95              	.LVL4:
+  96 0000 10B5     		push	{r4, lr}
+  97              		.cfi_def_cfa_offset 8
+  98              		.cfi_offset 4, -8
+  99              		.cfi_offset 14, -4
+  29:fir_filter1.c ****     // put the new samples at the high end of the buffer
+  30:fir_filter1.c ****     memcpy( &insamp[MAX_FLT_LEN - 1], inp, //husk at insamp er erklæret oppe i toppen af denne .c 
+ 100              		.loc 1 30 0
+ 101 0002 044C     		ldr	r4, .L11
+ 102 0004 4A00     		lsls	r2, r1, #1
+ 103 0006 0146     		mov	r1, r0
+ 104              	.LVL5:
+ 105 0008 2046     		mov	r0, r4
+ 106              	.LVL6:
+ 107 000a FFF7FEFF 		bl	memcpy
+ 108              	.LVL7:
+  31:fir_filter1.c ****             length * sizeof(int16_t) );
+  32:fir_filter1.c ****     // return the location at which to apply the filtering
+  33:fir_filter1.c ****     return &insamp[MAX_FLT_LEN - 1]; //returnerer adresse som fir-filter funktionen benytter som pa
+  34:fir_filter1.c **** }
+ 109              		.loc 1 34 0
+ 110 000e 2046     		mov	r0, r4
+ 111 0010 10BD     		pop	{r4, pc}
+ 112              	.L12:
+ 113 0012 00BF     		.align	2
+ 114              	.L11:
+ 115 0014 7C000000 		.word	insamp+124
+ 116              		.cfi_endproc
+ 117              	.LFE66:
+ 118              		.size	firStoreNewSamples, .-firStoreNewSamples
+ 119              		.section	.text.firFixed,"ax",%progbits
+ 120              		.align	2
+ 121              		.global	firFixed
+ 122              		.thumb
+ 123              		.thumb_func
+ 124              		.type	firFixed, %function
+ 125              	firFixed:
+ 126              	.LFB67:
+  35:fir_filter1.c **** 
+  36:fir_filter1.c **** // the FIR filter function
+  37:fir_filter1.c **** void firFixed(int16_t *coeffs, int16_t *input, int16_t *output,
+  38:fir_filter1.c ****        int length, int filterLength )
+  39:fir_filter1.c **** {
+ 127              		.loc 1 39 0
+ 128              		.cfi_startproc
+ 129              		@ args = 4, pretend = 0, frame = 0
+ 130              		@ frame_needed = 0, uses_anonymous_args = 0
+ 131              	.LVL8:
+ 132 0000 2DE9F047 		push	{r4, r5, r6, r7, r8, r9, r10, lr}
+ARM GAS  C:\Users\danie\AppData\Local\Temp\cck955PV.s 			page 4
+
+
+ 133              		.cfi_def_cfa_offset 32
+ 134              		.cfi_offset 4, -32
+ 135              		.cfi_offset 5, -28
+ 136              		.cfi_offset 6, -24
+ 137              		.cfi_offset 7, -20
+ 138              		.cfi_offset 8, -16
+ 139              		.cfi_offset 9, -12
+ 140              		.cfi_offset 10, -8
+ 141              		.cfi_offset 14, -4
+ 142 0004 DDF82080 		ldr	r8, [sp, #32]
+ 143              	.LVL9:
+  40:fir_filter1.c ****     int32_t acc;     // accumulator for MACs
+  41:fir_filter1.c ****     int16_t *coeffp; // pointer to coefficients
+  42:fir_filter1.c ****     int16_t *inputp; // pointer to input samples
+  43:fir_filter1.c ****     int n;
+  44:fir_filter1.c ****     int k;
+  45:fir_filter1.c **** 
+  46:fir_filter1.c ****     // apply the filter to each input sample
+  47:fir_filter1.c ****     for ( n = 0; n < length; n++ ) {
+ 144              		.loc 1 47 0
+ 145 0008 4FF00009 		mov	r9, #0
+ 146 000c 25E0     		b	.L14
+ 147              	.LVL10:
+ 148              	.L18:
+  48:fir_filter1.c ****         // calculate output n
+  49:fir_filter1.c ****         coeffp = coeffs;
+  50:fir_filter1.c ****         inputp = &input[n];
+ 149              		.loc 1 50 0
+ 150 000e 4FEA490A 		lsl	r10, r9, #1
+ 151 0012 01EB0A06 		add	r6, r1, r10
+ 152              	.LVL11:
+  49:fir_filter1.c ****         inputp = &input[n];
+ 153              		.loc 1 49 0
+ 154 0016 0546     		mov	r5, r0
+  51:fir_filter1.c ****         // load rounding constant
+  52:fir_filter1.c ****         acc = 1 << 14;
+  53:fir_filter1.c ****         // perform the multiply-accumulate
+  54:fir_filter1.c ****         for ( k = 0; k < filterLength; k++ ) {
+ 155              		.loc 1 54 0
+ 156 0018 0024     		movs	r4, #0
+  52:fir_filter1.c ****         // perform the multiply-accumulate
+ 157              		.loc 1 52 0
+ 158 001a 4FF48047 		mov	r7, #16384
+ 159              		.loc 1 54 0
+ 160 001e 08E0     		b	.L15
+ 161              	.LVL12:
+ 162              	.L16:
+  55:fir_filter1.c ****             acc += (int32_t)(*coeffp++) * (int32_t)(*inputp--);
+ 163              		.loc 1 55 0 discriminator 3
+ 164 0020 B5F900E0 		ldrsh	lr, [r5]
+ 165              	.LVL13:
+ 166 0024 B6F900C0 		ldrsh	ip, [r6]
+ 167 0028 0CFB0E77 		mla	r7, ip, lr, r7
+ 168              	.LVL14:
+  54:fir_filter1.c ****             acc += (int32_t)(*coeffp++) * (int32_t)(*inputp--);
+ 169              		.loc 1 54 0 discriminator 3
+ 170 002c 0134     		adds	r4, r4, #1
+ARM GAS  C:\Users\danie\AppData\Local\Temp\cck955PV.s 			page 5
+
+
+ 171              	.LVL15:
+ 172              		.loc 1 55 0 discriminator 3
+ 173 002e 023E     		subs	r6, r6, #2
+ 174              	.LVL16:
+ 175 0030 0235     		adds	r5, r5, #2
+ 176              	.LVL17:
+ 177              	.L15:
+  54:fir_filter1.c ****             acc += (int32_t)(*coeffp++) * (int32_t)(*inputp--);
+ 178              		.loc 1 54 0 discriminator 1
+ 179 0032 4445     		cmp	r4, r8
+ 180 0034 F4DB     		blt	.L16
+  56:fir_filter1.c ****         }
+  57:fir_filter1.c ****         // saturate the result - for at undgå overflow
+  58:fir_filter1.c ****         if ( acc > 0x3fffffff ) {
+ 181              		.loc 1 58 0
+ 182 0036 B7F1804F 		cmp	r7, #1073741824
+ 183 003a 03DA     		bge	.L19
+  59:fir_filter1.c ****             acc = 0x3fffffff;
+  60:fir_filter1.c ****         } else if ( acc < -0x40000000 ) {
+ 184              		.loc 1 60 0
+ 185 003c B7F1404F 		cmp	r7, #-1073741824
+ 186 0040 03DB     		blt	.L20
+ 187 0042 04E0     		b	.L17
+ 188              	.L19:
+  59:fir_filter1.c ****             acc = 0x3fffffff;
+ 189              		.loc 1 59 0
+ 190 0044 6FF04047 		mvn	r7, #-1073741824
+ 191              	.LVL18:
+ 192 0048 01E0     		b	.L17
+ 193              	.LVL19:
+ 194              	.L20:
+  61:fir_filter1.c ****             acc = -0x40000000;
+ 195              		.loc 1 61 0
+ 196 004a 4FF04047 		mov	r7, #-1073741824
+ 197              	.LVL20:
+ 198              	.L17:
+  62:fir_filter1.c ****         }
+  63:fir_filter1.c ****         // convert from Q30 to Q15
+  64:fir_filter1.c ****         output[n] = (int16_t)(acc >> 15);
+ 199              		.loc 1 64 0 discriminator 2
+ 200 004e 47F3CF37 		sbfx	r7, r7, #15, #16
+ 201              	.LVL21:
+ 202 0052 22F80A70 		strh	r7, [r2, r10]	@ movhi
+  47:fir_filter1.c ****         // calculate output n
+ 203              		.loc 1 47 0 discriminator 2
+ 204 0056 09F10109 		add	r9, r9, #1
+ 205              	.LVL22:
+ 206              	.L14:
+  47:fir_filter1.c ****         // calculate output n
+ 207              		.loc 1 47 0 is_stmt 0 discriminator 1
+ 208 005a 9945     		cmp	r9, r3
+ 209 005c D7DB     		blt	.L18
+  65:fir_filter1.c ****     }
+  66:fir_filter1.c **** }...
+ 210              		.loc 1 66 0 is_stmt 1
+ 211 005e BDE8F087 		pop	{r4, r5, r6, r7, r8, r9, r10, pc}
+ 212              		.cfi_endproc
+ARM GAS  C:\Users\danie\AppData\Local\Temp\cck955PV.s 			page 6
+
+
+ 213              	.LFE67:
+ 214              		.size	firFixed, .-firFixed
+ 215              		.comm	insamp,284,4
+ 216 0062 00BF     		.text
+ 217              	.Letext0:
+ 218              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.3\\psoc creator\\import\\gnu\\arm\\5.4.
+ 219              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.3\\psoc creator\\import\\gnu\\arm\\5.4.
+ 220              		.file 4 "Generated_Source\\PSoC5/core_cm3.h"
+ 221              		.file 5 "c:\\program files (x86)\\cypress\\psoc creator\\4.3\\psoc creator\\import\\gnu\\arm\\5.4.
+ 222              		.section	.debug_info,"",%progbits
+ 223              	.Ldebug_info0:
+ 224 0000 85020000 		.4byte	0x285
+ 225 0004 0400     		.2byte	0x4
+ 226 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 227 000a 04       		.byte	0x4
+ 228 000b 01       		.uleb128 0x1
+ 229 000c 4B000000 		.4byte	.LASF32
+ 230 0010 0C       		.byte	0xc
+ 231 0011 DD010000 		.4byte	.LASF33
+ 232 0015 1F010000 		.4byte	.LASF34
+ 233 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 234 001d 00000000 		.4byte	0
+ 235 0021 00000000 		.4byte	.Ldebug_line0
+ 236 0025 02       		.uleb128 0x2
+ 237 0026 01       		.byte	0x1
+ 238 0027 06       		.byte	0x6
+ 239 0028 51020000 		.4byte	.LASF0
+ 240 002c 02       		.uleb128 0x2
+ 241 002d 01       		.byte	0x1
+ 242 002e 08       		.byte	0x8
+ 243 002f 3D000000 		.4byte	.LASF1
+ 244 0033 03       		.uleb128 0x3
+ 245 0034 16000000 		.4byte	.LASF4
+ 246 0038 02       		.byte	0x2
+ 247 0039 29       		.byte	0x29
+ 248 003a 3E000000 		.4byte	0x3e
+ 249 003e 02       		.uleb128 0x2
+ 250 003f 02       		.byte	0x2
+ 251 0040 05       		.byte	0x5
+ 252 0041 2B020000 		.4byte	.LASF2
+ 253 0045 02       		.uleb128 0x2
+ 254 0046 02       		.byte	0x2
+ 255 0047 07       		.byte	0x7
+ 256 0048 F1000000 		.4byte	.LASF3
+ 257 004c 03       		.uleb128 0x3
+ 258 004d 20000000 		.4byte	.LASF5
+ 259 0051 02       		.byte	0x2
+ 260 0052 3F       		.byte	0x3f
+ 261 0053 57000000 		.4byte	0x57
+ 262 0057 02       		.uleb128 0x2
+ 263 0058 04       		.byte	0x4
+ 264 0059 05       		.byte	0x5
+ 265 005a 3C020000 		.4byte	.LASF6
+ 266 005e 02       		.uleb128 0x2
+ 267 005f 04       		.byte	0x4
+ 268 0060 07       		.byte	0x7
+ 269 0061 DF000000 		.4byte	.LASF7
+ARM GAS  C:\Users\danie\AppData\Local\Temp\cck955PV.s 			page 7
+
+
+ 270 0065 02       		.uleb128 0x2
+ 271 0066 08       		.byte	0x8
+ 272 0067 05       		.byte	0x5
+ 273 0068 11020000 		.4byte	.LASF8
+ 274 006c 02       		.uleb128 0x2
+ 275 006d 08       		.byte	0x8
+ 276 006e 07       		.byte	0x7
+ 277 006f C6010000 		.4byte	.LASF9
+ 278 0073 04       		.uleb128 0x4
+ 279 0074 04       		.byte	0x4
+ 280 0075 05       		.byte	0x5
+ 281 0076 696E7400 		.ascii	"int\000"
+ 282 007a 02       		.uleb128 0x2
+ 283 007b 04       		.byte	0x4
+ 284 007c 07       		.byte	0x7
+ 285 007d B2010000 		.4byte	.LASF10
+ 286 0081 03       		.uleb128 0x3
+ 287 0082 F8010000 		.4byte	.LASF11
+ 288 0086 03       		.byte	0x3
+ 289 0087 20       		.byte	0x20
+ 290 0088 33000000 		.4byte	0x33
+ 291 008c 03       		.uleb128 0x3
+ 292 008d 00020000 		.4byte	.LASF12
+ 293 0091 03       		.byte	0x3
+ 294 0092 2C       		.byte	0x2c
+ 295 0093 4C000000 		.4byte	0x4c
+ 296 0097 02       		.uleb128 0x2
+ 297 0098 04       		.byte	0x4
+ 298 0099 04       		.byte	0x4
+ 299 009a 37000000 		.4byte	.LASF13
+ 300 009e 02       		.uleb128 0x2
+ 301 009f 08       		.byte	0x8
+ 302 00a0 04       		.byte	0x4
+ 303 00a1 18010000 		.4byte	.LASF14
+ 304 00a5 02       		.uleb128 0x2
+ 305 00a6 01       		.byte	0x1
+ 306 00a7 08       		.byte	0x8
+ 307 00a8 1F020000 		.4byte	.LASF15
+ 308 00ac 02       		.uleb128 0x2
+ 309 00ad 08       		.byte	0x8
+ 310 00ae 04       		.byte	0x4
+ 311 00af 45020000 		.4byte	.LASF16
+ 312 00b3 02       		.uleb128 0x2
+ 313 00b4 04       		.byte	0x4
+ 314 00b5 07       		.byte	0x7
+ 315 00b6 08020000 		.4byte	.LASF17
+ 316 00ba 05       		.uleb128 0x5
+ 317 00bb 2A000000 		.4byte	.LASF18
+ 318 00bf 01       		.byte	0x1
+ 319 00c0 0D       		.byte	0xd
+ 320 00c1 00000000 		.4byte	.LFB64
+ 321 00c5 14000000 		.4byte	.LFE64-.LFB64
+ 322 00c9 01       		.uleb128 0x1
+ 323 00ca 9C       		.byte	0x9c
+ 324 00cb EF000000 		.4byte	0xef
+ 325 00cf 06       		.uleb128 0x6
+ 326 00d0 0E000000 		.4byte	.LVL0
+ARM GAS  C:\Users\danie\AppData\Local\Temp\cck955PV.s 			page 8
+
+
+ 327 00d4 6B020000 		.4byte	0x26b
+ 328 00d8 07       		.uleb128 0x7
+ 329 00d9 01       		.uleb128 0x1
+ 330 00da 50       		.byte	0x50
+ 331 00db 05       		.uleb128 0x5
+ 332 00dc 03       		.byte	0x3
+ 333 00dd 00000000 		.4byte	insamp
+ 334 00e1 07       		.uleb128 0x7
+ 335 00e2 01       		.uleb128 0x1
+ 336 00e3 51       		.byte	0x51
+ 337 00e4 01       		.uleb128 0x1
+ 338 00e5 30       		.byte	0x30
+ 339 00e6 07       		.uleb128 0x7
+ 340 00e7 01       		.uleb128 0x1
+ 341 00e8 52       		.byte	0x52
+ 342 00e9 03       		.uleb128 0x3
+ 343 00ea 0A       		.byte	0xa
+ 344 00eb 1C01     		.2byte	0x11c
+ 345 00ed 00       		.byte	0
+ 346 00ee 00       		.byte	0
+ 347 00ef 05       		.uleb128 0x5
+ 348 00f0 5D020000 		.4byte	.LASF19
+ 349 00f4 01       		.byte	0x1
+ 350 00f5 13       		.byte	0x13
+ 351 00f6 00000000 		.4byte	.LFB65
+ 352 00fa 18000000 		.4byte	.LFE65-.LFB65
+ 353 00fe 01       		.uleb128 0x1
+ 354 00ff 9C       		.byte	0x9c
+ 355 0100 3C010000 		.4byte	0x13c
+ 356 0104 08       		.uleb128 0x8
+ 357 0105 70020000 		.4byte	.LASF20
+ 358 0109 01       		.byte	0x1
+ 359 010a 13       		.byte	0x13
+ 360 010b 73000000 		.4byte	0x73
+ 361 010f 00000000 		.4byte	.LLST0
+ 362 0113 06       		.uleb128 0x6
+ 363 0114 10000000 		.4byte	.LVL3
+ 364 0118 74020000 		.4byte	0x274
+ 365 011c 07       		.uleb128 0x7
+ 366 011d 01       		.uleb128 0x1
+ 367 011e 50       		.byte	0x50
+ 368 011f 05       		.uleb128 0x5
+ 369 0120 03       		.byte	0x3
+ 370 0121 00000000 		.4byte	insamp
+ 371 0125 07       		.uleb128 0x7
+ 372 0126 01       		.uleb128 0x1
+ 373 0127 51       		.byte	0x51
+ 374 0128 0B       		.uleb128 0xb
+ 375 0129 F3       		.byte	0xf3
+ 376 012a 01       		.uleb128 0x1
+ 377 012b 50       		.byte	0x50
+ 378 012c 31       		.byte	0x31
+ 379 012d 24       		.byte	0x24
+ 380 012e 03       		.byte	0x3
+ 381 012f 00000000 		.4byte	insamp
+ 382 0133 22       		.byte	0x22
+ 383 0134 07       		.uleb128 0x7
+ARM GAS  C:\Users\danie\AppData\Local\Temp\cck955PV.s 			page 9
+
+
+ 384 0135 01       		.uleb128 0x1
+ 385 0136 52       		.byte	0x52
+ 386 0137 02       		.uleb128 0x2
+ 387 0138 08       		.byte	0x8
+ 388 0139 7C       		.byte	0x7c
+ 389 013a 00       		.byte	0
+ 390 013b 00       		.byte	0
+ 391 013c 09       		.uleb128 0x9
+ 392 013d 8F010000 		.4byte	.LASF35
+ 393 0141 01       		.byte	0x1
+ 394 0142 1B       		.byte	0x1b
+ 395 0143 94010000 		.4byte	0x194
+ 396 0147 00000000 		.4byte	.LFB66
+ 397 014b 18000000 		.4byte	.LFE66-.LFB66
+ 398 014f 01       		.uleb128 0x1
+ 399 0150 9C       		.byte	0x9c
+ 400 0151 94010000 		.4byte	0x194
+ 401 0155 0A       		.uleb128 0xa
+ 402 0156 696E7000 		.ascii	"inp\000"
+ 403 015a 01       		.byte	0x1
+ 404 015b 1B       		.byte	0x1b
+ 405 015c 94010000 		.4byte	0x194
+ 406 0160 21000000 		.4byte	.LLST1
+ 407 0164 08       		.uleb128 0x8
+ 408 0165 70020000 		.4byte	.LASF20
+ 409 0169 01       		.byte	0x1
+ 410 016a 1B       		.byte	0x1b
+ 411 016b 73000000 		.4byte	0x73
+ 412 016f 4D000000 		.4byte	.LLST2
+ 413 0173 06       		.uleb128 0x6
+ 414 0174 0E000000 		.4byte	.LVL7
+ 415 0178 7F020000 		.4byte	0x27f
+ 416 017c 07       		.uleb128 0x7
+ 417 017d 01       		.uleb128 0x1
+ 418 017e 50       		.byte	0x50
+ 419 017f 02       		.uleb128 0x2
+ 420 0180 74       		.byte	0x74
+ 421 0181 00       		.sleb128 0
+ 422 0182 07       		.uleb128 0x7
+ 423 0183 01       		.uleb128 0x1
+ 424 0184 51       		.byte	0x51
+ 425 0185 03       		.uleb128 0x3
+ 426 0186 F3       		.byte	0xf3
+ 427 0187 01       		.uleb128 0x1
+ 428 0188 50       		.byte	0x50
+ 429 0189 07       		.uleb128 0x7
+ 430 018a 01       		.uleb128 0x1
+ 431 018b 52       		.byte	0x52
+ 432 018c 05       		.uleb128 0x5
+ 433 018d F3       		.byte	0xf3
+ 434 018e 01       		.uleb128 0x1
+ 435 018f 51       		.byte	0x51
+ 436 0190 31       		.byte	0x31
+ 437 0191 24       		.byte	0x24
+ 438 0192 00       		.byte	0
+ 439 0193 00       		.byte	0
+ 440 0194 0B       		.uleb128 0xb
+ARM GAS  C:\Users\danie\AppData\Local\Temp\cck955PV.s 			page 10
+
+
+ 441 0195 04       		.byte	0x4
+ 442 0196 81000000 		.4byte	0x81
+ 443 019a 05       		.uleb128 0x5
+ 444 019b A2010000 		.4byte	.LASF21
+ 445 019f 01       		.byte	0x1
+ 446 01a0 25       		.byte	0x25
+ 447 01a1 00000000 		.4byte	.LFB67
+ 448 01a5 62000000 		.4byte	.LFE67-.LFB67
+ 449 01a9 01       		.uleb128 0x1
+ 450 01aa 9C       		.byte	0x9c
+ 451 01ab 39020000 		.4byte	0x239
+ 452 01af 0C       		.uleb128 0xc
+ 453 01b0 0F000000 		.4byte	.LASF22
+ 454 01b4 01       		.byte	0x1
+ 455 01b5 25       		.byte	0x25
+ 456 01b6 94010000 		.4byte	0x194
+ 457 01ba 01       		.uleb128 0x1
+ 458 01bb 50       		.byte	0x50
+ 459 01bc 0C       		.uleb128 0xc
+ 460 01bd D9000000 		.4byte	.LASF23
+ 461 01c1 01       		.byte	0x1
+ 462 01c2 25       		.byte	0x25
+ 463 01c3 94010000 		.4byte	0x194
+ 464 01c7 01       		.uleb128 0x1
+ 465 01c8 51       		.byte	0x51
+ 466 01c9 0C       		.uleb128 0xc
+ 467 01ca 35020000 		.4byte	.LASF24
+ 468 01ce 01       		.byte	0x1
+ 469 01cf 25       		.byte	0x25
+ 470 01d0 94010000 		.4byte	0x194
+ 471 01d4 01       		.uleb128 0x1
+ 472 01d5 52       		.byte	0x52
+ 473 01d6 0C       		.uleb128 0xc
+ 474 01d7 70020000 		.4byte	.LASF20
+ 475 01db 01       		.byte	0x1
+ 476 01dc 26       		.byte	0x26
+ 477 01dd 73000000 		.4byte	0x73
+ 478 01e1 01       		.uleb128 0x1
+ 479 01e2 53       		.byte	0x53
+ 480 01e3 0C       		.uleb128 0xc
+ 481 01e4 EB010000 		.4byte	.LASF25
+ 482 01e8 01       		.byte	0x1
+ 483 01e9 26       		.byte	0x26
+ 484 01ea 73000000 		.4byte	0x73
+ 485 01ee 02       		.uleb128 0x2
+ 486 01ef 91       		.byte	0x91
+ 487 01f0 00       		.sleb128 0
+ 488 01f1 0D       		.uleb128 0xd
+ 489 01f2 61636300 		.ascii	"acc\000"
+ 490 01f6 01       		.byte	0x1
+ 491 01f7 28       		.byte	0x28
+ 492 01f8 8C000000 		.4byte	0x8c
+ 493 01fc 6E000000 		.4byte	.LLST3
+ 494 0200 0E       		.uleb128 0xe
+ 495 0201 00000000 		.4byte	.LASF26
+ 496 0205 01       		.byte	0x1
+ 497 0206 29       		.byte	0x29
+ARM GAS  C:\Users\danie\AppData\Local\Temp\cck955PV.s 			page 11
+
+
+ 498 0207 94010000 		.4byte	0x194
+ 499 020b 9A000000 		.4byte	.LLST4
+ 500 020f 0E       		.uleb128 0xe
+ 501 0210 AB010000 		.4byte	.LASF27
+ 502 0214 01       		.byte	0x1
+ 503 0215 2A       		.byte	0x2a
+ 504 0216 94010000 		.4byte	0x194
+ 505 021a C5000000 		.4byte	.LLST5
+ 506 021e 0D       		.uleb128 0xd
+ 507 021f 6E00     		.ascii	"n\000"
+ 508 0221 01       		.byte	0x1
+ 509 0222 2B       		.byte	0x2b
+ 510 0223 73000000 		.4byte	0x73
+ 511 0227 F0000000 		.4byte	.LLST6
+ 512 022b 0D       		.uleb128 0xd
+ 513 022c 6B00     		.ascii	"k\000"
+ 514 022e 01       		.byte	0x1
+ 515 022f 2C       		.byte	0x2c
+ 516 0230 73000000 		.4byte	0x73
+ 517 0234 0F010000 		.4byte	.LLST7
+ 518 0238 00       		.byte	0
+ 519 0239 0F       		.uleb128 0xf
+ 520 023a 04010000 		.4byte	.LASF28
+ 521 023e 04       		.byte	0x4
+ 522 023f 1207     		.2byte	0x712
+ 523 0241 45020000 		.4byte	0x245
+ 524 0245 10       		.uleb128 0x10
+ 525 0246 8C000000 		.4byte	0x8c
+ 526 024a 11       		.uleb128 0x11
+ 527 024b 81000000 		.4byte	0x81
+ 528 024f 5A020000 		.4byte	0x25a
+ 529 0253 12       		.uleb128 0x12
+ 530 0254 B3000000 		.4byte	0xb3
+ 531 0258 8D       		.byte	0x8d
+ 532 0259 00       		.byte	0
+ 533 025a 13       		.uleb128 0x13
+ 534 025b BF010000 		.4byte	.LASF29
+ 535 025f 01       		.byte	0x1
+ 536 0260 0A       		.byte	0xa
+ 537 0261 4A020000 		.4byte	0x24a
+ 538 0265 05       		.uleb128 0x5
+ 539 0266 03       		.byte	0x3
+ 540 0267 00000000 		.4byte	insamp
+ 541 026b 14       		.uleb128 0x14
+ 542 026c 11010000 		.4byte	.LASF30
+ 543 0270 11010000 		.4byte	.LASF30
+ 544 0274 15       		.uleb128 0x15
+ 545 0275 07000000 		.4byte	.LASF36
+ 546 0279 07000000 		.4byte	.LASF36
+ 547 027d 05       		.byte	0x5
+ 548 027e 18       		.byte	0x18
+ 549 027f 14       		.uleb128 0x14
+ 550 0280 24020000 		.4byte	.LASF31
+ 551 0284 24020000 		.4byte	.LASF31
+ 552 0288 00       		.byte	0
+ 553              		.section	.debug_abbrev,"",%progbits
+ 554              	.Ldebug_abbrev0:
+ARM GAS  C:\Users\danie\AppData\Local\Temp\cck955PV.s 			page 12
+
+
+ 555 0000 01       		.uleb128 0x1
+ 556 0001 11       		.uleb128 0x11
+ 557 0002 01       		.byte	0x1
+ 558 0003 25       		.uleb128 0x25
+ 559 0004 0E       		.uleb128 0xe
+ 560 0005 13       		.uleb128 0x13
+ 561 0006 0B       		.uleb128 0xb
+ 562 0007 03       		.uleb128 0x3
+ 563 0008 0E       		.uleb128 0xe
+ 564 0009 1B       		.uleb128 0x1b
+ 565 000a 0E       		.uleb128 0xe
+ 566 000b 55       		.uleb128 0x55
+ 567 000c 17       		.uleb128 0x17
+ 568 000d 11       		.uleb128 0x11
+ 569 000e 01       		.uleb128 0x1
+ 570 000f 10       		.uleb128 0x10
+ 571 0010 17       		.uleb128 0x17
+ 572 0011 00       		.byte	0
+ 573 0012 00       		.byte	0
+ 574 0013 02       		.uleb128 0x2
+ 575 0014 24       		.uleb128 0x24
+ 576 0015 00       		.byte	0
+ 577 0016 0B       		.uleb128 0xb
+ 578 0017 0B       		.uleb128 0xb
+ 579 0018 3E       		.uleb128 0x3e
+ 580 0019 0B       		.uleb128 0xb
+ 581 001a 03       		.uleb128 0x3
+ 582 001b 0E       		.uleb128 0xe
+ 583 001c 00       		.byte	0
+ 584 001d 00       		.byte	0
+ 585 001e 03       		.uleb128 0x3
+ 586 001f 16       		.uleb128 0x16
+ 587 0020 00       		.byte	0
+ 588 0021 03       		.uleb128 0x3
+ 589 0022 0E       		.uleb128 0xe
+ 590 0023 3A       		.uleb128 0x3a
+ 591 0024 0B       		.uleb128 0xb
+ 592 0025 3B       		.uleb128 0x3b
+ 593 0026 0B       		.uleb128 0xb
+ 594 0027 49       		.uleb128 0x49
+ 595 0028 13       		.uleb128 0x13
+ 596 0029 00       		.byte	0
+ 597 002a 00       		.byte	0
+ 598 002b 04       		.uleb128 0x4
+ 599 002c 24       		.uleb128 0x24
+ 600 002d 00       		.byte	0
+ 601 002e 0B       		.uleb128 0xb
+ 602 002f 0B       		.uleb128 0xb
+ 603 0030 3E       		.uleb128 0x3e
+ 604 0031 0B       		.uleb128 0xb
+ 605 0032 03       		.uleb128 0x3
+ 606 0033 08       		.uleb128 0x8
+ 607 0034 00       		.byte	0
+ 608 0035 00       		.byte	0
+ 609 0036 05       		.uleb128 0x5
+ 610 0037 2E       		.uleb128 0x2e
+ 611 0038 01       		.byte	0x1
+ARM GAS  C:\Users\danie\AppData\Local\Temp\cck955PV.s 			page 13
+
+
+ 612 0039 3F       		.uleb128 0x3f
+ 613 003a 19       		.uleb128 0x19
+ 614 003b 03       		.uleb128 0x3
+ 615 003c 0E       		.uleb128 0xe
+ 616 003d 3A       		.uleb128 0x3a
+ 617 003e 0B       		.uleb128 0xb
+ 618 003f 3B       		.uleb128 0x3b
+ 619 0040 0B       		.uleb128 0xb
+ 620 0041 27       		.uleb128 0x27
+ 621 0042 19       		.uleb128 0x19
+ 622 0043 11       		.uleb128 0x11
+ 623 0044 01       		.uleb128 0x1
+ 624 0045 12       		.uleb128 0x12
+ 625 0046 06       		.uleb128 0x6
+ 626 0047 40       		.uleb128 0x40
+ 627 0048 18       		.uleb128 0x18
+ 628 0049 9742     		.uleb128 0x2117
+ 629 004b 19       		.uleb128 0x19
+ 630 004c 01       		.uleb128 0x1
+ 631 004d 13       		.uleb128 0x13
+ 632 004e 00       		.byte	0
+ 633 004f 00       		.byte	0
+ 634 0050 06       		.uleb128 0x6
+ 635 0051 898201   		.uleb128 0x4109
+ 636 0054 01       		.byte	0x1
+ 637 0055 11       		.uleb128 0x11
+ 638 0056 01       		.uleb128 0x1
+ 639 0057 31       		.uleb128 0x31
+ 640 0058 13       		.uleb128 0x13
+ 641 0059 00       		.byte	0
+ 642 005a 00       		.byte	0
+ 643 005b 07       		.uleb128 0x7
+ 644 005c 8A8201   		.uleb128 0x410a
+ 645 005f 00       		.byte	0
+ 646 0060 02       		.uleb128 0x2
+ 647 0061 18       		.uleb128 0x18
+ 648 0062 9142     		.uleb128 0x2111
+ 649 0064 18       		.uleb128 0x18
+ 650 0065 00       		.byte	0
+ 651 0066 00       		.byte	0
+ 652 0067 08       		.uleb128 0x8
+ 653 0068 05       		.uleb128 0x5
+ 654 0069 00       		.byte	0
+ 655 006a 03       		.uleb128 0x3
+ 656 006b 0E       		.uleb128 0xe
+ 657 006c 3A       		.uleb128 0x3a
+ 658 006d 0B       		.uleb128 0xb
+ 659 006e 3B       		.uleb128 0x3b
+ 660 006f 0B       		.uleb128 0xb
+ 661 0070 49       		.uleb128 0x49
+ 662 0071 13       		.uleb128 0x13
+ 663 0072 02       		.uleb128 0x2
+ 664 0073 17       		.uleb128 0x17
+ 665 0074 00       		.byte	0
+ 666 0075 00       		.byte	0
+ 667 0076 09       		.uleb128 0x9
+ 668 0077 2E       		.uleb128 0x2e
+ARM GAS  C:\Users\danie\AppData\Local\Temp\cck955PV.s 			page 14
+
+
+ 669 0078 01       		.byte	0x1
+ 670 0079 3F       		.uleb128 0x3f
+ 671 007a 19       		.uleb128 0x19
+ 672 007b 03       		.uleb128 0x3
+ 673 007c 0E       		.uleb128 0xe
+ 674 007d 3A       		.uleb128 0x3a
+ 675 007e 0B       		.uleb128 0xb
+ 676 007f 3B       		.uleb128 0x3b
+ 677 0080 0B       		.uleb128 0xb
+ 678 0081 27       		.uleb128 0x27
+ 679 0082 19       		.uleb128 0x19
+ 680 0083 49       		.uleb128 0x49
+ 681 0084 13       		.uleb128 0x13
+ 682 0085 11       		.uleb128 0x11
+ 683 0086 01       		.uleb128 0x1
+ 684 0087 12       		.uleb128 0x12
+ 685 0088 06       		.uleb128 0x6
+ 686 0089 40       		.uleb128 0x40
+ 687 008a 18       		.uleb128 0x18
+ 688 008b 9742     		.uleb128 0x2117
+ 689 008d 19       		.uleb128 0x19
+ 690 008e 01       		.uleb128 0x1
+ 691 008f 13       		.uleb128 0x13
+ 692 0090 00       		.byte	0
+ 693 0091 00       		.byte	0
+ 694 0092 0A       		.uleb128 0xa
+ 695 0093 05       		.uleb128 0x5
+ 696 0094 00       		.byte	0
+ 697 0095 03       		.uleb128 0x3
+ 698 0096 08       		.uleb128 0x8
+ 699 0097 3A       		.uleb128 0x3a
+ 700 0098 0B       		.uleb128 0xb
+ 701 0099 3B       		.uleb128 0x3b
+ 702 009a 0B       		.uleb128 0xb
+ 703 009b 49       		.uleb128 0x49
+ 704 009c 13       		.uleb128 0x13
+ 705 009d 02       		.uleb128 0x2
+ 706 009e 17       		.uleb128 0x17
+ 707 009f 00       		.byte	0
+ 708 00a0 00       		.byte	0
+ 709 00a1 0B       		.uleb128 0xb
+ 710 00a2 0F       		.uleb128 0xf
+ 711 00a3 00       		.byte	0
+ 712 00a4 0B       		.uleb128 0xb
+ 713 00a5 0B       		.uleb128 0xb
+ 714 00a6 49       		.uleb128 0x49
+ 715 00a7 13       		.uleb128 0x13
+ 716 00a8 00       		.byte	0
+ 717 00a9 00       		.byte	0
+ 718 00aa 0C       		.uleb128 0xc
+ 719 00ab 05       		.uleb128 0x5
+ 720 00ac 00       		.byte	0
+ 721 00ad 03       		.uleb128 0x3
+ 722 00ae 0E       		.uleb128 0xe
+ 723 00af 3A       		.uleb128 0x3a
+ 724 00b0 0B       		.uleb128 0xb
+ 725 00b1 3B       		.uleb128 0x3b
+ARM GAS  C:\Users\danie\AppData\Local\Temp\cck955PV.s 			page 15
+
+
+ 726 00b2 0B       		.uleb128 0xb
+ 727 00b3 49       		.uleb128 0x49
+ 728 00b4 13       		.uleb128 0x13
+ 729 00b5 02       		.uleb128 0x2
+ 730 00b6 18       		.uleb128 0x18
+ 731 00b7 00       		.byte	0
+ 732 00b8 00       		.byte	0
+ 733 00b9 0D       		.uleb128 0xd
+ 734 00ba 34       		.uleb128 0x34
+ 735 00bb 00       		.byte	0
+ 736 00bc 03       		.uleb128 0x3
+ 737 00bd 08       		.uleb128 0x8
+ 738 00be 3A       		.uleb128 0x3a
+ 739 00bf 0B       		.uleb128 0xb
+ 740 00c0 3B       		.uleb128 0x3b
+ 741 00c1 0B       		.uleb128 0xb
+ 742 00c2 49       		.uleb128 0x49
+ 743 00c3 13       		.uleb128 0x13
+ 744 00c4 02       		.uleb128 0x2
+ 745 00c5 17       		.uleb128 0x17
+ 746 00c6 00       		.byte	0
+ 747 00c7 00       		.byte	0
+ 748 00c8 0E       		.uleb128 0xe
+ 749 00c9 34       		.uleb128 0x34
+ 750 00ca 00       		.byte	0
+ 751 00cb 03       		.uleb128 0x3
+ 752 00cc 0E       		.uleb128 0xe
+ 753 00cd 3A       		.uleb128 0x3a
+ 754 00ce 0B       		.uleb128 0xb
+ 755 00cf 3B       		.uleb128 0x3b
+ 756 00d0 0B       		.uleb128 0xb
+ 757 00d1 49       		.uleb128 0x49
+ 758 00d2 13       		.uleb128 0x13
+ 759 00d3 02       		.uleb128 0x2
+ 760 00d4 17       		.uleb128 0x17
+ 761 00d5 00       		.byte	0
+ 762 00d6 00       		.byte	0
+ 763 00d7 0F       		.uleb128 0xf
+ 764 00d8 34       		.uleb128 0x34
+ 765 00d9 00       		.byte	0
+ 766 00da 03       		.uleb128 0x3
+ 767 00db 0E       		.uleb128 0xe
+ 768 00dc 3A       		.uleb128 0x3a
+ 769 00dd 0B       		.uleb128 0xb
+ 770 00de 3B       		.uleb128 0x3b
+ 771 00df 05       		.uleb128 0x5
+ 772 00e0 49       		.uleb128 0x49
+ 773 00e1 13       		.uleb128 0x13
+ 774 00e2 3F       		.uleb128 0x3f
+ 775 00e3 19       		.uleb128 0x19
+ 776 00e4 3C       		.uleb128 0x3c
+ 777 00e5 19       		.uleb128 0x19
+ 778 00e6 00       		.byte	0
+ 779 00e7 00       		.byte	0
+ 780 00e8 10       		.uleb128 0x10
+ 781 00e9 35       		.uleb128 0x35
+ 782 00ea 00       		.byte	0
+ARM GAS  C:\Users\danie\AppData\Local\Temp\cck955PV.s 			page 16
+
+
+ 783 00eb 49       		.uleb128 0x49
+ 784 00ec 13       		.uleb128 0x13
+ 785 00ed 00       		.byte	0
+ 786 00ee 00       		.byte	0
+ 787 00ef 11       		.uleb128 0x11
+ 788 00f0 01       		.uleb128 0x1
+ 789 00f1 01       		.byte	0x1
+ 790 00f2 49       		.uleb128 0x49
+ 791 00f3 13       		.uleb128 0x13
+ 792 00f4 01       		.uleb128 0x1
+ 793 00f5 13       		.uleb128 0x13
+ 794 00f6 00       		.byte	0
+ 795 00f7 00       		.byte	0
+ 796 00f8 12       		.uleb128 0x12
+ 797 00f9 21       		.uleb128 0x21
+ 798 00fa 00       		.byte	0
+ 799 00fb 49       		.uleb128 0x49
+ 800 00fc 13       		.uleb128 0x13
+ 801 00fd 2F       		.uleb128 0x2f
+ 802 00fe 0B       		.uleb128 0xb
+ 803 00ff 00       		.byte	0
+ 804 0100 00       		.byte	0
+ 805 0101 13       		.uleb128 0x13
+ 806 0102 34       		.uleb128 0x34
+ 807 0103 00       		.byte	0
+ 808 0104 03       		.uleb128 0x3
+ 809 0105 0E       		.uleb128 0xe
+ 810 0106 3A       		.uleb128 0x3a
+ 811 0107 0B       		.uleb128 0xb
+ 812 0108 3B       		.uleb128 0x3b
+ 813 0109 0B       		.uleb128 0xb
+ 814 010a 49       		.uleb128 0x49
+ 815 010b 13       		.uleb128 0x13
+ 816 010c 3F       		.uleb128 0x3f
+ 817 010d 19       		.uleb128 0x19
+ 818 010e 02       		.uleb128 0x2
+ 819 010f 18       		.uleb128 0x18
+ 820 0110 00       		.byte	0
+ 821 0111 00       		.byte	0
+ 822 0112 14       		.uleb128 0x14
+ 823 0113 2E       		.uleb128 0x2e
+ 824 0114 00       		.byte	0
+ 825 0115 3F       		.uleb128 0x3f
+ 826 0116 19       		.uleb128 0x19
+ 827 0117 3C       		.uleb128 0x3c
+ 828 0118 19       		.uleb128 0x19
+ 829 0119 6E       		.uleb128 0x6e
+ 830 011a 0E       		.uleb128 0xe
+ 831 011b 03       		.uleb128 0x3
+ 832 011c 0E       		.uleb128 0xe
+ 833 011d 00       		.byte	0
+ 834 011e 00       		.byte	0
+ 835 011f 15       		.uleb128 0x15
+ 836 0120 2E       		.uleb128 0x2e
+ 837 0121 00       		.byte	0
+ 838 0122 3F       		.uleb128 0x3f
+ 839 0123 19       		.uleb128 0x19
+ARM GAS  C:\Users\danie\AppData\Local\Temp\cck955PV.s 			page 17
+
+
+ 840 0124 3C       		.uleb128 0x3c
+ 841 0125 19       		.uleb128 0x19
+ 842 0126 6E       		.uleb128 0x6e
+ 843 0127 0E       		.uleb128 0xe
+ 844 0128 03       		.uleb128 0x3
+ 845 0129 0E       		.uleb128 0xe
+ 846 012a 3A       		.uleb128 0x3a
+ 847 012b 0B       		.uleb128 0xb
+ 848 012c 3B       		.uleb128 0x3b
+ 849 012d 0B       		.uleb128 0xb
+ 850 012e 00       		.byte	0
+ 851 012f 00       		.byte	0
+ 852 0130 00       		.byte	0
+ 853              		.section	.debug_loc,"",%progbits
+ 854              	.Ldebug_loc0:
+ 855              	.LLST0:
+ 856 0000 00000000 		.4byte	.LVL1
+ 857 0004 0C000000 		.4byte	.LVL2
+ 858 0008 0100     		.2byte	0x1
+ 859 000a 50       		.byte	0x50
+ 860 000b 0C000000 		.4byte	.LVL2
+ 861 000f 18000000 		.4byte	.LFE65
+ 862 0013 0400     		.2byte	0x4
+ 863 0015 F3       		.byte	0xf3
+ 864 0016 01       		.uleb128 0x1
+ 865 0017 50       		.byte	0x50
+ 866 0018 9F       		.byte	0x9f
+ 867 0019 00000000 		.4byte	0
+ 868 001d 00000000 		.4byte	0
+ 869              	.LLST1:
+ 870 0021 00000000 		.4byte	.LVL4
+ 871 0025 0A000000 		.4byte	.LVL6
+ 872 0029 0100     		.2byte	0x1
+ 873 002b 50       		.byte	0x50
+ 874 002c 0A000000 		.4byte	.LVL6
+ 875 0030 0D000000 		.4byte	.LVL7-1
+ 876 0034 0100     		.2byte	0x1
+ 877 0036 51       		.byte	0x51
+ 878 0037 0D000000 		.4byte	.LVL7-1
+ 879 003b 18000000 		.4byte	.LFE66
+ 880 003f 0400     		.2byte	0x4
+ 881 0041 F3       		.byte	0xf3
+ 882 0042 01       		.uleb128 0x1
+ 883 0043 50       		.byte	0x50
+ 884 0044 9F       		.byte	0x9f
+ 885 0045 00000000 		.4byte	0
+ 886 0049 00000000 		.4byte	0
+ 887              	.LLST2:
+ 888 004d 00000000 		.4byte	.LVL4
+ 889 0051 08000000 		.4byte	.LVL5
+ 890 0055 0100     		.2byte	0x1
+ 891 0057 51       		.byte	0x51
+ 892 0058 08000000 		.4byte	.LVL5
+ 893 005c 18000000 		.4byte	.LFE66
+ 894 0060 0400     		.2byte	0x4
+ 895 0062 F3       		.byte	0xf3
+ 896 0063 01       		.uleb128 0x1
+ARM GAS  C:\Users\danie\AppData\Local\Temp\cck955PV.s 			page 18
+
+
+ 897 0064 51       		.byte	0x51
+ 898 0065 9F       		.byte	0x9f
+ 899 0066 00000000 		.4byte	0
+ 900 006a 00000000 		.4byte	0
+ 901              	.LLST3:
+ 902 006e 16000000 		.4byte	.LVL11
+ 903 0072 20000000 		.4byte	.LVL12
+ 904 0076 0400     		.2byte	0x4
+ 905 0078 0A       		.byte	0xa
+ 906 0079 0040     		.2byte	0x4000
+ 907 007b 9F       		.byte	0x9f
+ 908 007c 20000000 		.4byte	.LVL12
+ 909 0080 48000000 		.4byte	.LVL18
+ 910 0084 0100     		.2byte	0x1
+ 911 0086 57       		.byte	0x57
+ 912 0087 4A000000 		.4byte	.LVL19
+ 913 008b 52000000 		.4byte	.LVL21
+ 914 008f 0100     		.2byte	0x1
+ 915 0091 57       		.byte	0x57
+ 916 0092 00000000 		.4byte	0
+ 917 0096 00000000 		.4byte	0
+ 918              	.LLST4:
+ 919 009a 0E000000 		.4byte	.LVL10
+ 920 009e 20000000 		.4byte	.LVL12
+ 921 00a2 0100     		.2byte	0x1
+ 922 00a4 50       		.byte	0x50
+ 923 00a5 20000000 		.4byte	.LVL12
+ 924 00a9 32000000 		.4byte	.LVL17
+ 925 00ad 0300     		.2byte	0x3
+ 926 00af 75       		.byte	0x75
+ 927 00b0 02       		.sleb128 2
+ 928 00b1 9F       		.byte	0x9f
+ 929 00b2 32000000 		.4byte	.LVL17
+ 930 00b6 5A000000 		.4byte	.LVL22
+ 931 00ba 0100     		.2byte	0x1
+ 932 00bc 55       		.byte	0x55
+ 933 00bd 00000000 		.4byte	0
+ 934 00c1 00000000 		.4byte	0
+ 935              	.LLST5:
+ 936 00c5 16000000 		.4byte	.LVL11
+ 937 00c9 24000000 		.4byte	.LVL13
+ 938 00cd 0100     		.2byte	0x1
+ 939 00cf 56       		.byte	0x56
+ 940 00d0 24000000 		.4byte	.LVL13
+ 941 00d4 30000000 		.4byte	.LVL16
+ 942 00d8 0300     		.2byte	0x3
+ 943 00da 76       		.byte	0x76
+ 944 00db 7E       		.sleb128 -2
+ 945 00dc 9F       		.byte	0x9f
+ 946 00dd 30000000 		.4byte	.LVL16
+ 947 00e1 5A000000 		.4byte	.LVL22
+ 948 00e5 0100     		.2byte	0x1
+ 949 00e7 56       		.byte	0x56
+ 950 00e8 00000000 		.4byte	0
+ 951 00ec 00000000 		.4byte	0
+ 952              	.LLST6:
+ 953 00f0 08000000 		.4byte	.LVL9
+ARM GAS  C:\Users\danie\AppData\Local\Temp\cck955PV.s 			page 19
+
+
+ 954 00f4 0E000000 		.4byte	.LVL10
+ 955 00f8 0200     		.2byte	0x2
+ 956 00fa 30       		.byte	0x30
+ 957 00fb 9F       		.byte	0x9f
+ 958 00fc 0E000000 		.4byte	.LVL10
+ 959 0100 62000000 		.4byte	.LFE67
+ 960 0104 0100     		.2byte	0x1
+ 961 0106 59       		.byte	0x59
+ 962 0107 00000000 		.4byte	0
+ 963 010b 00000000 		.4byte	0
+ 964              	.LLST7:
+ 965 010f 16000000 		.4byte	.LVL11
+ 966 0113 20000000 		.4byte	.LVL12
+ 967 0117 0200     		.2byte	0x2
+ 968 0119 30       		.byte	0x30
+ 969 011a 9F       		.byte	0x9f
+ 970 011b 20000000 		.4byte	.LVL12
+ 971 011f 5A000000 		.4byte	.LVL22
+ 972 0123 0100     		.2byte	0x1
+ 973 0125 54       		.byte	0x54
+ 974 0126 00000000 		.4byte	0
+ 975 012a 00000000 		.4byte	0
+ 976              		.section	.debug_aranges,"",%progbits
+ 977 0000 34000000 		.4byte	0x34
+ 978 0004 0200     		.2byte	0x2
+ 979 0006 00000000 		.4byte	.Ldebug_info0
+ 980 000a 04       		.byte	0x4
+ 981 000b 00       		.byte	0
+ 982 000c 0000     		.2byte	0
+ 983 000e 0000     		.2byte	0
+ 984 0010 00000000 		.4byte	.LFB64
+ 985 0014 14000000 		.4byte	.LFE64-.LFB64
+ 986 0018 00000000 		.4byte	.LFB65
+ 987 001c 18000000 		.4byte	.LFE65-.LFB65
+ 988 0020 00000000 		.4byte	.LFB66
+ 989 0024 18000000 		.4byte	.LFE66-.LFB66
+ 990 0028 00000000 		.4byte	.LFB67
+ 991 002c 62000000 		.4byte	.LFE67-.LFB67
+ 992 0030 00000000 		.4byte	0
+ 993 0034 00000000 		.4byte	0
+ 994              		.section	.debug_ranges,"",%progbits
+ 995              	.Ldebug_ranges0:
+ 996 0000 00000000 		.4byte	.LFB64
+ 997 0004 14000000 		.4byte	.LFE64
+ 998 0008 00000000 		.4byte	.LFB65
+ 999 000c 18000000 		.4byte	.LFE65
+ 1000 0010 00000000 		.4byte	.LFB66
+ 1001 0014 18000000 		.4byte	.LFE66
+ 1002 0018 00000000 		.4byte	.LFB67
+ 1003 001c 62000000 		.4byte	.LFE67
+ 1004 0020 00000000 		.4byte	0
+ 1005 0024 00000000 		.4byte	0
+ 1006              		.section	.debug_line,"",%progbits
+ 1007              	.Ldebug_line0:
+ 1008 0000 34020000 		.section	.debug_str,"MS",%progbits,1
+ 1008      0200BA01 
+ 1008      00000201 
+ARM GAS  C:\Users\danie\AppData\Local\Temp\cck955PV.s 			page 20
+
+
+ 1008      FB0E0D00 
+ 1008      01010101 
+ 1009              	.LASF26:
+ 1010 0000 636F6566 		.ascii	"coeffp\000"
+ 1010      667000
+ 1011              	.LASF36:
+ 1012 0007 6D656D6D 		.ascii	"memmove\000"
+ 1012      6F766500 
+ 1013              	.LASF22:
+ 1014 000f 636F6566 		.ascii	"coeffs\000"
+ 1014      667300
+ 1015              	.LASF4:
+ 1016 0016 5F5F696E 		.ascii	"__int16_t\000"
+ 1016      7431365F 
+ 1016      7400
+ 1017              	.LASF5:
+ 1018 0020 5F5F696E 		.ascii	"__int32_t\000"
+ 1018      7433325F 
+ 1018      7400
+ 1019              	.LASF18:
+ 1020 002a 66697246 		.ascii	"firFixedInit\000"
+ 1020      69786564 
+ 1020      496E6974 
+ 1020      00
+ 1021              	.LASF13:
+ 1022 0037 666C6F61 		.ascii	"float\000"
+ 1022      7400
+ 1023              	.LASF1:
+ 1024 003d 756E7369 		.ascii	"unsigned char\000"
+ 1024      676E6564 
+ 1024      20636861 
+ 1024      7200
+ 1025              	.LASF32:
+ 1026 004b 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 1026      43313120 
+ 1026      352E342E 
+ 1026      31203230 
+ 1026      31363036 
+ 1027 007e 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 1027      20726576 
+ 1027      6973696F 
+ 1027      6E203233 
+ 1027      37373135 
+ 1028 00b1 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 1028      66756E63 
+ 1028      74696F6E 
+ 1028      2D736563 
+ 1028      74696F6E 
+ 1029              	.LASF23:
+ 1030 00d9 696E7075 		.ascii	"input\000"
+ 1030      7400
+ 1031              	.LASF7:
+ 1032 00df 6C6F6E67 		.ascii	"long unsigned int\000"
+ 1032      20756E73 
+ 1032      69676E65 
+ 1032      6420696E 
+ 1032      7400
+ARM GAS  C:\Users\danie\AppData\Local\Temp\cck955PV.s 			page 21
+
+
+ 1033              	.LASF3:
+ 1034 00f1 73686F72 		.ascii	"short unsigned int\000"
+ 1034      7420756E 
+ 1034      7369676E 
+ 1034      65642069 
+ 1034      6E7400
+ 1035              	.LASF28:
+ 1036 0104 49544D5F 		.ascii	"ITM_RxBuffer\000"
+ 1036      52784275 
+ 1036      66666572 
+ 1036      00
+ 1037              	.LASF30:
+ 1038 0111 6D656D73 		.ascii	"memset\000"
+ 1038      657400
+ 1039              	.LASF14:
+ 1040 0118 646F7562 		.ascii	"double\000"
+ 1040      6C6500
+ 1041              	.LASF34:
+ 1042 011f 433A5C55 		.ascii	"C:\\Users\\danie\\OneDrive - Aarhus Universitet\\3."
+ 1042      73657273 
+ 1042      5C64616E 
+ 1042      69655C4F 
+ 1042      6E654472 
+ 1043 014e 2073656D 		.ascii	" semester\\eprj3 grp\\ADC_TO_FIRFILTERBANK\\ADC_TO_"
+ 1043      65737465 
+ 1043      725C6570 
+ 1043      726A3320 
+ 1043      6772705C 
+ 1044 017e 46494C54 		.ascii	"FILTERBANK.cydsn\000"
+ 1044      45524241 
+ 1044      4E4B2E63 
+ 1044      7964736E 
+ 1044      00
+ 1045              	.LASF35:
+ 1046 018f 66697253 		.ascii	"firStoreNewSamples\000"
+ 1046      746F7265 
+ 1046      4E657753 
+ 1046      616D706C 
+ 1046      657300
+ 1047              	.LASF21:
+ 1048 01a2 66697246 		.ascii	"firFixed\000"
+ 1048      69786564 
+ 1048      00
+ 1049              	.LASF27:
+ 1050 01ab 696E7075 		.ascii	"inputp\000"
+ 1050      747000
+ 1051              	.LASF10:
+ 1052 01b2 756E7369 		.ascii	"unsigned int\000"
+ 1052      676E6564 
+ 1052      20696E74 
+ 1052      00
+ 1053              	.LASF29:
+ 1054 01bf 696E7361 		.ascii	"insamp\000"
+ 1054      6D7000
+ 1055              	.LASF9:
+ 1056 01c6 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 1056      206C6F6E 
+ARM GAS  C:\Users\danie\AppData\Local\Temp\cck955PV.s 			page 22
+
+
+ 1056      6720756E 
+ 1056      7369676E 
+ 1056      65642069 
+ 1057              	.LASF33:
+ 1058 01dd 6669725F 		.ascii	"fir_filter1.c\000"
+ 1058      66696C74 
+ 1058      6572312E 
+ 1058      6300
+ 1059              	.LASF25:
+ 1060 01eb 66696C74 		.ascii	"filterLength\000"
+ 1060      65724C65 
+ 1060      6E677468 
+ 1060      00
+ 1061              	.LASF11:
+ 1062 01f8 696E7431 		.ascii	"int16_t\000"
+ 1062      365F7400 
+ 1063              	.LASF12:
+ 1064 0200 696E7433 		.ascii	"int32_t\000"
+ 1064      325F7400 
+ 1065              	.LASF17:
+ 1066 0208 73697A65 		.ascii	"sizetype\000"
+ 1066      74797065 
+ 1066      00
+ 1067              	.LASF8:
+ 1068 0211 6C6F6E67 		.ascii	"long long int\000"
+ 1068      206C6F6E 
+ 1068      6720696E 
+ 1068      7400
+ 1069              	.LASF15:
+ 1070 021f 63686172 		.ascii	"char\000"
+ 1070      00
+ 1071              	.LASF31:
+ 1072 0224 6D656D63 		.ascii	"memcpy\000"
+ 1072      707900
+ 1073              	.LASF2:
+ 1074 022b 73686F72 		.ascii	"short int\000"
+ 1074      7420696E 
+ 1074      7400
+ 1075              	.LASF24:
+ 1076 0235 6F757470 		.ascii	"output\000"
+ 1076      757400
+ 1077              	.LASF6:
+ 1078 023c 6C6F6E67 		.ascii	"long int\000"
+ 1078      20696E74 
+ 1078      00
+ 1079              	.LASF16:
+ 1080 0245 6C6F6E67 		.ascii	"long double\000"
+ 1080      20646F75 
+ 1080      626C6500 
+ 1081              	.LASF0:
+ 1082 0251 7369676E 		.ascii	"signed char\000"
+ 1082      65642063 
+ 1082      68617200 
+ 1083              	.LASF19:
+ 1084 025d 6669724D 		.ascii	"firMoveProcSamples\000"
+ 1084      6F766550 
+ 1084      726F6353 
+ARM GAS  C:\Users\danie\AppData\Local\Temp\cck955PV.s 			page 23
+
+
+ 1084      616D706C 
+ 1084      657300
+ 1085              	.LASF20:
+ 1086 0270 6C656E67 		.ascii	"length\000"
+ 1086      746800
+ 1087              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

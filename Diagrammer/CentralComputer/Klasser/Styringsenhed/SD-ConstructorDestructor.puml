@@ -21,6 +21,9 @@ end loop
 
 ==Destructor==
 
-
+UC1 -> Styringsenhed : ~Styringsenhed()
+Styringsenhed -> SPIMaster !!: ~SPIMaster()
+Styringsenhed --> UC1 :
+destroy Styringsenhed 
 
 @enduml

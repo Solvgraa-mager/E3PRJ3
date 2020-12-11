@@ -2,7 +2,7 @@
 
 skinparam wrapWidth 200
 
-title setDirectionAndSpeed
+title getDirectionAndSpeed
 
 actor UC1 #Red
 participant Styringsenhed

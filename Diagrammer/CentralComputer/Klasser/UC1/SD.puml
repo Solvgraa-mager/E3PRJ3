@@ -1,26 +1,40 @@
 @startuml
-title UC1::UC1(Startknap* SK, Display* D)
+title UC1_Constructor
 
 skinparam wrapWidth 200
 
+title UC1_Constructor_Destructor
 
 actor Player #Red 
 participant UC1
 participant _W1
+participant _D
+collections SumoBot
+collections Styringsenhed
+
+==Constructor==
 
 Player -> UC1 : UC1(Startknap* SK, Display* D)
-activate UC1 
 UC1 -> _W1 ** : Wifi()
-activate _W1
 UC1 <-- _W1 :
-deactivate _W1
 UC1 -> _W1 : createHotspot("SumoBot", "12345678")
-activate _W1
 UC1 <-- _W1 :
-deactivate _W1 
 UC1 -> Player : "Hotspot made"
 note over UC1 : Class attributes SK and D being set
 
+note over SumoBot, Styringsenhed : 1 x SumoBot and 1 x Styringsenhed constructed for each player
+UC1 -> SumoBot ** : new SumoBot(lifes,player)
+SumoBot --> UC1
+UC1 -> Styringsenhed ** : new Styringsenhed(channel,comSpeed,bufferSize)
+Styringsenhed --> UC1 : 
+UC1 -> Player : "SumoBot and Styringsenhed constructed"
+UC1 -> _D : writeToScreen("Welcome to Robo-Sumo-Battle")
+
+==Destructor==
+UC1-> SumoBot !! :
+UC1 -> Styringsenhed !! : 
+UC1 -> _D : writeToScreen("Goodbye")
+destroy UC1 
 
 
 @enduml

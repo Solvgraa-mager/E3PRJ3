@@ -1,0 +1,13 @@
+@startuml
+actor SumoBot1 #green
+actor Styringsenhed1 #green
+participant CC
+actor SumoBot2 #yellow
+actor Styringsenhed2 #yellow
+
+title Initialization
+
+
+
+ 
+@enduml

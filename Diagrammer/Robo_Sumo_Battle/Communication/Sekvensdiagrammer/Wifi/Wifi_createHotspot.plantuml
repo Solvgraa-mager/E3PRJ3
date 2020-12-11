@@ -1,21 +1,25 @@
 @startuml
+title Wifi::createHotspot()
 participant UC1
 participant Wifi
+actor Linux #red
 actor Connman #red
 
 UC1 -> Wifi : createHotspot(SSID,passphrase)
-Wifi -> Wifi : "save SSID and passphrase"
-Wifi -> Connman : changeSSIDPassword(SSID, passphrase)
-Connman -> Connman : "changeing SSID and password"
-opt changeing faild
-    Connman --> Wifi : "change faild"
-    Wifi --> UC1 : return -1. "change faild"
-end
-Wifi -> Connman : hotspot(enable)
-Connman -> Connman : "enable hotspot"
-opt faild to enable hotspot
-    Connman --> Wifi : "faild to enable hotspot"
-    Wifi --> UC1 : return -2. "faild to enable hotspot"
-end
+Wifi -> Wifi : SSID_ = SSID, passphrase_ = passphrase
+Wifi -> Linux : echo SSID=SSID_>/etc/connman-hotspot.conf
+Linux -> Connman : update SSID
+Linux <-- Connman
+Wifi <-- Linux
+
+Wifi -> Linux : echo PASSWORD=passphrase_>>/etc/connman-hotspot.conf
+Linux -> Connman : update PASSWORD
+Linux <-- Connman
+Wifi <-- Linux
+
+Wifi -> Linux : connman-hotspot enable
+Linux -> Connman : connman-hotspot enable
+Linux <-- Connman
+Wifi <-- Linux
 
 @enduml

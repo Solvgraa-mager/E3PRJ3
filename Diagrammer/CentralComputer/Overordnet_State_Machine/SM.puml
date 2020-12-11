@@ -1,0 +1,17 @@
+@startuml
+
+[*] --> Init
+Init --> Init :  A SumoBot Connected to CC
+Init --> Ready : 2 SumoBots Connected to CC
+Init: Waiting for 2 SumoBots to connect
+Ready --> GamePlay : User presses start
+state GamePlay {
+    [*] --> CountDown
+    CountDown --> Battle 
+    Battle --> Life_Lost : SumoBot Successfull Attack
+    Life_Lost --> CountDown 
+}
+
+GamePlay --> GameOver : A SumoBot has 0 lives
+
+@enduml
