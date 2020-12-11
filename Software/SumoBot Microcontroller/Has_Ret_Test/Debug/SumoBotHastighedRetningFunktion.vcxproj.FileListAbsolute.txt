@@ -1,0 +1,2 @@
+C:\Users\fwl24\Documents\GitHub\E3PRJ3\Software\SumoBot Microcontroller\Has_Ret_Test\Debug\SumoBotHastighedRetningFunktion.exe
+C:\Users\fwl24\Documents\GitHub\E3PRJ3\Software\SumoBot Microcontroller\Has_Ret_Test\Debug\SumoBotHastighedRetningFunktion.pdb
