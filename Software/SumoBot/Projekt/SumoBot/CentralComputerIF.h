@@ -12,8 +12,8 @@ public:
 	~CentralComputerIF();
 private:
 	TCPClient *_TCPC; 
-	int _dir; 
-	int _speed; 
+	int _dir;
+	int _speed;
 	
 };
 
