@@ -28,7 +28,7 @@ void firFixedInit( void );
 int16_t *firStoreNewSamples(int16_t *input, int size );
 
 //Metode til fixed point (int16) operering. Koefficienter fra matlab skal så i andet format???
-void firFixed( int16_t *coeffs, int16 *input, int16 *output,
+void firFixed( int16_t *coeffs, int16_t *input, int16_t *output,
        int length, int filterLength );
 
 void firMoveProcSamples( int length );

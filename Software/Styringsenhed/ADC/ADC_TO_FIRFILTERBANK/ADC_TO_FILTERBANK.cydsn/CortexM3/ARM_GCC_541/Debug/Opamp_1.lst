@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\danie\AppData\Local\Temp\ccGxFIPa.s 			page 1
+ARM GAS  C:\Users\danie\AppData\Local\Temp\cc43Dwyd.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\danie\AppData\Local\Temp\ccGxFIPa.s 			page 1
   28:Generated_Source\PSoC5/Opamp_1.c **** *  Initialize component's parameters to the parameters set by user in the 
   29:Generated_Source\PSoC5/Opamp_1.c **** *  customizer of the component placed onto schematic. Usually called in 
   30:Generated_Source\PSoC5/Opamp_1.c **** *  Opamp_1_Start().
-ARM GAS  C:\Users\danie\AppData\Local\Temp\ccGxFIPa.s 			page 2
+ARM GAS  C:\Users\danie\AppData\Local\Temp\cc43Dwyd.s 			page 2
 
 
   31:Generated_Source\PSoC5/Opamp_1.c **** *
@@ -110,7 +110,7 @@ ARM GAS  C:\Users\danie\AppData\Local\Temp\ccGxFIPa.s 			page 1
   39 000a A2F5A652 		sub	r2, r2, #5312
   40 000e 133A     		subs	r2, r2, #19
   41 0010 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
-  42 0012 43F00803 		orr	r3, r3, #8
+  42 0012 43F00103 		orr	r3, r3, #1
   43 0016 1370     		strb	r3, [r2]
   66:Generated_Source\PSoC5/Opamp_1.c **** 
   67:Generated_Source\PSoC5/Opamp_1.c ****     /* Enable power to buffer in alternative active mode */
@@ -118,10 +118,10 @@ ARM GAS  C:\Users\danie\AppData\Local\Temp\ccGxFIPa.s 			page 1
   44              		.loc 1 68 0
   45 0018 1032     		adds	r2, r2, #16
   46 001a 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
-ARM GAS  C:\Users\danie\AppData\Local\Temp\ccGxFIPa.s 			page 3
+ARM GAS  C:\Users\danie\AppData\Local\Temp\cc43Dwyd.s 			page 3
 
 
-  47 001c 43F00803 		orr	r3, r3, #8
+  47 001c 43F00103 		orr	r3, r3, #1
   48 0020 1370     		strb	r3, [r2]
   49 0022 7047     		bx	lr
   50              	.L3:
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\danie\AppData\Local\Temp\ccGxFIPa.s 			page 1
  105:Generated_Source\PSoC5/Opamp_1.c **** * Function Name: Opamp_1_Stop
  106:Generated_Source\PSoC5/Opamp_1.c **** ********************************************************************************
  107:Generated_Source\PSoC5/Opamp_1.c **** *
-ARM GAS  C:\Users\danie\AppData\Local\Temp\ccGxFIPa.s 			page 4
+ARM GAS  C:\Users\danie\AppData\Local\Temp\cc43Dwyd.s 			page 4
 
 
  108:Generated_Source\PSoC5/Opamp_1.c **** * Summary:
@@ -203,7 +203,7 @@ ARM GAS  C:\Users\danie\AppData\Local\Temp\ccGxFIPa.s 			page 1
   70              		.loc 1 121 0
   71 0000 094B     		ldr	r3, .L6
   72 0002 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
-  73 0004 02F0F702 		and	r2, r2, #247
+  73 0004 02F0FE02 		and	r2, r2, #254
   74 0008 1A70     		strb	r2, [r3]
  122:Generated_Source\PSoC5/Opamp_1.c **** 
  123:Generated_Source\PSoC5/Opamp_1.c ****     /* Disable power to buffer in alternative active mode template */
@@ -211,7 +211,7 @@ ARM GAS  C:\Users\danie\AppData\Local\Temp\ccGxFIPa.s 			page 1
   75              		.loc 1 124 0
   76 000a 0849     		ldr	r1, .L6+4
   77 000c 0A78     		ldrb	r2, [r1]	@ zero_extendqisi2
-  78 000e 02F0F702 		and	r2, r2, #247
+  78 000e 02F0FE02 		and	r2, r2, #254
   79 0012 0A70     		strb	r2, [r1]
  125:Generated_Source\PSoC5/Opamp_1.c ****     
  126:Generated_Source\PSoC5/Opamp_1.c ****     /* Disable negative charge pumps for ANIF only if all ABuf is turned OFF */
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\danie\AppData\Local\Temp\ccGxFIPa.s 			page 1
   97              		.cfi_endproc
   98              	.LFE3:
   99              		.size	Opamp_1_Stop, .-Opamp_1_Stop
-ARM GAS  C:\Users\danie\AppData\Local\Temp\ccGxFIPa.s 			page 5
+ARM GAS  C:\Users\danie\AppData\Local\Temp\cc43Dwyd.s 			page 5
 
 
  100              		.section	.text.Opamp_1_SetPower,"ax",%progbits
@@ -294,11 +294,11 @@ ARM GAS  C:\Users\danie\AppData\Local\Temp\ccGxFIPa.s 			page 1
  126              	.L10:
  127 0016 00BF     		.align	2
  128              	.L9:
- 129 0018 5E580040 		.word	1073764446
+ 129 0018 58580040 		.word	1073764440
  130              		.cfi_endproc
  131              	.LFE4:
  132              		.size	Opamp_1_SetPower, .-Opamp_1_SetPower
-ARM GAS  C:\Users\danie\AppData\Local\Temp\ccGxFIPa.s 			page 6
+ARM GAS  C:\Users\danie\AppData\Local\Temp\cc43Dwyd.s 			page 6
 
 
  133              		.section	.text.Opamp_1_Init,"ax",%progbits
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\danie\AppData\Local\Temp\ccGxFIPa.s 			page 1
  181              		.loc 1 97 0
  182 000e FFF7FEFF 		bl	Opamp_1_Init
  183              	.LVL3:
-ARM GAS  C:\Users\danie\AppData\Local\Temp\ccGxFIPa.s 			page 7
+ARM GAS  C:\Users\danie\AppData\Local\Temp\cc43Dwyd.s 			page 7
 
 
  184              	.L14:
@@ -394,14 +394,14 @@ ARM GAS  C:\Users\danie\AppData\Local\Temp\ccGxFIPa.s 			page 1
  213 000c 28000000 		.4byte	.LASF21
  214 0010 0C       		.byte	0xc
  215 0011 1B010000 		.4byte	.LASF22
- 216 0015 5D010000 		.4byte	.LASF23
+ 216 0015 7C010000 		.4byte	.LASF23
  217 0019 00000000 		.4byte	.Ldebug_ranges0+0
  218 001d 00000000 		.4byte	0
  219 0021 00000000 		.4byte	.Ldebug_line0
  220 0025 02       		.uleb128 0x2
  221 0026 01       		.byte	0x1
  222 0027 06       		.byte	0x6
- 223 0028 E0010000 		.4byte	.LASF0
+ 223 0028 70010000 		.4byte	.LASF0
  224 002c 02       		.uleb128 0x2
  225 002d 01       		.byte	0x1
  226 002e 08       		.byte	0x8
@@ -409,16 +409,16 @@ ARM GAS  C:\Users\danie\AppData\Local\Temp\ccGxFIPa.s 			page 1
  228 0033 02       		.uleb128 0x2
  229 0034 02       		.byte	0x2
  230 0035 05       		.byte	0x5
- 231 0036 06020000 		.4byte	.LASF2
+ 231 0036 F1010000 		.4byte	.LASF2
  232 003a 02       		.uleb128 0x2
  233 003b 02       		.byte	0x2
  234 003c 07       		.byte	0x7
- 235 003d CD010000 		.4byte	.LASF3
+ 235 003d 5D010000 		.4byte	.LASF3
  236 0041 02       		.uleb128 0x2
  237 0042 04       		.byte	0x4
  238 0043 05       		.byte	0x5
  239 0044 3C010000 		.4byte	.LASF4
-ARM GAS  C:\Users\danie\AppData\Local\Temp\ccGxFIPa.s 			page 8
+ARM GAS  C:\Users\danie\AppData\Local\Temp\cc43Dwyd.s 			page 8
 
 
  240 0048 02       		.uleb128 0x2
@@ -459,7 +459,7 @@ ARM GAS  C:\Users\danie\AppData\Local\Temp\ccGxFIPa.s 			page 1
  275 0087 08       		.byte	0x8
  276 0088 16010000 		.4byte	.LASF11
  277 008c 04       		.uleb128 0x4
- 278 008d 10020000 		.4byte	.LASF13
+ 278 008d FB010000 		.4byte	.LASF13
  279 0091 02       		.byte	0x2
  280 0092 9202     		.2byte	0x292
  281 0094 98000000 		.4byte	0x98
@@ -468,17 +468,17 @@ ARM GAS  C:\Users\danie\AppData\Local\Temp\ccGxFIPa.s 			page 1
  284 009d 02       		.uleb128 0x2
  285 009e 08       		.byte	0x8
  286 009f 04       		.byte	0x4
- 287 00a0 EC010000 		.4byte	.LASF14
+ 287 00a0 D7010000 		.4byte	.LASF14
  288 00a4 02       		.uleb128 0x2
  289 00a5 04       		.byte	0x4
  290 00a6 07       		.byte	0x7
- 291 00a7 1B020000 		.4byte	.LASF15
+ 291 00a7 06020000 		.4byte	.LASF15
  292 00ab 06       		.uleb128 0x6
- 293 00ac 24020000 		.4byte	.LASF16
+ 293 00ac 0F020000 		.4byte	.LASF16
  294 00b0 01       		.byte	0x1
  295 00b1 3B       		.byte	0x3b
  296 00b2 00000000 		.4byte	.LFB1
-ARM GAS  C:\Users\danie\AppData\Local\Temp\ccGxFIPa.s 			page 9
+ARM GAS  C:\Users\danie\AppData\Local\Temp\cc43Dwyd.s 			page 9
 
 
  297 00b6 28000000 		.4byte	.LFE1-.LFB1
@@ -502,7 +502,7 @@ ARM GAS  C:\Users\danie\AppData\Local\Temp\ccGxFIPa.s 			page 1
  315 00dd 9C       		.byte	0x9c
  316 00de F2000000 		.4byte	0xf2
  317 00e2 08       		.uleb128 0x8
- 318 00e3 15020000 		.4byte	.LASF24
+ 318 00e3 00020000 		.4byte	.LASF24
  319 00e7 01       		.byte	0x1
  320 00e8 95       		.byte	0x95
  321 00e9 6B000000 		.4byte	0x6b
@@ -528,7 +528,7 @@ ARM GAS  C:\Users\danie\AppData\Local\Temp\ccGxFIPa.s 			page 1
  341 0115 00       		.byte	0
  342 0116 00       		.byte	0
  343 0117 07       		.uleb128 0x7
- 344 0118 F8010000 		.4byte	.LASF20
+ 344 0118 E3010000 		.4byte	.LASF20
  345 011c 01       		.byte	0x1
  346 011d 5C       		.byte	0x5c
  347 011e 00000000 		.4byte	.LFB2
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\danie\AppData\Local\Temp\ccGxFIPa.s 			page 1
  351 0128 3F010000 		.4byte	0x13f
  352 012c 0B       		.uleb128 0xb
  353 012d 12000000 		.4byte	.LVL3
-ARM GAS  C:\Users\danie\AppData\Local\Temp\ccGxFIPa.s 			page 10
+ARM GAS  C:\Users\danie\AppData\Local\Temp\cc43Dwyd.s 			page 10
 
 
  354 0131 F2000000 		.4byte	0xf2
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\danie\AppData\Local\Temp\ccGxFIPa.s 			page 1
  408 0026 08       		.uleb128 0x8
  409 0027 00       		.byte	0
  410 0028 00       		.byte	0
-ARM GAS  C:\Users\danie\AppData\Local\Temp\ccGxFIPa.s 			page 11
+ARM GAS  C:\Users\danie\AppData\Local\Temp\cc43Dwyd.s 			page 11
 
 
  411 0029 04       		.uleb128 0x4
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\danie\AppData\Local\Temp\ccGxFIPa.s 			page 1
  465 0060 27       		.uleb128 0x27
  466 0061 19       		.uleb128 0x19
  467 0062 11       		.uleb128 0x11
-ARM GAS  C:\Users\danie\AppData\Local\Temp\ccGxFIPa.s 			page 12
+ARM GAS  C:\Users\danie\AppData\Local\Temp\cc43Dwyd.s 			page 12
 
 
  468 0063 01       		.uleb128 0x1
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\danie\AppData\Local\Temp\ccGxFIPa.s 			page 1
  522 00a1 34       		.uleb128 0x34
  523 00a2 00       		.byte	0
  524 00a3 03       		.uleb128 0x3
-ARM GAS  C:\Users\danie\AppData\Local\Temp\ccGxFIPa.s 			page 13
+ARM GAS  C:\Users\danie\AppData\Local\Temp\cc43Dwyd.s 			page 13
 
 
  525 00a4 0E       		.uleb128 0xe
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\danie\AppData\Local\Temp\ccGxFIPa.s 			page 1
  579 0008 00000000 		.4byte	.LFB3
  580 000c 34000000 		.4byte	.LFE3
  581 0010 00000000 		.4byte	.LFB4
-ARM GAS  C:\Users\danie\AppData\Local\Temp\ccGxFIPa.s 			page 14
+ARM GAS  C:\Users\danie\AppData\Local\Temp\cc43Dwyd.s 			page 14
 
 
  582 0014 1C000000 		.4byte	.LFE4
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\danie\AppData\Local\Temp\ccGxFIPa.s 			page 1
  606              	.LASF7:
  607 00ce 6C6F6E67 		.ascii	"long long unsigned int\000"
  607      206C6F6E 
-ARM GAS  C:\Users\danie\AppData\Local\Temp\ccGxFIPa.s 			page 15
+ARM GAS  C:\Users\danie\AppData\Local\Temp\cc43Dwyd.s 			page 15
 
 
  607      6720756E 
@@ -884,61 +884,56 @@ ARM GAS  C:\Users\danie\AppData\Local\Temp\ccGxFIPa.s 			page 1
  625      53657450 
  625      6F776572 
  625      00
- 626              	.LASF23:
- 627 015d 433A5C55 		.ascii	"C:\\Users\\danie\\OneDrive - Aarhus Universitet\\3."
- 627      73657273 
- 627      5C64616E 
- 627      69655C4F 
- 627      6E654472 
- 628 018c 2073656D 		.ascii	" semester\\eprj3 grp\\ADC_TO_FIRFILTERBANK\\ADC_TO_"
- 628      65737465 
- 628      725C6570 
- 628      726A3320 
- 628      6772705C 
- 629 01bc 46494C54 		.ascii	"FILTERBANK.cydsn\000"
- 629      45524241 
- 629      4E4B2E63 
-ARM GAS  C:\Users\danie\AppData\Local\Temp\ccGxFIPa.s 			page 16
+ 626              	.LASF3:
+ 627 015d 73686F72 		.ascii	"short unsigned int\000"
+ 627      7420756E 
+ 627      7369676E 
+ 627      65642069 
+ 627      6E7400
+ 628              	.LASF0:
+ 629 0170 7369676E 		.ascii	"signed char\000"
+ 629      65642063 
+ 629      68617200 
+ 630              	.LASF23:
+ 631 017c 433A5C50 		.ascii	"C:\\PRJ3 git\\E3PRJ3\\Software\\Styringsenhed\\ADC\\"
+ 631      524A3320 
+ 631      6769745C 
+ARM GAS  C:\Users\danie\AppData\Local\Temp\cc43Dwyd.s 			page 16
 
 
- 629      7964736E 
- 629      00
- 630              	.LASF3:
- 631 01cd 73686F72 		.ascii	"short unsigned int\000"
- 631      7420756E 
- 631      7369676E 
- 631      65642069 
- 631      6E7400
- 632              	.LASF0:
- 633 01e0 7369676E 		.ascii	"signed char\000"
- 633      65642063 
- 633      68617200 
- 634              	.LASF14:
- 635 01ec 6C6F6E67 		.ascii	"long double\000"
- 635      20646F75 
- 635      626C6500 
- 636              	.LASF20:
- 637 01f8 4F70616D 		.ascii	"Opamp_1_Start\000"
- 637      705F315F 
- 637      53746172 
- 637      7400
- 638              	.LASF2:
- 639 0206 73686F72 		.ascii	"short int\000"
- 639      7420696E 
- 639      7400
- 640              	.LASF13:
- 641 0210 72656738 		.ascii	"reg8\000"
- 641      00
- 642              	.LASF24:
- 643 0215 706F7765 		.ascii	"power\000"
- 643      7200
- 644              	.LASF15:
- 645 021b 73697A65 		.ascii	"sizetype\000"
- 645      74797065 
- 645      00
- 646              	.LASF16:
- 647 0224 4F70616D 		.ascii	"Opamp_1_Enable\000"
- 647      705F315F 
- 647      456E6162 
- 647      6C6500
- 648              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran
+ 631      45335052 
+ 631      4A335C53 
+ 632 01aa 4144435F 		.ascii	"ADC_TO_FIRFILTERBANK\\ADC_TO_FILTERBANK.cydsn\000"
+ 632      544F5F46 
+ 632      49524649 
+ 632      4C544552 
+ 632      42414E4B 
+ 633              	.LASF14:
+ 634 01d7 6C6F6E67 		.ascii	"long double\000"
+ 634      20646F75 
+ 634      626C6500 
+ 635              	.LASF20:
+ 636 01e3 4F70616D 		.ascii	"Opamp_1_Start\000"
+ 636      705F315F 
+ 636      53746172 
+ 636      7400
+ 637              	.LASF2:
+ 638 01f1 73686F72 		.ascii	"short int\000"
+ 638      7420696E 
+ 638      7400
+ 639              	.LASF13:
+ 640 01fb 72656738 		.ascii	"reg8\000"
+ 640      00
+ 641              	.LASF24:
+ 642 0200 706F7765 		.ascii	"power\000"
+ 642      7200
+ 643              	.LASF15:
+ 644 0206 73697A65 		.ascii	"sizetype\000"
+ 644      74797065 
+ 644      00
+ 645              	.LASF16:
+ 646 020f 4F70616D 		.ascii	"Opamp_1_Enable\000"
+ 646      705F315F 
+ 646      456E6162 
+ 646      6C6500
+ 647              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

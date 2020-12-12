@@ -4,7 +4,7 @@
 DER PROCESSERES PÅ PAKKER AF NO_OF_SAMPLES OG IKKE PR. SAMPLE.
 DERFOR BENYTTES firStoreNewInputSamples TIL AT GEMME BÅDE 
 KOEFFICIENTER OG adc_SampleArray[NO_OF_SAMPLES] I ET ARRAY TIL FILTERET.
-DERNÆST BRUGES */
+*/
 
 //array til at holde både input samples og filter koefficienter
 int16_t insamp[ BUFFER_LEN ];
@@ -46,6 +46,8 @@ void firFixed(int16_t *coeffs, int16_t *input, int16_t *output,
 {
     int32_t acc;     // accumulator for gange og plus
     int16_t *coeffp; // pointer til filterkoefficienter
+    
+    //er blevet formateret fra int16
     int16_t *inputp; // pointer til input samples
     int n;
     int k;
@@ -61,9 +63,15 @@ void firFixed(int16_t *coeffs, int16_t *input, int16_t *output,
         //gange input igennem koefficienter (impulsrespons for digitalt filter)
         //her er shiftet om tidsaksen (delayregisteret er indstillet) inden (funktionen firMoveProcSamples() )
         for ( k = 0; k < filterLength; k++ ) {
-            //krydsovergang: gange, skifte
-            //koefficienter nederst i filter_workingArray, lydinput øverst i filter_workingArray
-            //h(k)*x(n-k)
+            
+            /*koefficienter nederst i filter_workingArray, 
+            lydinput øverst i filter_workingArray.
+            Gange første koeff med nuværende sample
+            og gange anden koefficient med sidste sample
+            h(k)*x(n-k)*/
+            
+            //koefficienter fra matlab er formatteret til int
+            //for at passe med input samples
             acc += (int32_t)(*coeffp++) * (int32_t)(*inputp--);
         }
         //overflows sikring max +- 2^14 for akkumulator

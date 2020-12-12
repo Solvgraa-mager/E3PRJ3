@@ -1,5 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <DesignWideResources xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://cypress.com/xsd/cydwr">
+  <Group key="Analog2">
+    <Group key="NET_ROUTING">
+      <Data key="Net_25" value="opamp_1_vplus,vidac_3_vout,agr4,agr4_x_opamp_1_vplus,agr4_x_vidac_3_vout" />
+    </Group>
+    <Group key="PLACEMENT">
+      <Group key="F(OpAmp,1)">
+        <Data key="INST_GUID_PATH" value="85bfd9b7-d7d7-44e7-90b7-d203225d968b/23e176f5-2d49-415c-92e4-85b5cde510c7" />
+        <Data key="RTL_NAME_SUFFIX" value="" />
+      </Group>
+      <Group key="F(VIDAC,3)">
+        <Data key="INST_GUID_PATH" value="ae00057b-133b-4933-9c4d-97f0cd82beaa/7b0745a3-9643-40c1-b963-3ed8a3da0805" />
+        <Data key="RTL_NAME_SUFFIX" value="" />
+      </Group>
+    </Group>
+  </Group>
   <Group key="Clock2">
     <Data key="ClockSolver" value="1" />
     <Group key="DesigneWideClks" />
@@ -252,6 +267,7 @@
   <Group key="DWRInstGuidMapping">
     <Group key="Pin">
       <Data key="77715107-f8d5-47e5-a629-0fb83101ac6b" value="ADC_IN" />
+      <Data key="cc3bcd7e-5dc0-48ea-9bf6-6aa082be1ada" value="DAC_OUT" />
     </Group>
   </Group>
   <Group key="EEPROM">
@@ -3343,6 +3359,12 @@
         <Data key="Port Format" value="0,0" />
       </Group>
     </Group>
+    <Group key="cc3bcd7e-5dc0-48ea-9bf6-6aa082be1ada">
+      <Group key="0">
+        <Data key="Port Format" value="2,5" />
+      </Group>
+    </Group>
+    <Group key="UnAssigned Pins" />
   </Group>
   <Group key="PlaceDir">
     <Data key="count" value="0" />

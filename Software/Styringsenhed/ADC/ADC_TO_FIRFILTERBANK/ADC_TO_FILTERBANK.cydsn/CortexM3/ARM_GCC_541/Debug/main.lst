@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\danie\AppData\Local\Temp\ccgko4Fm.s 			page 1
+ARM GAS  C:\Users\danie\AppData\Local\Temp\ccMFGOGe.s 			page 1
 
 
    1              		.syntax unified
@@ -20,62 +20,65 @@ ARM GAS  C:\Users\danie\AppData\Local\Temp\ccgko4Fm.s 			page 1
   17              	.Ltext0:
   18              		.cfi_sections	.debug_frame
   19              		.global	__aeabi_i2d
-  20              		.section	.text.intToFloat,"ax",%progbits
+  20              		.section	.text.intToDouble,"ax",%progbits
   21              		.align	2
-  22              		.global	intToFloat
+  22              		.global	intToDouble
   23              		.thumb
   24              		.thumb_func
-  25              		.type	intToFloat, %function
-  26              	intToFloat:
+  25              		.type	intToDouble, %function
+  26              	intToDouble:
   27              	.LFB64:
   28              		.file 1 "main.c"
-   1:main.c        **** /* ========================================
-   2:main.c        ****  *
-   3:main.c        ****  * Copyright YOUR COMPANY, THE YEAR
-   4:main.c        ****  * All Rights Reserved
-   5:main.c        ****  * UNPUBLISHED, LICENSED SOFTWARE.
-   6:main.c        ****  *
-   7:main.c        ****  * CONFIDENTIAL AND PROPRIETARY INFORMATION
-   8:main.c        ****  * WHICH IS THE PROPERTY OF your company.
-   9:main.c        ****  *
-  10:main.c        ****  * ========================================
-  11:main.c        **** */
-  12:main.c        **** #include "project.h"
-  13:main.c        **** #include <stdio.h>
-  14:main.c        **** #include <string.h>
-  15:main.c        **** #include "fir_filter1.h"
-  16:main.c        **** 
-  17:main.c        **** #define NO_OF_SAMPLES 80 //Samme bliver brugt til begge kanaler, skal stemme overens med max_input_
-  18:main.c        **** 
-  19:main.c        **** #define TRANSFER_COUNT NO_OF_SAMPLES*2 //Samme bliver brugt til begge kanaler
-  20:main.c        **** 
-  21:main.c        **** #define DMA_BYTES_PER_BURST 2
-  22:main.c        **** #define DMA_REQUEST_PER_BURST 1
-  23:main.c        **** #define DMA_SRC_BASE (CYDEV_PERIPH_BASE)
-  24:main.c        **** #define DMA_DST_BASE (CYDEV_SRAM_BASE)
-  25:main.c        **** 
-  26:main.c        **** //FILTERKOEFFICIENTER
-  27:main.c        **** //FILTER 1
-  28:main.c        **** #define FILTER_LEN  63
-  29:main.c        **** int16 coeffs[ FILTER_LEN ] =
-ARM GAS  C:\Users\danie\AppData\Local\Temp\ccgko4Fm.s 			page 2
+   1:main.c        **** //C KODE PRIMÆRT FRA https://dspguru.com/dsp/tricks/fir-filtering-in-c/
+   2:main.c        **** //KOEFFICIENTER FRA MATLAB FILTERDESIGNER ;D
+   3:main.c        **** //INITIALISERING AF DMA FRA DMA WIZARD TOOL
+   4:main.c        **** //PING PONG BUFFER INSPIRATION FRA CYPRESS AN44011 https://www.cypress.com/file/44011/download
+   5:main.c        **** 
+   6:main.c        **** #include "project.h"
+   7:main.c        **** #include <stdio.h>
+   8:main.c        **** #include <string.h>
+   9:main.c        **** #include "fir_filter1.h"
+  10:main.c        **** 
+  11:main.c        **** /*Antal samples for hver DMA overførsel, 
+  12:main.c        **** skal stemme overens med max_input_len i fir_filter1.h*/
+  13:main.c        **** #define NO_OF_SAMPLES 80 
+  14:main.c        **** 
+  15:main.c        **** //Samme bliver brugt til begge kanaler
+  16:main.c        **** //*2 for 16 bit
+  17:main.c        **** #define TRANSFER_COUNT NO_OF_SAMPLES*2
+  18:main.c        **** //2 for 16 bit
+  19:main.c        **** #define DMA_BYTES_PER_BURST 2
+  20:main.c        **** #define DMA_REQUEST_PER_BURST 1
+  21:main.c        **** #define DMA_SRC_BASE (CYDEV_PERIPH_BASE)
+  22:main.c        **** #define DMA_DST_BASE (CYDEV_SRAM_BASE)
+  23:main.c        **** 
+  24:main.c        **** //FILTERKOEFFICIENTER
+  25:main.c        **** //KONVERTERES TIL INT16 I MATLAB VED KOEFF_VEK=int16(rec1_4.Numerator*2^15);
+  26:main.c        **** //HVOR FILTRET ER DESIGNET I FILTERDESIGNER, SKREVET TIL FUNKTION.
+  27:main.c        **** 
+  28:main.c        **** //FILTER 1
+  29:main.c        **** #define FILTER_LEN 64
+ARM GAS  C:\Users\danie\AppData\Local\Temp\ccMFGOGe.s 			page 2
 
 
-  30:main.c        **** {
-  31:main.c        ****  -1468, 1058,   594,   287,    186,  284,   485,   613,
+  30:main.c        **** static int16_t coeffs[ FILTER_LEN ] =
+  31:main.c        **** {-1468, 1058,   594,   287,    186,  284,   485,   613,
   32:main.c        ****    495,   90,  -435,  -762,   -615,   21,   821,  1269,
   33:main.c        ****    982,    9, -1132, -1721,  -1296,    1,  1445,  2136,
   34:main.c        ****   1570,    0, -1666, -2413,  -1735,   -2,  1770,  2512,
   35:main.c        ****   1770,   -2, -1735, -2413,  -1666,    0,  1570,  2136,
   36:main.c        ****   1445,    1, -1296, -1721,  -1132,    9,   982,  1269,
   37:main.c        ****    821,   21,  -615,  -762,   -435,   90,   495,   613,
-  38:main.c        ****    485,  284,   186,   287,    594, 1058, -1468
-  39:main.c        **** };
-  40:main.c        **** 
-  41:main.c        **** //FUNKTIONER TIL TYPEKONVERTERING AF ARRAYS
-  42:main.c        **** void intToFloat( int16_t *input, double *output, int length )
-  43:main.c        **** {
-  29              		.loc 1 43 0
+  38:main.c        ****    485,  284,   186,   287,    594, 1058, -1468};
+  39:main.c        **** 
+  40:main.c        **** /*FUNKTIONER TIL TYPEKONVERTERING AF ARRAYS
+  41:main.c        **** enten konverter inputtet til double og brug
+  42:main.c        **** de af matlab genererede koefficienter eller 
+  43:main.c        **** konverter matlab koefficienter til int16. Ved
+  44:main.c        **** ikke hvad der tager længest tid.*/
+  45:main.c        **** void intToDouble( int16_t *input, double *output, int length )
+  46:main.c        **** {
+  29              		.loc 1 46 0
   30              		.cfi_startproc
   31              		@ args = 0, pretend = 0, frame = 0
   32              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -92,55 +95,55 @@ ARM GAS  C:\Users\danie\AppData\Local\Temp\ccgko4Fm.s 			page 1
   43 0006 0F46     		mov	r7, r1
   44 0008 1646     		mov	r6, r2
   45              	.LVL1:
-  44:main.c        ****     int i;
-  45:main.c        ****  
-  46:main.c        ****     for ( i = 0; i < length; i++ ) {
-  46              		.loc 1 46 0
+  47:main.c        ****     int i;
+  48:main.c        ****  
+  49:main.c        ****     for ( i = 0; i < length; i++ ) {
+  46              		.loc 1 49 0
   47 000a 0024     		movs	r4, #0
   48 000c 08E0     		b	.L2
   49              	.LVL2:
   50              	.L3:
-  47:main.c        ****         output[i] = (double)input[i];
-  51              		.loc 1 47 0 discriminator 3
+  50:main.c        ****         output[i] = (double)input[i];
+  51              		.loc 1 50 0 discriminator 3
   52 000e 07EBC405 		add	r5, r7, r4, lsl #3
   53 0012 38F91400 		ldrsh	r0, [r8, r4, lsl #1]
   54 0016 FFF7FEFF 		bl	__aeabi_i2d
   55              	.LVL3:
   56 001a C5E90001 		strd	r0, [r5]
-  46:main.c        ****         output[i] = (double)input[i];
-  57              		.loc 1 46 0 discriminator 3
+  49:main.c        ****         output[i] = (double)input[i];
+  57              		.loc 1 49 0 discriminator 3
   58 001e 0134     		adds	r4, r4, #1
   59              	.LVL4:
   60              	.L2:
-  46:main.c        ****         output[i] = (double)input[i];
-  61              		.loc 1 46 0 is_stmt 0 discriminator 1
+  49:main.c        ****         output[i] = (double)input[i];
+  61              		.loc 1 49 0 is_stmt 0 discriminator 1
   62 0020 B442     		cmp	r4, r6
+ARM GAS  C:\Users\danie\AppData\Local\Temp\ccMFGOGe.s 			page 3
+
+
   63 0022 F4DB     		blt	.L3
-  48:main.c        ****     }
-  49:main.c        **** }
-ARM GAS  C:\Users\danie\AppData\Local\Temp\ccgko4Fm.s 			page 3
-
-
-  64              		.loc 1 49 0 is_stmt 1
+  51:main.c        ****     }
+  52:main.c        **** }
+  64              		.loc 1 52 0 is_stmt 1
   65 0024 BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
   66              		.cfi_endproc
   67              	.LFE64:
-  68              		.size	intToFloat, .-intToFloat
+  68              		.size	intToDouble, .-intToDouble
   69              		.global	__aeabi_dcmpgt
   70              		.global	__aeabi_dcmplt
   71              		.global	__aeabi_d2iz
-  72              		.section	.text.floatToInt,"ax",%progbits
+  72              		.section	.text.DoubleToInt,"ax",%progbits
   73              		.align	2
-  74              		.global	floatToInt
+  74              		.global	DoubleToInt
   75              		.thumb
   76              		.thumb_func
-  77              		.type	floatToInt, %function
-  78              	floatToInt:
+  77              		.type	DoubleToInt, %function
+  78              	DoubleToInt:
   79              	.LFB65:
-  50:main.c        ****  
-  51:main.c        **** void floatToInt( double *input, int16_t *output, int length )
-  52:main.c        **** {
-  80              		.loc 1 52 0
+  53:main.c        ****  
+  54:main.c        **** void DoubleToInt( double *input, int16_t *output, int length )
+  55:main.c        **** {
+  80              		.loc 1 55 0
   81              		.cfi_startproc
   82              		@ args = 0, pretend = 0, frame = 0
   83              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -161,38 +164,38 @@ ARM GAS  C:\Users\danie\AppData\Local\Temp\ccgko4Fm.s 			page 1
   98 0006 8A46     		mov	r10, r1
   99 0008 9146     		mov	r9, r2
  100              	.LVL6:
-  53:main.c        ****     int i;
-  54:main.c        ****  
-  55:main.c        ****     for ( i = 0; i < length; i++ ) {
- 101              		.loc 1 55 0
+  56:main.c        ****     int i;
+  57:main.c        ****  
+  58:main.c        ****     for ( i = 0; i < length; i++ ) {
+ 101              		.loc 1 58 0
  102 000a 0024     		movs	r4, #0
  103 000c 24E0     		b	.L6
  104              	.LVL7:
  105              	.L11:
-  56:main.c        ****         if ( input[i] > 32767.0 ) {
- 106              		.loc 1 56 0
+  59:main.c        ****         if ( input[i] > 32767.0 ) {
+ 106              		.loc 1 59 0
  107 000e A046     		mov	r8, r4
  108 0010 0BEBC405 		add	r5, fp, r4, lsl #3
  109 0014 D5E90067 		ldrd	r6, [r5]
  110 0018 11A3     		adr	r3, .L16
+ARM GAS  C:\Users\danie\AppData\Local\Temp\ccMFGOGe.s 			page 4
+
+
  111 001a D3E90023 		ldrd	r2, [r3]
  112 001e 3046     		mov	r0, r6
  113 0020 3946     		mov	r1, r7
-ARM GAS  C:\Users\danie\AppData\Local\Temp\ccgko4Fm.s 			page 4
-
-
  114 0022 FFF7FEFF 		bl	__aeabi_dcmpgt
  115              	.LVL8:
  116 0026 28B1     		cbz	r0, .L14
-  57:main.c        ****             input[i] = 32767.0;
- 117              		.loc 1 57 0
+  60:main.c        ****             input[i] = 32767.0;
+ 117              		.loc 1 60 0
  118 0028 0DA3     		adr	r3, .L16
  119 002a D3E90023 		ldrd	r2, [r3]
  120 002e C5E90023 		strd	r2, [r5]
  121 0032 0AE0     		b	.L9
  122              	.L14:
-  58:main.c        ****         } else if ( input[i] < -32768.0 ) {
- 123              		.loc 1 58 0
+  61:main.c        ****         } else if ( input[i] < -32768.0 ) {
+ 123              		.loc 1 61 0
  124 0034 0022     		movs	r2, #0
  125 0036 0C4B     		ldr	r3, .L16+8
  126 0038 3046     		mov	r0, r6
@@ -200,32 +203,31 @@ ARM GAS  C:\Users\danie\AppData\Local\Temp\ccgko4Fm.s 			page 1
  128 003c FFF7FEFF 		bl	__aeabi_dcmplt
  129              	.LVL9:
  130 0040 18B1     		cbz	r0, .L9
-  59:main.c        ****             input[i] = -32768.0;
- 131              		.loc 1 59 0
+  62:main.c        ****             input[i] = -32768.0;
+ 131              		.loc 1 62 0
  132 0042 0022     		movs	r2, #0
  133 0044 084B     		ldr	r3, .L16+8
  134 0046 C5E90023 		strd	r2, [r5]
  135              	.L9:
-  60:main.c        ****         }
-  61:main.c        ****         // convert
-  62:main.c        ****         output[i] = (int16_t)input[i];
- 136              		.loc 1 62 0 discriminator 2
+  63:main.c        ****         }
+  64:main.c        ****         output[i] = (int16_t)input[i];
+ 136              		.loc 1 64 0 discriminator 2
  137 004a D5E90001 		ldrd	r0, [r5]
  138 004e FFF7FEFF 		bl	__aeabi_d2iz
  139              	.LVL10:
  140 0052 2AF81800 		strh	r0, [r10, r8, lsl #1]	@ movhi
-  55:main.c        ****         if ( input[i] > 32767.0 ) {
- 141              		.loc 1 55 0 discriminator 2
+  58:main.c        ****         if ( input[i] > 32767.0 ) {
+ 141              		.loc 1 58 0 discriminator 2
  142 0056 0134     		adds	r4, r4, #1
  143              	.LVL11:
  144              	.L6:
-  55:main.c        ****         if ( input[i] > 32767.0 ) {
- 145              		.loc 1 55 0 is_stmt 0 discriminator 1
+  58:main.c        ****         if ( input[i] > 32767.0 ) {
+ 145              		.loc 1 58 0 is_stmt 0 discriminator 1
  146 0058 4C45     		cmp	r4, r9
  147 005a D8DB     		blt	.L11
-  63:main.c        ****     }
-  64:main.c        **** }
- 148              		.loc 1 64 0 is_stmt 1
+  65:main.c        ****     }
+  66:main.c        **** }
+ 148              		.loc 1 66 0 is_stmt 1
  149 005c BDE8F88F 		pop	{r3, r4, r5, r6, r7, r8, r9, r10, fp, pc}
  150              	.LVL12:
  151              	.L17:
@@ -236,11 +238,11 @@ ARM GAS  C:\Users\danie\AppData\Local\Temp\ccgko4Fm.s 			page 1
  156 0068 0000E0C0 		.word	-1059061760
  157              		.cfi_endproc
  158              	.LFE65:
- 159              		.size	floatToInt, .-floatToInt
+ARM GAS  C:\Users\danie\AppData\Local\Temp\ccMFGOGe.s 			page 5
+
+
+ 159              		.size	DoubleToInt, .-DoubleToInt
  160              		.section	.text.Init,"ax",%progbits
-ARM GAS  C:\Users\danie\AppData\Local\Temp\ccgko4Fm.s 			page 5
-
-
  161              		.align	2
  162              		.global	Init
  163              		.thumb
@@ -248,1826 +250,1814 @@ ARM GAS  C:\Users\danie\AppData\Local\Temp\ccgko4Fm.s 			page 1
  165              		.type	Init, %function
  166              	Init:
  167              	.LFB66:
-  65:main.c        **** 
-  66:main.c        **** //ISR PROTOER
-  67:main.c        **** CY_ISR_PROTO(ISR_DMA_Done);
-  68:main.c        **** 
-  69:main.c        **** //
-  70:main.c        ****     /* DMA_Chan is used to store the DMA channel handle */ 
-  71:main.c        **** uint8 DMA_Chan;
-  72:main.c        **** 
-  73:main.c        **** /* DMA_TD array is used to store all of the TDs associated with the channel*/
-  74:main.c        **** uint8 DMA_TD[2]; //Transaction Descriptors "navigerer" data hen til 2 forskellige arrays (ping ping
-  75:main.c        **** 
-  76:main.c        **** /* DMA_DISABLE_TD definition not available for PSoC 5LP inside CyDmac.h in PSoC Creator 2.1 SP1.
-  77:main.c        ****  * So, manually define the DMA_DISABLE_TD */
-  78:main.c        **** #if (CY_PSOC5LP)
-  79:main.c        **** 	#if !defined(DMA_DISABLE_TD)
-  80:main.c        **** 	    #define DMA_DISABLE_TD          0xFEu
-  81:main.c        **** 	#endif
-  82:main.c        **** #endif  /* (CY_PSOC5LP) */
-  83:main.c        **** 
-  84:main.c        **** //Sample arrays som DMA fylder op
-  85:main.c        **** static int16 adc_sampleArray1[NO_OF_SAMPLES]={0}; //evt træk offset fra ifht input til filteret - 
-  86:main.c        **** static int16 adc_sampleArray2[NO_OF_SAMPLES]={0};
-  87:main.c        **** 
-  88:main.c        **** void Init()
-  89:main.c        **** {   //8 bit = 1 byte pr burst (1 byte til memory ad gangen)
- 168              		.loc 1 89 0
+  67:main.c        **** 
+  68:main.c        **** //ISR PROTOER
+  69:main.c        **** CY_ISR_PROTO(ISR_DMA_Done);
+  70:main.c        **** 
+  71:main.c        **** //
+  72:main.c        ****     /* DMA_Chan is used to store the DMA channel handle */ 
+  73:main.c        **** uint8 DMA_Chan;
+  74:main.c        **** 
+  75:main.c        **** /* DMA_TD array is used to store all of the TDs associated with the channel*/
+  76:main.c        **** //Transaction Descriptors "navigerer" data
+  77:main.c        **** //2 for ping pong array, hvis t_proc >> t_sample ((ping pong buffer)
+  78:main.c        **** //1 for circular array. Bruges som udgangspunkt.
+  79:main.c        **** uint8 DMA_TD[1]; 
+  80:main.c        **** 
+  81:main.c        **** /* DMA_DISABLE_TD definition not available for PSoC 5LP inside CyDmac.h in PSoC Creator 2.1 SP1.
+  82:main.c        ****  * So, manually define the DMA_DISABLE_TD */
+  83:main.c        **** #if (CY_PSOC5LP)
+  84:main.c        **** 	#if !defined(DMA_DISABLE_TD)
+  85:main.c        **** 	    #define DMA_DISABLE_TD          0xFEu
+  86:main.c        **** 	#endif
+  87:main.c        **** #endif  /* (CY_PSOC5LP) */
+  88:main.c        **** 
+  89:main.c        **** //Sample arrays som DMA fylder op
+  90:main.c        **** 
+  91:main.c        **** //Hvis differentiel, add dc offset +32768 for int16 for meningsfuld output
+  92:main.c        **** //Hvis single ended er der 2,5V DC på + indgangen til ADC - brug derfor uint16_t
+  93:main.c        **** static int16 adc_sampleArray1[NO_OF_SAMPLES]={0}; 
+  94:main.c        **** //Udkommenter nedenstående for ping pong buffer
+  95:main.c        **** //static int16 adc_sampleArray2[NO_OF_SAMPLES]={0};
+  96:main.c        **** 
+  97:main.c        **** void Init()
+  98:main.c        **** {   //8 bit = 1 byte pr burst (1 byte til memory ad gangen)
+ 168              		.loc 1 98 0
  169              		.cfi_startproc
  170              		@ args = 0, pretend = 0, frame = 0
  171              		@ frame_needed = 0, uses_anonymous_args = 0
- 172 0000 70B5     		push	{r4, r5, r6, lr}
+ 172 0000 38B5     		push	{r3, r4, r5, lr}
  173              		.cfi_def_cfa_offset 16
- 174              		.cfi_offset 4, -16
- 175              		.cfi_offset 5, -12
- 176              		.cfi_offset 6, -8
+ 174              		.cfi_offset 3, -16
+ 175              		.cfi_offset 4, -12
+ 176              		.cfi_offset 5, -8
  177              		.cfi_offset 14, -4
-  90:main.c        ****     //16 bit = 2 byte pr burst
-  91:main.c        ****     DMA_Chan = DMA_1_DmaInitialize(DMA_BYTES_PER_BURST, DMA_REQUEST_PER_BURST, HI16(DMA_SRC_BASE), 
- 178              		.loc 1 91 0
+  99:main.c        ****     //16 bit = 2 byte pr burst
+ 100:main.c        ****     DMA_Chan = DMA_1_DmaInitialize(DMA_BYTES_PER_BURST, DMA_REQUEST_PER_BURST, HI16(DMA_SRC_BASE), 
+ 178              		.loc 1 100 0
  179 0002 41F6FF73 		movw	r3, #8191
  180 0006 4FF48042 		mov	r2, #16384
  181 000a 0121     		movs	r1, #1
+ARM GAS  C:\Users\danie\AppData\Local\Temp\ccMFGOGe.s 			page 6
+
+
  182 000c 0220     		movs	r0, #2
  183 000e FFF7FEFF 		bl	DMA_1_DmaInitialize
  184              	.LVL13:
- 185 0012 1B4E     		ldr	r6, .L20
- 186 0014 3070     		strb	r0, [r6]
-  92:main.c        **** 		
-  93:main.c        ****     /*CyDmaTdAllocate - Allocate TDs */
-  94:main.c        **** 	DMA_TD[0] = CyDmaTdAllocate();
- 187              		.loc 1 94 0
-ARM GAS  C:\Users\danie\AppData\Local\Temp\ccgko4Fm.s 			page 6
-
-
+ 185 0012 154C     		ldr	r4, .L20
+ 186 0014 2070     		strb	r0, [r4]
+ 101:main.c        **** 		
+ 102:main.c        ****     /*CyDmaTdAllocate - Allocate TDs */
+ 103:main.c        ****     
+ 104:main.c        **** 	DMA_TD[0] = CyDmaTdAllocate();
+ 187              		.loc 1 104 0
  188 0016 FFF7FEFF 		bl	CyDmaTdAllocate
  189              	.LVL14:
- 190 001a 1A4C     		ldr	r4, .L20+4
- 191 001c 2070     		strb	r0, [r4]
-  95:main.c        **** 	DMA_TD[1] = CyDmaTdAllocate();
- 192              		.loc 1 95 0
- 193 001e FFF7FEFF 		bl	CyDmaTdAllocate
- 194              	.LVL15:
- 195 0022 0246     		mov	r2, r0
- 196 0024 6070     		strb	r0, [r4, #1]
-  96:main.c        ****     
-  97:main.c        ****     //NO_OF_SAMPLES ad gangen (80 samples * 2 byte), inkrementer transaction descriptor, lav interr
-  98:main.c        ****     CyDmaTdSetConfiguration(DMA_TD[0],TRANSFER_COUNT, DMA_TD[1],  TD_INC_DST_ADR);
- 197              		.loc 1 98 0
- 198 0026 0223     		movs	r3, #2
- 199 0028 A021     		movs	r1, #160
- 200 002a 2078     		ldrb	r0, [r4]	@ zero_extendqisi2
- 201 002c FFF7FEFF 		bl	CyDmaTdSetConfiguration
- 202              	.LVL16:
-  99:main.c        **** 	CyDmaTdSetConfiguration(DMA_TD[1], TRANSFER_COUNT, DMA_DISABLE_TD, TD_INC_DST_ADR | DMA_1__TD_TERM
- 203              		.loc 1 99 0
- 204 0030 0623     		movs	r3, #6
- 205 0032 FE22     		movs	r2, #254
- 206 0034 A021     		movs	r1, #160
- 207 0036 6078     		ldrb	r0, [r4, #1]	@ zero_extendqisi2
- 208 0038 FFF7FEFF 		bl	CyDmaTdSetConfiguration
+ 190 001a 0246     		mov	r2, r0
+ 191 001c 134D     		ldr	r5, .L20+4
+ 192 001e 2870     		strb	r0, [r5]
+ 105:main.c        **** 	//DMA_TD[1] = CyDmaTdAllocate(); //Udkommenter for ping pong buffer
+ 106:main.c        ****     
+ 107:main.c        ****     /*NO_OF_SAMPLES ad gangen (NO_OF_SAMPLES * 2 byte), 
+ 108:main.c        ****     inkrementer transaction descriptor, lav interrupt når færdig
+ 109:main.c        ****     Udkommenter nummer 2 for ping pong buffer*/
+ 110:main.c        ****     CyDmaTdSetConfiguration(DMA_TD[0],TRANSFER_COUNT, DMA_TD[0],  TD_INC_DST_ADR | DMA_1__TD_TERMOU
+ 193              		.loc 1 110 0
+ 194 0020 0623     		movs	r3, #6
+ 195 0022 A021     		movs	r1, #160
+ 196 0024 FFF7FEFF 		bl	CyDmaTdSetConfiguration
+ 197              	.LVL15:
+ 111:main.c        **** 	//CyDmaTdSetConfiguration(DMA_TD[1], TRANSFER_COUNT, DMA_DISABLE_TD, TD_INC_DST_ADR | DMA_1__TD_TE
+ 112:main.c        ****     
+ 113:main.c        ****     //Sætter destinationsadressen til sampleArray1, peger på første plads
+ 114:main.c        ****     CyDmaTdSetAddress(DMA_TD[0], LO16((uint32)ADC_DelSig_1_DEC_SAMP_PTR), LO16((uint32)&adc_sampleA
+ 198              		.loc 1 114 0
+ 199 0028 114A     		ldr	r2, .L20+8
+ 200 002a 92B2     		uxth	r2, r2
+ 201 002c 44F61061 		movw	r1, #19984
+ 202 0030 2878     		ldrb	r0, [r5]	@ zero_extendqisi2
+ 203 0032 FFF7FEFF 		bl	CyDmaTdSetAddress
+ 204              	.LVL16:
+ 115:main.c        ****     //Udkommenter nedenstående for ping pong buffer
+ 116:main.c        **** 	//CyDmaTdSetAddress(DMA_TD[1], LO16((uint32)ADC_DelSig_1_DEC_SAMP_PTR), LO16((uint32)&adc_sampleAr
+ 117:main.c        ****     
+ 118:main.c        ****     /*Map the TD to the DMA Channel */
+ 119:main.c        **** 	CyDmaChSetInitialTd(DMA_Chan, DMA_TD[0]);
+ 205              		.loc 1 119 0
+ 206 0036 2978     		ldrb	r1, [r5]	@ zero_extendqisi2
+ 207 0038 2078     		ldrb	r0, [r4]	@ zero_extendqisi2
+ 208 003a FFF7FEFF 		bl	CyDmaChSetInitialTd
  209              	.LVL17:
- 100:main.c        ****     
- 101:main.c        ****     //Sætter destinationsadressen til første sampleArray, peger på første plads
- 102:main.c        ****     CyDmaTdSetAddress(DMA_TD[0], LO16((uint32)ADC_DelSig_1_DEC_SAMP_PTR), LO16((uint32)&adc_sampleA
- 210              		.loc 1 102 0
- 211 003c 124D     		ldr	r5, .L20+8
- 212 003e AAB2     		uxth	r2, r5
- 213 0040 44F61061 		movw	r1, #19984
- 214 0044 2078     		ldrb	r0, [r4]	@ zero_extendqisi2
- 215 0046 FFF7FEFF 		bl	CyDmaTdSetAddress
- 216              	.LVL18:
- 103:main.c        **** 	CyDmaTdSetAddress(DMA_TD[1], LO16((uint32)ADC_DelSig_1_DEC_SAMP_PTR), LO16((uint32)&adc_sampleArra
- 217              		.loc 1 103 0
- 218 004a 05F1A002 		add	r2, r5, #160
- 219 004e 92B2     		uxth	r2, r2
- 220 0050 44F61061 		movw	r1, #19984
- 221 0054 6078     		ldrb	r0, [r4, #1]	@ zero_extendqisi2
- 222 0056 FFF7FEFF 		bl	CyDmaTdSetAddress
- 223              	.LVL19:
- 104:main.c        ****     
- 105:main.c        ****     /*Map the TD to the DMA Channel */
- 106:main.c        **** 	CyDmaChSetInitialTd(DMA_Chan, DMA_TD[0]);
- 224              		.loc 1 106 0
- 225 005a 2178     		ldrb	r1, [r4]	@ zero_extendqisi2
- 226 005c 3078     		ldrb	r0, [r6]	@ zero_extendqisi2
- 227 005e FFF7FEFF 		bl	CyDmaChSetInitialTd
- 228              	.LVL20:
- 107:main.c        ****     
- 108:main.c        ****     //Enable DMA channel. 
- 109:main.c        ****     CyDmaChEnable(DMA_Chan, 1);
- 229              		.loc 1 109 0
-ARM GAS  C:\Users\danie\AppData\Local\Temp\ccgko4Fm.s 			page 7
+ 120:main.c        ****     
+ 121:main.c        ****     //Enable DMA channel. 
+ 122:main.c        ****     CyDmaChEnable(DMA_Chan, 1);
+ 210              		.loc 1 122 0
+ 211 003e 0121     		movs	r1, #1
+ 212 0040 2078     		ldrb	r0, [r4]	@ zero_extendqisi2
+ 213 0042 FFF7FEFF 		bl	CyDmaChEnable
+ 214              	.LVL18:
+ 123:main.c        **** 
+ 124:main.c        **** 	/* Start ADC */
+ARM GAS  C:\Users\danie\AppData\Local\Temp\ccMFGOGe.s 			page 7
 
 
- 230 0062 0121     		movs	r1, #1
- 231 0064 3078     		ldrb	r0, [r6]	@ zero_extendqisi2
- 232 0066 FFF7FEFF 		bl	CyDmaChEnable
- 233              	.LVL21:
- 110:main.c        **** 
- 111:main.c        **** 	/* Start ADC */
- 112:main.c        **** 	ADC_DelSig_1_Start();
- 234              		.loc 1 112 0
- 235 006a FFF7FEFF 		bl	ADC_DelSig_1_Start
- 236              	.LVL22:
- 113:main.c        ****     
- 114:main.c        ****     /* Disable the ADC ISR as it is not required */
- 115:main.c        ****     ADC_DelSig_1_IRQ_Disable();
- 237              		.loc 1 115 0
- 238 006e FFF7FEFF 		bl	ADC_DelSig_1_IRQ_Disable
- 239              	.LVL23:
- 116:main.c        **** 
- 117:main.c        **** 	/* Start ADC conversion */
- 118:main.c        **** 	ADC_DelSig_1_StartConvert();
- 240              		.loc 1 118 0
- 241 0072 FFF7FEFF 		bl	ADC_DelSig_1_StartConvert
- 242              	.LVL24:
- 119:main.c        **** 	
- 120:main.c        **** 	/* Start isr connected to DMA nrq signal */
- 121:main.c        **** 	ISR_DMA_Done_Start();
- 243              		.loc 1 121 0
- 244 0076 FFF7FEFF 		bl	ISR_DMA_Done_Start
- 245              	.LVL25:
- 122:main.c        **** 
- 123:main.c        **** 	/* Enable global interrupt */
- 124:main.c        **** 	CYGlobalIntEnable; 
- 246              		.loc 1 124 0
- 247              		.syntax unified
- 248              	@ 124 "main.c" 1
- 249 007a 62B6     		CPSIE   i
- 250              	@ 0 "" 2
- 251              		.thumb
- 252              		.syntax unified
- 253 007c 70BD     		pop	{r4, r5, r6, pc}
- 254              	.L21:
- 255 007e 00BF     		.align	2
- 256              	.L20:
- 257 0080 00000000 		.word	DMA_Chan
- 258 0084 00000000 		.word	DMA_TD
- 259 0088 00000000 		.word	.LANCHOR0
- 260              		.cfi_endproc
- 261              	.LFE66:
- 262              		.size	Init, .-Init
- 263              		.section	.text.ISR_DMA_Done,"ax",%progbits
- 264              		.align	2
- 265              		.global	ISR_DMA_Done
- 266              		.thumb
- 267              		.thumb_func
- 268              		.type	ISR_DMA_Done, %function
- 269              	ISR_DMA_Done:
- 270              	.LFB67:
- 125:main.c        ****     
-ARM GAS  C:\Users\danie\AppData\Local\Temp\ccgko4Fm.s 			page 8
-
-
- 126:main.c        **** };
- 127:main.c        **** 
- 128:main.c        **** 
- 129:main.c        **** //Når DMA er done med at overføre TIL BEGGE SAMPLE ARRAYS startes DMA_Done interrupt
- 130:main.c        **** CY_ISR(ISR_DMA_Done)
- 131:main.c        **** {    
- 271              		.loc 1 131 0
- 272              		.cfi_startproc
- 273              		@ args = 0, pretend = 0, frame = 320
- 274              		@ frame_needed = 0, uses_anonymous_args = 0
- 275 0000 00B5     		push	{lr}
- 276              		.cfi_def_cfa_offset 4
- 277              		.cfi_offset 14, -4
- 278 0002 D3B0     		sub	sp, sp, #332
- 279              		.cfi_def_cfa_offset 336
- 132:main.c        **** //HER 
- 133:main.c        **** firFixedInit();
- 280              		.loc 1 133 0
- 281 0004 FFF7FEFF 		bl	firFixedInit
- 282              	.LVL26:
- 134:main.c        **** 
- 135:main.c        **** int16_t *filter_outputArray[NO_OF_SAMPLES];
- 136:main.c        **** int16_t *filter_workingArray1 = firStoreNewSamples(adc_sampleArray1, NO_OF_SAMPLES);
- 283              		.loc 1 136 0
- 284 0008 5021     		movs	r1, #80
- 285 000a 0848     		ldr	r0, .L24
- 286 000c FFF7FEFF 		bl	firStoreNewSamples
- 287              	.LVL27:
- 137:main.c        **** 
- 138:main.c        **** /*Definer flere koefficientarrays og brug dette koefficient array i kald
- 139:main.c        **** samme metode med nyt koefficientarray for at lade adc input samples 
- 140:main.c        **** gennemløbe flere arrays uden at påvirke hinanden*/
- 141:main.c        **** firFixed(coeffs, filter_workingArray1, *filter_outputArray, NO_OF_SAMPLES, FILTER_LEN);
- 288              		.loc 1 141 0
- 289 0010 029A     		ldr	r2, [sp, #8]
- 290 0012 3F23     		movs	r3, #63
- 291 0014 0093     		str	r3, [sp]
- 292 0016 5023     		movs	r3, #80
- 293 0018 0146     		mov	r1, r0
- 294 001a 0548     		ldr	r0, .L24+4
- 295              	.LVL28:
- 296 001c FFF7FEFF 		bl	firFixed
- 297              	.LVL29:
+ 125:main.c        **** 	ADC_DelSig_1_Start();
+ 215              		.loc 1 125 0
+ 216 0046 FFF7FEFF 		bl	ADC_DelSig_1_Start
+ 217              	.LVL19:
+ 126:main.c        ****     
+ 127:main.c        ****     //Start VREF
+ 128:main.c        ****     Opamp_1_Start();
+ 218              		.loc 1 128 0
+ 219 004a FFF7FEFF 		bl	Opamp_1_Start
+ 220              	.LVL20:
+ 129:main.c        ****     Opamp_2_Start();
+ 221              		.loc 1 129 0
+ 222 004e FFF7FEFF 		bl	Opamp_2_Start
+ 223              	.LVL21:
+ 130:main.c        ****    
+ 131:main.c        ****     //Start DAC
+ 132:main.c        ****     VDAC8_1_Start();
+ 224              		.loc 1 132 0
+ 225 0052 FFF7FEFF 		bl	VDAC8_1_Start
+ 226              	.LVL22:
+ 133:main.c        ****     
+ 134:main.c        ****     /* Disable the ADC ISR as it is not required */
+ 135:main.c        ****     ADC_DelSig_1_IRQ_Disable();
+ 227              		.loc 1 135 0
+ 228 0056 FFF7FEFF 		bl	ADC_DelSig_1_IRQ_Disable
+ 229              	.LVL23:
+ 136:main.c        **** 
+ 137:main.c        **** 	/* Start ADC conversion */
+ 138:main.c        **** 	ADC_DelSig_1_StartConvert();
+ 230              		.loc 1 138 0
+ 231 005a FFF7FEFF 		bl	ADC_DelSig_1_StartConvert
+ 232              	.LVL24:
+ 139:main.c        **** 	
+ 140:main.c        **** 	/* Start isr connected to DMA nrq signal */
+ 141:main.c        **** 	ISR_DMA_Done_Start();
+ 233              		.loc 1 141 0
+ 234 005e FFF7FEFF 		bl	ISR_DMA_Done_Start
+ 235              	.LVL25:
  142:main.c        **** 
- 143:main.c        **** //Flyt processeret data
- 144:main.c        **** firMoveProcSamples(NO_OF_SAMPLES);
- 298              		.loc 1 144 0
- 299 0020 5020     		movs	r0, #80
- 300 0022 FFF7FEFF 		bl	firMoveProcSamples
- 301              	.LVL30:
- 145:main.c        **** }
- 302              		.loc 1 145 0
- 303 0026 53B0     		add	sp, sp, #332
- 304              		.cfi_def_cfa_offset 4
- 305              		@ sp needed
- 306 0028 5DF804FB 		ldr	pc, [sp], #4
- 307              	.L25:
-ARM GAS  C:\Users\danie\AppData\Local\Temp\ccgko4Fm.s 			page 9
+ 143:main.c        **** 	/* Enable global interrupt */
+ 144:main.c        **** 	CYGlobalIntEnable; 
+ 236              		.loc 1 144 0
+ 237              		.syntax unified
+ 238              	@ 144 "main.c" 1
+ 239 0062 62B6     		CPSIE   i
+ 240              	@ 0 "" 2
+ 241              		.thumb
+ 242              		.syntax unified
+ 243 0064 38BD     		pop	{r3, r4, r5, pc}
+ 244              	.L21:
+ 245 0066 00BF     		.align	2
+ 246              	.L20:
+ 247 0068 00000000 		.word	DMA_Chan
+ 248 006c 00000000 		.word	DMA_TD
+ 249 0070 00000000 		.word	.LANCHOR0
+ 250              		.cfi_endproc
+ 251              	.LFE66:
+ARM GAS  C:\Users\danie\AppData\Local\Temp\ccMFGOGe.s 			page 8
 
 
- 308              		.align	2
- 309              	.L24:
- 310 002c 00000000 		.word	.LANCHOR0
- 311 0030 00000000 		.word	.LANCHOR1
- 312              		.cfi_endproc
- 313              	.LFE67:
- 314              		.size	ISR_DMA_Done, .-ISR_DMA_Done
- 315              		.section	.text.main,"ax",%progbits
- 316              		.align	2
- 317              		.global	main
- 318              		.thumb
- 319              		.thumb_func
- 320              		.type	main, %function
- 321              	main:
- 322              	.LFB68:
- 146:main.c        **** 
- 147:main.c        **** int main(void)
- 148:main.c        **** {
- 323              		.loc 1 148 0
- 324              		.cfi_startproc
- 325              		@ Volatile: function does not return.
- 326              		@ args = 0, pretend = 0, frame = 0
- 327              		@ frame_needed = 0, uses_anonymous_args = 0
- 328 0000 08B5     		push	{r3, lr}
- 329              		.cfi_def_cfa_offset 8
- 330              		.cfi_offset 3, -8
- 331              		.cfi_offset 14, -4
- 149:main.c        ****     Init();
- 332              		.loc 1 149 0
- 333 0002 FFF7FEFF 		bl	Init
- 334              	.LVL31:
- 335              	.L27:
- 336 0006 FEE7     		b	.L27
- 337              		.cfi_endproc
- 338              	.LFE68:
- 339              		.size	main, .-main
- 340              		.comm	DMA_TD,2,4
- 341              		.comm	DMA_Chan,1,1
- 342              		.global	coeffs
- 343              		.data
- 344              		.align	2
- 345              		.set	.LANCHOR1,. + 0
- 346              		.type	coeffs, %object
- 347              		.size	coeffs, 126
- 348              	coeffs:
- 349 0000 44FA     		.short	-1468
- 350 0002 2204     		.short	1058
- 351 0004 5202     		.short	594
- 352 0006 1F01     		.short	287
- 353 0008 BA00     		.short	186
- 354 000a 1C01     		.short	284
- 355 000c E501     		.short	485
- 356 000e 6502     		.short	613
- 357 0010 EF01     		.short	495
- 358 0012 5A00     		.short	90
- 359 0014 4DFE     		.short	-435
- 360 0016 06FD     		.short	-762
-ARM GAS  C:\Users\danie\AppData\Local\Temp\ccgko4Fm.s 			page 10
+ 252              		.size	Init, .-Init
+ 253              		.section	.text.ISR_DMA_Done,"ax",%progbits
+ 254              		.align	2
+ 255              		.global	ISR_DMA_Done
+ 256              		.thumb
+ 257              		.thumb_func
+ 258              		.type	ISR_DMA_Done, %function
+ 259              	ISR_DMA_Done:
+ 260              	.LFB67:
+ 145:main.c        ****     
+ 146:main.c        **** };
+ 147:main.c        **** 
+ 148:main.c        **** 
+ 149:main.c        **** //Når DMA er done med at overføre SAMPLE ARRAYS startes DMA_Done interrupt
+ 150:main.c        **** CY_ISR(ISR_DMA_Done)
+ 151:main.c        **** {
+ 261              		.loc 1 151 0
+ 262              		.cfi_startproc
+ 263              		@ args = 0, pretend = 0, frame = 160
+ 264              		@ frame_needed = 0, uses_anonymous_args = 0
+ 265 0000 00B5     		push	{lr}
+ 266              		.cfi_def_cfa_offset 4
+ 267              		.cfi_offset 14, -4
+ 268 0002 ABB0     		sub	sp, sp, #172
+ 269              		.cfi_def_cfa_offset 176
+ 152:main.c        ****     
+ 153:main.c        **** //Filteret ryddes for gammel data
+ 154:main.c        **** firFixedInit();
+ 270              		.loc 1 154 0
+ 271 0004 FFF7FEFF 		bl	firFixedInit
+ 272              	.LVL26:
+ 155:main.c        **** 
+ 156:main.c        **** 
+ 157:main.c        **** //De indhentede samples fra ADC kopieres til et working array for filtret 
+ 158:main.c        **** int16_t *filter_workingArray1 = firStoreNewSamples(adc_sampleArray1, NO_OF_SAMPLES);
+ 273              		.loc 1 158 0
+ 274 0008 5021     		movs	r1, #80
+ 275 000a 0848     		ldr	r0, .L24
+ 276 000c FFF7FEFF 		bl	firStoreNewSamples
+ 277              	.LVL27:
+ 159:main.c        **** int16_t filter_outputArray[NO_OF_SAMPLES];
+ 160:main.c        **** 
+ 161:main.c        **** /*Definer flere koefficientarrays og brug dette koefficient array i kald
+ 162:main.c        **** samme metode med nyt koefficientarray for at lade adc input samples 
+ 163:main.c        **** gennemløbe flere arrays uden at påvirke hinanden*/
+ 164:main.c        **** firFixed(coeffs, filter_workingArray1, filter_outputArray, NO_OF_SAMPLES, FILTER_LEN);
+ 278              		.loc 1 164 0
+ 279 0010 4023     		movs	r3, #64
+ 280 0012 0093     		str	r3, [sp]
+ 281 0014 5023     		movs	r3, #80
+ 282 0016 02AA     		add	r2, sp, #8
+ 283 0018 0146     		mov	r1, r0
+ 284 001a 0548     		ldr	r0, .L24+4
+ 285              	.LVL28:
+ 286 001c FFF7FEFF 		bl	firFixed
+ 287              	.LVL29:
+ 165:main.c        **** 
+ARM GAS  C:\Users\danie\AppData\Local\Temp\ccMFGOGe.s 			page 9
 
 
- 361 0018 99FD     		.short	-615
- 362 001a 1500     		.short	21
- 363 001c 3503     		.short	821
- 364 001e F504     		.short	1269
- 365 0020 D603     		.short	982
- 366 0022 0900     		.short	9
- 367 0024 94FB     		.short	-1132
- 368 0026 47F9     		.short	-1721
- 369 0028 F0FA     		.short	-1296
- 370 002a 0100     		.short	1
- 371 002c A505     		.short	1445
- 372 002e 5808     		.short	2136
- 373 0030 2206     		.short	1570
- 374 0032 0000     		.short	0
- 375 0034 7EF9     		.short	-1666
- 376 0036 93F6     		.short	-2413
- 377 0038 39F9     		.short	-1735
- 378 003a FEFF     		.short	-2
- 379 003c EA06     		.short	1770
- 380 003e D009     		.short	2512
- 381 0040 EA06     		.short	1770
- 382 0042 FEFF     		.short	-2
- 383 0044 39F9     		.short	-1735
- 384 0046 93F6     		.short	-2413
- 385 0048 7EF9     		.short	-1666
- 386 004a 0000     		.short	0
- 387 004c 2206     		.short	1570
- 388 004e 5808     		.short	2136
- 389 0050 A505     		.short	1445
- 390 0052 0100     		.short	1
- 391 0054 F0FA     		.short	-1296
- 392 0056 47F9     		.short	-1721
- 393 0058 94FB     		.short	-1132
- 394 005a 0900     		.short	9
- 395 005c D603     		.short	982
- 396 005e F504     		.short	1269
- 397 0060 3503     		.short	821
- 398 0062 1500     		.short	21
- 399 0064 99FD     		.short	-615
- 400 0066 06FD     		.short	-762
- 401 0068 4DFE     		.short	-435
- 402 006a 5A00     		.short	90
- 403 006c EF01     		.short	495
- 404 006e 6502     		.short	613
- 405 0070 E501     		.short	485
- 406 0072 1C01     		.short	284
- 407 0074 BA00     		.short	186
- 408 0076 1F01     		.short	287
- 409 0078 5202     		.short	594
- 410 007a 2204     		.short	1058
- 411 007c 44FA     		.short	-1468
- 412              		.bss
- 413              		.align	2
- 414              		.set	.LANCHOR0,. + 0
- 415              		.type	adc_sampleArray1, %object
- 416              		.size	adc_sampleArray1, 160
- 417              	adc_sampleArray1:
-ARM GAS  C:\Users\danie\AppData\Local\Temp\ccgko4Fm.s 			page 11
+ 166:main.c        **** //Skift de samples der lige er blevet processeret ud med 
+ 167:main.c        **** firMoveProcSamples(NO_OF_SAMPLES);
+ 288              		.loc 1 167 0
+ 289 0020 5020     		movs	r0, #80
+ 290 0022 FFF7FEFF 		bl	firMoveProcSamples
+ 291              	.LVL30:
+ 168:main.c        ****   
+ 169:main.c        **** //Debug   
+ 170:main.c        **** //VDAC8_1_SetValue((32768u+adc_sampleArray1[0])>>8); //16 bit offset
+ 171:main.c        **** //VDAC8_1_SetValue((32768u+ADC_DelSig_1_GetResult16())>>8);
+ 172:main.c        **** 
+ 173:main.c        **** }
+ 292              		.loc 1 173 0
+ 293 0026 2BB0     		add	sp, sp, #172
+ 294              		.cfi_def_cfa_offset 4
+ 295              		@ sp needed
+ 296 0028 5DF804FB 		ldr	pc, [sp], #4
+ 297              	.L25:
+ 298              		.align	2
+ 299              	.L24:
+ 300 002c 00000000 		.word	.LANCHOR0
+ 301 0030 00000000 		.word	.LANCHOR1
+ 302              		.cfi_endproc
+ 303              	.LFE67:
+ 304              		.size	ISR_DMA_Done, .-ISR_DMA_Done
+ 305              		.section	.text.main,"ax",%progbits
+ 306              		.align	2
+ 307              		.global	main
+ 308              		.thumb
+ 309              		.thumb_func
+ 310              		.type	main, %function
+ 311              	main:
+ 312              	.LFB68:
+ 174:main.c        **** 
+ 175:main.c        **** int main(void)
+ 176:main.c        **** {
+ 313              		.loc 1 176 0
+ 314              		.cfi_startproc
+ 315              		@ Volatile: function does not return.
+ 316              		@ args = 0, pretend = 0, frame = 0
+ 317              		@ frame_needed = 0, uses_anonymous_args = 0
+ 318 0000 08B5     		push	{r3, lr}
+ 319              		.cfi_def_cfa_offset 8
+ 320              		.cfi_offset 3, -8
+ 321              		.cfi_offset 14, -4
+ 177:main.c        ****     Init();
+ 322              		.loc 1 177 0
+ 323 0002 FFF7FEFF 		bl	Init
+ 324              	.LVL31:
+ 325              	.L27:
+ 326 0006 FEE7     		b	.L27
+ 327              		.cfi_endproc
+ 328              	.LFE68:
+ 329              		.size	main, .-main
+ 330              		.comm	DMA_TD,1,4
+ 331              		.comm	DMA_Chan,1,1
+ 332              		.data
+ARM GAS  C:\Users\danie\AppData\Local\Temp\ccMFGOGe.s 			page 10
 
 
- 418 0000 00000000 		.space	160
- 418      00000000 
- 418      00000000 
- 418      00000000 
- 418      00000000 
- 419              		.type	adc_sampleArray2, %object
- 420              		.size	adc_sampleArray2, 160
- 421              	adc_sampleArray2:
- 422 00a0 00000000 		.space	160
- 422      00000000 
- 422      00000000 
- 422      00000000 
- 422      00000000 
- 423              		.text
- 424              	.Letext0:
- 425              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.3\\psoc creator\\import\\gnu\\arm\\5.4.
- 426              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.3\\psoc creator\\import\\gnu\\arm\\5.4.
- 427              		.file 4 "Generated_Source\\PSoC5/cytypes.h"
- 428              		.file 5 "Generated_Source\\PSoC5/core_cm3.h"
- 429              		.file 6 "Generated_Source\\PSoC5/DMA_1_dma.h"
- 430              		.file 7 "Generated_Source\\PSoC5/CYDMAC.H"
- 431              		.file 8 "Generated_Source\\PSoC5/ADC_DelSig_1.h"
- 432              		.file 9 "Generated_Source\\PSoC5/ADC_DelSig_1_IRQ.h"
- 433              		.file 10 "Generated_Source\\PSoC5/ISR_DMA_Done.h"
- 434              		.file 11 "fir_filter1.h"
- 435              		.section	.debug_info,"",%progbits
- 436              	.Ldebug_info0:
- 437 0000 9A040000 		.4byte	0x49a
- 438 0004 0400     		.2byte	0x4
- 439 0006 00000000 		.4byte	.Ldebug_abbrev0
- 440 000a 04       		.byte	0x4
- 441 000b 01       		.uleb128 0x1
- 442 000c 93000000 		.4byte	.LASF51
- 443 0010 0C       		.byte	0xc
- 444 0011 E4020000 		.4byte	.LASF52
- 445 0015 9D010000 		.4byte	.LASF53
- 446 0019 00000000 		.4byte	.Ldebug_ranges0+0
- 447 001d 00000000 		.4byte	0
- 448 0021 00000000 		.4byte	.Ldebug_line0
- 449 0025 02       		.uleb128 0x2
- 450 0026 01       		.byte	0x1
- 451 0027 06       		.byte	0x6
- 452 0028 6C030000 		.4byte	.LASF0
- 453 002c 02       		.uleb128 0x2
- 454 002d 01       		.byte	0x1
- 455 002e 08       		.byte	0x8
- 456 002f 85000000 		.4byte	.LASF1
- 457 0033 03       		.uleb128 0x3
- 458 0034 07000000 		.4byte	.LASF4
- 459 0038 02       		.byte	0x2
- 460 0039 29       		.byte	0x29
- 461 003a 3E000000 		.4byte	0x3e
- 462 003e 02       		.uleb128 0x2
- 463 003f 02       		.byte	0x2
- 464 0040 05       		.byte	0x5
- 465 0041 03030000 		.4byte	.LASF2
- 466 0045 02       		.uleb128 0x2
-ARM GAS  C:\Users\danie\AppData\Local\Temp\ccgko4Fm.s 			page 12
+ 333              		.align	2
+ 334              		.set	.LANCHOR1,. + 0
+ 335              		.type	coeffs, %object
+ 336              		.size	coeffs, 128
+ 337              	coeffs:
+ 338 0000 44FA     		.short	-1468
+ 339 0002 2204     		.short	1058
+ 340 0004 5202     		.short	594
+ 341 0006 1F01     		.short	287
+ 342 0008 BA00     		.short	186
+ 343 000a 1C01     		.short	284
+ 344 000c E501     		.short	485
+ 345 000e 6502     		.short	613
+ 346 0010 EF01     		.short	495
+ 347 0012 5A00     		.short	90
+ 348 0014 4DFE     		.short	-435
+ 349 0016 06FD     		.short	-762
+ 350 0018 99FD     		.short	-615
+ 351 001a 1500     		.short	21
+ 352 001c 3503     		.short	821
+ 353 001e F504     		.short	1269
+ 354 0020 D603     		.short	982
+ 355 0022 0900     		.short	9
+ 356 0024 94FB     		.short	-1132
+ 357 0026 47F9     		.short	-1721
+ 358 0028 F0FA     		.short	-1296
+ 359 002a 0100     		.short	1
+ 360 002c A505     		.short	1445
+ 361 002e 5808     		.short	2136
+ 362 0030 2206     		.short	1570
+ 363 0032 0000     		.short	0
+ 364 0034 7EF9     		.short	-1666
+ 365 0036 93F6     		.short	-2413
+ 366 0038 39F9     		.short	-1735
+ 367 003a FEFF     		.short	-2
+ 368 003c EA06     		.short	1770
+ 369 003e D009     		.short	2512
+ 370 0040 EA06     		.short	1770
+ 371 0042 FEFF     		.short	-2
+ 372 0044 39F9     		.short	-1735
+ 373 0046 93F6     		.short	-2413
+ 374 0048 7EF9     		.short	-1666
+ 375 004a 0000     		.short	0
+ 376 004c 2206     		.short	1570
+ 377 004e 5808     		.short	2136
+ 378 0050 A505     		.short	1445
+ 379 0052 0100     		.short	1
+ 380 0054 F0FA     		.short	-1296
+ 381 0056 47F9     		.short	-1721
+ 382 0058 94FB     		.short	-1132
+ 383 005a 0900     		.short	9
+ 384 005c D603     		.short	982
+ 385 005e F504     		.short	1269
+ 386 0060 3503     		.short	821
+ 387 0062 1500     		.short	21
+ 388 0064 99FD     		.short	-615
+ 389 0066 06FD     		.short	-762
+ARM GAS  C:\Users\danie\AppData\Local\Temp\ccMFGOGe.s 			page 11
 
 
- 467 0046 02       		.byte	0x2
- 468 0047 07       		.byte	0x7
- 469 0048 56010000 		.4byte	.LASF3
- 470 004c 03       		.uleb128 0x3
- 471 004d 11000000 		.4byte	.LASF5
- 472 0051 02       		.byte	0x2
- 473 0052 3F       		.byte	0x3f
- 474 0053 57000000 		.4byte	0x57
- 475 0057 02       		.uleb128 0x2
- 476 0058 04       		.byte	0x4
- 477 0059 05       		.byte	0x5
- 478 005a 27030000 		.4byte	.LASF6
- 479 005e 02       		.uleb128 0x2
- 480 005f 04       		.byte	0x4
- 481 0060 07       		.byte	0x7
- 482 0061 44010000 		.4byte	.LASF7
- 483 0065 02       		.uleb128 0x2
- 484 0066 08       		.byte	0x8
- 485 0067 05       		.byte	0x5
- 486 0068 D6020000 		.4byte	.LASF8
- 487 006c 02       		.uleb128 0x2
- 488 006d 08       		.byte	0x8
- 489 006e 07       		.byte	0x7
- 490 006f 73020000 		.4byte	.LASF9
- 491 0073 04       		.uleb128 0x4
- 492 0074 04       		.byte	0x4
- 493 0075 05       		.byte	0x5
- 494 0076 696E7400 		.ascii	"int\000"
- 495 007a 02       		.uleb128 0x2
- 496 007b 04       		.byte	0x4
- 497 007c 07       		.byte	0x7
- 498 007d 66020000 		.4byte	.LASF10
- 499 0081 03       		.uleb128 0x3
- 500 0082 A3020000 		.4byte	.LASF11
- 501 0086 03       		.byte	0x3
- 502 0087 20       		.byte	0x20
- 503 0088 33000000 		.4byte	0x33
- 504 008c 03       		.uleb128 0x3
- 505 008d 5A000000 		.4byte	.LASF12
- 506 0091 03       		.byte	0x3
- 507 0092 2C       		.byte	0x2c
- 508 0093 4C000000 		.4byte	0x4c
- 509 0097 05       		.uleb128 0x5
- 510 0098 14030000 		.4byte	.LASF13
- 511 009c 04       		.byte	0x4
- 512 009d E801     		.2byte	0x1e8
- 513 009f 2C000000 		.4byte	0x2c
- 514 00a3 05       		.uleb128 0x5
- 515 00a4 2E020000 		.4byte	.LASF14
- 516 00a8 04       		.byte	0x4
- 517 00a9 E901     		.2byte	0x1e9
- 518 00ab 45000000 		.4byte	0x45
- 519 00af 05       		.uleb128 0x5
- 520 00b0 3E020000 		.4byte	.LASF15
- 521 00b4 04       		.byte	0x4
- 522 00b5 EA01     		.2byte	0x1ea
- 523 00b7 5E000000 		.4byte	0x5e
-ARM GAS  C:\Users\danie\AppData\Local\Temp\ccgko4Fm.s 			page 13
+ 390 0068 4DFE     		.short	-435
+ 391 006a 5A00     		.short	90
+ 392 006c EF01     		.short	495
+ 393 006e 6502     		.short	613
+ 394 0070 E501     		.short	485
+ 395 0072 1C01     		.short	284
+ 396 0074 BA00     		.short	186
+ 397 0076 1F01     		.short	287
+ 398 0078 5202     		.short	594
+ 399 007a 2204     		.short	1058
+ 400 007c 44FA     		.short	-1468
+ 401 007e 0000     		.space	2
+ 402              		.bss
+ 403              		.align	2
+ 404              		.set	.LANCHOR0,. + 0
+ 405              		.type	adc_sampleArray1, %object
+ 406              		.size	adc_sampleArray1, 160
+ 407              	adc_sampleArray1:
+ 408 0000 00000000 		.space	160
+ 408      00000000 
+ 408      00000000 
+ 408      00000000 
+ 408      00000000 
+ 409              		.text
+ 410              	.Letext0:
+ 411              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.3\\psoc creator\\import\\gnu\\arm\\5.4.
+ 412              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.3\\psoc creator\\import\\gnu\\arm\\5.4.
+ 413              		.file 4 "Generated_Source\\PSoC5/cytypes.h"
+ 414              		.file 5 "Generated_Source\\PSoC5/core_cm3.h"
+ 415              		.file 6 "Generated_Source\\PSoC5/DMA_1_dma.h"
+ 416              		.file 7 "Generated_Source\\PSoC5/CYDMAC.H"
+ 417              		.file 8 "Generated_Source\\PSoC5/ADC_DelSig_1.h"
+ 418              		.file 9 "Generated_Source\\PSoC5/Opamp_1.h"
+ 419              		.file 10 "Generated_Source\\PSoC5/Opamp_2.h"
+ 420              		.file 11 "Generated_Source\\PSoC5/VDAC8_1.h"
+ 421              		.file 12 "Generated_Source\\PSoC5/ADC_DelSig_1_IRQ.h"
+ 422              		.file 13 "Generated_Source\\PSoC5/ISR_DMA_Done.h"
+ 423              		.file 14 "fir_filter1.h"
+ 424              		.section	.debug_info,"",%progbits
+ 425              	.Ldebug_info0:
+ 426 0000 83040000 		.4byte	0x483
+ 427 0004 0400     		.2byte	0x4
+ 428 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 429 000a 04       		.byte	0x4
+ 430 000b 01       		.uleb128 0x1
+ 431 000c A8000000 		.4byte	.LASF53
+ 432 0010 0C       		.byte	0xc
+ 433 0011 EF020000 		.4byte	.LASF54
+ 434 0015 77010000 		.4byte	.LASF55
+ 435 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 436 001d 00000000 		.4byte	0
+ 437 0021 00000000 		.4byte	.Ldebug_line0
+ 438 0025 02       		.uleb128 0x2
+ 439 0026 01       		.byte	0x1
+ 440 0027 06       		.byte	0x6
+ 441 0028 72030000 		.4byte	.LASF0
+ 442 002c 02       		.uleb128 0x2
+ARM GAS  C:\Users\danie\AppData\Local\Temp\ccMFGOGe.s 			page 12
 
 
- 524 00bb 05       		.uleb128 0x5
- 525 00bc 8A020000 		.4byte	.LASF16
- 526 00c0 04       		.byte	0x4
- 527 00c1 EC01     		.2byte	0x1ec
- 528 00c3 3E000000 		.4byte	0x3e
- 529 00c7 02       		.uleb128 0x2
- 530 00c8 04       		.byte	0x4
- 531 00c9 04       		.byte	0x4
- 532 00ca 7F000000 		.4byte	.LASF17
- 533 00ce 02       		.uleb128 0x2
- 534 00cf 08       		.byte	0x8
- 535 00d0 04       		.byte	0x4
- 536 00d1 96010000 		.4byte	.LASF18
- 537 00d5 02       		.uleb128 0x2
- 538 00d6 01       		.byte	0x1
- 539 00d7 08       		.byte	0x8
- 540 00d8 EB020000 		.4byte	.LASF19
- 541 00dc 05       		.uleb128 0x5
- 542 00dd 27010000 		.4byte	.LASF20
- 543 00e1 04       		.byte	0x4
- 544 00e2 9202     		.2byte	0x292
- 545 00e4 E8000000 		.4byte	0xe8
- 546 00e8 06       		.uleb128 0x6
- 547 00e9 97000000 		.4byte	0x97
- 548 00ed 02       		.uleb128 0x2
- 549 00ee 08       		.byte	0x8
- 550 00ef 04       		.byte	0x4
- 551 00f0 B6020000 		.4byte	.LASF21
- 552 00f4 02       		.uleb128 0x2
- 553 00f5 04       		.byte	0x4
- 554 00f6 07       		.byte	0x7
- 555 00f7 CD020000 		.4byte	.LASF22
- 556 00fb 07       		.uleb128 0x7
- 557 00fc AB020000 		.4byte	.LASF26
- 558 0100 01       		.byte	0x1
- 559 0101 2A       		.byte	0x2a
- 560 0102 00000000 		.4byte	.LFB64
- 561 0106 28000000 		.4byte	.LFE64-.LFB64
- 562 010a 01       		.uleb128 0x1
- 563 010b 9C       		.byte	0x9c
- 564 010c 4B010000 		.4byte	0x14b
- 565 0110 08       		.uleb128 0x8
- 566 0111 21010000 		.4byte	.LASF23
- 567 0115 01       		.byte	0x1
- 568 0116 2A       		.byte	0x2a
- 569 0117 4B010000 		.4byte	0x14b
- 570 011b 00000000 		.4byte	.LLST0
- 571 011f 08       		.uleb128 0x8
- 572 0120 0D030000 		.4byte	.LASF24
- 573 0124 01       		.byte	0x1
- 574 0125 2A       		.byte	0x2a
- 575 0126 51010000 		.4byte	0x151
- 576 012a 1E000000 		.4byte	.LLST1
- 577 012e 08       		.uleb128 0x8
- 578 012f 8B030000 		.4byte	.LASF25
- 579 0133 01       		.byte	0x1
- 580 0134 2A       		.byte	0x2a
-ARM GAS  C:\Users\danie\AppData\Local\Temp\ccgko4Fm.s 			page 14
+ 443 002d 01       		.byte	0x1
+ 444 002e 08       		.byte	0x8
+ 445 002f 9A000000 		.4byte	.LASF1
+ 446 0033 03       		.uleb128 0x3
+ 447 0034 07000000 		.4byte	.LASF4
+ 448 0038 02       		.byte	0x2
+ 449 0039 29       		.byte	0x29
+ 450 003a 3E000000 		.4byte	0x3e
+ 451 003e 02       		.uleb128 0x2
+ 452 003f 02       		.byte	0x2
+ 453 0040 05       		.byte	0x5
+ 454 0041 0E030000 		.4byte	.LASF2
+ 455 0045 02       		.uleb128 0x2
+ 456 0046 02       		.byte	0x2
+ 457 0047 07       		.byte	0x7
+ 458 0048 29000000 		.4byte	.LASF3
+ 459 004c 03       		.uleb128 0x3
+ 460 004d 11000000 		.4byte	.LASF5
+ 461 0051 02       		.byte	0x2
+ 462 0052 3F       		.byte	0x3f
+ 463 0053 57000000 		.4byte	0x57
+ 464 0057 02       		.uleb128 0x2
+ 465 0058 04       		.byte	0x4
+ 466 0059 05       		.byte	0x5
+ 467 005a 32030000 		.4byte	.LASF6
+ 468 005e 02       		.uleb128 0x2
+ 469 005f 04       		.byte	0x4
+ 470 0060 07       		.byte	0x7
+ 471 0061 59010000 		.4byte	.LASF7
+ 472 0065 02       		.uleb128 0x2
+ 473 0066 08       		.byte	0x8
+ 474 0067 05       		.byte	0x5
+ 475 0068 CF020000 		.4byte	.LASF8
+ 476 006c 02       		.uleb128 0x2
+ 477 006d 08       		.byte	0x8
+ 478 006e 07       		.byte	0x7
+ 479 006f 86020000 		.4byte	.LASF9
+ 480 0073 04       		.uleb128 0x4
+ 481 0074 04       		.byte	0x4
+ 482 0075 05       		.byte	0x5
+ 483 0076 696E7400 		.ascii	"int\000"
+ 484 007a 02       		.uleb128 0x2
+ 485 007b 04       		.byte	0x4
+ 486 007c 07       		.byte	0x7
+ 487 007d 6D020000 		.4byte	.LASF10
+ 488 0081 03       		.uleb128 0x3
+ 489 0082 B6020000 		.4byte	.LASF11
+ 490 0086 03       		.byte	0x3
+ 491 0087 20       		.byte	0x20
+ 492 0088 33000000 		.4byte	0x33
+ 493 008c 03       		.uleb128 0x3
+ 494 008d BE020000 		.4byte	.LASF12
+ 495 0091 03       		.byte	0x3
+ 496 0092 2C       		.byte	0x2c
+ 497 0093 4C000000 		.4byte	0x4c
+ 498 0097 05       		.uleb128 0x5
+ 499 0098 1F030000 		.4byte	.LASF13
+ARM GAS  C:\Users\danie\AppData\Local\Temp\ccMFGOGe.s 			page 13
 
 
- 581 0135 73000000 		.4byte	0x73
- 582 0139 3C000000 		.4byte	.LLST2
- 583 013d 09       		.uleb128 0x9
- 584 013e 6900     		.ascii	"i\000"
- 585 0140 01       		.byte	0x1
- 586 0141 2C       		.byte	0x2c
- 587 0142 73000000 		.4byte	0x73
- 588 0146 5A000000 		.4byte	.LLST3
- 589 014a 00       		.byte	0
- 590 014b 0A       		.uleb128 0xa
- 591 014c 04       		.byte	0x4
- 592 014d 81000000 		.4byte	0x81
- 593 0151 0A       		.uleb128 0xa
- 594 0152 04       		.byte	0x4
- 595 0153 CE000000 		.4byte	0xce
- 596 0157 07       		.uleb128 0x7
- 597 0158 C2020000 		.4byte	.LASF27
- 598 015c 01       		.byte	0x1
- 599 015d 33       		.byte	0x33
- 600 015e 00000000 		.4byte	.LFB65
- 601 0162 6C000000 		.4byte	.LFE65-.LFB65
- 602 0166 01       		.uleb128 0x1
- 603 0167 9C       		.byte	0x9c
- 604 0168 A7010000 		.4byte	0x1a7
- 605 016c 08       		.uleb128 0x8
- 606 016d 21010000 		.4byte	.LASF23
- 607 0171 01       		.byte	0x1
- 608 0172 33       		.byte	0x33
- 609 0173 51010000 		.4byte	0x151
- 610 0177 79000000 		.4byte	.LLST4
- 611 017b 08       		.uleb128 0x8
- 612 017c 0D030000 		.4byte	.LASF24
- 613 0180 01       		.byte	0x1
- 614 0181 33       		.byte	0x33
- 615 0182 4B010000 		.4byte	0x14b
- 616 0186 A5000000 		.4byte	.LLST5
- 617 018a 08       		.uleb128 0x8
- 618 018b 8B030000 		.4byte	.LASF25
- 619 018f 01       		.byte	0x1
- 620 0190 33       		.byte	0x33
- 621 0191 73000000 		.4byte	0x73
- 622 0195 D1000000 		.4byte	.LLST6
- 623 0199 09       		.uleb128 0x9
- 624 019a 6900     		.ascii	"i\000"
- 625 019c 01       		.byte	0x1
- 626 019d 35       		.byte	0x35
- 627 019e 73000000 		.4byte	0x73
- 628 01a2 FD000000 		.4byte	.LLST7
- 629 01a6 00       		.byte	0
- 630 01a7 0B       		.uleb128 0xb
- 631 01a8 69010000 		.4byte	.LASF54
- 632 01ac 01       		.byte	0x1
- 633 01ad 58       		.byte	0x58
- 634 01ae 00000000 		.4byte	.LFB66
- 635 01b2 8C000000 		.4byte	.LFE66-.LFB66
- 636 01b6 01       		.uleb128 0x1
- 637 01b7 9C       		.byte	0x9c
-ARM GAS  C:\Users\danie\AppData\Local\Temp\ccgko4Fm.s 			page 15
+ 500 009c 04       		.byte	0x4
+ 501 009d E801     		.2byte	0x1e8
+ 502 009f 2C000000 		.4byte	0x2c
+ 503 00a3 05       		.uleb128 0x5
+ 504 00a4 35020000 		.4byte	.LASF14
+ 505 00a8 04       		.byte	0x4
+ 506 00a9 E901     		.2byte	0x1e9
+ 507 00ab 45000000 		.4byte	0x45
+ 508 00af 05       		.uleb128 0x5
+ 509 00b0 45020000 		.4byte	.LASF15
+ 510 00b4 04       		.byte	0x4
+ 511 00b5 EA01     		.2byte	0x1ea
+ 512 00b7 5E000000 		.4byte	0x5e
+ 513 00bb 05       		.uleb128 0x5
+ 514 00bc 9D020000 		.4byte	.LASF16
+ 515 00c0 04       		.byte	0x4
+ 516 00c1 EC01     		.2byte	0x1ec
+ 517 00c3 3E000000 		.4byte	0x3e
+ 518 00c7 02       		.uleb128 0x2
+ 519 00c8 04       		.byte	0x4
+ 520 00c9 04       		.byte	0x4
+ 521 00ca 94000000 		.4byte	.LASF17
+ 522 00ce 02       		.uleb128 0x2
+ 523 00cf 08       		.byte	0x8
+ 524 00d0 04       		.byte	0x4
+ 525 00d1 0D020000 		.4byte	.LASF18
+ 526 00d5 02       		.uleb128 0x2
+ 527 00d6 01       		.byte	0x1
+ 528 00d7 08       		.byte	0x8
+ 529 00d8 F6020000 		.4byte	.LASF19
+ 530 00dc 05       		.uleb128 0x5
+ 531 00dd 3C010000 		.4byte	.LASF20
+ 532 00e1 04       		.byte	0x4
+ 533 00e2 9202     		.2byte	0x292
+ 534 00e4 E8000000 		.4byte	0xe8
+ 535 00e8 06       		.uleb128 0x6
+ 536 00e9 97000000 		.4byte	0x97
+ 537 00ed 02       		.uleb128 0x2
+ 538 00ee 08       		.byte	0x8
+ 539 00ef 04       		.byte	0x4
+ 540 00f0 66030000 		.4byte	.LASF21
+ 541 00f4 02       		.uleb128 0x2
+ 542 00f5 04       		.byte	0x4
+ 543 00f6 07       		.byte	0x7
+ 544 00f7 C6020000 		.4byte	.LASF22
+ 545 00fb 07       		.uleb128 0x7
+ 546 00fc 7A020000 		.4byte	.LASF26
+ 547 0100 01       		.byte	0x1
+ 548 0101 2D       		.byte	0x2d
+ 549 0102 00000000 		.4byte	.LFB64
+ 550 0106 28000000 		.4byte	.LFE64-.LFB64
+ 551 010a 01       		.uleb128 0x1
+ 552 010b 9C       		.byte	0x9c
+ 553 010c 4B010000 		.4byte	0x14b
+ 554 0110 08       		.uleb128 0x8
+ 555 0111 36010000 		.4byte	.LASF23
+ 556 0115 01       		.byte	0x1
+ARM GAS  C:\Users\danie\AppData\Local\Temp\ccMFGOGe.s 			page 14
 
 
- 638 01b8 A4020000 		.4byte	0x2a4
- 639 01bc 0C       		.uleb128 0xc
- 640 01bd 12000000 		.4byte	.LVL13
- 641 01c1 03040000 		.4byte	0x403
- 642 01c5 E2010000 		.4byte	0x1e2
- 643 01c9 0D       		.uleb128 0xd
- 644 01ca 01       		.uleb128 0x1
- 645 01cb 50       		.byte	0x50
- 646 01cc 01       		.uleb128 0x1
- 647 01cd 32       		.byte	0x32
- 648 01ce 0D       		.uleb128 0xd
- 649 01cf 01       		.uleb128 0x1
- 650 01d0 51       		.byte	0x51
- 651 01d1 01       		.uleb128 0x1
- 652 01d2 31       		.byte	0x31
- 653 01d3 0D       		.uleb128 0xd
- 654 01d4 01       		.uleb128 0x1
- 655 01d5 52       		.byte	0x52
- 656 01d6 03       		.uleb128 0x3
- 657 01d7 0A       		.byte	0xa
- 658 01d8 0040     		.2byte	0x4000
- 659 01da 0D       		.uleb128 0xd
- 660 01db 01       		.uleb128 0x1
- 661 01dc 53       		.byte	0x53
- 662 01dd 03       		.uleb128 0x3
- 663 01de 0A       		.byte	0xa
- 664 01df FF1F     		.2byte	0x1fff
- 665 01e1 00       		.byte	0
- 666 01e2 0E       		.uleb128 0xe
- 667 01e3 1A000000 		.4byte	.LVL14
- 668 01e7 0E040000 		.4byte	0x40e
- 669 01eb 0E       		.uleb128 0xe
- 670 01ec 22000000 		.4byte	.LVL15
- 671 01f0 0E040000 		.4byte	0x40e
- 672 01f4 0C       		.uleb128 0xc
- 673 01f5 30000000 		.4byte	.LVL16
- 674 01f9 19040000 		.4byte	0x419
- 675 01fd 0D020000 		.4byte	0x20d
- 676 0201 0D       		.uleb128 0xd
- 677 0202 01       		.uleb128 0x1
- 678 0203 51       		.byte	0x51
- 679 0204 02       		.uleb128 0x2
- 680 0205 08       		.byte	0x8
- 681 0206 A0       		.byte	0xa0
- 682 0207 0D       		.uleb128 0xd
- 683 0208 01       		.uleb128 0x1
- 684 0209 53       		.byte	0x53
- 685 020a 01       		.uleb128 0x1
- 686 020b 32       		.byte	0x32
- 687 020c 00       		.byte	0
- 688 020d 0C       		.uleb128 0xc
- 689 020e 3C000000 		.4byte	.LVL17
- 690 0212 19040000 		.4byte	0x419
- 691 0216 2C020000 		.4byte	0x22c
- 692 021a 0D       		.uleb128 0xd
- 693 021b 01       		.uleb128 0x1
- 694 021c 51       		.byte	0x51
-ARM GAS  C:\Users\danie\AppData\Local\Temp\ccgko4Fm.s 			page 16
+ 557 0116 2D       		.byte	0x2d
+ 558 0117 4B010000 		.4byte	0x14b
+ 559 011b 00000000 		.4byte	.LLST0
+ 560 011f 08       		.uleb128 0x8
+ 561 0120 18030000 		.4byte	.LASF24
+ 562 0124 01       		.byte	0x1
+ 563 0125 2D       		.byte	0x2d
+ 564 0126 51010000 		.4byte	0x151
+ 565 012a 1E000000 		.4byte	.LLST1
+ 566 012e 08       		.uleb128 0x8
+ 567 012f 91030000 		.4byte	.LASF25
+ 568 0133 01       		.byte	0x1
+ 569 0134 2D       		.byte	0x2d
+ 570 0135 73000000 		.4byte	0x73
+ 571 0139 3C000000 		.4byte	.LLST2
+ 572 013d 09       		.uleb128 0x9
+ 573 013e 6900     		.ascii	"i\000"
+ 574 0140 01       		.byte	0x1
+ 575 0141 2F       		.byte	0x2f
+ 576 0142 73000000 		.4byte	0x73
+ 577 0146 5A000000 		.4byte	.LLST3
+ 578 014a 00       		.byte	0
+ 579 014b 0A       		.uleb128 0xa
+ 580 014c 04       		.byte	0x4
+ 581 014d 81000000 		.4byte	0x81
+ 582 0151 0A       		.uleb128 0xa
+ 583 0152 04       		.byte	0x4
+ 584 0153 CE000000 		.4byte	0xce
+ 585 0157 07       		.uleb128 0x7
+ 586 0158 6B010000 		.4byte	.LASF27
+ 587 015c 01       		.byte	0x1
+ 588 015d 36       		.byte	0x36
+ 589 015e 00000000 		.4byte	.LFB65
+ 590 0162 6C000000 		.4byte	.LFE65-.LFB65
+ 591 0166 01       		.uleb128 0x1
+ 592 0167 9C       		.byte	0x9c
+ 593 0168 A7010000 		.4byte	0x1a7
+ 594 016c 08       		.uleb128 0x8
+ 595 016d 36010000 		.4byte	.LASF23
+ 596 0171 01       		.byte	0x1
+ 597 0172 36       		.byte	0x36
+ 598 0173 51010000 		.4byte	0x151
+ 599 0177 79000000 		.4byte	.LLST4
+ 600 017b 08       		.uleb128 0x8
+ 601 017c 18030000 		.4byte	.LASF24
+ 602 0180 01       		.byte	0x1
+ 603 0181 36       		.byte	0x36
+ 604 0182 4B010000 		.4byte	0x14b
+ 605 0186 A5000000 		.4byte	.LLST5
+ 606 018a 08       		.uleb128 0x8
+ 607 018b 91030000 		.4byte	.LASF25
+ 608 018f 01       		.byte	0x1
+ 609 0190 36       		.byte	0x36
+ 610 0191 73000000 		.4byte	0x73
+ 611 0195 D1000000 		.4byte	.LLST6
+ 612 0199 09       		.uleb128 0x9
+ 613 019a 6900     		.ascii	"i\000"
+ARM GAS  C:\Users\danie\AppData\Local\Temp\ccMFGOGe.s 			page 15
 
 
- 695 021d 02       		.uleb128 0x2
- 696 021e 08       		.byte	0x8
- 697 021f A0       		.byte	0xa0
- 698 0220 0D       		.uleb128 0xd
- 699 0221 01       		.uleb128 0x1
- 700 0222 52       		.byte	0x52
- 701 0223 02       		.uleb128 0x2
- 702 0224 09       		.byte	0x9
- 703 0225 FE       		.byte	0xfe
- 704 0226 0D       		.uleb128 0xd
- 705 0227 01       		.uleb128 0x1
- 706 0228 53       		.byte	0x53
- 707 0229 01       		.uleb128 0x1
- 708 022a 36       		.byte	0x36
- 709 022b 00       		.byte	0
- 710 022c 0C       		.uleb128 0xc
- 711 022d 4A000000 		.4byte	.LVL18
- 712 0231 24040000 		.4byte	0x424
- 713 0235 47020000 		.4byte	0x247
- 714 0239 0D       		.uleb128 0xd
- 715 023a 01       		.uleb128 0x1
- 716 023b 51       		.byte	0x51
- 717 023c 03       		.uleb128 0x3
- 718 023d 0A       		.byte	0xa
- 719 023e 104E     		.2byte	0x4e10
- 720 0240 0D       		.uleb128 0xd
- 721 0241 01       		.uleb128 0x1
- 722 0242 52       		.byte	0x52
- 723 0243 02       		.uleb128 0x2
- 724 0244 75       		.byte	0x75
- 725 0245 00       		.sleb128 0
- 726 0246 00       		.byte	0
- 727 0247 0C       		.uleb128 0xc
- 728 0248 5A000000 		.4byte	.LVL19
- 729 024c 24040000 		.4byte	0x424
- 730 0250 63020000 		.4byte	0x263
- 731 0254 0D       		.uleb128 0xd
- 732 0255 01       		.uleb128 0x1
- 733 0256 51       		.byte	0x51
- 734 0257 03       		.uleb128 0x3
- 735 0258 0A       		.byte	0xa
- 736 0259 104E     		.2byte	0x4e10
- 737 025b 0D       		.uleb128 0xd
- 738 025c 01       		.uleb128 0x1
- 739 025d 52       		.byte	0x52
- 740 025e 03       		.uleb128 0x3
- 741 025f 75       		.byte	0x75
- 742 0260 A001     		.sleb128 160
- 743 0262 00       		.byte	0
- 744 0263 0E       		.uleb128 0xe
- 745 0264 62000000 		.4byte	.LVL20
- 746 0268 2F040000 		.4byte	0x42f
- 747 026c 0C       		.uleb128 0xc
- 748 026d 6A000000 		.4byte	.LVL21
- 749 0271 3A040000 		.4byte	0x43a
- 750 0275 7F020000 		.4byte	0x27f
- 751 0279 0D       		.uleb128 0xd
-ARM GAS  C:\Users\danie\AppData\Local\Temp\ccgko4Fm.s 			page 17
+ 614 019c 01       		.byte	0x1
+ 615 019d 38       		.byte	0x38
+ 616 019e 73000000 		.4byte	0x73
+ 617 01a2 FD000000 		.4byte	.LLST7
+ 618 01a6 00       		.byte	0
+ 619 01a7 0B       		.uleb128 0xb
+ 620 01a8 D2010000 		.4byte	.LASF56
+ 621 01ac 01       		.byte	0x1
+ 622 01ad 61       		.byte	0x61
+ 623 01ae 00000000 		.4byte	.LFB66
+ 624 01b2 74000000 		.4byte	.LFE66-.LFB66
+ 625 01b6 01       		.uleb128 0x1
+ 626 01b7 9C       		.byte	0x9c
+ 627 01b8 7E020000 		.4byte	0x27e
+ 628 01bc 0C       		.uleb128 0xc
+ 629 01bd 12000000 		.4byte	.LVL13
+ 630 01c1 CB030000 		.4byte	0x3cb
+ 631 01c5 E2010000 		.4byte	0x1e2
+ 632 01c9 0D       		.uleb128 0xd
+ 633 01ca 01       		.uleb128 0x1
+ 634 01cb 50       		.byte	0x50
+ 635 01cc 01       		.uleb128 0x1
+ 636 01cd 32       		.byte	0x32
+ 637 01ce 0D       		.uleb128 0xd
+ 638 01cf 01       		.uleb128 0x1
+ 639 01d0 51       		.byte	0x51
+ 640 01d1 01       		.uleb128 0x1
+ 641 01d2 31       		.byte	0x31
+ 642 01d3 0D       		.uleb128 0xd
+ 643 01d4 01       		.uleb128 0x1
+ 644 01d5 52       		.byte	0x52
+ 645 01d6 03       		.uleb128 0x3
+ 646 01d7 0A       		.byte	0xa
+ 647 01d8 0040     		.2byte	0x4000
+ 648 01da 0D       		.uleb128 0xd
+ 649 01db 01       		.uleb128 0x1
+ 650 01dc 53       		.byte	0x53
+ 651 01dd 03       		.uleb128 0x3
+ 652 01de 0A       		.byte	0xa
+ 653 01df FF1F     		.2byte	0x1fff
+ 654 01e1 00       		.byte	0
+ 655 01e2 0E       		.uleb128 0xe
+ 656 01e3 1A000000 		.4byte	.LVL14
+ 657 01e7 D6030000 		.4byte	0x3d6
+ 658 01eb 0C       		.uleb128 0xc
+ 659 01ec 28000000 		.4byte	.LVL15
+ 660 01f0 E1030000 		.4byte	0x3e1
+ 661 01f4 04020000 		.4byte	0x204
+ 662 01f8 0D       		.uleb128 0xd
+ 663 01f9 01       		.uleb128 0x1
+ 664 01fa 51       		.byte	0x51
+ 665 01fb 02       		.uleb128 0x2
+ 666 01fc 08       		.byte	0x8
+ 667 01fd A0       		.byte	0xa0
+ 668 01fe 0D       		.uleb128 0xd
+ 669 01ff 01       		.uleb128 0x1
+ 670 0200 53       		.byte	0x53
+ARM GAS  C:\Users\danie\AppData\Local\Temp\ccMFGOGe.s 			page 16
 
 
- 752 027a 01       		.uleb128 0x1
- 753 027b 51       		.byte	0x51
- 754 027c 01       		.uleb128 0x1
- 755 027d 31       		.byte	0x31
- 756 027e 00       		.byte	0
- 757 027f 0E       		.uleb128 0xe
- 758 0280 6E000000 		.4byte	.LVL22
- 759 0284 45040000 		.4byte	0x445
- 760 0288 0E       		.uleb128 0xe
- 761 0289 72000000 		.4byte	.LVL23
- 762 028d 50040000 		.4byte	0x450
- 763 0291 0E       		.uleb128 0xe
- 764 0292 76000000 		.4byte	.LVL24
- 765 0296 5B040000 		.4byte	0x45b
- 766 029a 0E       		.uleb128 0xe
- 767 029b 7A000000 		.4byte	.LVL25
- 768 029f 66040000 		.4byte	0x466
- 769 02a3 00       		.byte	0
- 770 02a4 0F       		.uleb128 0xf
- 771 02a5 1A030000 		.4byte	.LASF28
- 772 02a9 01       		.byte	0x1
- 773 02aa 82       		.byte	0x82
- 774 02ab 00000000 		.4byte	.LFB67
- 775 02af 34000000 		.4byte	.LFE67-.LFB67
- 776 02b3 01       		.uleb128 0x1
- 777 02b4 9C       		.byte	0x9c
- 778 02b5 3A030000 		.4byte	0x33a
- 779 02b9 10       		.uleb128 0x10
- 780 02ba 90020000 		.4byte	.LASF29
- 781 02be 01       		.byte	0x1
- 782 02bf 87       		.byte	0x87
- 783 02c0 3A030000 		.4byte	0x33a
- 784 02c4 03       		.uleb128 0x3
- 785 02c5 91       		.byte	0x91
- 786 02c6 B87D     		.sleb128 -328
- 787 02c8 11       		.uleb128 0x11
- 788 02c9 92030000 		.4byte	.LASF30
- 789 02cd 01       		.byte	0x1
- 790 02ce 88       		.byte	0x88
- 791 02cf 4B010000 		.4byte	0x14b
- 792 02d3 1C010000 		.4byte	.LLST8
- 793 02d7 0E       		.uleb128 0xe
- 794 02d8 08000000 		.4byte	.LVL26
- 795 02dc 71040000 		.4byte	0x471
- 796 02e0 0C       		.uleb128 0xc
- 797 02e1 10000000 		.4byte	.LVL27
- 798 02e5 7C040000 		.4byte	0x47c
- 799 02e9 FD020000 		.4byte	0x2fd
- 800 02ed 0D       		.uleb128 0xd
- 801 02ee 01       		.uleb128 0x1
- 802 02ef 50       		.byte	0x50
- 803 02f0 05       		.uleb128 0x5
- 804 02f1 03       		.byte	0x3
- 805 02f2 00000000 		.4byte	.LANCHOR0
- 806 02f6 0D       		.uleb128 0xd
- 807 02f7 01       		.uleb128 0x1
- 808 02f8 51       		.byte	0x51
-ARM GAS  C:\Users\danie\AppData\Local\Temp\ccgko4Fm.s 			page 18
+ 671 0201 01       		.uleb128 0x1
+ 672 0202 36       		.byte	0x36
+ 673 0203 00       		.byte	0
+ 674 0204 0C       		.uleb128 0xc
+ 675 0205 36000000 		.4byte	.LVL16
+ 676 0209 EC030000 		.4byte	0x3ec
+ 677 020d 22020000 		.4byte	0x222
+ 678 0211 0D       		.uleb128 0xd
+ 679 0212 01       		.uleb128 0x1
+ 680 0213 51       		.byte	0x51
+ 681 0214 03       		.uleb128 0x3
+ 682 0215 0A       		.byte	0xa
+ 683 0216 104E     		.2byte	0x4e10
+ 684 0218 0D       		.uleb128 0xd
+ 685 0219 01       		.uleb128 0x1
+ 686 021a 52       		.byte	0x52
+ 687 021b 05       		.uleb128 0x5
+ 688 021c 03       		.byte	0x3
+ 689 021d 00000000 		.4byte	.LANCHOR0
+ 690 0221 00       		.byte	0
+ 691 0222 0E       		.uleb128 0xe
+ 692 0223 3E000000 		.4byte	.LVL17
+ 693 0227 F7030000 		.4byte	0x3f7
+ 694 022b 0C       		.uleb128 0xc
+ 695 022c 46000000 		.4byte	.LVL18
+ 696 0230 02040000 		.4byte	0x402
+ 697 0234 3E020000 		.4byte	0x23e
+ 698 0238 0D       		.uleb128 0xd
+ 699 0239 01       		.uleb128 0x1
+ 700 023a 51       		.byte	0x51
+ 701 023b 01       		.uleb128 0x1
+ 702 023c 31       		.byte	0x31
+ 703 023d 00       		.byte	0
+ 704 023e 0E       		.uleb128 0xe
+ 705 023f 4A000000 		.4byte	.LVL19
+ 706 0243 0D040000 		.4byte	0x40d
+ 707 0247 0E       		.uleb128 0xe
+ 708 0248 4E000000 		.4byte	.LVL20
+ 709 024c 18040000 		.4byte	0x418
+ 710 0250 0E       		.uleb128 0xe
+ 711 0251 52000000 		.4byte	.LVL21
+ 712 0255 23040000 		.4byte	0x423
+ 713 0259 0E       		.uleb128 0xe
+ 714 025a 56000000 		.4byte	.LVL22
+ 715 025e 2E040000 		.4byte	0x42e
+ 716 0262 0E       		.uleb128 0xe
+ 717 0263 5A000000 		.4byte	.LVL23
+ 718 0267 39040000 		.4byte	0x439
+ 719 026b 0E       		.uleb128 0xe
+ 720 026c 5E000000 		.4byte	.LVL24
+ 721 0270 44040000 		.4byte	0x444
+ 722 0274 0E       		.uleb128 0xe
+ 723 0275 62000000 		.4byte	.LVL25
+ 724 0279 4F040000 		.4byte	0x44f
+ 725 027d 00       		.byte	0
+ 726 027e 0F       		.uleb128 0xf
+ 727 027f 25030000 		.4byte	.LASF28
+ARM GAS  C:\Users\danie\AppData\Local\Temp\ccMFGOGe.s 			page 17
 
 
- 809 02f9 02       		.uleb128 0x2
- 810 02fa 08       		.byte	0x8
- 811 02fb 50       		.byte	0x50
- 812 02fc 00       		.byte	0
- 813 02fd 0C       		.uleb128 0xc
- 814 02fe 20000000 		.4byte	.LVL29
- 815 0302 87040000 		.4byte	0x487
- 816 0306 29030000 		.4byte	0x329
- 817 030a 0D       		.uleb128 0xd
- 818 030b 01       		.uleb128 0x1
- 819 030c 50       		.byte	0x50
- 820 030d 05       		.uleb128 0x5
- 821 030e 03       		.byte	0x3
- 822 030f 00000000 		.4byte	.LANCHOR1
- 823 0313 0D       		.uleb128 0xd
- 824 0314 01       		.uleb128 0x1
- 825 0315 52       		.byte	0x52
- 826 0316 04       		.uleb128 0x4
- 827 0317 91       		.byte	0x91
- 828 0318 B87D     		.sleb128 -328
- 829 031a 06       		.byte	0x6
- 830 031b 0D       		.uleb128 0xd
- 831 031c 01       		.uleb128 0x1
- 832 031d 53       		.byte	0x53
- 833 031e 02       		.uleb128 0x2
- 834 031f 08       		.byte	0x8
- 835 0320 50       		.byte	0x50
- 836 0321 0D       		.uleb128 0xd
- 837 0322 02       		.uleb128 0x2
- 838 0323 7D       		.byte	0x7d
- 839 0324 00       		.sleb128 0
- 840 0325 02       		.uleb128 0x2
- 841 0326 08       		.byte	0x8
- 842 0327 3F       		.byte	0x3f
- 843 0328 00       		.byte	0
- 844 0329 12       		.uleb128 0x12
- 845 032a 26000000 		.4byte	.LVL30
- 846 032e 92040000 		.4byte	0x492
- 847 0332 0D       		.uleb128 0xd
- 848 0333 01       		.uleb128 0x1
- 849 0334 50       		.byte	0x50
- 850 0335 02       		.uleb128 0x2
- 851 0336 08       		.byte	0x8
- 852 0337 50       		.byte	0x50
- 853 0338 00       		.byte	0
- 854 0339 00       		.byte	0
- 855 033a 13       		.uleb128 0x13
- 856 033b 4B010000 		.4byte	0x14b
- 857 033f 4A030000 		.4byte	0x34a
- 858 0343 14       		.uleb128 0x14
- 859 0344 F4000000 		.4byte	0xf4
- 860 0348 4F       		.byte	0x4f
- 861 0349 00       		.byte	0
- 862 034a 15       		.uleb128 0x15
- 863 034b 45020000 		.4byte	.LASF55
- 864 034f 01       		.byte	0x1
- 865 0350 93       		.byte	0x93
-ARM GAS  C:\Users\danie\AppData\Local\Temp\ccgko4Fm.s 			page 19
+ 728 0283 01       		.byte	0x1
+ 729 0284 96       		.byte	0x96
+ 730 0285 00000000 		.4byte	.LFB67
+ 731 0289 34000000 		.4byte	.LFE67-.LFB67
+ 732 028d 01       		.uleb128 0x1
+ 733 028e 9C       		.byte	0x9c
+ 734 028f 13030000 		.4byte	0x313
+ 735 0293 10       		.uleb128 0x10
+ 736 0294 98030000 		.4byte	.LASF29
+ 737 0298 01       		.byte	0x1
+ 738 0299 9E       		.byte	0x9e
+ 739 029a 4B010000 		.4byte	0x14b
+ 740 029e 1C010000 		.4byte	.LLST8
+ 741 02a2 11       		.uleb128 0x11
+ 742 02a3 A3020000 		.4byte	.LASF30
+ 743 02a7 01       		.byte	0x1
+ 744 02a8 9F       		.byte	0x9f
+ 745 02a9 13030000 		.4byte	0x313
+ 746 02ad 03       		.uleb128 0x3
+ 747 02ae 91       		.byte	0x91
+ 748 02af D87E     		.sleb128 -168
+ 749 02b1 0E       		.uleb128 0xe
+ 750 02b2 08000000 		.4byte	.LVL26
+ 751 02b6 5A040000 		.4byte	0x45a
+ 752 02ba 0C       		.uleb128 0xc
+ 753 02bb 10000000 		.4byte	.LVL27
+ 754 02bf 65040000 		.4byte	0x465
+ 755 02c3 D7020000 		.4byte	0x2d7
+ 756 02c7 0D       		.uleb128 0xd
+ 757 02c8 01       		.uleb128 0x1
+ 758 02c9 50       		.byte	0x50
+ 759 02ca 05       		.uleb128 0x5
+ 760 02cb 03       		.byte	0x3
+ 761 02cc 00000000 		.4byte	.LANCHOR0
+ 762 02d0 0D       		.uleb128 0xd
+ 763 02d1 01       		.uleb128 0x1
+ 764 02d2 51       		.byte	0x51
+ 765 02d3 02       		.uleb128 0x2
+ 766 02d4 08       		.byte	0x8
+ 767 02d5 50       		.byte	0x50
+ 768 02d6 00       		.byte	0
+ 769 02d7 0C       		.uleb128 0xc
+ 770 02d8 20000000 		.4byte	.LVL29
+ 771 02dc 70040000 		.4byte	0x470
+ 772 02e0 02030000 		.4byte	0x302
+ 773 02e4 0D       		.uleb128 0xd
+ 774 02e5 01       		.uleb128 0x1
+ 775 02e6 50       		.byte	0x50
+ 776 02e7 05       		.uleb128 0x5
+ 777 02e8 03       		.byte	0x3
+ 778 02e9 00000000 		.4byte	.LANCHOR1
+ 779 02ed 0D       		.uleb128 0xd
+ 780 02ee 01       		.uleb128 0x1
+ 781 02ef 52       		.byte	0x52
+ 782 02f0 03       		.uleb128 0x3
+ 783 02f1 91       		.byte	0x91
+ 784 02f2 D87E     		.sleb128 -168
+ARM GAS  C:\Users\danie\AppData\Local\Temp\ccMFGOGe.s 			page 18
 
 
- 866 0351 73000000 		.4byte	0x73
- 867 0355 00000000 		.4byte	.LFB68
- 868 0359 08000000 		.4byte	.LFE68-.LFB68
- 869 035d 01       		.uleb128 0x1
- 870 035e 9C       		.byte	0x9c
- 871 035f 6D030000 		.4byte	0x36d
- 872 0363 0E       		.uleb128 0xe
- 873 0364 06000000 		.4byte	.LVL31
- 874 0368 A7010000 		.4byte	0x1a7
- 875 036c 00       		.byte	0
- 876 036d 13       		.uleb128 0x13
- 877 036e BB000000 		.4byte	0xbb
- 878 0372 7D030000 		.4byte	0x37d
- 879 0376 14       		.uleb128 0x14
- 880 0377 F4000000 		.4byte	0xf4
- 881 037b 4F       		.byte	0x4f
- 882 037c 00       		.byte	0
- 883 037d 10       		.uleb128 0x10
- 884 037e 4A030000 		.4byte	.LASF31
- 885 0382 01       		.byte	0x1
- 886 0383 55       		.byte	0x55
- 887 0384 6D030000 		.4byte	0x36d
- 888 0388 05       		.uleb128 0x5
- 889 0389 03       		.byte	0x3
- 890 038a 00000000 		.4byte	adc_sampleArray1
- 891 038e 10       		.uleb128 0x10
- 892 038f 5B030000 		.4byte	.LASF32
- 893 0393 01       		.byte	0x1
- 894 0394 56       		.byte	0x56
- 895 0395 6D030000 		.4byte	0x36d
- 896 0399 05       		.uleb128 0x5
- 897 039a 03       		.byte	0x3
- 898 039b A0000000 		.4byte	adc_sampleArray2
- 899 039f 16       		.uleb128 0x16
- 900 03a0 75010000 		.4byte	.LASF33
- 901 03a4 05       		.byte	0x5
- 902 03a5 1207     		.2byte	0x712
- 903 03a7 AB030000 		.4byte	0x3ab
- 904 03ab 06       		.uleb128 0x6
- 905 03ac 8C000000 		.4byte	0x8c
- 906 03b0 13       		.uleb128 0x13
- 907 03b1 BB000000 		.4byte	0xbb
- 908 03b5 C0030000 		.4byte	0x3c0
- 909 03b9 14       		.uleb128 0x14
- 910 03ba F4000000 		.4byte	0xf4
- 911 03be 3E       		.byte	0x3e
- 912 03bf 00       		.byte	0
- 913 03c0 17       		.uleb128 0x17
- 914 03c1 00000000 		.4byte	.LASF34
- 915 03c5 01       		.byte	0x1
- 916 03c6 1D       		.byte	0x1d
- 917 03c7 B0030000 		.4byte	0x3b0
- 918 03cb 05       		.uleb128 0x5
- 919 03cc 03       		.byte	0x3
- 920 03cd 00000000 		.4byte	coeffs
- 921 03d1 17       		.uleb128 0x17
- 922 03d2 35020000 		.4byte	.LASF35
-ARM GAS  C:\Users\danie\AppData\Local\Temp\ccgko4Fm.s 			page 20
+ 785 02f4 0D       		.uleb128 0xd
+ 786 02f5 01       		.uleb128 0x1
+ 787 02f6 53       		.byte	0x53
+ 788 02f7 02       		.uleb128 0x2
+ 789 02f8 08       		.byte	0x8
+ 790 02f9 50       		.byte	0x50
+ 791 02fa 0D       		.uleb128 0xd
+ 792 02fb 02       		.uleb128 0x2
+ 793 02fc 7D       		.byte	0x7d
+ 794 02fd 00       		.sleb128 0
+ 795 02fe 02       		.uleb128 0x2
+ 796 02ff 08       		.byte	0x8
+ 797 0300 40       		.byte	0x40
+ 798 0301 00       		.byte	0
+ 799 0302 12       		.uleb128 0x12
+ 800 0303 26000000 		.4byte	.LVL30
+ 801 0307 7B040000 		.4byte	0x47b
+ 802 030b 0D       		.uleb128 0xd
+ 803 030c 01       		.uleb128 0x1
+ 804 030d 50       		.byte	0x50
+ 805 030e 02       		.uleb128 0x2
+ 806 030f 08       		.byte	0x8
+ 807 0310 50       		.byte	0x50
+ 808 0311 00       		.byte	0
+ 809 0312 00       		.byte	0
+ 810 0313 13       		.uleb128 0x13
+ 811 0314 81000000 		.4byte	0x81
+ 812 0318 23030000 		.4byte	0x323
+ 813 031c 14       		.uleb128 0x14
+ 814 031d F4000000 		.4byte	0xf4
+ 815 0321 4F       		.byte	0x4f
+ 816 0322 00       		.byte	0
+ 817 0323 15       		.uleb128 0x15
+ 818 0324 4C020000 		.4byte	.LASF57
+ 819 0328 01       		.byte	0x1
+ 820 0329 AF       		.byte	0xaf
+ 821 032a 73000000 		.4byte	0x73
+ 822 032e 00000000 		.4byte	.LFB68
+ 823 0332 08000000 		.4byte	.LFE68-.LFB68
+ 824 0336 01       		.uleb128 0x1
+ 825 0337 9C       		.byte	0x9c
+ 826 0338 46030000 		.4byte	0x346
+ 827 033c 0E       		.uleb128 0xe
+ 828 033d 06000000 		.4byte	.LVL31
+ 829 0341 A7010000 		.4byte	0x1a7
+ 830 0345 00       		.byte	0
+ 831 0346 13       		.uleb128 0x13
+ 832 0347 81000000 		.4byte	0x81
+ 833 034b 56030000 		.4byte	0x356
+ 834 034f 14       		.uleb128 0x14
+ 835 0350 F4000000 		.4byte	0xf4
+ 836 0354 3F       		.byte	0x3f
+ 837 0355 00       		.byte	0
+ 838 0356 11       		.uleb128 0x11
+ 839 0357 00000000 		.4byte	.LASF31
+ 840 035b 01       		.byte	0x1
+ 841 035c 1E       		.byte	0x1e
+ARM GAS  C:\Users\danie\AppData\Local\Temp\ccMFGOGe.s 			page 19
 
 
- 923 03d6 01       		.byte	0x1
- 924 03d7 47       		.byte	0x47
- 925 03d8 97000000 		.4byte	0x97
- 926 03dc 05       		.uleb128 0x5
- 927 03dd 03       		.byte	0x3
- 928 03de 00000000 		.4byte	DMA_Chan
- 929 03e2 13       		.uleb128 0x13
- 930 03e3 97000000 		.4byte	0x97
- 931 03e7 F2030000 		.4byte	0x3f2
- 932 03eb 14       		.uleb128 0x14
- 933 03ec F4000000 		.4byte	0xf4
- 934 03f0 01       		.byte	0x1
- 935 03f1 00       		.byte	0
- 936 03f2 17       		.uleb128 0x17
- 937 03f3 6E010000 		.4byte	.LASF36
- 938 03f7 01       		.byte	0x1
- 939 03f8 4A       		.byte	0x4a
- 940 03f9 E2030000 		.4byte	0x3e2
- 941 03fd 05       		.uleb128 0x5
- 942 03fe 03       		.byte	0x3
- 943 03ff 00000000 		.4byte	DMA_TD
- 944 0403 18       		.uleb128 0x18
- 945 0404 82010000 		.4byte	.LASF37
- 946 0408 82010000 		.4byte	.LASF37
- 947 040c 06       		.byte	0x6
- 948 040d 1E       		.byte	0x1e
- 949 040e 18       		.uleb128 0x18
- 950 040f 62000000 		.4byte	.LASF38
- 951 0413 62000000 		.4byte	.LASF38
- 952 0417 07       		.byte	0x7
- 953 0418 38       		.byte	0x38
- 954 0419 18       		.uleb128 0x18
- 955 041a 2C010000 		.4byte	.LASF39
- 956 041e 2C010000 		.4byte	.LASF39
- 957 0422 07       		.byte	0x7
- 958 0423 3B       		.byte	0x3b
- 959 0424 18       		.uleb128 0x18
- 960 0425 1B000000 		.4byte	.LASF40
- 961 0429 1B000000 		.4byte	.LASF40
- 962 042d 07       		.byte	0x7
- 963 042e 3F       		.byte	0x3f
- 964 042f 18       		.uleb128 0x18
- 965 0430 2D000000 		.4byte	.LASF41
- 966 0434 2D000000 		.4byte	.LASF41
- 967 0438 07       		.byte	0x7
- 968 0439 2F       		.byte	0x2f
- 969 043a 18       		.uleb128 0x18
- 970 043b 20020000 		.4byte	.LASF42
- 971 043f 20020000 		.4byte	.LASF42
- 972 0443 07       		.byte	0x7
- 973 0444 29       		.byte	0x29
- 974 0445 18       		.uleb128 0x18
- 975 0446 53020000 		.4byte	.LASF43
- 976 044a 53020000 		.4byte	.LASF43
- 977 044e 08       		.byte	0x8
- 978 044f 3A       		.byte	0x3a
- 979 0450 18       		.uleb128 0x18
-ARM GAS  C:\Users\danie\AppData\Local\Temp\ccgko4Fm.s 			page 21
+ 842 035d 46030000 		.4byte	0x346
+ 843 0361 05       		.uleb128 0x5
+ 844 0362 03       		.byte	0x3
+ 845 0363 00000000 		.4byte	coeffs
+ 846 0367 13       		.uleb128 0x13
+ 847 0368 BB000000 		.4byte	0xbb
+ 848 036c 77030000 		.4byte	0x377
+ 849 0370 14       		.uleb128 0x14
+ 850 0371 F4000000 		.4byte	0xf4
+ 851 0375 4F       		.byte	0x4f
+ 852 0376 00       		.byte	0
+ 853 0377 11       		.uleb128 0x11
+ 854 0378 55030000 		.4byte	.LASF32
+ 855 037c 01       		.byte	0x1
+ 856 037d 5D       		.byte	0x5d
+ 857 037e 67030000 		.4byte	0x367
+ 858 0382 05       		.uleb128 0x5
+ 859 0383 03       		.byte	0x3
+ 860 0384 00000000 		.4byte	adc_sampleArray1
+ 861 0388 16       		.uleb128 0x16
+ 862 0389 DE010000 		.4byte	.LASF33
+ 863 038d 05       		.byte	0x5
+ 864 038e 1207     		.2byte	0x712
+ 865 0390 94030000 		.4byte	0x394
+ 866 0394 06       		.uleb128 0x6
+ 867 0395 8C000000 		.4byte	0x8c
+ 868 0399 17       		.uleb128 0x17
+ 869 039a 3C020000 		.4byte	.LASF34
+ 870 039e 01       		.byte	0x1
+ 871 039f 49       		.byte	0x49
+ 872 03a0 97000000 		.4byte	0x97
+ 873 03a4 05       		.uleb128 0x5
+ 874 03a5 03       		.byte	0x3
+ 875 03a6 00000000 		.4byte	DMA_Chan
+ 876 03aa 13       		.uleb128 0x13
+ 877 03ab 97000000 		.4byte	0x97
+ 878 03af BA030000 		.4byte	0x3ba
+ 879 03b3 14       		.uleb128 0x14
+ 880 03b4 F4000000 		.4byte	0xf4
+ 881 03b8 00       		.byte	0
+ 882 03b9 00       		.byte	0
+ 883 03ba 17       		.uleb128 0x17
+ 884 03bb D7010000 		.4byte	.LASF35
+ 885 03bf 01       		.byte	0x1
+ 886 03c0 4F       		.byte	0x4f
+ 887 03c1 AA030000 		.4byte	0x3aa
+ 888 03c5 05       		.uleb128 0x5
+ 889 03c6 03       		.byte	0x3
+ 890 03c7 00000000 		.4byte	DMA_TD
+ 891 03cb 18       		.uleb128 0x18
+ 892 03cc F9010000 		.4byte	.LASF36
+ 893 03d0 F9010000 		.4byte	.LASF36
+ 894 03d4 06       		.byte	0x6
+ 895 03d5 1E       		.byte	0x1e
+ 896 03d6 18       		.uleb128 0x18
+ 897 03d7 77000000 		.4byte	.LASF37
+ 898 03db 77000000 		.4byte	.LASF37
+ARM GAS  C:\Users\danie\AppData\Local\Temp\ccMFGOGe.s 			page 20
 
 
- 980 0451 41000000 		.4byte	.LASF44
- 981 0455 41000000 		.4byte	.LASF44
- 982 0459 09       		.byte	0x9
- 983 045a 25       		.byte	0x25
- 984 045b 18       		.uleb128 0x18
- 985 045c 30030000 		.4byte	.LASF45
- 986 0460 30030000 		.4byte	.LASF45
- 987 0464 08       		.byte	0x8
- 988 0465 3D       		.byte	0x3d
- 989 0466 18       		.uleb128 0x18
- 990 0467 F0020000 		.4byte	.LASF46
- 991 046b F0020000 		.4byte	.LASF46
- 992 046f 0A       		.byte	0xa
- 993 0470 17       		.byte	0x17
- 994 0471 18       		.uleb128 0x18
- 995 0472 72000000 		.4byte	.LASF47
- 996 0476 72000000 		.4byte	.LASF47
- 997 047a 0B       		.byte	0xb
- 998 047b 1A       		.byte	0x1a
- 999 047c 18       		.uleb128 0x18
- 1000 047d 0D020000 		.4byte	.LASF48
- 1001 0481 0D020000 		.4byte	.LASF48
- 1002 0485 0B       		.byte	0xb
- 1003 0486 1C       		.byte	0x1c
- 1004 0487 18       		.uleb128 0x18
- 1005 0488 4A020000 		.4byte	.LASF49
- 1006 048c 4A020000 		.4byte	.LASF49
- 1007 0490 0B       		.byte	0xb
- 1008 0491 1F       		.byte	0x1f
- 1009 0492 18       		.uleb128 0x18
- 1010 0493 78030000 		.4byte	.LASF50
- 1011 0497 78030000 		.4byte	.LASF50
- 1012 049b 0B       		.byte	0xb
- 1013 049c 22       		.byte	0x22
- 1014 049d 00       		.byte	0
- 1015              		.section	.debug_abbrev,"",%progbits
- 1016              	.Ldebug_abbrev0:
- 1017 0000 01       		.uleb128 0x1
- 1018 0001 11       		.uleb128 0x11
- 1019 0002 01       		.byte	0x1
- 1020 0003 25       		.uleb128 0x25
- 1021 0004 0E       		.uleb128 0xe
- 1022 0005 13       		.uleb128 0x13
- 1023 0006 0B       		.uleb128 0xb
- 1024 0007 03       		.uleb128 0x3
- 1025 0008 0E       		.uleb128 0xe
- 1026 0009 1B       		.uleb128 0x1b
- 1027 000a 0E       		.uleb128 0xe
- 1028 000b 55       		.uleb128 0x55
- 1029 000c 17       		.uleb128 0x17
- 1030 000d 11       		.uleb128 0x11
- 1031 000e 01       		.uleb128 0x1
- 1032 000f 10       		.uleb128 0x10
- 1033 0010 17       		.uleb128 0x17
- 1034 0011 00       		.byte	0
- 1035 0012 00       		.byte	0
- 1036 0013 02       		.uleb128 0x2
-ARM GAS  C:\Users\danie\AppData\Local\Temp\ccgko4Fm.s 			page 22
+ 899 03df 07       		.byte	0x7
+ 900 03e0 38       		.byte	0x38
+ 901 03e1 18       		.uleb128 0x18
+ 902 03e2 41010000 		.4byte	.LASF38
+ 903 03e6 41010000 		.4byte	.LASF38
+ 904 03ea 07       		.byte	0x7
+ 905 03eb 3B       		.byte	0x3b
+ 906 03ec 18       		.uleb128 0x18
+ 907 03ed DD020000 		.4byte	.LASF39
+ 908 03f1 DD020000 		.4byte	.LASF39
+ 909 03f5 07       		.byte	0x7
+ 910 03f6 3F       		.byte	0x3f
+ 911 03f7 18       		.uleb128 0x18
+ 912 03f8 3C000000 		.4byte	.LASF40
+ 913 03fc 3C000000 		.4byte	.LASF40
+ 914 0400 07       		.byte	0x7
+ 915 0401 2F       		.byte	0x2f
+ 916 0402 18       		.uleb128 0x18
+ 917 0403 27020000 		.4byte	.LASF41
+ 918 0407 27020000 		.4byte	.LASF41
+ 919 040b 07       		.byte	0x7
+ 920 040c 29       		.byte	0x29
+ 921 040d 18       		.uleb128 0x18
+ 922 040e 5A020000 		.4byte	.LASF42
+ 923 0412 5A020000 		.4byte	.LASF42
+ 924 0416 08       		.byte	0x8
+ 925 0417 3A       		.byte	0x3a
+ 926 0418 18       		.uleb128 0x18
+ 927 0419 1B000000 		.4byte	.LASF43
+ 928 041d 1B000000 		.4byte	.LASF43
+ 929 0421 09       		.byte	0x9
+ 930 0422 33       		.byte	0x33
+ 931 0423 18       		.uleb128 0x18
+ 932 0424 69000000 		.4byte	.LASF44
+ 933 0428 69000000 		.4byte	.LASF44
+ 934 042c 0A       		.byte	0xa
+ 935 042d 33       		.byte	0x33
+ 936 042e 18       		.uleb128 0x18
+ 937 042f EB010000 		.4byte	.LASF45
+ 938 0433 EB010000 		.4byte	.LASF45
+ 939 0437 0B       		.byte	0xb
+ 940 0438 33       		.byte	0x33
+ 941 0439 18       		.uleb128 0x18
+ 942 043a 50000000 		.4byte	.LASF46
+ 943 043e 50000000 		.4byte	.LASF46
+ 944 0442 0C       		.byte	0xc
+ 945 0443 25       		.byte	0x25
+ 946 0444 18       		.uleb128 0x18
+ 947 0445 3B030000 		.4byte	.LASF47
+ 948 0449 3B030000 		.4byte	.LASF47
+ 949 044d 08       		.byte	0x8
+ 950 044e 3D       		.byte	0x3d
+ 951 044f 18       		.uleb128 0x18
+ 952 0450 FB020000 		.4byte	.LASF48
+ 953 0454 FB020000 		.4byte	.LASF48
+ 954 0458 0D       		.byte	0xd
+ 955 0459 17       		.byte	0x17
+ARM GAS  C:\Users\danie\AppData\Local\Temp\ccMFGOGe.s 			page 21
 
 
- 1037 0014 24       		.uleb128 0x24
- 1038 0015 00       		.byte	0
- 1039 0016 0B       		.uleb128 0xb
- 1040 0017 0B       		.uleb128 0xb
- 1041 0018 3E       		.uleb128 0x3e
- 1042 0019 0B       		.uleb128 0xb
- 1043 001a 03       		.uleb128 0x3
- 1044 001b 0E       		.uleb128 0xe
- 1045 001c 00       		.byte	0
- 1046 001d 00       		.byte	0
- 1047 001e 03       		.uleb128 0x3
- 1048 001f 16       		.uleb128 0x16
- 1049 0020 00       		.byte	0
- 1050 0021 03       		.uleb128 0x3
- 1051 0022 0E       		.uleb128 0xe
- 1052 0023 3A       		.uleb128 0x3a
- 1053 0024 0B       		.uleb128 0xb
- 1054 0025 3B       		.uleb128 0x3b
- 1055 0026 0B       		.uleb128 0xb
- 1056 0027 49       		.uleb128 0x49
- 1057 0028 13       		.uleb128 0x13
- 1058 0029 00       		.byte	0
- 1059 002a 00       		.byte	0
- 1060 002b 04       		.uleb128 0x4
- 1061 002c 24       		.uleb128 0x24
- 1062 002d 00       		.byte	0
- 1063 002e 0B       		.uleb128 0xb
- 1064 002f 0B       		.uleb128 0xb
- 1065 0030 3E       		.uleb128 0x3e
- 1066 0031 0B       		.uleb128 0xb
- 1067 0032 03       		.uleb128 0x3
- 1068 0033 08       		.uleb128 0x8
- 1069 0034 00       		.byte	0
- 1070 0035 00       		.byte	0
- 1071 0036 05       		.uleb128 0x5
- 1072 0037 16       		.uleb128 0x16
- 1073 0038 00       		.byte	0
- 1074 0039 03       		.uleb128 0x3
- 1075 003a 0E       		.uleb128 0xe
- 1076 003b 3A       		.uleb128 0x3a
- 1077 003c 0B       		.uleb128 0xb
- 1078 003d 3B       		.uleb128 0x3b
- 1079 003e 05       		.uleb128 0x5
- 1080 003f 49       		.uleb128 0x49
- 1081 0040 13       		.uleb128 0x13
- 1082 0041 00       		.byte	0
- 1083 0042 00       		.byte	0
- 1084 0043 06       		.uleb128 0x6
- 1085 0044 35       		.uleb128 0x35
- 1086 0045 00       		.byte	0
- 1087 0046 49       		.uleb128 0x49
- 1088 0047 13       		.uleb128 0x13
- 1089 0048 00       		.byte	0
- 1090 0049 00       		.byte	0
- 1091 004a 07       		.uleb128 0x7
- 1092 004b 2E       		.uleb128 0x2e
- 1093 004c 01       		.byte	0x1
-ARM GAS  C:\Users\danie\AppData\Local\Temp\ccgko4Fm.s 			page 23
+ 956 045a 18       		.uleb128 0x18
+ 957 045b 87000000 		.4byte	.LASF49
+ 958 045f 87000000 		.4byte	.LASF49
+ 959 0463 0E       		.byte	0xe
+ 960 0464 1A       		.byte	0x1a
+ 961 0465 18       		.uleb128 0x18
+ 962 0466 14020000 		.4byte	.LASF50
+ 963 046a 14020000 		.4byte	.LASF50
+ 964 046e 0E       		.byte	0xe
+ 965 046f 1C       		.byte	0x1c
+ 966 0470 18       		.uleb128 0x18
+ 967 0471 51020000 		.4byte	.LASF51
+ 968 0475 51020000 		.4byte	.LASF51
+ 969 0479 0E       		.byte	0xe
+ 970 047a 1F       		.byte	0x1f
+ 971 047b 18       		.uleb128 0x18
+ 972 047c 7E030000 		.4byte	.LASF52
+ 973 0480 7E030000 		.4byte	.LASF52
+ 974 0484 0E       		.byte	0xe
+ 975 0485 22       		.byte	0x22
+ 976 0486 00       		.byte	0
+ 977              		.section	.debug_abbrev,"",%progbits
+ 978              	.Ldebug_abbrev0:
+ 979 0000 01       		.uleb128 0x1
+ 980 0001 11       		.uleb128 0x11
+ 981 0002 01       		.byte	0x1
+ 982 0003 25       		.uleb128 0x25
+ 983 0004 0E       		.uleb128 0xe
+ 984 0005 13       		.uleb128 0x13
+ 985 0006 0B       		.uleb128 0xb
+ 986 0007 03       		.uleb128 0x3
+ 987 0008 0E       		.uleb128 0xe
+ 988 0009 1B       		.uleb128 0x1b
+ 989 000a 0E       		.uleb128 0xe
+ 990 000b 55       		.uleb128 0x55
+ 991 000c 17       		.uleb128 0x17
+ 992 000d 11       		.uleb128 0x11
+ 993 000e 01       		.uleb128 0x1
+ 994 000f 10       		.uleb128 0x10
+ 995 0010 17       		.uleb128 0x17
+ 996 0011 00       		.byte	0
+ 997 0012 00       		.byte	0
+ 998 0013 02       		.uleb128 0x2
+ 999 0014 24       		.uleb128 0x24
+ 1000 0015 00       		.byte	0
+ 1001 0016 0B       		.uleb128 0xb
+ 1002 0017 0B       		.uleb128 0xb
+ 1003 0018 3E       		.uleb128 0x3e
+ 1004 0019 0B       		.uleb128 0xb
+ 1005 001a 03       		.uleb128 0x3
+ 1006 001b 0E       		.uleb128 0xe
+ 1007 001c 00       		.byte	0
+ 1008 001d 00       		.byte	0
+ 1009 001e 03       		.uleb128 0x3
+ 1010 001f 16       		.uleb128 0x16
+ 1011 0020 00       		.byte	0
+ 1012 0021 03       		.uleb128 0x3
+ARM GAS  C:\Users\danie\AppData\Local\Temp\ccMFGOGe.s 			page 22
 
 
- 1094 004d 3F       		.uleb128 0x3f
- 1095 004e 19       		.uleb128 0x19
- 1096 004f 03       		.uleb128 0x3
- 1097 0050 0E       		.uleb128 0xe
- 1098 0051 3A       		.uleb128 0x3a
- 1099 0052 0B       		.uleb128 0xb
- 1100 0053 3B       		.uleb128 0x3b
- 1101 0054 0B       		.uleb128 0xb
- 1102 0055 27       		.uleb128 0x27
- 1103 0056 19       		.uleb128 0x19
- 1104 0057 11       		.uleb128 0x11
- 1105 0058 01       		.uleb128 0x1
- 1106 0059 12       		.uleb128 0x12
- 1107 005a 06       		.uleb128 0x6
- 1108 005b 40       		.uleb128 0x40
- 1109 005c 18       		.uleb128 0x18
- 1110 005d 9642     		.uleb128 0x2116
- 1111 005f 19       		.uleb128 0x19
- 1112 0060 01       		.uleb128 0x1
- 1113 0061 13       		.uleb128 0x13
- 1114 0062 00       		.byte	0
- 1115 0063 00       		.byte	0
- 1116 0064 08       		.uleb128 0x8
- 1117 0065 05       		.uleb128 0x5
- 1118 0066 00       		.byte	0
- 1119 0067 03       		.uleb128 0x3
- 1120 0068 0E       		.uleb128 0xe
- 1121 0069 3A       		.uleb128 0x3a
- 1122 006a 0B       		.uleb128 0xb
- 1123 006b 3B       		.uleb128 0x3b
- 1124 006c 0B       		.uleb128 0xb
- 1125 006d 49       		.uleb128 0x49
- 1126 006e 13       		.uleb128 0x13
- 1127 006f 02       		.uleb128 0x2
- 1128 0070 17       		.uleb128 0x17
- 1129 0071 00       		.byte	0
- 1130 0072 00       		.byte	0
- 1131 0073 09       		.uleb128 0x9
- 1132 0074 34       		.uleb128 0x34
- 1133 0075 00       		.byte	0
- 1134 0076 03       		.uleb128 0x3
- 1135 0077 08       		.uleb128 0x8
- 1136 0078 3A       		.uleb128 0x3a
- 1137 0079 0B       		.uleb128 0xb
- 1138 007a 3B       		.uleb128 0x3b
- 1139 007b 0B       		.uleb128 0xb
- 1140 007c 49       		.uleb128 0x49
- 1141 007d 13       		.uleb128 0x13
- 1142 007e 02       		.uleb128 0x2
- 1143 007f 17       		.uleb128 0x17
- 1144 0080 00       		.byte	0
- 1145 0081 00       		.byte	0
- 1146 0082 0A       		.uleb128 0xa
- 1147 0083 0F       		.uleb128 0xf
- 1148 0084 00       		.byte	0
- 1149 0085 0B       		.uleb128 0xb
- 1150 0086 0B       		.uleb128 0xb
-ARM GAS  C:\Users\danie\AppData\Local\Temp\ccgko4Fm.s 			page 24
+ 1013 0022 0E       		.uleb128 0xe
+ 1014 0023 3A       		.uleb128 0x3a
+ 1015 0024 0B       		.uleb128 0xb
+ 1016 0025 3B       		.uleb128 0x3b
+ 1017 0026 0B       		.uleb128 0xb
+ 1018 0027 49       		.uleb128 0x49
+ 1019 0028 13       		.uleb128 0x13
+ 1020 0029 00       		.byte	0
+ 1021 002a 00       		.byte	0
+ 1022 002b 04       		.uleb128 0x4
+ 1023 002c 24       		.uleb128 0x24
+ 1024 002d 00       		.byte	0
+ 1025 002e 0B       		.uleb128 0xb
+ 1026 002f 0B       		.uleb128 0xb
+ 1027 0030 3E       		.uleb128 0x3e
+ 1028 0031 0B       		.uleb128 0xb
+ 1029 0032 03       		.uleb128 0x3
+ 1030 0033 08       		.uleb128 0x8
+ 1031 0034 00       		.byte	0
+ 1032 0035 00       		.byte	0
+ 1033 0036 05       		.uleb128 0x5
+ 1034 0037 16       		.uleb128 0x16
+ 1035 0038 00       		.byte	0
+ 1036 0039 03       		.uleb128 0x3
+ 1037 003a 0E       		.uleb128 0xe
+ 1038 003b 3A       		.uleb128 0x3a
+ 1039 003c 0B       		.uleb128 0xb
+ 1040 003d 3B       		.uleb128 0x3b
+ 1041 003e 05       		.uleb128 0x5
+ 1042 003f 49       		.uleb128 0x49
+ 1043 0040 13       		.uleb128 0x13
+ 1044 0041 00       		.byte	0
+ 1045 0042 00       		.byte	0
+ 1046 0043 06       		.uleb128 0x6
+ 1047 0044 35       		.uleb128 0x35
+ 1048 0045 00       		.byte	0
+ 1049 0046 49       		.uleb128 0x49
+ 1050 0047 13       		.uleb128 0x13
+ 1051 0048 00       		.byte	0
+ 1052 0049 00       		.byte	0
+ 1053 004a 07       		.uleb128 0x7
+ 1054 004b 2E       		.uleb128 0x2e
+ 1055 004c 01       		.byte	0x1
+ 1056 004d 3F       		.uleb128 0x3f
+ 1057 004e 19       		.uleb128 0x19
+ 1058 004f 03       		.uleb128 0x3
+ 1059 0050 0E       		.uleb128 0xe
+ 1060 0051 3A       		.uleb128 0x3a
+ 1061 0052 0B       		.uleb128 0xb
+ 1062 0053 3B       		.uleb128 0x3b
+ 1063 0054 0B       		.uleb128 0xb
+ 1064 0055 27       		.uleb128 0x27
+ 1065 0056 19       		.uleb128 0x19
+ 1066 0057 11       		.uleb128 0x11
+ 1067 0058 01       		.uleb128 0x1
+ 1068 0059 12       		.uleb128 0x12
+ 1069 005a 06       		.uleb128 0x6
+ARM GAS  C:\Users\danie\AppData\Local\Temp\ccMFGOGe.s 			page 23
 
 
- 1151 0087 49       		.uleb128 0x49
- 1152 0088 13       		.uleb128 0x13
- 1153 0089 00       		.byte	0
- 1154 008a 00       		.byte	0
- 1155 008b 0B       		.uleb128 0xb
- 1156 008c 2E       		.uleb128 0x2e
- 1157 008d 01       		.byte	0x1
- 1158 008e 3F       		.uleb128 0x3f
- 1159 008f 19       		.uleb128 0x19
- 1160 0090 03       		.uleb128 0x3
- 1161 0091 0E       		.uleb128 0xe
- 1162 0092 3A       		.uleb128 0x3a
- 1163 0093 0B       		.uleb128 0xb
- 1164 0094 3B       		.uleb128 0x3b
- 1165 0095 0B       		.uleb128 0xb
- 1166 0096 11       		.uleb128 0x11
- 1167 0097 01       		.uleb128 0x1
- 1168 0098 12       		.uleb128 0x12
- 1169 0099 06       		.uleb128 0x6
- 1170 009a 40       		.uleb128 0x40
- 1171 009b 18       		.uleb128 0x18
- 1172 009c 9742     		.uleb128 0x2117
- 1173 009e 19       		.uleb128 0x19
- 1174 009f 01       		.uleb128 0x1
- 1175 00a0 13       		.uleb128 0x13
- 1176 00a1 00       		.byte	0
- 1177 00a2 00       		.byte	0
- 1178 00a3 0C       		.uleb128 0xc
- 1179 00a4 898201   		.uleb128 0x4109
- 1180 00a7 01       		.byte	0x1
- 1181 00a8 11       		.uleb128 0x11
- 1182 00a9 01       		.uleb128 0x1
- 1183 00aa 31       		.uleb128 0x31
- 1184 00ab 13       		.uleb128 0x13
- 1185 00ac 01       		.uleb128 0x1
- 1186 00ad 13       		.uleb128 0x13
- 1187 00ae 00       		.byte	0
- 1188 00af 00       		.byte	0
- 1189 00b0 0D       		.uleb128 0xd
- 1190 00b1 8A8201   		.uleb128 0x410a
- 1191 00b4 00       		.byte	0
- 1192 00b5 02       		.uleb128 0x2
- 1193 00b6 18       		.uleb128 0x18
- 1194 00b7 9142     		.uleb128 0x2111
- 1195 00b9 18       		.uleb128 0x18
- 1196 00ba 00       		.byte	0
- 1197 00bb 00       		.byte	0
- 1198 00bc 0E       		.uleb128 0xe
- 1199 00bd 898201   		.uleb128 0x4109
- 1200 00c0 00       		.byte	0
- 1201 00c1 11       		.uleb128 0x11
- 1202 00c2 01       		.uleb128 0x1
- 1203 00c3 31       		.uleb128 0x31
- 1204 00c4 13       		.uleb128 0x13
- 1205 00c5 00       		.byte	0
- 1206 00c6 00       		.byte	0
- 1207 00c7 0F       		.uleb128 0xf
-ARM GAS  C:\Users\danie\AppData\Local\Temp\ccgko4Fm.s 			page 25
+ 1070 005b 40       		.uleb128 0x40
+ 1071 005c 18       		.uleb128 0x18
+ 1072 005d 9642     		.uleb128 0x2116
+ 1073 005f 19       		.uleb128 0x19
+ 1074 0060 01       		.uleb128 0x1
+ 1075 0061 13       		.uleb128 0x13
+ 1076 0062 00       		.byte	0
+ 1077 0063 00       		.byte	0
+ 1078 0064 08       		.uleb128 0x8
+ 1079 0065 05       		.uleb128 0x5
+ 1080 0066 00       		.byte	0
+ 1081 0067 03       		.uleb128 0x3
+ 1082 0068 0E       		.uleb128 0xe
+ 1083 0069 3A       		.uleb128 0x3a
+ 1084 006a 0B       		.uleb128 0xb
+ 1085 006b 3B       		.uleb128 0x3b
+ 1086 006c 0B       		.uleb128 0xb
+ 1087 006d 49       		.uleb128 0x49
+ 1088 006e 13       		.uleb128 0x13
+ 1089 006f 02       		.uleb128 0x2
+ 1090 0070 17       		.uleb128 0x17
+ 1091 0071 00       		.byte	0
+ 1092 0072 00       		.byte	0
+ 1093 0073 09       		.uleb128 0x9
+ 1094 0074 34       		.uleb128 0x34
+ 1095 0075 00       		.byte	0
+ 1096 0076 03       		.uleb128 0x3
+ 1097 0077 08       		.uleb128 0x8
+ 1098 0078 3A       		.uleb128 0x3a
+ 1099 0079 0B       		.uleb128 0xb
+ 1100 007a 3B       		.uleb128 0x3b
+ 1101 007b 0B       		.uleb128 0xb
+ 1102 007c 49       		.uleb128 0x49
+ 1103 007d 13       		.uleb128 0x13
+ 1104 007e 02       		.uleb128 0x2
+ 1105 007f 17       		.uleb128 0x17
+ 1106 0080 00       		.byte	0
+ 1107 0081 00       		.byte	0
+ 1108 0082 0A       		.uleb128 0xa
+ 1109 0083 0F       		.uleb128 0xf
+ 1110 0084 00       		.byte	0
+ 1111 0085 0B       		.uleb128 0xb
+ 1112 0086 0B       		.uleb128 0xb
+ 1113 0087 49       		.uleb128 0x49
+ 1114 0088 13       		.uleb128 0x13
+ 1115 0089 00       		.byte	0
+ 1116 008a 00       		.byte	0
+ 1117 008b 0B       		.uleb128 0xb
+ 1118 008c 2E       		.uleb128 0x2e
+ 1119 008d 01       		.byte	0x1
+ 1120 008e 3F       		.uleb128 0x3f
+ 1121 008f 19       		.uleb128 0x19
+ 1122 0090 03       		.uleb128 0x3
+ 1123 0091 0E       		.uleb128 0xe
+ 1124 0092 3A       		.uleb128 0x3a
+ 1125 0093 0B       		.uleb128 0xb
+ 1126 0094 3B       		.uleb128 0x3b
+ARM GAS  C:\Users\danie\AppData\Local\Temp\ccMFGOGe.s 			page 24
 
 
- 1208 00c8 2E       		.uleb128 0x2e
- 1209 00c9 01       		.byte	0x1
- 1210 00ca 3F       		.uleb128 0x3f
- 1211 00cb 19       		.uleb128 0x19
- 1212 00cc 03       		.uleb128 0x3
- 1213 00cd 0E       		.uleb128 0xe
- 1214 00ce 3A       		.uleb128 0x3a
- 1215 00cf 0B       		.uleb128 0xb
- 1216 00d0 3B       		.uleb128 0x3b
- 1217 00d1 0B       		.uleb128 0xb
- 1218 00d2 27       		.uleb128 0x27
- 1219 00d3 19       		.uleb128 0x19
- 1220 00d4 11       		.uleb128 0x11
- 1221 00d5 01       		.uleb128 0x1
- 1222 00d6 12       		.uleb128 0x12
- 1223 00d7 06       		.uleb128 0x6
- 1224 00d8 40       		.uleb128 0x40
- 1225 00d9 18       		.uleb128 0x18
- 1226 00da 9742     		.uleb128 0x2117
- 1227 00dc 19       		.uleb128 0x19
- 1228 00dd 01       		.uleb128 0x1
- 1229 00de 13       		.uleb128 0x13
- 1230 00df 00       		.byte	0
- 1231 00e0 00       		.byte	0
- 1232 00e1 10       		.uleb128 0x10
- 1233 00e2 34       		.uleb128 0x34
- 1234 00e3 00       		.byte	0
- 1235 00e4 03       		.uleb128 0x3
- 1236 00e5 0E       		.uleb128 0xe
- 1237 00e6 3A       		.uleb128 0x3a
- 1238 00e7 0B       		.uleb128 0xb
- 1239 00e8 3B       		.uleb128 0x3b
- 1240 00e9 0B       		.uleb128 0xb
- 1241 00ea 49       		.uleb128 0x49
- 1242 00eb 13       		.uleb128 0x13
- 1243 00ec 02       		.uleb128 0x2
- 1244 00ed 18       		.uleb128 0x18
- 1245 00ee 00       		.byte	0
- 1246 00ef 00       		.byte	0
- 1247 00f0 11       		.uleb128 0x11
- 1248 00f1 34       		.uleb128 0x34
- 1249 00f2 00       		.byte	0
- 1250 00f3 03       		.uleb128 0x3
- 1251 00f4 0E       		.uleb128 0xe
- 1252 00f5 3A       		.uleb128 0x3a
- 1253 00f6 0B       		.uleb128 0xb
- 1254 00f7 3B       		.uleb128 0x3b
- 1255 00f8 0B       		.uleb128 0xb
- 1256 00f9 49       		.uleb128 0x49
- 1257 00fa 13       		.uleb128 0x13
- 1258 00fb 02       		.uleb128 0x2
- 1259 00fc 17       		.uleb128 0x17
- 1260 00fd 00       		.byte	0
- 1261 00fe 00       		.byte	0
- 1262 00ff 12       		.uleb128 0x12
- 1263 0100 898201   		.uleb128 0x4109
- 1264 0103 01       		.byte	0x1
-ARM GAS  C:\Users\danie\AppData\Local\Temp\ccgko4Fm.s 			page 26
+ 1127 0095 0B       		.uleb128 0xb
+ 1128 0096 11       		.uleb128 0x11
+ 1129 0097 01       		.uleb128 0x1
+ 1130 0098 12       		.uleb128 0x12
+ 1131 0099 06       		.uleb128 0x6
+ 1132 009a 40       		.uleb128 0x40
+ 1133 009b 18       		.uleb128 0x18
+ 1134 009c 9742     		.uleb128 0x2117
+ 1135 009e 19       		.uleb128 0x19
+ 1136 009f 01       		.uleb128 0x1
+ 1137 00a0 13       		.uleb128 0x13
+ 1138 00a1 00       		.byte	0
+ 1139 00a2 00       		.byte	0
+ 1140 00a3 0C       		.uleb128 0xc
+ 1141 00a4 898201   		.uleb128 0x4109
+ 1142 00a7 01       		.byte	0x1
+ 1143 00a8 11       		.uleb128 0x11
+ 1144 00a9 01       		.uleb128 0x1
+ 1145 00aa 31       		.uleb128 0x31
+ 1146 00ab 13       		.uleb128 0x13
+ 1147 00ac 01       		.uleb128 0x1
+ 1148 00ad 13       		.uleb128 0x13
+ 1149 00ae 00       		.byte	0
+ 1150 00af 00       		.byte	0
+ 1151 00b0 0D       		.uleb128 0xd
+ 1152 00b1 8A8201   		.uleb128 0x410a
+ 1153 00b4 00       		.byte	0
+ 1154 00b5 02       		.uleb128 0x2
+ 1155 00b6 18       		.uleb128 0x18
+ 1156 00b7 9142     		.uleb128 0x2111
+ 1157 00b9 18       		.uleb128 0x18
+ 1158 00ba 00       		.byte	0
+ 1159 00bb 00       		.byte	0
+ 1160 00bc 0E       		.uleb128 0xe
+ 1161 00bd 898201   		.uleb128 0x4109
+ 1162 00c0 00       		.byte	0
+ 1163 00c1 11       		.uleb128 0x11
+ 1164 00c2 01       		.uleb128 0x1
+ 1165 00c3 31       		.uleb128 0x31
+ 1166 00c4 13       		.uleb128 0x13
+ 1167 00c5 00       		.byte	0
+ 1168 00c6 00       		.byte	0
+ 1169 00c7 0F       		.uleb128 0xf
+ 1170 00c8 2E       		.uleb128 0x2e
+ 1171 00c9 01       		.byte	0x1
+ 1172 00ca 3F       		.uleb128 0x3f
+ 1173 00cb 19       		.uleb128 0x19
+ 1174 00cc 03       		.uleb128 0x3
+ 1175 00cd 0E       		.uleb128 0xe
+ 1176 00ce 3A       		.uleb128 0x3a
+ 1177 00cf 0B       		.uleb128 0xb
+ 1178 00d0 3B       		.uleb128 0x3b
+ 1179 00d1 0B       		.uleb128 0xb
+ 1180 00d2 27       		.uleb128 0x27
+ 1181 00d3 19       		.uleb128 0x19
+ 1182 00d4 11       		.uleb128 0x11
+ 1183 00d5 01       		.uleb128 0x1
+ARM GAS  C:\Users\danie\AppData\Local\Temp\ccMFGOGe.s 			page 25
 
 
- 1265 0104 11       		.uleb128 0x11
- 1266 0105 01       		.uleb128 0x1
- 1267 0106 31       		.uleb128 0x31
- 1268 0107 13       		.uleb128 0x13
- 1269 0108 00       		.byte	0
- 1270 0109 00       		.byte	0
- 1271 010a 13       		.uleb128 0x13
- 1272 010b 01       		.uleb128 0x1
- 1273 010c 01       		.byte	0x1
- 1274 010d 49       		.uleb128 0x49
- 1275 010e 13       		.uleb128 0x13
- 1276 010f 01       		.uleb128 0x1
- 1277 0110 13       		.uleb128 0x13
- 1278 0111 00       		.byte	0
- 1279 0112 00       		.byte	0
- 1280 0113 14       		.uleb128 0x14
- 1281 0114 21       		.uleb128 0x21
- 1282 0115 00       		.byte	0
- 1283 0116 49       		.uleb128 0x49
- 1284 0117 13       		.uleb128 0x13
- 1285 0118 2F       		.uleb128 0x2f
- 1286 0119 0B       		.uleb128 0xb
- 1287 011a 00       		.byte	0
- 1288 011b 00       		.byte	0
- 1289 011c 15       		.uleb128 0x15
- 1290 011d 2E       		.uleb128 0x2e
- 1291 011e 01       		.byte	0x1
- 1292 011f 3F       		.uleb128 0x3f
- 1293 0120 19       		.uleb128 0x19
- 1294 0121 03       		.uleb128 0x3
- 1295 0122 0E       		.uleb128 0xe
- 1296 0123 3A       		.uleb128 0x3a
- 1297 0124 0B       		.uleb128 0xb
- 1298 0125 3B       		.uleb128 0x3b
- 1299 0126 0B       		.uleb128 0xb
- 1300 0127 27       		.uleb128 0x27
- 1301 0128 19       		.uleb128 0x19
- 1302 0129 49       		.uleb128 0x49
- 1303 012a 13       		.uleb128 0x13
- 1304 012b 8701     		.uleb128 0x87
- 1305 012d 19       		.uleb128 0x19
- 1306 012e 11       		.uleb128 0x11
- 1307 012f 01       		.uleb128 0x1
- 1308 0130 12       		.uleb128 0x12
- 1309 0131 06       		.uleb128 0x6
- 1310 0132 40       		.uleb128 0x40
- 1311 0133 18       		.uleb128 0x18
- 1312 0134 9742     		.uleb128 0x2117
- 1313 0136 19       		.uleb128 0x19
- 1314 0137 01       		.uleb128 0x1
- 1315 0138 13       		.uleb128 0x13
- 1316 0139 00       		.byte	0
- 1317 013a 00       		.byte	0
- 1318 013b 16       		.uleb128 0x16
- 1319 013c 34       		.uleb128 0x34
- 1320 013d 00       		.byte	0
- 1321 013e 03       		.uleb128 0x3
-ARM GAS  C:\Users\danie\AppData\Local\Temp\ccgko4Fm.s 			page 27
+ 1184 00d6 12       		.uleb128 0x12
+ 1185 00d7 06       		.uleb128 0x6
+ 1186 00d8 40       		.uleb128 0x40
+ 1187 00d9 18       		.uleb128 0x18
+ 1188 00da 9742     		.uleb128 0x2117
+ 1189 00dc 19       		.uleb128 0x19
+ 1190 00dd 01       		.uleb128 0x1
+ 1191 00de 13       		.uleb128 0x13
+ 1192 00df 00       		.byte	0
+ 1193 00e0 00       		.byte	0
+ 1194 00e1 10       		.uleb128 0x10
+ 1195 00e2 34       		.uleb128 0x34
+ 1196 00e3 00       		.byte	0
+ 1197 00e4 03       		.uleb128 0x3
+ 1198 00e5 0E       		.uleb128 0xe
+ 1199 00e6 3A       		.uleb128 0x3a
+ 1200 00e7 0B       		.uleb128 0xb
+ 1201 00e8 3B       		.uleb128 0x3b
+ 1202 00e9 0B       		.uleb128 0xb
+ 1203 00ea 49       		.uleb128 0x49
+ 1204 00eb 13       		.uleb128 0x13
+ 1205 00ec 02       		.uleb128 0x2
+ 1206 00ed 17       		.uleb128 0x17
+ 1207 00ee 00       		.byte	0
+ 1208 00ef 00       		.byte	0
+ 1209 00f0 11       		.uleb128 0x11
+ 1210 00f1 34       		.uleb128 0x34
+ 1211 00f2 00       		.byte	0
+ 1212 00f3 03       		.uleb128 0x3
+ 1213 00f4 0E       		.uleb128 0xe
+ 1214 00f5 3A       		.uleb128 0x3a
+ 1215 00f6 0B       		.uleb128 0xb
+ 1216 00f7 3B       		.uleb128 0x3b
+ 1217 00f8 0B       		.uleb128 0xb
+ 1218 00f9 49       		.uleb128 0x49
+ 1219 00fa 13       		.uleb128 0x13
+ 1220 00fb 02       		.uleb128 0x2
+ 1221 00fc 18       		.uleb128 0x18
+ 1222 00fd 00       		.byte	0
+ 1223 00fe 00       		.byte	0
+ 1224 00ff 12       		.uleb128 0x12
+ 1225 0100 898201   		.uleb128 0x4109
+ 1226 0103 01       		.byte	0x1
+ 1227 0104 11       		.uleb128 0x11
+ 1228 0105 01       		.uleb128 0x1
+ 1229 0106 31       		.uleb128 0x31
+ 1230 0107 13       		.uleb128 0x13
+ 1231 0108 00       		.byte	0
+ 1232 0109 00       		.byte	0
+ 1233 010a 13       		.uleb128 0x13
+ 1234 010b 01       		.uleb128 0x1
+ 1235 010c 01       		.byte	0x1
+ 1236 010d 49       		.uleb128 0x49
+ 1237 010e 13       		.uleb128 0x13
+ 1238 010f 01       		.uleb128 0x1
+ 1239 0110 13       		.uleb128 0x13
+ 1240 0111 00       		.byte	0
+ARM GAS  C:\Users\danie\AppData\Local\Temp\ccMFGOGe.s 			page 26
 
 
- 1322 013f 0E       		.uleb128 0xe
- 1323 0140 3A       		.uleb128 0x3a
- 1324 0141 0B       		.uleb128 0xb
- 1325 0142 3B       		.uleb128 0x3b
- 1326 0143 05       		.uleb128 0x5
- 1327 0144 49       		.uleb128 0x49
- 1328 0145 13       		.uleb128 0x13
- 1329 0146 3F       		.uleb128 0x3f
- 1330 0147 19       		.uleb128 0x19
- 1331 0148 3C       		.uleb128 0x3c
- 1332 0149 19       		.uleb128 0x19
- 1333 014a 00       		.byte	0
- 1334 014b 00       		.byte	0
- 1335 014c 17       		.uleb128 0x17
- 1336 014d 34       		.uleb128 0x34
- 1337 014e 00       		.byte	0
- 1338 014f 03       		.uleb128 0x3
- 1339 0150 0E       		.uleb128 0xe
- 1340 0151 3A       		.uleb128 0x3a
- 1341 0152 0B       		.uleb128 0xb
- 1342 0153 3B       		.uleb128 0x3b
- 1343 0154 0B       		.uleb128 0xb
- 1344 0155 49       		.uleb128 0x49
- 1345 0156 13       		.uleb128 0x13
- 1346 0157 3F       		.uleb128 0x3f
- 1347 0158 19       		.uleb128 0x19
- 1348 0159 02       		.uleb128 0x2
- 1349 015a 18       		.uleb128 0x18
- 1350 015b 00       		.byte	0
- 1351 015c 00       		.byte	0
- 1352 015d 18       		.uleb128 0x18
- 1353 015e 2E       		.uleb128 0x2e
- 1354 015f 00       		.byte	0
- 1355 0160 3F       		.uleb128 0x3f
- 1356 0161 19       		.uleb128 0x19
- 1357 0162 3C       		.uleb128 0x3c
- 1358 0163 19       		.uleb128 0x19
- 1359 0164 6E       		.uleb128 0x6e
- 1360 0165 0E       		.uleb128 0xe
- 1361 0166 03       		.uleb128 0x3
- 1362 0167 0E       		.uleb128 0xe
- 1363 0168 3A       		.uleb128 0x3a
- 1364 0169 0B       		.uleb128 0xb
- 1365 016a 3B       		.uleb128 0x3b
- 1366 016b 0B       		.uleb128 0xb
- 1367 016c 00       		.byte	0
- 1368 016d 00       		.byte	0
- 1369 016e 00       		.byte	0
- 1370              		.section	.debug_loc,"",%progbits
- 1371              	.Ldebug_loc0:
- 1372              	.LLST0:
- 1373 0000 00000000 		.4byte	.LVL0
- 1374 0004 0E000000 		.4byte	.LVL2
- 1375 0008 0100     		.2byte	0x1
- 1376 000a 50       		.byte	0x50
- 1377 000b 0E000000 		.4byte	.LVL2
- 1378 000f 28000000 		.4byte	.LFE64
-ARM GAS  C:\Users\danie\AppData\Local\Temp\ccgko4Fm.s 			page 28
+ 1241 0112 00       		.byte	0
+ 1242 0113 14       		.uleb128 0x14
+ 1243 0114 21       		.uleb128 0x21
+ 1244 0115 00       		.byte	0
+ 1245 0116 49       		.uleb128 0x49
+ 1246 0117 13       		.uleb128 0x13
+ 1247 0118 2F       		.uleb128 0x2f
+ 1248 0119 0B       		.uleb128 0xb
+ 1249 011a 00       		.byte	0
+ 1250 011b 00       		.byte	0
+ 1251 011c 15       		.uleb128 0x15
+ 1252 011d 2E       		.uleb128 0x2e
+ 1253 011e 01       		.byte	0x1
+ 1254 011f 3F       		.uleb128 0x3f
+ 1255 0120 19       		.uleb128 0x19
+ 1256 0121 03       		.uleb128 0x3
+ 1257 0122 0E       		.uleb128 0xe
+ 1258 0123 3A       		.uleb128 0x3a
+ 1259 0124 0B       		.uleb128 0xb
+ 1260 0125 3B       		.uleb128 0x3b
+ 1261 0126 0B       		.uleb128 0xb
+ 1262 0127 27       		.uleb128 0x27
+ 1263 0128 19       		.uleb128 0x19
+ 1264 0129 49       		.uleb128 0x49
+ 1265 012a 13       		.uleb128 0x13
+ 1266 012b 8701     		.uleb128 0x87
+ 1267 012d 19       		.uleb128 0x19
+ 1268 012e 11       		.uleb128 0x11
+ 1269 012f 01       		.uleb128 0x1
+ 1270 0130 12       		.uleb128 0x12
+ 1271 0131 06       		.uleb128 0x6
+ 1272 0132 40       		.uleb128 0x40
+ 1273 0133 18       		.uleb128 0x18
+ 1274 0134 9742     		.uleb128 0x2117
+ 1275 0136 19       		.uleb128 0x19
+ 1276 0137 01       		.uleb128 0x1
+ 1277 0138 13       		.uleb128 0x13
+ 1278 0139 00       		.byte	0
+ 1279 013a 00       		.byte	0
+ 1280 013b 16       		.uleb128 0x16
+ 1281 013c 34       		.uleb128 0x34
+ 1282 013d 00       		.byte	0
+ 1283 013e 03       		.uleb128 0x3
+ 1284 013f 0E       		.uleb128 0xe
+ 1285 0140 3A       		.uleb128 0x3a
+ 1286 0141 0B       		.uleb128 0xb
+ 1287 0142 3B       		.uleb128 0x3b
+ 1288 0143 05       		.uleb128 0x5
+ 1289 0144 49       		.uleb128 0x49
+ 1290 0145 13       		.uleb128 0x13
+ 1291 0146 3F       		.uleb128 0x3f
+ 1292 0147 19       		.uleb128 0x19
+ 1293 0148 3C       		.uleb128 0x3c
+ 1294 0149 19       		.uleb128 0x19
+ 1295 014a 00       		.byte	0
+ 1296 014b 00       		.byte	0
+ 1297 014c 17       		.uleb128 0x17
+ARM GAS  C:\Users\danie\AppData\Local\Temp\ccMFGOGe.s 			page 27
 
 
- 1379 0013 0100     		.2byte	0x1
- 1380 0015 58       		.byte	0x58
- 1381 0016 00000000 		.4byte	0
- 1382 001a 00000000 		.4byte	0
- 1383              	.LLST1:
- 1384 001e 00000000 		.4byte	.LVL0
- 1385 0022 0E000000 		.4byte	.LVL2
- 1386 0026 0100     		.2byte	0x1
- 1387 0028 51       		.byte	0x51
- 1388 0029 0E000000 		.4byte	.LVL2
- 1389 002d 28000000 		.4byte	.LFE64
- 1390 0031 0100     		.2byte	0x1
- 1391 0033 57       		.byte	0x57
- 1392 0034 00000000 		.4byte	0
- 1393 0038 00000000 		.4byte	0
- 1394              	.LLST2:
- 1395 003c 00000000 		.4byte	.LVL0
- 1396 0040 0E000000 		.4byte	.LVL2
- 1397 0044 0100     		.2byte	0x1
- 1398 0046 52       		.byte	0x52
- 1399 0047 0E000000 		.4byte	.LVL2
- 1400 004b 28000000 		.4byte	.LFE64
- 1401 004f 0100     		.2byte	0x1
- 1402 0051 56       		.byte	0x56
- 1403 0052 00000000 		.4byte	0
- 1404 0056 00000000 		.4byte	0
- 1405              	.LLST3:
- 1406 005a 0A000000 		.4byte	.LVL1
- 1407 005e 0E000000 		.4byte	.LVL2
- 1408 0062 0200     		.2byte	0x2
- 1409 0064 30       		.byte	0x30
- 1410 0065 9F       		.byte	0x9f
- 1411 0066 0E000000 		.4byte	.LVL2
- 1412 006a 28000000 		.4byte	.LFE64
- 1413 006e 0100     		.2byte	0x1
- 1414 0070 54       		.byte	0x54
- 1415 0071 00000000 		.4byte	0
- 1416 0075 00000000 		.4byte	0
- 1417              	.LLST4:
- 1418 0079 00000000 		.4byte	.LVL5
- 1419 007d 0E000000 		.4byte	.LVL7
- 1420 0081 0100     		.2byte	0x1
- 1421 0083 50       		.byte	0x50
- 1422 0084 0E000000 		.4byte	.LVL7
- 1423 0088 60000000 		.4byte	.LVL12
- 1424 008c 0100     		.2byte	0x1
- 1425 008e 5B       		.byte	0x5b
- 1426 008f 60000000 		.4byte	.LVL12
- 1427 0093 6C000000 		.4byte	.LFE65
- 1428 0097 0400     		.2byte	0x4
- 1429 0099 F3       		.byte	0xf3
- 1430 009a 01       		.uleb128 0x1
- 1431 009b 50       		.byte	0x50
- 1432 009c 9F       		.byte	0x9f
- 1433 009d 00000000 		.4byte	0
- 1434 00a1 00000000 		.4byte	0
- 1435              	.LLST5:
-ARM GAS  C:\Users\danie\AppData\Local\Temp\ccgko4Fm.s 			page 29
+ 1298 014d 34       		.uleb128 0x34
+ 1299 014e 00       		.byte	0
+ 1300 014f 03       		.uleb128 0x3
+ 1301 0150 0E       		.uleb128 0xe
+ 1302 0151 3A       		.uleb128 0x3a
+ 1303 0152 0B       		.uleb128 0xb
+ 1304 0153 3B       		.uleb128 0x3b
+ 1305 0154 0B       		.uleb128 0xb
+ 1306 0155 49       		.uleb128 0x49
+ 1307 0156 13       		.uleb128 0x13
+ 1308 0157 3F       		.uleb128 0x3f
+ 1309 0158 19       		.uleb128 0x19
+ 1310 0159 02       		.uleb128 0x2
+ 1311 015a 18       		.uleb128 0x18
+ 1312 015b 00       		.byte	0
+ 1313 015c 00       		.byte	0
+ 1314 015d 18       		.uleb128 0x18
+ 1315 015e 2E       		.uleb128 0x2e
+ 1316 015f 00       		.byte	0
+ 1317 0160 3F       		.uleb128 0x3f
+ 1318 0161 19       		.uleb128 0x19
+ 1319 0162 3C       		.uleb128 0x3c
+ 1320 0163 19       		.uleb128 0x19
+ 1321 0164 6E       		.uleb128 0x6e
+ 1322 0165 0E       		.uleb128 0xe
+ 1323 0166 03       		.uleb128 0x3
+ 1324 0167 0E       		.uleb128 0xe
+ 1325 0168 3A       		.uleb128 0x3a
+ 1326 0169 0B       		.uleb128 0xb
+ 1327 016a 3B       		.uleb128 0x3b
+ 1328 016b 0B       		.uleb128 0xb
+ 1329 016c 00       		.byte	0
+ 1330 016d 00       		.byte	0
+ 1331 016e 00       		.byte	0
+ 1332              		.section	.debug_loc,"",%progbits
+ 1333              	.Ldebug_loc0:
+ 1334              	.LLST0:
+ 1335 0000 00000000 		.4byte	.LVL0
+ 1336 0004 0E000000 		.4byte	.LVL2
+ 1337 0008 0100     		.2byte	0x1
+ 1338 000a 50       		.byte	0x50
+ 1339 000b 0E000000 		.4byte	.LVL2
+ 1340 000f 28000000 		.4byte	.LFE64
+ 1341 0013 0100     		.2byte	0x1
+ 1342 0015 58       		.byte	0x58
+ 1343 0016 00000000 		.4byte	0
+ 1344 001a 00000000 		.4byte	0
+ 1345              	.LLST1:
+ 1346 001e 00000000 		.4byte	.LVL0
+ 1347 0022 0E000000 		.4byte	.LVL2
+ 1348 0026 0100     		.2byte	0x1
+ 1349 0028 51       		.byte	0x51
+ 1350 0029 0E000000 		.4byte	.LVL2
+ 1351 002d 28000000 		.4byte	.LFE64
+ 1352 0031 0100     		.2byte	0x1
+ 1353 0033 57       		.byte	0x57
+ 1354 0034 00000000 		.4byte	0
+ARM GAS  C:\Users\danie\AppData\Local\Temp\ccMFGOGe.s 			page 28
 
 
- 1436 00a5 00000000 		.4byte	.LVL5
- 1437 00a9 0E000000 		.4byte	.LVL7
- 1438 00ad 0100     		.2byte	0x1
- 1439 00af 51       		.byte	0x51
- 1440 00b0 0E000000 		.4byte	.LVL7
- 1441 00b4 60000000 		.4byte	.LVL12
- 1442 00b8 0100     		.2byte	0x1
- 1443 00ba 5A       		.byte	0x5a
- 1444 00bb 60000000 		.4byte	.LVL12
- 1445 00bf 6C000000 		.4byte	.LFE65
- 1446 00c3 0400     		.2byte	0x4
- 1447 00c5 F3       		.byte	0xf3
- 1448 00c6 01       		.uleb128 0x1
- 1449 00c7 51       		.byte	0x51
- 1450 00c8 9F       		.byte	0x9f
- 1451 00c9 00000000 		.4byte	0
- 1452 00cd 00000000 		.4byte	0
- 1453              	.LLST6:
- 1454 00d1 00000000 		.4byte	.LVL5
- 1455 00d5 0E000000 		.4byte	.LVL7
- 1456 00d9 0100     		.2byte	0x1
- 1457 00db 52       		.byte	0x52
- 1458 00dc 0E000000 		.4byte	.LVL7
- 1459 00e0 60000000 		.4byte	.LVL12
- 1460 00e4 0100     		.2byte	0x1
- 1461 00e6 59       		.byte	0x59
- 1462 00e7 60000000 		.4byte	.LVL12
- 1463 00eb 6C000000 		.4byte	.LFE65
- 1464 00ef 0400     		.2byte	0x4
- 1465 00f1 F3       		.byte	0xf3
- 1466 00f2 01       		.uleb128 0x1
- 1467 00f3 52       		.byte	0x52
- 1468 00f4 9F       		.byte	0x9f
- 1469 00f5 00000000 		.4byte	0
- 1470 00f9 00000000 		.4byte	0
- 1471              	.LLST7:
- 1472 00fd 0A000000 		.4byte	.LVL6
- 1473 0101 0E000000 		.4byte	.LVL7
- 1474 0105 0200     		.2byte	0x2
- 1475 0107 30       		.byte	0x30
- 1476 0108 9F       		.byte	0x9f
- 1477 0109 0E000000 		.4byte	.LVL7
- 1478 010d 60000000 		.4byte	.LVL12
- 1479 0111 0100     		.2byte	0x1
- 1480 0113 54       		.byte	0x54
- 1481 0114 00000000 		.4byte	0
- 1482 0118 00000000 		.4byte	0
- 1483              	.LLST8:
- 1484 011c 10000000 		.4byte	.LVL27
- 1485 0120 1C000000 		.4byte	.LVL28
- 1486 0124 0100     		.2byte	0x1
- 1487 0126 50       		.byte	0x50
- 1488 0127 1C000000 		.4byte	.LVL28
- 1489 012b 1F000000 		.4byte	.LVL29-1
- 1490 012f 0100     		.2byte	0x1
- 1491 0131 51       		.byte	0x51
- 1492 0132 00000000 		.4byte	0
-ARM GAS  C:\Users\danie\AppData\Local\Temp\ccgko4Fm.s 			page 30
+ 1355 0038 00000000 		.4byte	0
+ 1356              	.LLST2:
+ 1357 003c 00000000 		.4byte	.LVL0
+ 1358 0040 0E000000 		.4byte	.LVL2
+ 1359 0044 0100     		.2byte	0x1
+ 1360 0046 52       		.byte	0x52
+ 1361 0047 0E000000 		.4byte	.LVL2
+ 1362 004b 28000000 		.4byte	.LFE64
+ 1363 004f 0100     		.2byte	0x1
+ 1364 0051 56       		.byte	0x56
+ 1365 0052 00000000 		.4byte	0
+ 1366 0056 00000000 		.4byte	0
+ 1367              	.LLST3:
+ 1368 005a 0A000000 		.4byte	.LVL1
+ 1369 005e 0E000000 		.4byte	.LVL2
+ 1370 0062 0200     		.2byte	0x2
+ 1371 0064 30       		.byte	0x30
+ 1372 0065 9F       		.byte	0x9f
+ 1373 0066 0E000000 		.4byte	.LVL2
+ 1374 006a 28000000 		.4byte	.LFE64
+ 1375 006e 0100     		.2byte	0x1
+ 1376 0070 54       		.byte	0x54
+ 1377 0071 00000000 		.4byte	0
+ 1378 0075 00000000 		.4byte	0
+ 1379              	.LLST4:
+ 1380 0079 00000000 		.4byte	.LVL5
+ 1381 007d 0E000000 		.4byte	.LVL7
+ 1382 0081 0100     		.2byte	0x1
+ 1383 0083 50       		.byte	0x50
+ 1384 0084 0E000000 		.4byte	.LVL7
+ 1385 0088 60000000 		.4byte	.LVL12
+ 1386 008c 0100     		.2byte	0x1
+ 1387 008e 5B       		.byte	0x5b
+ 1388 008f 60000000 		.4byte	.LVL12
+ 1389 0093 6C000000 		.4byte	.LFE65
+ 1390 0097 0400     		.2byte	0x4
+ 1391 0099 F3       		.byte	0xf3
+ 1392 009a 01       		.uleb128 0x1
+ 1393 009b 50       		.byte	0x50
+ 1394 009c 9F       		.byte	0x9f
+ 1395 009d 00000000 		.4byte	0
+ 1396 00a1 00000000 		.4byte	0
+ 1397              	.LLST5:
+ 1398 00a5 00000000 		.4byte	.LVL5
+ 1399 00a9 0E000000 		.4byte	.LVL7
+ 1400 00ad 0100     		.2byte	0x1
+ 1401 00af 51       		.byte	0x51
+ 1402 00b0 0E000000 		.4byte	.LVL7
+ 1403 00b4 60000000 		.4byte	.LVL12
+ 1404 00b8 0100     		.2byte	0x1
+ 1405 00ba 5A       		.byte	0x5a
+ 1406 00bb 60000000 		.4byte	.LVL12
+ 1407 00bf 6C000000 		.4byte	.LFE65
+ 1408 00c3 0400     		.2byte	0x4
+ 1409 00c5 F3       		.byte	0xf3
+ 1410 00c6 01       		.uleb128 0x1
+ 1411 00c7 51       		.byte	0x51
+ARM GAS  C:\Users\danie\AppData\Local\Temp\ccMFGOGe.s 			page 29
 
 
- 1493 0136 00000000 		.4byte	0
- 1494              		.section	.debug_aranges,"",%progbits
- 1495 0000 3C000000 		.4byte	0x3c
- 1496 0004 0200     		.2byte	0x2
- 1497 0006 00000000 		.4byte	.Ldebug_info0
- 1498 000a 04       		.byte	0x4
- 1499 000b 00       		.byte	0
- 1500 000c 0000     		.2byte	0
- 1501 000e 0000     		.2byte	0
- 1502 0010 00000000 		.4byte	.LFB64
- 1503 0014 28000000 		.4byte	.LFE64-.LFB64
- 1504 0018 00000000 		.4byte	.LFB65
- 1505 001c 6C000000 		.4byte	.LFE65-.LFB65
- 1506 0020 00000000 		.4byte	.LFB66
- 1507 0024 8C000000 		.4byte	.LFE66-.LFB66
- 1508 0028 00000000 		.4byte	.LFB67
- 1509 002c 34000000 		.4byte	.LFE67-.LFB67
- 1510 0030 00000000 		.4byte	.LFB68
- 1511 0034 08000000 		.4byte	.LFE68-.LFB68
- 1512 0038 00000000 		.4byte	0
- 1513 003c 00000000 		.4byte	0
- 1514              		.section	.debug_ranges,"",%progbits
- 1515              	.Ldebug_ranges0:
- 1516 0000 00000000 		.4byte	.LFB64
- 1517 0004 28000000 		.4byte	.LFE64
- 1518 0008 00000000 		.4byte	.LFB65
- 1519 000c 6C000000 		.4byte	.LFE65
- 1520 0010 00000000 		.4byte	.LFB66
- 1521 0014 8C000000 		.4byte	.LFE66
- 1522 0018 00000000 		.4byte	.LFB67
- 1523 001c 34000000 		.4byte	.LFE67
- 1524 0020 00000000 		.4byte	.LFB68
- 1525 0024 08000000 		.4byte	.LFE68
- 1526 0028 00000000 		.4byte	0
- 1527 002c 00000000 		.4byte	0
- 1528              		.section	.debug_line,"",%progbits
- 1529              	.Ldebug_line0:
- 1530 0000 48020000 		.section	.debug_str,"MS",%progbits,1
- 1530      0200B201 
- 1530      00000201 
- 1530      FB0E0D00 
- 1530      01010101 
- 1531              	.LASF34:
- 1532 0000 636F6566 		.ascii	"coeffs\000"
- 1532      667300
- 1533              	.LASF4:
- 1534 0007 5F5F696E 		.ascii	"__int16_t\000"
- 1534      7431365F 
- 1534      7400
- 1535              	.LASF5:
- 1536 0011 5F5F696E 		.ascii	"__int32_t\000"
- 1536      7433325F 
- 1536      7400
- 1537              	.LASF40:
- 1538 001b 4379446D 		.ascii	"CyDmaTdSetAddress\000"
- 1538      61546453 
- 1538      65744164 
-ARM GAS  C:\Users\danie\AppData\Local\Temp\ccgko4Fm.s 			page 31
+ 1412 00c8 9F       		.byte	0x9f
+ 1413 00c9 00000000 		.4byte	0
+ 1414 00cd 00000000 		.4byte	0
+ 1415              	.LLST6:
+ 1416 00d1 00000000 		.4byte	.LVL5
+ 1417 00d5 0E000000 		.4byte	.LVL7
+ 1418 00d9 0100     		.2byte	0x1
+ 1419 00db 52       		.byte	0x52
+ 1420 00dc 0E000000 		.4byte	.LVL7
+ 1421 00e0 60000000 		.4byte	.LVL12
+ 1422 00e4 0100     		.2byte	0x1
+ 1423 00e6 59       		.byte	0x59
+ 1424 00e7 60000000 		.4byte	.LVL12
+ 1425 00eb 6C000000 		.4byte	.LFE65
+ 1426 00ef 0400     		.2byte	0x4
+ 1427 00f1 F3       		.byte	0xf3
+ 1428 00f2 01       		.uleb128 0x1
+ 1429 00f3 52       		.byte	0x52
+ 1430 00f4 9F       		.byte	0x9f
+ 1431 00f5 00000000 		.4byte	0
+ 1432 00f9 00000000 		.4byte	0
+ 1433              	.LLST7:
+ 1434 00fd 0A000000 		.4byte	.LVL6
+ 1435 0101 0E000000 		.4byte	.LVL7
+ 1436 0105 0200     		.2byte	0x2
+ 1437 0107 30       		.byte	0x30
+ 1438 0108 9F       		.byte	0x9f
+ 1439 0109 0E000000 		.4byte	.LVL7
+ 1440 010d 60000000 		.4byte	.LVL12
+ 1441 0111 0100     		.2byte	0x1
+ 1442 0113 54       		.byte	0x54
+ 1443 0114 00000000 		.4byte	0
+ 1444 0118 00000000 		.4byte	0
+ 1445              	.LLST8:
+ 1446 011c 10000000 		.4byte	.LVL27
+ 1447 0120 1C000000 		.4byte	.LVL28
+ 1448 0124 0100     		.2byte	0x1
+ 1449 0126 50       		.byte	0x50
+ 1450 0127 1C000000 		.4byte	.LVL28
+ 1451 012b 1F000000 		.4byte	.LVL29-1
+ 1452 012f 0100     		.2byte	0x1
+ 1453 0131 51       		.byte	0x51
+ 1454 0132 00000000 		.4byte	0
+ 1455 0136 00000000 		.4byte	0
+ 1456              		.section	.debug_aranges,"",%progbits
+ 1457 0000 3C000000 		.4byte	0x3c
+ 1458 0004 0200     		.2byte	0x2
+ 1459 0006 00000000 		.4byte	.Ldebug_info0
+ 1460 000a 04       		.byte	0x4
+ 1461 000b 00       		.byte	0
+ 1462 000c 0000     		.2byte	0
+ 1463 000e 0000     		.2byte	0
+ 1464 0010 00000000 		.4byte	.LFB64
+ 1465 0014 28000000 		.4byte	.LFE64-.LFB64
+ 1466 0018 00000000 		.4byte	.LFB65
+ 1467 001c 6C000000 		.4byte	.LFE65-.LFB65
+ 1468 0020 00000000 		.4byte	.LFB66
+ARM GAS  C:\Users\danie\AppData\Local\Temp\ccMFGOGe.s 			page 30
 
 
- 1538      64726573 
- 1538      7300
- 1539              	.LASF41:
- 1540 002d 4379446D 		.ascii	"CyDmaChSetInitialTd\000"
- 1540      61436853 
- 1540      6574496E 
- 1540      69746961 
- 1540      6C546400 
- 1541              	.LASF44:
- 1542 0041 4144435F 		.ascii	"ADC_DelSig_1_IRQ_Disable\000"
- 1542      44656C53 
- 1542      69675F31 
- 1542      5F495251 
- 1542      5F446973 
- 1543              	.LASF12:
- 1544 005a 696E7433 		.ascii	"int32_t\000"
- 1544      325F7400 
- 1545              	.LASF38:
- 1546 0062 4379446D 		.ascii	"CyDmaTdAllocate\000"
- 1546      61546441 
- 1546      6C6C6F63 
- 1546      61746500 
- 1547              	.LASF47:
- 1548 0072 66697246 		.ascii	"firFixedInit\000"
- 1548      69786564 
- 1548      496E6974 
- 1548      00
- 1549              	.LASF17:
- 1550 007f 666C6F61 		.ascii	"float\000"
- 1550      7400
- 1551              	.LASF1:
- 1552 0085 756E7369 		.ascii	"unsigned char\000"
- 1552      676E6564 
- 1552      20636861 
- 1552      7200
- 1553              	.LASF51:
- 1554 0093 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
- 1554      43313120 
- 1554      352E342E 
- 1554      31203230 
- 1554      31363036 
- 1555 00c6 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
- 1555      20726576 
- 1555      6973696F 
- 1555      6E203233 
- 1555      37373135 
- 1556 00f9 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
- 1556      66756E63 
- 1556      74696F6E 
- 1556      2D736563 
- 1556      74696F6E 
- 1557              	.LASF23:
- 1558 0121 696E7075 		.ascii	"input\000"
- 1558      7400
- 1559              	.LASF20:
- 1560 0127 72656738 		.ascii	"reg8\000"
- 1560      00
-ARM GAS  C:\Users\danie\AppData\Local\Temp\ccgko4Fm.s 			page 32
+ 1469 0024 74000000 		.4byte	.LFE66-.LFB66
+ 1470 0028 00000000 		.4byte	.LFB67
+ 1471 002c 34000000 		.4byte	.LFE67-.LFB67
+ 1472 0030 00000000 		.4byte	.LFB68
+ 1473 0034 08000000 		.4byte	.LFE68-.LFB68
+ 1474 0038 00000000 		.4byte	0
+ 1475 003c 00000000 		.4byte	0
+ 1476              		.section	.debug_ranges,"",%progbits
+ 1477              	.Ldebug_ranges0:
+ 1478 0000 00000000 		.4byte	.LFB64
+ 1479 0004 28000000 		.4byte	.LFE64
+ 1480 0008 00000000 		.4byte	.LFB65
+ 1481 000c 6C000000 		.4byte	.LFE65
+ 1482 0010 00000000 		.4byte	.LFB66
+ 1483 0014 74000000 		.4byte	.LFE66
+ 1484 0018 00000000 		.4byte	.LFB67
+ 1485 001c 34000000 		.4byte	.LFE67
+ 1486 0020 00000000 		.4byte	.LFB68
+ 1487 0024 08000000 		.4byte	.LFE68
+ 1488 0028 00000000 		.4byte	0
+ 1489 002c 00000000 		.4byte	0
+ 1490              		.section	.debug_line,"",%progbits
+ 1491              	.Ldebug_line0:
+ 1492 0000 6D020000 		.section	.debug_str,"MS",%progbits,1
+ 1492      0200D901 
+ 1492      00000201 
+ 1492      FB0E0D00 
+ 1492      01010101 
+ 1493              	.LASF31:
+ 1494 0000 636F6566 		.ascii	"coeffs\000"
+ 1494      667300
+ 1495              	.LASF4:
+ 1496 0007 5F5F696E 		.ascii	"__int16_t\000"
+ 1496      7431365F 
+ 1496      7400
+ 1497              	.LASF5:
+ 1498 0011 5F5F696E 		.ascii	"__int32_t\000"
+ 1498      7433325F 
+ 1498      7400
+ 1499              	.LASF43:
+ 1500 001b 4F70616D 		.ascii	"Opamp_1_Start\000"
+ 1500      705F315F 
+ 1500      53746172 
+ 1500      7400
+ 1501              	.LASF3:
+ 1502 0029 73686F72 		.ascii	"short unsigned int\000"
+ 1502      7420756E 
+ 1502      7369676E 
+ 1502      65642069 
+ 1502      6E7400
+ 1503              	.LASF40:
+ 1504 003c 4379446D 		.ascii	"CyDmaChSetInitialTd\000"
+ 1504      61436853 
+ 1504      6574496E 
+ 1504      69746961 
+ 1504      6C546400 
+ 1505              	.LASF46:
+ARM GAS  C:\Users\danie\AppData\Local\Temp\ccMFGOGe.s 			page 31
 
 
- 1561              	.LASF39:
- 1562 012c 4379446D 		.ascii	"CyDmaTdSetConfiguration\000"
- 1562      61546453 
- 1562      6574436F 
- 1562      6E666967 
- 1562      75726174 
- 1563              	.LASF7:
- 1564 0144 6C6F6E67 		.ascii	"long unsigned int\000"
- 1564      20756E73 
- 1564      69676E65 
- 1564      6420696E 
- 1564      7400
- 1565              	.LASF3:
- 1566 0156 73686F72 		.ascii	"short unsigned int\000"
- 1566      7420756E 
- 1566      7369676E 
- 1566      65642069 
- 1566      6E7400
- 1567              	.LASF54:
- 1568 0169 496E6974 		.ascii	"Init\000"
- 1568      00
- 1569              	.LASF36:
- 1570 016e 444D415F 		.ascii	"DMA_TD\000"
- 1570      544400
- 1571              	.LASF33:
- 1572 0175 49544D5F 		.ascii	"ITM_RxBuffer\000"
- 1572      52784275 
- 1572      66666572 
- 1572      00
- 1573              	.LASF37:
- 1574 0182 444D415F 		.ascii	"DMA_1_DmaInitialize\000"
- 1574      315F446D 
- 1574      61496E69 
- 1574      7469616C 
- 1574      697A6500 
- 1575              	.LASF18:
- 1576 0196 646F7562 		.ascii	"double\000"
- 1576      6C6500
- 1577              	.LASF53:
- 1578 019d 433A5C55 		.ascii	"C:\\Users\\danie\\OneDrive - Aarhus Universitet\\3."
- 1578      73657273 
- 1578      5C64616E 
- 1578      69655C4F 
- 1578      6E654472 
- 1579 01cc 2073656D 		.ascii	" semester\\eprj3 grp\\ADC_TO_FIRFILTERBANK\\ADC_TO_"
- 1579      65737465 
- 1579      725C6570 
- 1579      726A3320 
- 1579      6772705C 
- 1580 01fc 46494C54 		.ascii	"FILTERBANK.cydsn\000"
- 1580      45524241 
- 1580      4E4B2E63 
- 1580      7964736E 
- 1580      00
- 1581              	.LASF48:
- 1582 020d 66697253 		.ascii	"firStoreNewSamples\000"
- 1582      746F7265 
-ARM GAS  C:\Users\danie\AppData\Local\Temp\ccgko4Fm.s 			page 33
+ 1506 0050 4144435F 		.ascii	"ADC_DelSig_1_IRQ_Disable\000"
+ 1506      44656C53 
+ 1506      69675F31 
+ 1506      5F495251 
+ 1506      5F446973 
+ 1507              	.LASF44:
+ 1508 0069 4F70616D 		.ascii	"Opamp_2_Start\000"
+ 1508      705F325F 
+ 1508      53746172 
+ 1508      7400
+ 1509              	.LASF37:
+ 1510 0077 4379446D 		.ascii	"CyDmaTdAllocate\000"
+ 1510      61546441 
+ 1510      6C6C6F63 
+ 1510      61746500 
+ 1511              	.LASF49:
+ 1512 0087 66697246 		.ascii	"firFixedInit\000"
+ 1512      69786564 
+ 1512      496E6974 
+ 1512      00
+ 1513              	.LASF17:
+ 1514 0094 666C6F61 		.ascii	"float\000"
+ 1514      7400
+ 1515              	.LASF1:
+ 1516 009a 756E7369 		.ascii	"unsigned char\000"
+ 1516      676E6564 
+ 1516      20636861 
+ 1516      7200
+ 1517              	.LASF53:
+ 1518 00a8 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 1518      43313120 
+ 1518      352E342E 
+ 1518      31203230 
+ 1518      31363036 
+ 1519 00db 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 1519      20726576 
+ 1519      6973696F 
+ 1519      6E203233 
+ 1519      37373135 
+ 1520 010e 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 1520      66756E63 
+ 1520      74696F6E 
+ 1520      2D736563 
+ 1520      74696F6E 
+ 1521              	.LASF23:
+ 1522 0136 696E7075 		.ascii	"input\000"
+ 1522      7400
+ 1523              	.LASF20:
+ 1524 013c 72656738 		.ascii	"reg8\000"
+ 1524      00
+ 1525              	.LASF38:
+ 1526 0141 4379446D 		.ascii	"CyDmaTdSetConfiguration\000"
+ 1526      61546453 
+ 1526      6574436F 
+ 1526      6E666967 
+ 1526      75726174 
+ 1527              	.LASF7:
+ARM GAS  C:\Users\danie\AppData\Local\Temp\ccMFGOGe.s 			page 32
 
 
- 1582      4E657753 
- 1582      616D706C 
- 1582      657300
- 1583              	.LASF42:
- 1584 0220 4379446D 		.ascii	"CyDmaChEnable\000"
- 1584      61436845 
- 1584      6E61626C 
- 1584      6500
- 1585              	.LASF14:
- 1586 022e 75696E74 		.ascii	"uint16\000"
- 1586      313600
- 1587              	.LASF35:
- 1588 0235 444D415F 		.ascii	"DMA_Chan\000"
- 1588      4368616E 
- 1588      00
- 1589              	.LASF15:
- 1590 023e 75696E74 		.ascii	"uint32\000"
- 1590      333200
- 1591              	.LASF55:
- 1592 0245 6D61696E 		.ascii	"main\000"
- 1592      00
- 1593              	.LASF49:
- 1594 024a 66697246 		.ascii	"firFixed\000"
- 1594      69786564 
- 1594      00
- 1595              	.LASF43:
- 1596 0253 4144435F 		.ascii	"ADC_DelSig_1_Start\000"
- 1596      44656C53 
- 1596      69675F31 
- 1596      5F537461 
- 1596      727400
- 1597              	.LASF10:
- 1598 0266 756E7369 		.ascii	"unsigned int\000"
- 1598      676E6564 
- 1598      20696E74 
- 1598      00
- 1599              	.LASF9:
- 1600 0273 6C6F6E67 		.ascii	"long long unsigned int\000"
- 1600      206C6F6E 
- 1600      6720756E 
- 1600      7369676E 
- 1600      65642069 
- 1601              	.LASF16:
- 1602 028a 696E7431 		.ascii	"int16\000"
- 1602      3600
- 1603              	.LASF29:
- 1604 0290 66696C74 		.ascii	"filter_outputArray\000"
- 1604      65725F6F 
- 1604      75747075 
- 1604      74417272 
- 1604      617900
- 1605              	.LASF11:
- 1606 02a3 696E7431 		.ascii	"int16_t\000"
- 1606      365F7400 
- 1607              	.LASF26:
- 1608 02ab 696E7454 		.ascii	"intToFloat\000"
- 1608      6F466C6F 
-ARM GAS  C:\Users\danie\AppData\Local\Temp\ccgko4Fm.s 			page 34
+ 1528 0159 6C6F6E67 		.ascii	"long unsigned int\000"
+ 1528      20756E73 
+ 1528      69676E65 
+ 1528      6420696E 
+ 1528      7400
+ 1529              	.LASF27:
+ 1530 016b 446F7562 		.ascii	"DoubleToInt\000"
+ 1530      6C65546F 
+ 1530      496E7400 
+ 1531              	.LASF55:
+ 1532 0177 433A5C50 		.ascii	"C:\\PRJ3 git\\E3PRJ3\\Software\\Styringsenhed\\ADC\\"
+ 1532      524A3320 
+ 1532      6769745C 
+ 1532      45335052 
+ 1532      4A335C53 
+ 1533 01a5 4144435F 		.ascii	"ADC_TO_FIRFILTERBANK\\ADC_TO_FILTERBANK.cydsn\000"
+ 1533      544F5F46 
+ 1533      49524649 
+ 1533      4C544552 
+ 1533      42414E4B 
+ 1534              	.LASF56:
+ 1535 01d2 496E6974 		.ascii	"Init\000"
+ 1535      00
+ 1536              	.LASF35:
+ 1537 01d7 444D415F 		.ascii	"DMA_TD\000"
+ 1537      544400
+ 1538              	.LASF33:
+ 1539 01de 49544D5F 		.ascii	"ITM_RxBuffer\000"
+ 1539      52784275 
+ 1539      66666572 
+ 1539      00
+ 1540              	.LASF45:
+ 1541 01eb 56444143 		.ascii	"VDAC8_1_Start\000"
+ 1541      385F315F 
+ 1541      53746172 
+ 1541      7400
+ 1542              	.LASF36:
+ 1543 01f9 444D415F 		.ascii	"DMA_1_DmaInitialize\000"
+ 1543      315F446D 
+ 1543      61496E69 
+ 1543      7469616C 
+ 1543      697A6500 
+ 1544              	.LASF18:
+ 1545 020d 646F7562 		.ascii	"double\000"
+ 1545      6C6500
+ 1546              	.LASF50:
+ 1547 0214 66697253 		.ascii	"firStoreNewSamples\000"
+ 1547      746F7265 
+ 1547      4E657753 
+ 1547      616D706C 
+ 1547      657300
+ 1548              	.LASF41:
+ 1549 0227 4379446D 		.ascii	"CyDmaChEnable\000"
+ 1549      61436845 
+ 1549      6E61626C 
+ 1549      6500
+ 1550              	.LASF14:
+ARM GAS  C:\Users\danie\AppData\Local\Temp\ccMFGOGe.s 			page 33
 
 
- 1608      617400
- 1609              	.LASF21:
- 1610 02b6 6C6F6E67 		.ascii	"long double\000"
- 1610      20646F75 
- 1610      626C6500 
- 1611              	.LASF27:
- 1612 02c2 666C6F61 		.ascii	"floatToInt\000"
- 1612      74546F49 
- 1612      6E7400
- 1613              	.LASF22:
- 1614 02cd 73697A65 		.ascii	"sizetype\000"
- 1614      74797065 
- 1614      00
- 1615              	.LASF8:
- 1616 02d6 6C6F6E67 		.ascii	"long long int\000"
- 1616      206C6F6E 
- 1616      6720696E 
- 1616      7400
- 1617              	.LASF52:
- 1618 02e4 6D61696E 		.ascii	"main.c\000"
- 1618      2E6300
- 1619              	.LASF19:
- 1620 02eb 63686172 		.ascii	"char\000"
- 1620      00
- 1621              	.LASF46:
- 1622 02f0 4953525F 		.ascii	"ISR_DMA_Done_Start\000"
- 1622      444D415F 
- 1622      446F6E65 
- 1622      5F537461 
- 1622      727400
- 1623              	.LASF2:
- 1624 0303 73686F72 		.ascii	"short int\000"
- 1624      7420696E 
- 1624      7400
- 1625              	.LASF24:
- 1626 030d 6F757470 		.ascii	"output\000"
- 1626      757400
- 1627              	.LASF13:
- 1628 0314 75696E74 		.ascii	"uint8\000"
- 1628      3800
- 1629              	.LASF28:
- 1630 031a 4953525F 		.ascii	"ISR_DMA_Done\000"
- 1630      444D415F 
- 1630      446F6E65 
- 1630      00
- 1631              	.LASF6:
- 1632 0327 6C6F6E67 		.ascii	"long int\000"
- 1632      20696E74 
- 1632      00
- 1633              	.LASF45:
- 1634 0330 4144435F 		.ascii	"ADC_DelSig_1_StartConvert\000"
- 1634      44656C53 
- 1634      69675F31 
- 1634      5F537461 
- 1634      7274436F 
- 1635              	.LASF31:
- 1636 034a 6164635F 		.ascii	"adc_sampleArray1\000"
-ARM GAS  C:\Users\danie\AppData\Local\Temp\ccgko4Fm.s 			page 35
+ 1551 0235 75696E74 		.ascii	"uint16\000"
+ 1551      313600
+ 1552              	.LASF34:
+ 1553 023c 444D415F 		.ascii	"DMA_Chan\000"
+ 1553      4368616E 
+ 1553      00
+ 1554              	.LASF15:
+ 1555 0245 75696E74 		.ascii	"uint32\000"
+ 1555      333200
+ 1556              	.LASF57:
+ 1557 024c 6D61696E 		.ascii	"main\000"
+ 1557      00
+ 1558              	.LASF51:
+ 1559 0251 66697246 		.ascii	"firFixed\000"
+ 1559      69786564 
+ 1559      00
+ 1560              	.LASF42:
+ 1561 025a 4144435F 		.ascii	"ADC_DelSig_1_Start\000"
+ 1561      44656C53 
+ 1561      69675F31 
+ 1561      5F537461 
+ 1561      727400
+ 1562              	.LASF10:
+ 1563 026d 756E7369 		.ascii	"unsigned int\000"
+ 1563      676E6564 
+ 1563      20696E74 
+ 1563      00
+ 1564              	.LASF26:
+ 1565 027a 696E7454 		.ascii	"intToDouble\000"
+ 1565      6F446F75 
+ 1565      626C6500 
+ 1566              	.LASF9:
+ 1567 0286 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 1567      206C6F6E 
+ 1567      6720756E 
+ 1567      7369676E 
+ 1567      65642069 
+ 1568              	.LASF16:
+ 1569 029d 696E7431 		.ascii	"int16\000"
+ 1569      3600
+ 1570              	.LASF30:
+ 1571 02a3 66696C74 		.ascii	"filter_outputArray\000"
+ 1571      65725F6F 
+ 1571      75747075 
+ 1571      74417272 
+ 1571      617900
+ 1572              	.LASF11:
+ 1573 02b6 696E7431 		.ascii	"int16_t\000"
+ 1573      365F7400 
+ 1574              	.LASF12:
+ 1575 02be 696E7433 		.ascii	"int32_t\000"
+ 1575      325F7400 
+ 1576              	.LASF22:
+ 1577 02c6 73697A65 		.ascii	"sizetype\000"
+ 1577      74797065 
+ 1577      00
+ 1578              	.LASF8:
+ARM GAS  C:\Users\danie\AppData\Local\Temp\ccMFGOGe.s 			page 34
 
 
- 1636      73616D70 
- 1636      6C654172 
- 1636      72617931 
- 1636      00
- 1637              	.LASF32:
- 1638 035b 6164635F 		.ascii	"adc_sampleArray2\000"
- 1638      73616D70 
- 1638      6C654172 
- 1638      72617932 
- 1638      00
- 1639              	.LASF0:
- 1640 036c 7369676E 		.ascii	"signed char\000"
- 1640      65642063 
- 1640      68617200 
- 1641              	.LASF50:
- 1642 0378 6669724D 		.ascii	"firMoveProcSamples\000"
- 1642      6F766550 
- 1642      726F6353 
- 1642      616D706C 
- 1642      657300
- 1643              	.LASF25:
- 1644 038b 6C656E67 		.ascii	"length\000"
- 1644      746800
- 1645              	.LASF30:
- 1646 0392 66696C74 		.ascii	"filter_workingArray1\000"
- 1646      65725F77 
- 1646      6F726B69 
- 1646      6E674172 
- 1646      72617931 
- 1647              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran
+ 1579 02cf 6C6F6E67 		.ascii	"long long int\000"
+ 1579      206C6F6E 
+ 1579      6720696E 
+ 1579      7400
+ 1580              	.LASF39:
+ 1581 02dd 4379446D 		.ascii	"CyDmaTdSetAddress\000"
+ 1581      61546453 
+ 1581      65744164 
+ 1581      64726573 
+ 1581      7300
+ 1582              	.LASF54:
+ 1583 02ef 6D61696E 		.ascii	"main.c\000"
+ 1583      2E6300
+ 1584              	.LASF19:
+ 1585 02f6 63686172 		.ascii	"char\000"
+ 1585      00
+ 1586              	.LASF48:
+ 1587 02fb 4953525F 		.ascii	"ISR_DMA_Done_Start\000"
+ 1587      444D415F 
+ 1587      446F6E65 
+ 1587      5F537461 
+ 1587      727400
+ 1588              	.LASF2:
+ 1589 030e 73686F72 		.ascii	"short int\000"
+ 1589      7420696E 
+ 1589      7400
+ 1590              	.LASF24:
+ 1591 0318 6F757470 		.ascii	"output\000"
+ 1591      757400
+ 1592              	.LASF13:
+ 1593 031f 75696E74 		.ascii	"uint8\000"
+ 1593      3800
+ 1594              	.LASF28:
+ 1595 0325 4953525F 		.ascii	"ISR_DMA_Done\000"
+ 1595      444D415F 
+ 1595      446F6E65 
+ 1595      00
+ 1596              	.LASF6:
+ 1597 0332 6C6F6E67 		.ascii	"long int\000"
+ 1597      20696E74 
+ 1597      00
+ 1598              	.LASF47:
+ 1599 033b 4144435F 		.ascii	"ADC_DelSig_1_StartConvert\000"
+ 1599      44656C53 
+ 1599      69675F31 
+ 1599      5F537461 
+ 1599      7274436F 
+ 1600              	.LASF32:
+ 1601 0355 6164635F 		.ascii	"adc_sampleArray1\000"
+ 1601      73616D70 
+ 1601      6C654172 
+ 1601      72617931 
+ 1601      00
+ 1602              	.LASF21:
+ 1603 0366 6C6F6E67 		.ascii	"long double\000"
+ 1603      20646F75 
+ 1603      626C6500 
+ARM GAS  C:\Users\danie\AppData\Local\Temp\ccMFGOGe.s 			page 35
+
+
+ 1604              	.LASF0:
+ 1605 0372 7369676E 		.ascii	"signed char\000"
+ 1605      65642063 
+ 1605      68617200 
+ 1606              	.LASF52:
+ 1607 037e 6669724D 		.ascii	"firMoveProcSamples\000"
+ 1607      6F766550 
+ 1607      726F6353 
+ 1607      616D706C 
+ 1607      657300
+ 1608              	.LASF25:
+ 1609 0391 6C656E67 		.ascii	"length\000"
+ 1609      746800
+ 1610              	.LASF29:
+ 1611 0398 66696C74 		.ascii	"filter_workingArray1\000"
+ 1611      65725F77 
+ 1611      6F726B69 
+ 1611      6E674172 
+ 1611      72617931 
+ 1612              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran
