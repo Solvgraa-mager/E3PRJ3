@@ -13,7 +13,5 @@ public:
 	~TCPServer();
 private: 
 	int clientSocket_; 
-	int clientCount_;
-	int bytesReceived;
 };
 

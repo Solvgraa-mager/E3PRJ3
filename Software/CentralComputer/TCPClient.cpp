@@ -17,19 +17,16 @@ int TCPClient::connectToServer(string ipAddress, int port)
         return 1;
     }
     else
-    {
-        cout << "socket number is: " << socket << endl;
-    }
+   
+    //	Create a clientStructure structure for the server we're connecting with
 
-    //	Create a hint structure for the server we're connecting with
-
-    sockaddr_in hint;
-    hint.sin_family = AF_INET;
-    hint.sin_port = htons(port);
-    inet_pton(AF_INET, ipAddress.c_str(), &hint.sin_addr);
+    sockaddr_in clientStructure;
+    clientStructure.sin_family = AF_INET;
+    clientStructure.sin_port = htons(port);
+    inet_pton(AF_INET, ipAddress.c_str(), &clientStructure.sin_addr);
 
     //	Connect to the server on the socket
-    int connectRes = connect(socket_, (sockaddr*)&hint, sizeof(hint));
+    int connectRes = connect(socket_, (sockaddr*)&clientStructure, sizeof(clientStructure));
     if (connectRes == -1)
     {
         return 1;

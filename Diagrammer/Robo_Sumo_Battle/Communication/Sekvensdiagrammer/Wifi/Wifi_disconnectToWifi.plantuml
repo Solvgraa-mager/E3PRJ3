@@ -2,7 +2,7 @@
 title Wifi::disconnectToWifi()
 participant UC1
 participant Wifi
-actor Linux #red
+actor OS #red
 actor Connman #red
 
 
@@ -11,11 +11,11 @@ UC1 -> Wifi : disconnectToWifi()
 Wifi -> Wifi : SSID_hex = TextToHex(SSID_) 
 note over Wifi : converting SSID to Hex value.
 
-Wifi -> Linux : connmanctl disconnect wifi_MAC_SSID_hex_managed_psk
-Linux -> Connman : disconnect wifi_MAC_SSID_hex_managed_psk
-Linux <-- Connman 
+Wifi -> OS : connmanctl disconnect wifi_MAC_SSID_hex_managed_psk
+OS -> Connman : disconnect wifi_MAC_SSID_hex_managed_psk
+OS <-- Connman 
 opt 
-    Wifi <-- Linux : return -1 || 127 
+    Wifi <-- OS : return -1 || 127 
     UC1 <-- Wifi : return -2 (disconnection faild)
 end 
 UC1 <-- Wifi

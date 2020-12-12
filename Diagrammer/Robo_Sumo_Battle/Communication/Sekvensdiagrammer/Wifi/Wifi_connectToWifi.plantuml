@@ -2,43 +2,43 @@
 title Wifi::connectToWifi()
 participant UC1
 participant Wifi
-actor Linux #red
+actor OS #red
 actor Connman #red
 
 UC1 -> Wifi : connectToWifi(SSID, passphrase, MAC)
 
 Wifi -> Wifi : SSID_ = SSID, MAC_ = MAC
 Wifi -> Wifi : passphrase_ = passphrase
-Wifi -> Linux : connmanctl scan wifi
+Wifi -> OS : connmanctl scan wifi
 
-Linux -> Connman : scan wifi
-Linux <-- Connman 
+OS -> Connman : scan wifi
+OS <-- Connman 
 opt 
-    Wifi <-- Linux : return -1 || 127
+    Wifi <-- OS : return -1 || 127
     UC1 <-- Wifi : return -1 (scan faild)
 end 
-Wifi <-- Linux
+Wifi <-- OS
 
 Wifi -> Wifi : SSID_hex = TextToHex(SSID_) 
 note over Wifi : converting SSID to Hex value.
 
-Wifi -> Linux : connmanctl connect wifi_MAC_SSID_hex_managed_psk
-Linux -> Connman : connect wifi_MAC_SSID_hex_managed_psk
-Linux <-- Connman 
+Wifi -> OS : connmanctl connect wifi_MAC_SSID_hex_managed_psk
+OS -> Connman : connect wifi_MAC_SSID_hex_managed_psk
+OS <-- Connman 
 opt 
-    Wifi <-- Linux : return -1 || 127 
+    Wifi <-- OS : return -1 || 127 
     UC1 <-- Wifi : return -2 (connect faild)
 end 
-Wifi <-- Linux
+Wifi <-- OS
 
-Wifi -> Linux :  echo passphrase
-Linux -> Connman : passphrase
-Linux <-- Connman 
+Wifi -> OS :  echo passphrase
+OS -> Connman : passphrase
+OS <-- Connman 
 opt 
-    Wifi <-- Linux : return -1 || 127 
+    Wifi <-- OS : return -1 || 127 
     UC1 <-- Wifi : return -3 (passphrase faild)
 end 
-Wifi <-- Linux
+Wifi <-- OS
 UC1 <-- Wifi : return 0 (connected)
 
 @enduml

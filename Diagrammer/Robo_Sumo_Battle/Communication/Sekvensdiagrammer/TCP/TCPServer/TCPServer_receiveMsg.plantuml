@@ -1,24 +1,16 @@
 @startuml
+title TCPServer::receiveMsg(char *buffer, int bufferLegth)
 participant UC1
 participant TCPServer
-participant TCPClient
 
-UC1 -> TCPServer : receiveMsg(buffer, bufferLengt)
-loop while no message received
-    TCPServer -> TCPServer : "check clientsocket if msg received"
+UC1 -> TCPServer : receiveMsg(buffer, bufferLenght)
+TCPServer ->  TCPServer : bytesReceived = receiveMsg\n(clientSocket_, buffer, bufferLength, 0)
+alt bytesReceived == -1
+    UC1 <-- TCPServer : return -1 (received faild)
+else bytesReceived == 0
+    UC1 <-- TCPServer : return -2 (client disconnected)
 end
-TCPServer <- TCPClient : send(msg)
-activate TCPServer
-TCPServer -> TCPServer :"read bufferlenght chars of msg"
-TCPServer -> TCPServer : "put msg in buffer"
-TCPServer -> TCPServer : "save amount of bytes received"
+note over TCPServer : prints received\nmessage
 
-alt bytes receives == -1
-    UC1 <-- TCPServer : return -1. "receive error"
-else bytes received == 0
-    UC1 <-- TCPServer : return -2. "client disconnected"
-else bytes recieved > 0
-    UC1 <-- TCPServer : return 0. "new message in buffer"
-    deactivate TCPServer
-end
+UC1 <-- TCPServer : return 0 (msg received in buffer)
 @enduml

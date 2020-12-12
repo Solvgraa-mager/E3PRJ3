@@ -1,22 +1,48 @@
 @startuml
+title TCPServer::openServer
 participant UC1
 participant TCPServer
-participant hint
+participant serverStructure
 participant client
 
 UC1 -> TCPServer : openServer(port)
-TCPServer -> TCPServer : int listning = socket(AF_INET, SOCK_STREAM, 0);
 note over TCPServer : creates a socket 
+TCPServer -> TCPServer : int listning = socket(AF_INET, SOCK_STREAM, 0);
 opt  listening == -1
     UC1 <-- TCPServer : return -1 (Socket faild to create))
 end
-note over hint : hint is object of struct sockaddr_in 
-TCPServer -> hint ** : hint()
-TCPServer -> hint : sin_family = AF_INET
-TCPServer -> hint : sin_port = htons(port)
-TCPServer -> TCPServer : inet_pton(AF_INET, "0.0.0.0", &hint.sin_addr)
-TCPServer -> TCPServer : bind(listening, (sockaddr*)&hint, sizeof(hint));
+note over serverStructure : object of\nsockaddr_in 
+TCPServer -> serverStructure ** : serverStructure()
+TCPServer <-- serverStructure
+TCPServer -> serverStructure : serverStructure.sin_family = AF_INET
+TCPServer <-- serverStructure
+TCPServer -> serverStructure : serverStructure.sin_port = htons(port)
+TCPServer <-- serverStructure
+note over TCPServer : create an addres to the socket. \nAF_INET standart.
+TCPServer -> TCPServer : inet_pton(AF_INET, "0.0.0.0", &serverStructure.sin_addr)
+note over TCPServer : binding the address to the socket
+TCPServer -> TCPServer : bind(listening, (sockaddr*)&serverStructure, sizeof(serverStructure));
 TCPServer -> TCPServer : listen(listening, SOMAXCONN);
-
-
+note over client : socket object of\nstruct sockaddr_in 
+TCPServer -> client ** : client()
+TCPServer <-- client
+TCPServer -> clientSize ** : sizeof(client)
+loop while client != connected
+    TCPServer -> TCPServer : clientSocket_ = accept(listening, (sockaddr*)&client, &clientSize);
+end
+TCPServer -> TCPServer : char host[NI_MAXHOST]
+TCPServer -> TCPServer : char service[NI_MAXSERV]
+TCPServer -> TCPServer : memset(host, 0, NI_MAXHOST)
+TCPServer -> TCPServer : memset(service, 0, NI_MAXSERV)
+alt getnameinfo((sockaddr*)&client, sizeof(client), host, NI_MAXHOST, service, NI_MAXSERV, 0) == 0
+    note over TCPServer : host connected on port service
+else
+    TCPServer -> TCPServer :  inet_ntop(AF_INET, &client.sin_addr, host, NI_MAXHOST);
+    note over TCPServer : host connected on port ntohs(client.sin_port) 
+end
+TCPServer -> TCPServer : colse (listening)
+TCPServer -> serverStructure !! 
+TCPServer -> client !! 
+TCPServer -> clientSize !!
+UC1 <-- TCPServer : return 0(server open. client connected)
 @enduml

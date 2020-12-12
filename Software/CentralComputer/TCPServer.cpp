@@ -14,12 +14,12 @@ int TCPServer::openServer(int port)
         return -1; //socket faild create
  
     //give socket an IP-address and port to bind
-    sockaddr_in hint; //create socket object from sock_in stuckaddr_in 
-    hint.sin_family = AF_INET; // AF_INET standart is used
-    hint.sin_port = htons(port); //insert used port to socket object
-    inet_pton(AF_INET, "0.0.0.0", &hint.sin_addr); //Inet function******
+    sockaddr_in serverStructure; //create socket object from sock_in stuckaddr_in 
+    serverStructure.sin_family = AF_INET; // AF_INET standart is used
+    serverStructure.sin_port = htons(port); //insert used port to socket object
+    inet_pton(AF_INET, "0.0.0.0", &serverStructure.sin_addr); //Inet function******
  
-    bind(listening, (sockaddr*)&hint, sizeof(hint));//binding socket to address
+    bind(listening, (sockaddr*)&serverStructure, sizeof(serverStructure));//binding socket to address
 
     // Tell Winsock the socket is for listening
     listen(listening, SOMAXCONN);
@@ -28,19 +28,17 @@ int TCPServer::openServer(int port)
     cout << "Wait for a connection" << endl;
     sockaddr_in client;
     socklen_t clientSize = sizeof(client);
-    
-    cout << "about to accept client on socket" << endl;
-
     clientSocket_ = accept(listening, (sockaddr*)&client, &clientSize);
 
     cout << "accept client on socket" << endl;
 
+//*******************DET SKAL JEG LIGE FATTE**************************
     char host[NI_MAXHOST];      // Client's remote name
     char service[NI_MAXSERV];   // Service (i.e. port) the client is connect on
  
     memset(host, 0, NI_MAXHOST); // same as memset(host, 0, NI_MAXHOST);
     memset(service, 0, NI_MAXSERV);
- 
+ //*******************DET SKAL JEG LIGE FATTE**************************
 
     cout << "memset Host and Service" << endl;
 
@@ -74,7 +72,7 @@ int TCPServer::receiveMsg(char *buffer, int bufferLength)
 {
 
     memset(buffer, 0, length);//buffer fyldes med 0;
-    bytesReceived = recv(clientSocket_, buffer, length, 0);
+    int bytesReceived = recv(clientSocket_, buffer, length, 0);
 	
     if (bytesReceived == -1)
     {
@@ -90,8 +88,6 @@ int TCPServer::receiveMsg(char *buffer, int bufferLength)
  
     cout << string(buffer, 0, bytesReceived) << endl;
  
-    
-    
     return 0;
 }
 

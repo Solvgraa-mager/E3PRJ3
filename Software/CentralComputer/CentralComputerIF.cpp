@@ -8,12 +8,17 @@ CentralComputerIF::CentralComputerIF(string SSID, string passphrase, string IPAd
 	_TCPC->connectToServer(IPAddress, playerNr+54000);
 }
 
-int CentralComputerIF::getDirSpeed(string msg, char *buffer, int length)
+int CentralComputerIF::getDirSpeed(string attackstatus, char *buffer, int length)
 {
-	_TCPC->receiveMsg(buffer, length);
-	cout << "Receive: dir|speed: " << buffer << endl; 
-	_TCPC->sendMsg(msg);
-	cout << "Send: Attack status: " << msg << endl; 
+	int err = _TCPC->receiveMsg(buffer, length); 
+	if (err == -1)
+		return -1 
+	cout << "Receive: dir|speed: " << buffer << endl;
+
+	err = _TCPC->sendMsg(msg);
+	if (err == -1)
+		return -1 
+	cout << "Send: Attack status: " << attackstatus << endl; 
 	return 0;
 }
 
