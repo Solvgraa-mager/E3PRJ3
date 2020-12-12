@@ -17,8 +17,9 @@ int CentralComputerIF::getDirSpeed(string attackstatus, char *buffer, int length
 
 	err = _TCPC->sendMsg(msg);
 	if (err == -1)
-		return -1 
+		return -2 
 	cout << "Send: Attack status: " << attackstatus << endl; 
+	
 	return 0;
 }
 

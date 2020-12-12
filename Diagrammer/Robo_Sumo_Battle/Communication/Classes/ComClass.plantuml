@@ -1,0 +1,108 @@
+@startuml
+class Communication{
+    +Communication() 
+    +sendMsg() {abstract} : virtual int
+    +receiveMsg() {abstract} : virtual int
+    ~Communication()
+}
+class Wifi{
+    +Wifi();
+    +createHotspot(string SSID, string passphrase)
+    +closeHotspot()
+    +connectToWifi(string SSID, string passphrase, string MAC)
+    +disconnectToWifi()
+    -SSID
+    -Passphrase
+    -MAC
+    ~Wifi();
+}
+
+class TCP{
+   	+TCP();
+	+getPort() : int
+	+setPort(int port) : void
+	+getBuffer() : char*
+	~TCP()
+	-port_ : int 
+	-buffer_size_ : int
+	-buffer_[MAX_BUFFER_SIZE] : char
+}
+class TCPClient{
+    +TCPClient()
+	+connectToServer(string Ipaddress, int port): int 
+	+disconnectToServer() : int
+	+sendMsg(string msg) : int
+	+receiveMsg(char *buffer, int lenght) : int
+	~TCPClient()
+	-socket_
+}
+class TCPServer{
+    +TCPServer()
+	+openServer(int port) : int
+	+closeServer() : int
+	+sendMsg(string msg) : int
+	+receiveMsg(char *buffer, int length) : int
+	~TCPServer()
+    -clientSocket_ : int 
+}
+
+Class SPI{
+    +SPI(int channel, int speed, int bufferSize)
+	+getBufferSize() : int
+	+setBufferSize(int bufferSize) : void
+	+getclkFreq() : int
+	+setClkFreq(int clkFreq) : void
+	+getChannel() : int
+	+getfd() : int
+    ~SPI()
+    -fd : int 
+    -Buffer_Size : int 
+    -clkFrequency : int 
+    -channel : int 
+}
+Class SPIMaster{
+    +SPIMaster(int channel, int speed, int bufferSize)
+	+sendMsg(string msg) : int
+	+sendChar(unsigned char msg) : int
+	+receiveMsg(char *buffer, int length) : int;
+	~SPIMaster();
+}
+Class SPISlave{
+    +SPISlave(int channel, int speed, int bufferSize)
+	+sendMsg(string msg) : int
+	+receiveMsg(char *buffer, int length) : int
+	~SPISlave()
+}
+class I2C{
+    -SDA_Gpio
+    -SCL_Gpio
+    -clkFrequency
+}
+class I2CMaster{
+    +I2CMaster();
+    +sendMsg(string msg) override int
+	+receiveMsg(char *buffer, int length) int
+    -address[MAX_CLIENT_COUNT] : int 
+    ~I2CMaster();
+    -clientCount : int 
+}
+class I2CSlave{
+    +I2CSlave()
+    +sendMsg(string msg)
+    +receiveMsg(char *buffer, int length)
+    ~I2CSlave()
+    -address int
+}
+
+Communication <|- Wifi
+Wifi <|- TCP
+SPI -|> Communication
+TCP <|-- TCPClient
+TCP <|--TCPServer
+SPI <|--SPIMaster
+SPI <|--SPISlave
+Communication <|--I2C
+I2C <|-- I2CMaster
+I2C <|-- I2CSlave
+
+@enduml

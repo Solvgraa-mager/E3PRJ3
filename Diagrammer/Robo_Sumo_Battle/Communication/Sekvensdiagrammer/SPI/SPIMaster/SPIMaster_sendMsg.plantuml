@@ -1,0 +1,25 @@
+@startuml
+title SPIMaster::sendMsg(string msg)
+participant UC1
+participant SPIMaster
+participant SPI
+participant wiringPi
+
+
+UC1 -> SPIMaster : sendMsg(msg)
+SPIMaster -> SPI : bufferSize = getBufferSize()
+SPIMaster <-- SPI
+SPIMaster -> SPI : channel = getChannel()
+SPIMaster <-- SPI
+opt msg.length() +1 != bufferSize
+    UC1 <-- SPIMaster : return -1 (bufferSize and msg not match)
+end
+SPIMaster -> SPIMaster : char buffer[bufferSize]
+SPIMaster -> SPIMaster : strcpy(buffer,msg.c_str())
+SPIMaster -> wiringPi : err =  wiringPiSPIDataRW\n(bufferSize, (unsigned char*)buffer, channel)
+SPIMaster <-- wiringPi 
+opt err < 0
+    UC1 <-- SPIMaster : return -2 (faild to send msg)
+end
+UC1 <-- SPIMaster : reuturn 0
+@enduml

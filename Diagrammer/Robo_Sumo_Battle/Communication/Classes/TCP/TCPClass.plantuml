@@ -1,0 +1,10 @@
+class TCP{
+   	+TCP();
+	+getPort() : int
+	+setPort(int port) : void
+	+getBuffer() : char*
+	~TCP()
+	-port_ : int 
+	-buffer_size_ : int
+	-buffer_[MAX_BUFFER_SIZE] : char
+}

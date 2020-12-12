@@ -1,0 +1,19 @@
+@startuml
+title SPIMaster::sendChar(unsigned char msg)
+participant UC1
+participant SPIMaster
+participant wiringPi
+participant SPI
+
+
+UC1 -> SPIMaster : sendChar(msg)
+SPIMaster -> SPIMaster : unigned char *buf = &msg\n int err
+SPIMaster -> SPI : channel = getChannel()
+SPIMaster <-- SPI
+SPIMaster -> wiringPi : err = wiringPiSPIDataRW(channel,buf,1)
+SPIMaster <-- wiringPi
+opt err<0
+UC1 <-- SPIMaster : return -1 (faild to send msg)
+end
+UC1 <-- SPIMaster : return 0
+@enduml

@@ -1,0 +1,16 @@
+@startuml
+title TCPClient::receiveMsg(char *buffer, int bufferLegth)
+participant UC1
+participant TCPClient
+
+UC1 -> TCPClient : receiveMsg(buffer, bufferLenght)
+TCPClient ->  TCPClient : bytesReceived = receiveMsg\n(clientSocket_, buffer, bufferLength, 0)
+alt bytesReceived == -1
+    UC1 <-- TCPClient : return -1 (received faild)
+else bytesReceived == 0
+    UC1 <-- TCPClient : return -2 (client disconnected)
+end
+note over TCPClient : prints received\nmessage
+
+UC1 <-- TCPClient : return 0 (msg received in buffer)
+@enduml

@@ -1,0 +1,17 @@
+@startuml
+title TCPClient::sendMsg(string msg)
+participant UC1
+participant TCPClient
+participant TCPServer
+
+
+UC1 -> TCPClient : sendMsg(msg)
+TCPClient -> TCPClient : send(clientSocket_,\nmsg.c_str(), msg.size() + 1, 0)
+opt faild to send
+    UC1 <-- TCPClient : retunr -1. (send message failde)
+end
+UC1 <-- TCPClient : return 0. (message send)
+TCPServer -> TCPServer : receiveMsg(*buffer, bufferLength)
+
+
+@enduml

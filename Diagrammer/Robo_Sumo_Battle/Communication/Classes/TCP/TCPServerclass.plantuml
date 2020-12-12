@@ -1,0 +1,10 @@
+
+class TCPServer{
+    +TCPServer()
+	+openServer(int port) : int
+	+closeServer() : int
+	+sendMsg(string msg) : int
+	+receiveMsg(char *buffer, int length) : int
+	~TCPServer()
+    -clientSocket_ : int 
+}

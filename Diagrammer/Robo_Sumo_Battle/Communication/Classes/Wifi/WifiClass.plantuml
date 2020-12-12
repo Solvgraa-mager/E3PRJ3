@@ -1,0 +1,11 @@
+class Wifi{
+    +Wifi();
+    +createHotspot(string SSID, string passphrase)
+    +closeHotspot()
+    +connectToWifi(string SSID, string passphrase, string MAC)
+    +disconnectToWifi()
+    -SSID
+    -Passphrase
+    -MAC
+    ~Wifi();
+}
