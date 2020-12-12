@@ -251,6 +251,7 @@
   <Data key="DataVersionKey" value="2" />
   <Group key="DWRInstGuidMapping">
     <Group key="Pin">
+      <Data key="0f78ac1f-72d7-47ec-a8de-0a9f283ebfdb" value="VREF_OUT" />
       <Data key="4b74a7dd-11eb-4c83-8c47-ce5573625e9a" value="Bin_Test_2" />
       <Data key="6bb974fa-eaf5-4425-baa2-d7656c7274b4" value="ADC_EOC" />
       <Data key="8d318d8b-cf7b-4b6b-b02c-ab1c5c49d0ba" value="SW" />
@@ -258,14 +259,17 @@
       <Data key="9c3a10c2-a5c5-4ace-a24a-c000b762ff60" value="Bin_Test_3" />
       <Data key="97e6a90f-80a0-4e58-be21-73a21c2b82b7" value="Bin_Test_1" />
       <Data key="220a0222-c10c-44cc-8e74-584023227521/20681f4c-d171-47ae-a1cb-d832cd711191" value="ADC_DelSig_Bypass_P03" />
+      <Data key="951bc808-0334-4d20-b517-c3991b0e25e2" value="Hann_Flag" />
       <Data key="1305c1b2-d2ac-443b-9c91-f34cb722064f" value="dma_done_test" />
       <Data key="00650855-dddc-4e6e-9c8f-c418ce361dc0" value="Bin_Test_2" />
       <Data key="1425177d-0d0e-4468-8bcc-e638e5509a9b" value="Rx_1" />
+      <Data key="75261359-d909-4d35-97a9-4a6f3376cf9f" value="FFT_Flag" />
       <Data key="77715107-f8d5-47e5-a629-0fb83101ac6b" value="Floejtelyd" />
       <Data key="a4216d54-e6bd-49e9-91d9-7fa291804647" value="Bin_Test_4" />
       <Data key="cabbb8cf-9f11-42a4-9b44-0f0049ccb41e" value="Bin_Test_4" />
       <Data key="e851a3b9-efb8-48be-bbb8-b303b216c393" value="switch_test" />
       <Data key="ed092b9b-d398-4703-be89-cebf998501f6" value="Tx_1" />
+      <Data key="eebdfa58-6a30-4299-8ca7-6c263cb71fb8" value="VREF_OUT_1" />
     </Group>
   </Group>
   <Group key="EEPROM">
@@ -3352,14 +3356,14 @@
     </Group>
   </Group>
   <Group key="Pin2">
-    <Group key="4b74a7dd-11eb-4c83-8c47-ce5573625e9a">
+    <Group key="0f78ac1f-72d7-47ec-a8de-0a9f283ebfdb">
       <Group key="0">
         <Data key="Port Format" value="2,2" />
       </Group>
     </Group>
-    <Group key="6bb974fa-eaf5-4425-baa2-d7656c7274b4">
+    <Group key="4b74a7dd-11eb-4c83-8c47-ce5573625e9a">
       <Group key="0">
-        <Data key="Port Format" value="1,6" />
+        <Data key="Port Format" value="2,2" />
       </Group>
     </Group>
     <Group key="8d318d8b-cf7b-4b6b-b02c-ab1c5c49d0ba">
@@ -3387,11 +3391,6 @@
         <Data key="Port Format" value="0,3" />
       </Group>
     </Group>
-    <Group key="1305c1b2-d2ac-443b-9c91-f34cb722064f">
-      <Group key="0">
-        <Data key="Port Format" value="1,2" />
-      </Group>
-    </Group>
     <Group key="00650855-dddc-4e6e-9c8f-c418ce361dc0">
       <Group key="0">
         <Data key="Port Format" value="2,2" />
@@ -3404,15 +3403,10 @@
     </Group>
     <Group key="77715107-f8d5-47e5-a629-0fb83101ac6b">
       <Group key="0">
-        <Data key="Port Format" value="0,0" />
+        <Data key="Port Format" value="0,7" />
       </Group>
     </Group>
     <Group key="a4216d54-e6bd-49e9-91d9-7fa291804647">
-      <Group key="0">
-        <Data key="Port Format" value="2,4" />
-      </Group>
-    </Group>
-    <Group key="cabbb8cf-9f11-42a4-9b44-0f0049ccb41e">
       <Group key="0">
         <Data key="Port Format" value="2,4" />
       </Group>
@@ -3427,7 +3421,29 @@
         <Data key="Port Format" value="12,7" />
       </Group>
     </Group>
-    <Group key="UnAssigned Pins" />
+    <Group key="eebdfa58-6a30-4299-8ca7-6c263cb71fb8">
+      <Group key="0">
+        <Data key="Port Format" value="0,6" />
+      </Group>
+    </Group>
+    <Group key="UnAssigned Pins">
+      <Group key="6bb974fa-eaf5-4425-baa2-d7656c7274b4">
+        <Data key="0" value="132522699912001199" />
+      </Group>
+      <Group key="951bc808-0334-4d20-b517-c3991b0e25e2">
+        <Data key="0" value="132522699756728662" />
+      </Group>
+      <Group key="1305c1b2-d2ac-443b-9c91-f34cb722064f">
+        <Data key="0" value="132522699929554590" />
+      </Group>
+      <Group key="75261359-d909-4d35-97a9-4a6f3376cf9f">
+        <Data key="0" value="132522699696221742" />
+      </Group>
+      <Group key="cabbb8cf-9f11-42a4-9b44-0f0049ccb41e">
+        <Data key="0" value="132517351780267845" />
+      </Group>
+    </Group>
+    <Group key="Unlocked Pins" />
   </Group>
   <Group key="PlaceDir">
     <Data key="count" value="0" />
@@ -3444,7 +3460,7 @@
     <Data key="CYDEV_INSTRUCT_CACHE_ENABLED" value="True" />
     <Data key="CYDEV_PROTECTION_ENABLE" value="False" />
     <Data key="CYDEV_STACK_SIZE" value="0x0800" />
-    <Data key="CYDEV_TEMPERATURE" value="-40C - 85/125C" />
+    <Data key="CYDEV_TEMPERATURE" value="0C - 85/125C" />
     <Data key="CYDEV_TRACE_ENABLED" value="False" />
     <Data key="CYDEV_USE_BUNDLED_CMSIS" value="True" />
     <Data key="CYDEV_VARIABLE_VDDA" value="False" />

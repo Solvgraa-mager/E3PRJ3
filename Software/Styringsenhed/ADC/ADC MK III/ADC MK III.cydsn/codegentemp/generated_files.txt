@@ -36,40 +36,26 @@
   <file name="C:\E3PRJ3\Software\Styringsenhed\ADC\ADC MK III\ADC MK III.cydsn\codegentemp\Floejtelyd.h" value="HEADER;;;;;Floejtelyd" />
   <file name="C:\E3PRJ3\Software\Styringsenhed\ADC\ADC MK III\ADC MK III.cydsn\codegentemp\ISR_DMA_Done.c" value="SOURCE_C;CortexM3;;;;ISR_DMA_Done" />
   <file name="C:\E3PRJ3\Software\Styringsenhed\ADC\ADC MK III\ADC MK III.cydsn\codegentemp\ISR_DMA_Done.h" value="HEADER;;;;;ISR_DMA_Done" />
-  <file name="C:\E3PRJ3\Software\Styringsenhed\ADC\ADC MK III\ADC MK III.cydsn\codegentemp\VDAC8_2.c" value="SOURCE_C;CortexM3;;;;VDAC8_2" />
-  <file name="C:\E3PRJ3\Software\Styringsenhed\ADC\ADC MK III\ADC MK III.cydsn\codegentemp\VDAC8_2.h" value="HEADER;;;;;VDAC8_2" />
-  <file name="C:\E3PRJ3\Software\Styringsenhed\ADC\ADC MK III\ADC MK III.cydsn\codegentemp\VDAC8_2_PM.c" value="SOURCE_C;CortexM3;;;;VDAC8_2" />
-  <file name="C:\E3PRJ3\Software\Styringsenhed\ADC\ADC MK III\ADC MK III.cydsn\codegentemp\Bin_Test_3_aliases.h" value="HEADER;;;;;Bin_Test_3" />
-  <file name="C:\E3PRJ3\Software\Styringsenhed\ADC\ADC MK III\ADC MK III.cydsn\codegentemp\Bin_Test_3.c" value="SOURCE_C;CortexM3;;;;Bin_Test_3" />
-  <file name="C:\E3PRJ3\Software\Styringsenhed\ADC\ADC MK III\ADC MK III.cydsn\codegentemp\Bin_Test_3.h" value="HEADER;;;;;Bin_Test_3" />
-  <file name="C:\E3PRJ3\Software\Styringsenhed\ADC\ADC MK III\ADC MK III.cydsn\codegentemp\Bin_Test_1_aliases.h" value="HEADER;;;;;Bin_Test_1" />
-  <file name="C:\E3PRJ3\Software\Styringsenhed\ADC\ADC MK III\ADC MK III.cydsn\codegentemp\Bin_Test_1.c" value="SOURCE_C;CortexM3;;;;Bin_Test_1" />
-  <file name="C:\E3PRJ3\Software\Styringsenhed\ADC\ADC MK III\ADC MK III.cydsn\codegentemp\Bin_Test_1.h" value="HEADER;;;;;Bin_Test_1" />
   <file name="C:\E3PRJ3\Software\Styringsenhed\ADC\ADC MK III\ADC MK III.cydsn\codegentemp\dma_done_test_aliases.h" value="HEADER;;;;;dma_done_test" />
   <file name="C:\E3PRJ3\Software\Styringsenhed\ADC\ADC MK III\ADC MK III.cydsn\codegentemp\dma_done_test.c" value="SOURCE_C;CortexM3;;;;dma_done_test" />
   <file name="C:\E3PRJ3\Software\Styringsenhed\ADC\ADC MK III\ADC MK III.cydsn\codegentemp\dma_done_test.h" value="HEADER;;;;;dma_done_test" />
   <file name="C:\E3PRJ3\Software\Styringsenhed\ADC\ADC MK III\ADC MK III.cydsn\codegentemp\ADC_EOC_aliases.h" value="HEADER;;;;;ADC_EOC" />
   <file name="C:\E3PRJ3\Software\Styringsenhed\ADC\ADC MK III\ADC MK III.cydsn\codegentemp\ADC_EOC.c" value="SOURCE_C;CortexM3;;;;ADC_EOC" />
   <file name="C:\E3PRJ3\Software\Styringsenhed\ADC\ADC MK III\ADC MK III.cydsn\codegentemp\ADC_EOC.h" value="HEADER;;;;;ADC_EOC" />
-  <file name="C:\E3PRJ3\Software\Styringsenhed\ADC\ADC MK III\ADC MK III.cydsn\codegentemp\Bin_Test_4_aliases.h" value="HEADER;;;;;Bin_Test_4" />
-  <file name="C:\E3PRJ3\Software\Styringsenhed\ADC\ADC MK III\ADC MK III.cydsn\codegentemp\Bin_Test_4.c" value="SOURCE_C;CortexM3;;;;Bin_Test_4" />
-  <file name="C:\E3PRJ3\Software\Styringsenhed\ADC\ADC MK III\ADC MK III.cydsn\codegentemp\Bin_Test_4.h" value="HEADER;;;;;Bin_Test_4" />
-  <file name="C:\E3PRJ3\Software\Styringsenhed\ADC\ADC MK III\ADC MK III.cydsn\codegentemp\VDAC8_1.c" value="SOURCE_C;CortexM3;;;;VDAC8_1" />
-  <file name="C:\E3PRJ3\Software\Styringsenhed\ADC\ADC MK III\ADC MK III.cydsn\codegentemp\VDAC8_1.h" value="HEADER;;;;;VDAC8_1" />
-  <file name="C:\E3PRJ3\Software\Styringsenhed\ADC\ADC MK III\ADC MK III.cydsn\codegentemp\VDAC8_1_PM.c" value="SOURCE_C;CortexM3;;;;VDAC8_1" />
-  <file name="C:\E3PRJ3\Software\Styringsenhed\ADC\ADC MK III\ADC MK III.cydsn\codegentemp\VDAC8_3.c" value="SOURCE_C;CortexM3;;;;VDAC8_3" />
-  <file name="C:\E3PRJ3\Software\Styringsenhed\ADC\ADC MK III\ADC MK III.cydsn\codegentemp\VDAC8_3.h" value="HEADER;;;;;VDAC8_3" />
-  <file name="C:\E3PRJ3\Software\Styringsenhed\ADC\ADC MK III\ADC MK III.cydsn\codegentemp\VDAC8_3_PM.c" value="SOURCE_C;CortexM3;;;;VDAC8_3" />
-  <file name="C:\E3PRJ3\Software\Styringsenhed\ADC\ADC MK III\ADC MK III.cydsn\codegentemp\Bin_Test_2_aliases.h" value="HEADER;;;;;Bin_Test_2" />
-  <file name="C:\E3PRJ3\Software\Styringsenhed\ADC\ADC MK III\ADC MK III.cydsn\codegentemp\Bin_Test_2.c" value="SOURCE_C;CortexM3;;;;Bin_Test_2" />
-  <file name="C:\E3PRJ3\Software\Styringsenhed\ADC\ADC MK III\ADC MK III.cydsn\codegentemp\Bin_Test_2.h" value="HEADER;;;;;Bin_Test_2" />
-  <file name="C:\E3PRJ3\Software\Styringsenhed\ADC\ADC MK III\ADC MK III.cydsn\codegentemp\VDAC8_4.c" value="SOURCE_C;CortexM3;;;;VDAC8_4" />
-  <file name="C:\E3PRJ3\Software\Styringsenhed\ADC\ADC MK III\ADC MK III.cydsn\codegentemp\VDAC8_4.h" value="HEADER;;;;;VDAC8_4" />
-  <file name="C:\E3PRJ3\Software\Styringsenhed\ADC\ADC MK III\ADC MK III.cydsn\codegentemp\VDAC8_4_PM.c" value="SOURCE_C;CortexM3;;;;VDAC8_4" />
+  <file name="C:\E3PRJ3\Software\Styringsenhed\ADC\ADC MK III\ADC MK III.cydsn\codegentemp\Opamp_1.c" value="SOURCE_C;CortexM3;;;;Opamp_1" />
+  <file name="C:\E3PRJ3\Software\Styringsenhed\ADC\ADC MK III\ADC MK III.cydsn\codegentemp\Opamp_1.h" value="HEADER;;;;;Opamp_1" />
+  <file name="C:\E3PRJ3\Software\Styringsenhed\ADC\ADC MK III\ADC MK III.cydsn\codegentemp\Opamp_1_PM.c" value="SOURCE_C;CortexM3;;;;Opamp_1" />
+  <file name="C:\E3PRJ3\Software\Styringsenhed\ADC\ADC MK III\ADC MK III.cydsn\codegentemp\VREF_OUT_aliases.h" value="HEADER;;;;;VREF_OUT" />
+  <file name="C:\E3PRJ3\Software\Styringsenhed\ADC\ADC MK III\ADC MK III.cydsn\codegentemp\VREF_OUT.c" value="SOURCE_C;CortexM3;;;;VREF_OUT" />
+  <file name="C:\E3PRJ3\Software\Styringsenhed\ADC\ADC MK III\ADC MK III.cydsn\codegentemp\VREF_OUT.h" value="HEADER;;;;;VREF_OUT" />
+  <file name="C:\E3PRJ3\Software\Styringsenhed\ADC\ADC MK III\ADC MK III.cydsn\codegentemp\Hann_Flag_aliases.h" value="HEADER;;;;;Hann_Flag" />
+  <file name="C:\E3PRJ3\Software\Styringsenhed\ADC\ADC MK III\ADC MK III.cydsn\codegentemp\Hann_Flag.c" value="SOURCE_C;CortexM3;;;;Hann_Flag" />
+  <file name="C:\E3PRJ3\Software\Styringsenhed\ADC\ADC MK III\ADC MK III.cydsn\codegentemp\Hann_Flag.h" value="HEADER;;;;;Hann_Flag" />
+  <file name="C:\E3PRJ3\Software\Styringsenhed\ADC\ADC MK III\ADC MK III.cydsn\codegentemp\FFT_Flag_aliases.h" value="HEADER;;;;;FFT_Flag" />
+  <file name="C:\E3PRJ3\Software\Styringsenhed\ADC\ADC MK III\ADC MK III.cydsn\codegentemp\FFT_Flag.c" value="SOURCE_C;CortexM3;;;;FFT_Flag" />
+  <file name="C:\E3PRJ3\Software\Styringsenhed\ADC\ADC MK III\ADC MK III.cydsn\codegentemp\FFT_Flag.h" value="HEADER;;;;;FFT_Flag" />
   <file name="C:\E3PRJ3\Software\Styringsenhed\ADC\ADC MK III\ADC MK III.cydsn\codegentemp\UART_1_IntClock.c" value="SOURCE_C;CortexM3;;;;UART_1_IntClock" />
   <file name="C:\E3PRJ3\Software\Styringsenhed\ADC\ADC MK III\ADC MK III.cydsn\codegentemp\UART_1_IntClock.h" value="HEADER;;;;;UART_1_IntClock" />
-  <file name="C:\E3PRJ3\Software\Styringsenhed\ADC\ADC MK III\ADC MK III.cydsn\codegentemp\ADC_DelSig_AMux.c" value="SOURCE_C;CortexM3;;;;ADC_DelSig_AMux" />
-  <file name="C:\E3PRJ3\Software\Styringsenhed\ADC\ADC MK III\ADC MK III.cydsn\codegentemp\ADC_DelSig_AMux.h" value="HEADER;;;;;ADC_DelSig_AMux" />
   <file name="C:\E3PRJ3\Software\Styringsenhed\ADC\ADC MK III\ADC MK III.cydsn\codegentemp\ADC_DelSig_Ext_CP_Clk.c" value="SOURCE_C;CortexM3;;;;ADC_DelSig_Ext_CP_Clk" />
   <file name="C:\E3PRJ3\Software\Styringsenhed\ADC\ADC MK III\ADC MK III.cydsn\codegentemp\ADC_DelSig_Ext_CP_Clk.h" value="HEADER;;;;;ADC_DelSig_Ext_CP_Clk" />
   <file name="C:\E3PRJ3\Software\Styringsenhed\ADC\ADC MK III\ADC MK III.cydsn\codegentemp\ADC_DelSig_IRQ.c" value="SOURCE_C;CortexM3;;;;ADC_DelSig_IRQ" />

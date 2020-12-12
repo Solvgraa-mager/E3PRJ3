@@ -4,7 +4,7 @@
 #include <tgmath.h>
 #include <stdlib.h>
 #include <time.h>
-#define NO_OF_SAMPLES 256 // = 2^3 
+#define NO_OF_SAMPLES 80 //
 #define n (NO_OF_SAMPLES / 2)
 #define SampleRate 10000
 #define FrequencyResolution (SampleRate/n)
@@ -19,4 +19,4 @@
 #define FreqBin3 (uint8)floor(keyFrequency3/FrequencyResolution)
 #define FreqBin4 (uint8)floor(keyFrequency4/FrequencyResolution)
 
-uint8 DoFFT(uint8* inputArray, uint16* FFTResultPtr);
+uint8 DoFFT(int8* inputArray, uint16* FFTResultPtr);

@@ -38,8 +38,10 @@
         <Files Root="C:\E3PRJ3\Software\Styringsenhed\ADC\ADC MK III\ADC MK III.cydsn">
           <File BuildType="BUILD" Toolchain="">main.c</File>
           <File BuildType="BUILD" Toolchain="">fft.c</File>
+          <File BuildType="BUILD" Toolchain="">fir_filter1.c</File>
           <File BuildType="BUILD" Toolchain="">cyapicallbacks.h</File>
           <File BuildType="BUILD" Toolchain="">fft.h</File>
+          <File BuildType="BUILD" Toolchain="">fir_filter1.h</File>
         </Files>
       </Folder>
       <Folder BuildType="STRICT" Path="C:\E3PRJ3\Software\Styringsenhed\ADC\ADC MK III\ADC MK III.cydsn\Generated_Source\PSoC5">
@@ -116,8 +118,6 @@
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\dma_done_test_aliases.h</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\dma_done_test.c</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\dma_done_test.h</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\ADC_DelSig_AMux.c</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\ADC_DelSig_AMux.h</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\ADC_DelSig_Ext_CP_Clk.c</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\ADC_DelSig_Ext_CP_Clk.h</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\ADC_DelSig_IRQ.c</File>
@@ -127,30 +127,18 @@
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\ADC_EOC_aliases.h</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\ADC_EOC.c</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\ADC_EOC.h</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\Bin_Test_3_aliases.h</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\Bin_Test_3.c</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\Bin_Test_3.h</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\Bin_Test_2_aliases.h</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\Bin_Test_2.c</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\Bin_Test_2.h</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\Bin_Test_1_aliases.h</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\Bin_Test_1.c</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\Bin_Test_1.h</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\Bin_Test_4_aliases.h</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\Bin_Test_4.c</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\Bin_Test_4.h</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\VDAC8_1.c</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\VDAC8_1.h</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\VDAC8_1_PM.c</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\VDAC8_2.c</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\VDAC8_2.h</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\VDAC8_2_PM.c</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\VDAC8_3.c</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\VDAC8_3.h</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\VDAC8_3_PM.c</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\VDAC8_4.c</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\VDAC8_4.h</File>
-          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\VDAC8_4_PM.c</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\VREF_OUT_aliases.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\VREF_OUT.c</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\VREF_OUT.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\Opamp_1.c</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\Opamp_1.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\Opamp_1_PM.c</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\FFT_Flag_aliases.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\FFT_Flag.c</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\FFT_Flag.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\Hann_Flag_aliases.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\Hann_Flag.c</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\Hann_Flag.h</File>
         </Files>
       </Folder>
       <Folder BuildType="STRICT" Path="C:\E3PRJ3\Software\Styringsenhed\ADC\ADC MK III\ADC MK III.cydsn\Export\ARM_GCC_Generic">

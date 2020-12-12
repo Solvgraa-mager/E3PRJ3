@@ -5,19 +5,21 @@
 #define omega_N (cpow(cexp(-2 * M_PI * I / NO_OF_SAMPLES), (k / 2) * v))
 
 uint8
-DoFFT(uint8* inputArray, uint16* FFTResultPtr)
+DoFFT(int8* inputArray, uint16* FFTResultPtr)
 {
 
-    
+    Hann_Flag_Write(1);
 float complex coefficientArray[n] = { 0 };
 char uartBuffer[256];
 // Hanning 
   for (int i = 0; i < NO_OF_SAMPLES; i++) {
     float hann = 0.5 * (1 - cosf(2 * M_PI * i / NO_OF_SAMPLES));
-    inputArray[i] = hann * inputArray[i] - 128u;
+    inputArray[i] = hann * inputArray[i];
   }
 
+    Hann_Flag_Write(0);
 
+    FFT_Flag_Write(1);
 // FFT udregning
 // Lige koefficienter
 for (int l = 0; l < n/4; l++) {
@@ -31,16 +33,18 @@ for (int l = 0; l < n/4; l++) {
                                omega_n;
     };
   }
-
+    FFT_Flag_Write(0);
   
-  FFTResultPtr[0] = (uint16)(2 * coefficientArray[0])>>4;
-
 // Fyld resultater ind i output pointer
-  for (int k = 1; k < n/2; k++) {
-    FFTResultPtr[k] = (uint16)cabsf(coefficientArray[k]) >> 4;
-    FFTResultPtr[n-k] = (uint16)cabsf(conjf(coefficientArray[k])) >> 4;
-     snprintf(uartBuffer, sizeof(uartBuffer), "%d: %d\n", k, FFTResultPtr[k]);
-     UART_1_PutString(uartBuffer);
+  for (int k = 0; k < n/2; k++) {
+    if (k ==0)
+    { FFTResultPtr[0] = (uint8)(2 * coefficientArray[0]);}
+    FFTResultPtr[k] = (uint8)cabsf(coefficientArray[k]) ;
+    FFTResultPtr[n-k] = (uint8)cabsf(conjf(coefficientArray[k]));
+//     snprintf(uartBuffer, sizeof(uartBuffer), "%d\n",FFTResultPtr[k]);
+//     UART_1_PutString(uartBuffer);
   };
+
+
   return 0;
 }
