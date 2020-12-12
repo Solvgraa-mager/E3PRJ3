@@ -1,0 +1,9 @@
+
+class TCPClient{
+    +TCPClient()
+	+connectToServer(string Ipaddress, int port): int 
+	+disconnectToServer() : int
+	+sendMsg(string msg) : int
+	+receiveMsg(char *buffer, int lenght) : int
+	~TCPClient()
+	-socket_

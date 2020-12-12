@@ -1,0 +1,18 @@
+@startuml
+
+Class SPI{
+    +SPI(int channel, int speed, int bufferSize)
+	+getBufferSize() : int
+	+setBufferSize(int bufferSize) : void
+	+getclkFreq() : int
+	+setClkFreq(int clkFreq) : void
+	+getChannel() : int
+	+getfd() : int
+    ~SPI()
+    -fd : int 
+    -Buffer_Size : int 
+    -clkFrequency : int 
+    -channel : int 
+}
+
+@enduml

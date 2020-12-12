@@ -1,0 +1,20 @@
+@startuml
+title SPIMaster::receiveMsg(char *buffer, int length)
+participant UC1
+participant SPIMaster
+participant wiringPi
+participant SPI
+
+UC1 -> SPIMaster : receiveMsg(buffer, bufferLength)
+SPIMaster -> SPIMaster : unsigned char receieveBuffer[length]
+SPIMaster -> SPIMaster : memset(receieveBuffer,0,length)
+SPIMaster -> SPI : channel = getChannel()
+SPIMaster <-- SPI
+SPIMaster -> wiringPi : err = wiringPiSPIDataRW(channel,receieveBuffer,length);
+SPIMaster <-- wiringPi
+opt err<0
+UC1 <-- SPIMaster : return -1 (faild to receive msg)
+end
+SPIMaster -> SPIMaster : strcpy(buffer,(char*)receieveBuffer);
+UC1 <-- SPIMaster : return 0 (msg received in buffer)
+@enduml

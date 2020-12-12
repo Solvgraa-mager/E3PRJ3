@@ -1,0 +1,8 @@
+
+Class SPIMaster{
+    +SPIMaster(int channel, int speed, int bufferSize)
+	+sendMsg(string msg) : int
+	+sendChar(unsigned char msg) : int
+	+receiveMsg(char *buffer, int length) : int;
+	~SPIMaster();
+}

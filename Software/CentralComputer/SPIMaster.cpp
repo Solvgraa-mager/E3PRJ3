@@ -32,7 +32,7 @@ int SPIMaster::sendMsg(string msg)
 int SPIMaster::sendChar(unsigned char msg)
 {
 	unsigned char *buf = &msg;
-	if (wiringPiSPIDataRW(0,buf,1)<0)
+	if (wiringPiSPIDataRW(SPI::getChannel(),buf,1)<0)
 	{
 		cout << "SPIMaster: Could not send byte" << endl; 
 		return -1; 

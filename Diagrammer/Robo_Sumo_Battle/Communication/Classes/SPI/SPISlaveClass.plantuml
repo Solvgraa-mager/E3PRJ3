@@ -1,0 +1,7 @@
+
+Class SPISlave{
+    +SPISlave(int channel, int speed, int bufferSize)
+	+sendMsg(string msg) : int
+	+receiveMsg(char *buffer, int length) : int
+	~SPISlave()
+}

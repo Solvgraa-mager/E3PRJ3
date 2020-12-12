@@ -1,0 +1,21 @@
+@startuml
+title CentralComputerIF\n(string SSID, string passphrase, string IPAddress, int playerNr)
+==Constructor==
+participant UC1
+participant CentralComputerIF
+UC1 -> CentralComputerIF : CentralComputerIf\n(SSID, passphrase, IPAddress, playerNr) 
+note over _TCPC : TCPClient object
+CentralComputerIF -> _TCPC ** : TCPC_ = new TCPClient()
+CentralComputerIF <-- _TCPC
+CentralComputerIF -> _TCPC : connectToWifi(SSID, passphrase)
+CentralComputerIF <-- _TCPC
+note over _TCPC : 54000 + palyernumbe = port. 
+CentralComputerIF -> _TCPC : connecToserver(IPAddress, palyerNr + 54000)
+CentralComputerIF <-- _TCPC
+UC1 <-- CentralComputerIF
+==Destructor==
+UC1 -> CentralComputerIF !! : ~CentralComputeIF()
+CentralComputerIF -> _TCPC !! : ~_TCPC()
+CentralComputerIF <-- _TCPC
+UC1 <-- CentralComputerIF
+@enduml

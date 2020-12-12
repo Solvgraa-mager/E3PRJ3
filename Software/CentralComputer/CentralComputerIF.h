@@ -8,7 +8,7 @@ class CentralComputerIF
 {
 public:
 	CentralComputerIF(string SSID, string passphrase, string IPAddress, int TCPClientPort);
-	int getDirSpeed(string msg, char *buffer, int length);
+	int getDirSpeed(string attackstatus, char *buffer, int length);
 	~CentralComputerIF();
 private:
 	TCPClient *_TCPC; 

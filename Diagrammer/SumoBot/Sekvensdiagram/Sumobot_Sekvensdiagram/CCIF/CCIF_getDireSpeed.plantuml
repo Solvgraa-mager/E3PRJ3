@@ -1,0 +1,25 @@
+@startuml
+title CentralComputerIF::getDirSpeed(string attackstatus, char *buffer, int length)
+participant UC1
+participant CentralComputerIF
+participant _TCPC
+
+UC1 -> CentralComputerIF : getDirSpeed(attackstatus, buffer, length)
+CentralComputerIF -> _TCPC :receiveMsg(buffer, length)
+opt 
+   CentralComputerIF <-- _TCPC : return -1
+   UC1 <-- CentralComputerIF : return -1 (faild to receive msg)
+end
+CentralComputerIF <-- _TCPC
+
+
+CentralComputerIF -> _TCPC :sendMsg(attackstatus)
+opt 
+   CentralComputerIF <-- _TCPC : return -1
+   UC1 <-- CentralComputerIF : return -2 (faild to send msg)
+end
+CentralComputerIF <-- _TCPC
+UC1 <-- CentralComputerIF : return 0 (dir, speed updated.) 
+
+
+@enduml

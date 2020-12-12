@@ -2,24 +2,24 @@
 title Wifi::createHotspot()
 participant UC1
 participant Wifi
-actor Linux #red
+actor OS #red
 actor Connman #red
 
 UC1 -> Wifi : createHotspot(SSID,passphrase)
 Wifi -> Wifi : SSID_ = SSID, passphrase_ = passphrase
-Wifi -> Linux : echo SSID=SSID_>/etc/connman-hotspot.conf
-Linux -> Connman : update SSID
-Linux <-- Connman
-Wifi <-- Linux
+Wifi -> OS : echo SSID=SSID_>/etc/connman-hotspot.conf
+OS -> Connman : update SSID
+OS <-- Connman
+Wifi <-- OS
 
-Wifi -> Linux : echo PASSWORD=passphrase_>>/etc/connman-hotspot.conf
-Linux -> Connman : update PASSWORD
-Linux <-- Connman
-Wifi <-- Linux
+Wifi -> OS : echo PASSWORD=passphrase_>>/etc/connman-hotspot.conf
+OS -> Connman : update PASSWORD
+OS <-- Connman
+Wifi <-- OS
 
-Wifi -> Linux : connman-hotspot enable
-Linux -> Connman : connman-hotspot enable
-Linux <-- Connman
-Wifi <-- Linux
+Wifi -> OS : connman-hotspot enable
+OS -> Connman : connman-hotspot enable
+OS <-- Connman
+Wifi <-- OS
 
 @enduml

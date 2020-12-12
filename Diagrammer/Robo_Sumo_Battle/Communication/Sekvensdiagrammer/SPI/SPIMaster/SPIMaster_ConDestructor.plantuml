@@ -1,0 +1,16 @@
+@startuml
+title SPIMaster::SPIMaster(int channel, int speed, int bufferSize)
+participant UC1
+participant SPIMaster
+participant SPI
+participant wiringPi
+
+UC1 -> SPIMaster : SPIMaster(channel, speed, bufferSize)
+SPIMaster -> SPI : SPI(channel, speed, bufferSize)
+note over wiringPi : select SPI channel,\nclock frequenzy
+SPI -> wiringPi : _fd = wiringPiSPISetup(channel, 10000)
+SPI <-- wiringPi
+SPI -> SPI : _buffer_size = bufferSize\n_channel = channel; 
+SPIMaster <-- SPI 
+UC1 <-- SPIMaster
+@enduml
