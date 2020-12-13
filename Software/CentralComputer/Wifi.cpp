@@ -69,12 +69,11 @@ int Wifi::disconnectToWifi()
 {
 	int err;
 	
-	if (SSID == "SumoBot")
+	if (SSID_ == "SumoBot")
 	{
 		string SumoBot_hex = "53756d6f426f74"; //Text to Hex value. SumoBot = 53756d6f426f74
 		err = system(("connmanctl disconnect wifi_"+MAC_+SumoBot_hex"__managed_psk").c_str()); //connman connect to hotspot
 		if ((err == -1) || (err == 127)) 
-		return -1;
 	}
 	else
 	{
@@ -89,11 +88,7 @@ Wifi::~Wifi()
 {
 	int err; 
 	err = disconnectToWifi(SSID_);
-	if (err == -1) 
-
 	err = system("connman-hotspot disable");
-	if ((err == -1) || (err == 127)) 
-
 }
 
 int Wifi::sendMsg(string msg)

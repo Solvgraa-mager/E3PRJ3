@@ -1,0 +1,8 @@
+@startuml
+class Communication{
+    +Communication() 
+    +sendMsg() {abstract} : virtual int
+    +receiveMsg() {abstract} : virtual int
+    ~Communication()
+}
+@enduml
