@@ -93,7 +93,7 @@ main(void)
 
 CY_ISR(ISR_DMA_Done)
 {
-  dma_done_test_Write(1);
+  Proc_done_test_Write(1);
 //  ADC_DelSig_StopConvert();
 //  uint16 binSum1 = 0;
 //  uint16 binSum2 = 0;
@@ -122,7 +122,6 @@ int16_t filter_outputArray[NO_OF_SAMPLES];
       snprintf(uartBuffer, sizeof(uartBuffer), "%d,%d\n",ADC_Sample[i], filter_outputArray[i]);
       UART_1_PutString(uartBuffer);
     }
-
 
 /*Definer flere koefficientarrays og brug dette koefficient array i kald
 samme metode med nyt koefficientarray for at lade adc input samples 
@@ -156,7 +155,7 @@ firMoveProcSamples(NO_OF_SAMPLES);
 //           binSum4);
 //  UART_1_PutString(uartBuffer);
 
-  dma_done_test_Write(0);
+  Proc_done_test_Write(0);
 //  ADC_DelSig_StartConvert();
 }
 

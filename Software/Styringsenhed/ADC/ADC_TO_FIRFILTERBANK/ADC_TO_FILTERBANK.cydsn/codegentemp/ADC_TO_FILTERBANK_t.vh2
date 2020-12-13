@@ -1,5 +1,5 @@
 -- Project:   C:\PRJ3 git\E3PRJ3\Software\Styringsenhed\ADC\ADC_TO_FIRFILTERBANK\ADC_TO_FILTERBANK.cydsn\ADC_TO_FILTERBANK.cyprj
--- Generated: 12/12/2020 16:35:20
+-- Generated: 12/12/2020 17:00:20
 -- PSoC Creator  4.3
 
 ENTITY ADC_TO_FILTERBANK IS
@@ -68,9 +68,9 @@ ARCHITECTURE __DEFAULT__ OF ADC_TO_FILTERBANK IS
     ATTRIBUTE Location OF Dedicated_Output : LABEL IS "P3[6]";
     ATTRIBUTE Location OF ClockBlock : LABEL IS "F(Clock,0)";
     ATTRIBUTE lib_model OF ADC_IN(0) : LABEL IS "iocell2";
-    ATTRIBUTE Location OF ADC_IN(0) : LABEL IS "P0[0]";
+    ATTRIBUTE Location OF ADC_IN(0) : LABEL IS "P0[7]";
     ATTRIBUTE lib_model OF DAC_OUT(0) : LABEL IS "iocell3";
-    ATTRIBUTE Location OF DAC_OUT(0) : LABEL IS "P2[5]";
+    ATTRIBUTE Location OF DAC_OUT(0) : LABEL IS "P3[7]";
     ATTRIBUTE lib_model OF Dedicated_Output_1 : LABEL IS "iocell4";
     ATTRIBUTE Location OF Dedicated_Output_1 : LABEL IS "P0[1]";
     ATTRIBUTE Location OF \ADC_DelSig_1:DSM\ : LABEL IS "F(DSM,0)";

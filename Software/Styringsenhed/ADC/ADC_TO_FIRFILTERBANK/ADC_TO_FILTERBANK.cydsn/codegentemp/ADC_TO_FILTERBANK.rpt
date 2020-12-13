@@ -1,4 +1,4 @@
-Loading plugins phase: Elapsed time ==> 1s.735ms
+Loading plugins phase: Elapsed time ==> 0s.195ms
 <CYPRESSTAG name="CyDsfit arguments...">
 cydsfit arguments: -.fdsnotice -.fdswarpdepfile=warp_dependencies.txt -.fdselabdepfile=elab_dependencies.txt -.fdsbldfile=generated_files.txt -.fdsreffile=referenced_files.txt -p C:\PRJ3 git\E3PRJ3\Software\Styringsenhed\ADC\ADC_TO_FIRFILTERBANK\ADC_TO_FILTERBANK.cydsn\ADC_TO_FILTERBANK.cyprj -d CY8C5888LTI-LP097 -s C:\PRJ3 git\E3PRJ3\Software\Styringsenhed\ADC\ADC_TO_FIRFILTERBANK\ADC_TO_FILTERBANK.cydsn\Generated_Source\PSoC5 -- -yv2 -q10 -ygs -o2 -v3 -.fftcfgtype=LE
 </CYPRESSTAG>
@@ -11,10 +11,10 @@ ADD: sdb.M0065: information: Analog terminal "Opamp_1.Vout" on TopDesign is unco
  * C:\PRJ3 git\E3PRJ3\Software\Styringsenhed\ADC\ADC_TO_FIRFILTERBANK\ADC_TO_FILTERBANK.cydsn\TopDesign\TopDesign.cysch (Shape_57)
 
 </CYPRESSTAG>
-Elaboration phase: Elapsed time ==> 4s.355ms
+Elaboration phase: Elapsed time ==> 2s.118ms
 <CYPRESSTAG name="HDL generation results...">
 </CYPRESSTAG>
-HDL generation phase: Elapsed time ==> 0s.067ms
+HDL generation phase: Elapsed time ==> 0s.069ms
 <CYPRESSTAG name="Synthesis results...">
 
      | | | | | | |
@@ -48,7 +48,7 @@ Options  :    -yv2 -q10 -ygs -o2 -v3 -.fftcfgtype=LE -ya -.fftprj=C:\PRJ3 git\E3
 ======================================================================
 
 vlogfe V6.3 IR 41:  Verilog parser
-Sat Dec 12 16:35:14 2020
+Sat Dec 12 17:00:16 2020
 
 
 ======================================================================
@@ -58,7 +58,7 @@ Options  :    -yv2 -q10 ADC_TO_FILTERBANK.v
 ======================================================================
 
 vpp V6.3 IR 41:  Verilog Pre-Processor
-Sat Dec 12 16:35:14 2020
+Sat Dec 12 17:00:16 2020
 
 Flattening file 'C:\Program Files (x86)\Cypress\PSoC Creator\4.3\PSoC Creator\psoc\content\CyPrimitives\cyprimitives.cylib\cy_vref_v1_70\cy_vref_v1_70.v'
 Flattening file 'C:\Program Files (x86)\Cypress\PSoC Creator\4.3\PSoC Creator\psoc\content\CyPrimitives\cyprimitives.cylib\cy_analog_virtualmux_v1_0\cy_analog_virtualmux_v1_0.v'
@@ -96,7 +96,7 @@ Options  :    -yv2 -q10 -ygs -o2 -v3 -.fftcfgtype=LE -ya -.fftprj=C:\PRJ3 git\E3
 ======================================================================
 
 tovif V6.3 IR 41:  High-level synthesis
-Sat Dec 12 16:35:15 2020
+Sat Dec 12 17:00:16 2020
 
 Linking 'C:\Program Files (x86)\Cypress\PSoC Creator\4.3\PSoC Creator\warp\lib\common\std.vhd'.
 Linking 'C:\Program Files (x86)\Cypress\PSoC Creator\4.3\PSoC Creator\warp\lib\common\cypress.vhd'.
@@ -128,7 +128,7 @@ Options  :    -yv2 -q10 -ygs -o2 -v3 -.fftcfgtype=LE -ya -.fftprj=C:\PRJ3 git\E3
 ======================================================================
 
 topld V6.3 IR 41:  Synthesis and optimization
-Sat Dec 12 16:35:16 2020
+Sat Dec 12 17:00:17 2020
 
 Linking 'C:\Program Files (x86)\Cypress\PSoC Creator\4.3\PSoC Creator\warp\lib\common\std.vhd'.
 Linking 'C:\Program Files (x86)\Cypress\PSoC Creator\4.3\PSoC Creator\warp\lib\common\cypress.vhd'.
@@ -212,10 +212,10 @@ CYPRESS_DIR    : C:\Program Files (x86)\Cypress\PSoC Creator\4.3\PSoC Creator\wa
 Warp Program   : C:\Program Files (x86)\Cypress\PSoC Creator\4.3\PSoC Creator\warp\bin\warp.exe
 Warp Arguments : -yv2 -q10 -ygs -o2 -v3 -.fftcfgtype=LE -ya "-.fftprj=C:\PRJ3 git\E3PRJ3\Software\Styringsenhed\ADC\ADC_TO_FIRFILTERBANK\ADC_TO_FILTERBANK.cydsn\ADC_TO_FILTERBANK.cyprj" -dcpsoc3 ADC_TO_FILTERBANK.v -verilog
 </CYPRESSTAG>
-Warp synthesis phase: Elapsed time ==> 2s.467ms
+Warp synthesis phase: Elapsed time ==> 0s.635ms
 <CYPRESSTAG name="Fitter results...">
 <CYPRESSTAG name="Fitter startup details...">
-cyp3fit: V4.3.0.1445, Family: PSoC3, Started at: Saturday, 12 December 2020 16:35:16
+cyp3fit: V4.3.0.1445, Family: PSoC3, Started at: Saturday, 12 December 2020 17:00:17
 Options: -yv2 -q10 -ygs -o2 -v3 -.fftcfgtype=LE -ya -.fftprj=C:\PRJ3 git\E3PRJ3\Software\Styringsenhed\ADC\ADC_TO_FIRFILTERBANK\ADC_TO_FILTERBANK.cydsn\ADC_TO_FILTERBANK.cyprj -d CY8C5888LTI-LP097 ADC_TO_FILTERBANK.v -verilog
 </CYPRESSTAG>
 <CYPRESSTAG name="Design parsing">
@@ -229,7 +229,6 @@ Design parsing phase: Elapsed time ==> 0s.019ms
 </CYPRESSTAG>
 <CYPRESSTAG name="UDB Clock/Enable Remapping Results">
 </CYPRESSTAG>
-Info: plm.M0038: The pin named ADC_IN(0) at location P0[0] prevents usage of special purposes: OpAmp:out. (App=cydsfit)
 
 Removing unused cells resulting from optimization
 Done removing unused cells.
@@ -435,14 +434,14 @@ Analog (SC/CT) Blocks         :    0 :    4 :    4 :  0.00 %
 DAC                           :      :      :      :        
   VIDAC                       :    1 :    3 :    4 : 25.00 %
 </CYPRESSTAG>
-Technology Mapping: Elapsed time ==> 0s.016ms
-Tech Mapping phase: Elapsed time ==> 0s.081ms
+Technology Mapping: Elapsed time ==> 0s.014ms
+Tech Mapping phase: Elapsed time ==> 0s.086ms
 </CYPRESSTAG>
 <CYPRESSTAG name="Analog Placement">
 Info: apr.M0002: Analog signal "\ADC_DelSig_1:Net_35\" is connected to one terminal only. (App=cydsfit)
 Initial Analog Placement Results:
-IO_0@[IOP=(0)][IoId=(0)] : ADC_IN(0) (fixed)
-IO_5@[IOP=(2)][IoId=(5)] : DAC_OUT(0) (fixed)
+IO_7@[IOP=(0)][IoId=(7)] : ADC_IN(0) (fixed)
+IO_7@[IOP=(3)][IoId=(7)] : DAC_OUT(0) (fixed)
 OpAmp[1]@[FFB(OpAmp,1)] : \Opamp_2:ABuf\ (fixed)
 VIDAC[3]@[FFB(VIDAC,3)] : \VDAC8_1:viDAC8\ (fixed)
 IO_6@[IOP=(3)][IoId=(6)] : Dedicated_Output (fixed)
@@ -452,8 +451,8 @@ OpAmp[0]@[FFB(OpAmp,0)] : \Opamp_1:ABuf\ (OPAMP-GPIO)
 Vref[1]@[FFB(Vref,1)] : vRef_1
 IO_1@[IOP=(0)][IoId=(1)] : Dedicated_Output_1 (OPAMP-GPIO)
 Analog Placement Results:
-IO_0@[IOP=(0)][IoId=(0)] : ADC_IN(0) (fixed)
-IO_5@[IOP=(2)][IoId=(5)] : DAC_OUT(0) (fixed)
+IO_7@[IOP=(0)][IoId=(7)] : ADC_IN(0) (fixed)
+IO_7@[IOP=(3)][IoId=(7)] : DAC_OUT(0) (fixed)
 OpAmp[1]@[FFB(OpAmp,1)] : \Opamp_2:ABuf\ (fixed)
 VIDAC[3]@[FFB(VIDAC,3)] : \VDAC8_1:viDAC8\ (fixed)
 IO_6@[IOP=(3)][IoId=(6)] : Dedicated_Output (fixed)
@@ -463,10 +462,10 @@ OpAmp[0]@[FFB(OpAmp,0)] : \Opamp_1:ABuf\ (OPAMP-GPIO)
 Vref[1]@[FFB(Vref,1)] : vRef_1
 IO_1@[IOP=(0)][IoId=(1)] : Dedicated_Output_1 (OPAMP-GPIO)
 
-Analog Placement phase: Elapsed time ==> 0s.067ms
+Analog Placement phase: Elapsed time ==> 0s.063ms
 </CYPRESSTAG>
 <CYPRESSTAG name="Analog Routing">
-Analog Routing phase: Elapsed time ==> 0s.012ms
+Analog Routing phase: Elapsed time ==> 0s.005ms
 </CYPRESSTAG>
 <CYPRESSTAG name="Analog Code Generation">
 ============ Analog Final Answer Routes ============
@@ -482,19 +481,17 @@ Map of net to items {
   }
   Net: Net_1 {
     dsm_0_vplus
-    agl4_x_dsm_0_vplus
-    agl4
-    agl4_x_p0_0
-    p0_0
+    agl7_x_dsm_0_vplus
+    agl7
+    agl7_x_p0_7
+    p0_7
   }
   Net: Net_26 {
     p3_6
     amuxbusr_x_p3_6
     amuxbusr
-    amuxbusl_x_amuxbusr
-    amuxbusl
-    amuxbusl_x_p2_5
-    p2_5
+    amuxbusr_x_p3_7
+    p3_7
     opamp_1_vminus_x_p3_6
     opamp_1_vminus
   }
@@ -538,17 +535,15 @@ Map of net to items {
 }
 Map of item to net {
   dsm_0_vplus                                      -> Net_1
-  agl4_x_dsm_0_vplus                               -> Net_1
-  agl4                                             -> Net_1
-  agl4_x_p0_0                                      -> Net_1
-  p0_0                                             -> Net_1
+  agl7_x_dsm_0_vplus                               -> Net_1
+  agl7                                             -> Net_1
+  agl7_x_p0_7                                      -> Net_1
+  p0_7                                             -> Net_1
   p3_6                                             -> Net_26
   amuxbusr_x_p3_6                                  -> Net_26
   amuxbusr                                         -> Net_26
-  amuxbusl_x_amuxbusr                              -> Net_26
-  amuxbusl                                         -> Net_26
-  amuxbusl_x_p2_5                                  -> Net_26
-  p2_5                                             -> Net_26
+  amuxbusr_x_p3_7                                  -> Net_26
+  p3_7                                             -> Net_26
   opamp_1_vminus_x_p3_6                            -> Net_26
   opamp_1_vminus                                   -> Net_26
   common_Vdda/2                                    -> Net_8
@@ -602,12 +597,12 @@ Dump of CyP35AnalogRoutingResultsDB
 IsVddaHalfUsedForComp = True
 IsVddaHalfUsedForSar0 = False
 IsVddaHalfUsedForSar1 = False
-Analog Code Generation phase: Elapsed time ==> 0s.439ms
+Analog Code Generation phase: Elapsed time ==> 0s.366ms
 </CYPRESSTAG>
 <CYPRESSTAG name="Digital Placement">
 <CYPRESSTAG name="Detailed placement messages">
 I2659: No Constrained paths were found. The placer will run in non-timing driven mode.
-I2076: Total run-time: 0.8 sec.
+I2076: Total run-time: 0.6 sec.
 
 </CYPRESSTAG>
 <CYPRESSTAG name="PLD Packing">
@@ -731,47 +726,6 @@ Drq container @ [DrqContainer=(0)]:
             num_tds = 0
         }
 Port 0 contains the following IO cells:
-[IoId=0]: 
-Pin : Name = ADC_IN(0)
-    Attributes:
-        In Group/Port: True
-        In Sync Option: AUTO
-        Out Sync Option: AUTO
-        Interrupt generated: False
-        Interrupt mode: NONE
-        Drive mode: HI_Z_ANALOG
-        VTrip: EITHER
-        Slew: FAST
-        Input Sync needed: False
-        Output Sync needed: False
-        SC shield enabled: False
-        POR State: ANY
-        LCD Mode: COMMON
-        Register Mode: RegComb
-        CaSense Mode: NEITHER
-        Treat as pin: True
-        Is OE Registered: False
-        Uses Analog: True
-        Can contain Digital: False
-        Is SIO: False
-        SIO Output Buf: NONREGULATED
-        SIO Input Buf: SINGLE_ENDED
-        SIO HiFreq: LOW
-        SIO Hyst: DISABLED
-        SIO Vtrip: MULTIPLIER_0_5
-        SIO Multiplier Index: 0
-        SIO RefSel: VCC_IO
-        Required Capabilities: ANALOG
-        Initial Value: 0
-        IO Voltage: 0
-    PORT MAP (
-        pa_out => ADC_IN(0)__PA ,
-        analog_term => Net_1 ,
-        pad => ADC_IN(0)_PAD );
-    Properties:
-    {
-    }
-
 [IoId=1]: 
 Pin : Name = Dedicated_Output_1
     Attributes:
@@ -812,10 +766,8 @@ Pin : Name = Dedicated_Output_1
     {
     }
 
-Port 1 contains the following IO cells:
-Port 2 contains the following IO cells:
-[IoId=5]: 
-Pin : Name = DAC_OUT(0)
+[IoId=7]: 
+Pin : Name = ADC_IN(0)
     Attributes:
         In Group/Port: True
         In Sync Option: AUTO
@@ -848,13 +800,15 @@ Pin : Name = DAC_OUT(0)
         Initial Value: 0
         IO Voltage: 0
     PORT MAP (
-        pa_out => DAC_OUT(0)__PA ,
-        analog_term => Net_26 ,
-        pad => DAC_OUT(0)_PAD );
+        pa_out => ADC_IN(0)__PA ,
+        analog_term => Net_1 ,
+        pad => ADC_IN(0)_PAD );
     Properties:
     {
     }
 
+Port 1 contains the following IO cells:
+Port 2 contains the following IO cells:
 Port 3 contains the following IO cells:
 [IoId=6]: 
 Pin : Name = Dedicated_Output
@@ -892,6 +846,47 @@ Pin : Name = Dedicated_Output
     PORT MAP (
         pa_out => Dedicated_Output__PA ,
         analog_term => Net_26 );
+    Properties:
+    {
+    }
+
+[IoId=7]: 
+Pin : Name = DAC_OUT(0)
+    Attributes:
+        In Group/Port: True
+        In Sync Option: AUTO
+        Out Sync Option: AUTO
+        Interrupt generated: False
+        Interrupt mode: NONE
+        Drive mode: HI_Z_ANALOG
+        VTrip: EITHER
+        Slew: FAST
+        Input Sync needed: False
+        Output Sync needed: False
+        SC shield enabled: False
+        POR State: ANY
+        LCD Mode: COMMON
+        Register Mode: RegComb
+        CaSense Mode: NEITHER
+        Treat as pin: True
+        Is OE Registered: False
+        Uses Analog: True
+        Can contain Digital: False
+        Is SIO: False
+        SIO Output Buf: NONREGULATED
+        SIO Input Buf: SINGLE_ENDED
+        SIO HiFreq: LOW
+        SIO Hyst: DISABLED
+        SIO Vtrip: MULTIPLIER_0_5
+        SIO Multiplier Index: 0
+        SIO RefSel: VCC_IO
+        Required Capabilities: ANALOG
+        Initial Value: 0
+        IO Voltage: 0
+    PORT MAP (
+        pa_out => DAC_OUT(0)__PA ,
+        analog_term => Net_26 ,
+        pad => DAC_OUT(0)_PAD );
     Properties:
     {
     }
@@ -1075,43 +1070,42 @@ Port Configuration report
      |     |       | Interrupt |                  |                    | 
 Port | Pin | Fixed |      Type |       Drive Mode |               Name | Connections
 -----+-----+-------+-----------+------------------+--------------------+---------------
-   0 |   0 |     * |      NONE |      HI_Z_ANALOG |          ADC_IN(0) | Analog(Net_1)
-     |   1 |       |      NONE |      HI_Z_ANALOG | Dedicated_Output_1 | Analog(Net_2)
------+-----+-------+-----------+------------------+--------------------+---------------
-   2 |   5 |     * |      NONE |      HI_Z_ANALOG |         DAC_OUT(0) | Analog(Net_26)
+   0 |   1 |       |      NONE |      HI_Z_ANALOG | Dedicated_Output_1 | Analog(Net_2)
+     |   7 |     * |      NONE |      HI_Z_ANALOG |          ADC_IN(0) | Analog(Net_1)
 -----+-----+-------+-----------+------------------+--------------------+---------------
    3 |   6 |       |      NONE |      HI_Z_ANALOG |   Dedicated_Output | Analog(Net_26)
+     |   7 |     * |      NONE |      HI_Z_ANALOG |         DAC_OUT(0) | Analog(Net_26)
 ---------------------------------------------------------------------------------------
 </CYPRESSTAG>
 </CYPRESSTAG>
 </CYPRESSTAG>
-Digital component placer commit/Report: Elapsed time ==> 0s.013ms
-Digital Placement phase: Elapsed time ==> 1s.290ms
+Digital component placer commit/Report: Elapsed time ==> 0s.015ms
+Digital Placement phase: Elapsed time ==> 0s.994ms
 </CYPRESSTAG>
 <CYPRESSTAG name="Digital Routing">
 "C:\Program Files (x86)\Cypress\PSoC Creator\4.3\PSoC Creator\bin/sjrouter.exe" --xml-path "C:\Program Files (x86)\Cypress\PSoC Creator\4.3\PSoC Creator\dev\psoc5/psoc5lp/route_arch-rrg.cydata" --vh2-path "ADC_TO_FILTERBANK_r.vh2" --pcf-path "ADC_TO_FILTERBANK.pco" --des-name "ADC_TO_FILTERBANK" --dsf-path "ADC_TO_FILTERBANK.dsf" --sdc-path "ADC_TO_FILTERBANK.sdc" --lib-path "ADC_TO_FILTERBANK_r.lib"
 Routing successful.
-Digital Routing phase: Elapsed time ==> 1s.507ms
+Digital Routing phase: Elapsed time ==> 1s.422ms
 </CYPRESSTAG>
 <CYPRESSTAG name="Bitstream Generation">
-Bitstream Generation phase: Elapsed time ==> 0s.290ms
+Bitstream Generation phase: Elapsed time ==> 0s.317ms
 </CYPRESSTAG>
 <CYPRESSTAG name="Bitstream Verification">
-Bitstream Verification phase: Elapsed time ==> 0s.052ms
+Bitstream Verification phase: Elapsed time ==> 0s.041ms
 </CYPRESSTAG>
 <CYPRESSTAG name="Static timing analysis">
 Timing report is in ADC_TO_FILTERBANK_timing.html.
-Static timing analysis phase: Elapsed time ==> 0s.341ms
+Static timing analysis phase: Elapsed time ==> 0s.321ms
 </CYPRESSTAG>
 <CYPRESSTAG name="Data reporting">
 Data reporting phase: Elapsed time ==> 0s.000ms
 </CYPRESSTAG>
 <CYPRESSTAG name="Database update...">
-Design database save phase: Elapsed time ==> 0s.176ms
+Design database save phase: Elapsed time ==> 0s.193ms
 </CYPRESSTAG>
-cydsfit: Elapsed time ==> 4s.346ms
+cydsfit: Elapsed time ==> 3s.911ms
 </CYPRESSTAG>
-Fitter phase: Elapsed time ==> 4s.347ms
-API generation phase: Elapsed time ==> 6s.453ms
-Dependency generation phase: Elapsed time ==> 0s.043ms
+Fitter phase: Elapsed time ==> 3s.911ms
+API generation phase: Elapsed time ==> 1s.810ms
+Dependency generation phase: Elapsed time ==> 0s.028ms
 Cleanup phase: Elapsed time ==> 0s.000ms

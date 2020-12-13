@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\adamh\AppData\Local\Temp\cc72H6DU.s 			page 1
+ARM GAS  C:\Users\danie\AppData\Local\Temp\cckYwplP.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\adamh\AppData\Local\Temp\cc72H6DU.s 			page 1
   28:main.c        **** #define DMA_1_DST_BASE (CYDEV_SRAM_BASE)
   29:main.c        **** 
   30:main.c        **** /* Variable declarations for DMA_1 */
-ARM GAS  C:\Users\adamh\AppData\Local\Temp\cc72H6DU.s 			page 2
+ARM GAS  C:\Users\danie\AppData\Local\Temp\cckYwplP.s 			page 2
 
 
   31:main.c        **** /* Move these variable declarations to the top of the function */
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\adamh\AppData\Local\Temp\cc72H6DU.s 			page 1
   85:main.c        **** 
   86:main.c        ****   UART_1_PutString("Starting...\n");
   87:main.c        **** 
-ARM GAS  C:\Users\adamh\AppData\Local\Temp\cc72H6DU.s 			page 3
+ARM GAS  C:\Users\danie\AppData\Local\Temp\cckYwplP.s 			page 3
 
 
   88:main.c        ****   for (;;) {
@@ -141,10 +141,10 @@ ARM GAS  C:\Users\adamh\AppData\Local\Temp\cc72H6DU.s 			page 1
   37              		.cfi_offset 14, -4
   38 0002 AAB0     		sub	sp, sp, #168
   39              		.cfi_def_cfa_offset 184
-  96:main.c        ****   dma_done_test_Write(1);
+  96:main.c        ****   Proc_done_test_Write(1);
   40              		.loc 1 96 0
   41 0004 0120     		movs	r0, #1
-  42 0006 FFF7FEFF 		bl	dma_done_test_Write
+  42 0006 FFF7FEFF 		bl	Proc_done_test_Write
   43              	.LVL0:
   97:main.c        **** //  ADC_DelSig_StopConvert();
   98:main.c        **** //  uint16 binSum1 = 0;
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\adamh\AppData\Local\Temp\cc72H6DU.s 			page 1
   51              	.LVL2:
   52 0016 0646     		mov	r6, r0
   53              	.LVL3:
-ARM GAS  C:\Users\adamh\AppData\Local\Temp\cc72H6DU.s 			page 4
+ARM GAS  C:\Users\danie\AppData\Local\Temp\cckYwplP.s 			page 4
 
 
   54              	.LBB2:
@@ -221,12 +221,11 @@ ARM GAS  C:\Users\adamh\AppData\Local\Temp\cc72H6DU.s 			page 1
   84              	.LBE2:
  124:main.c        ****     }
  125:main.c        **** 
- 126:main.c        **** 
- 127:main.c        **** /*Definer flere koefficientarrays og brug dette koefficient array i kald
- 128:main.c        **** samme metode med nyt koefficientarray for at lade adc input samples 
- 129:main.c        **** gennemløbe flere arrays uden at påvirke hinanden*/
- 130:main.c        **** firFixed(coeffs, filter_workingArray1, filter_outputArray, NO_OF_SAMPLES, FILTER_LEN);
-  85              		.loc 1 130 0 is_stmt 1
+ 126:main.c        **** /*Definer flere koefficientarrays og brug dette koefficient array i kald
+ 127:main.c        **** samme metode med nyt koefficientarray for at lade adc input samples 
+ 128:main.c        **** gennemløbe flere arrays uden at påvirke hinanden*/
+ 129:main.c        **** firFixed(coeffs, filter_workingArray1, filter_outputArray, NO_OF_SAMPLES, FILTER_LEN);
+  85              		.loc 1 129 0 is_stmt 1
   86 0048 4423     		movs	r3, #68
   87 004a 0093     		str	r3, [sp]
   88 004c 5023     		movs	r3, #80
@@ -236,31 +235,31 @@ ARM GAS  C:\Users\adamh\AppData\Local\Temp\cc72H6DU.s 			page 1
   92 0054 FFF7FEFF 		bl	firFixed
   93              	.LVL8:
   94              	.LBB3:
- 131:main.c        ****            
- 132:main.c        ****   for (size_t i = 0; i < NO_OF_SAMPLES; i++) {
-ARM GAS  C:\Users\adamh\AppData\Local\Temp\cc72H6DU.s 			page 5
+ 130:main.c        ****            
+ 131:main.c        ****   for (size_t i = 0; i < NO_OF_SAMPLES; i++) {
+  95              		.loc 1 131 0
+ARM GAS  C:\Users\danie\AppData\Local\Temp\cckYwplP.s 			page 5
 
 
-  95              		.loc 1 132 0
   96 0058 0024     		movs	r4, #0
   97              	.LVL9:
   98 005a 13E0     		b	.L4
   99              	.LVL10:
  100              	.L5:
- 133:main.c        ****     snprintf(uartBuffer,
- 134:main.c        ****              sizeof(uartBuffer),
- 135:main.c        ****              "%d,%d\n",
- 136:main.c        ****              ADC_Sample[i],
- 101              		.loc 1 136 0 discriminator 3
+ 132:main.c        ****     snprintf(uartBuffer,
+ 133:main.c        ****              sizeof(uartBuffer),
+ 134:main.c        ****              "%d,%d\n",
+ 135:main.c        ****              ADC_Sample[i],
+ 101              		.loc 1 135 0 discriminator 3
  102 005c 0E4B     		ldr	r3, .L7
  103 005e 33F91430 		ldrsh	r3, [r3, r4, lsl #1]
- 137:main.c        ****              filter_outputArray[i]);
- 104              		.loc 1 137 0 discriminator 3
+ 136:main.c        ****              filter_outputArray[i]);
+ 104              		.loc 1 136 0 discriminator 3
  105 0062 2AAA     		add	r2, sp, #168
  106 0064 02EB4402 		add	r2, r2, r4, lsl #1
  107 0068 32F9A02C 		ldrsh	r2, [r2, #-160]
- 133:main.c        ****     snprintf(uartBuffer,
- 108              		.loc 1 133 0 discriminator 3
+ 132:main.c        ****     snprintf(uartBuffer,
+ 108              		.loc 1 132 0 discriminator 3
  109 006c 0B4D     		ldr	r5, .L7+4
  110 006e 0092     		str	r2, [sp]
  111 0070 0B4A     		ldr	r2, .L7+8
@@ -268,56 +267,56 @@ ARM GAS  C:\Users\adamh\AppData\Local\Temp\cc72H6DU.s 			page 1
  113 0076 2846     		mov	r0, r5
  114 0078 FFF7FEFF 		bl	snprintf
  115              	.LVL11:
- 138:main.c        ****     UART_1_PutString(uartBuffer);
- 116              		.loc 1 138 0 discriminator 3
+ 137:main.c        ****     UART_1_PutString(uartBuffer);
+ 116              		.loc 1 137 0 discriminator 3
  117 007c 2846     		mov	r0, r5
  118 007e FFF7FEFF 		bl	UART_1_PutString
  119              	.LVL12:
- 132:main.c        ****     snprintf(uartBuffer,
- 120              		.loc 1 132 0 discriminator 3
+ 131:main.c        ****     snprintf(uartBuffer,
+ 120              		.loc 1 131 0 discriminator 3
  121 0082 0134     		adds	r4, r4, #1
  122              	.LVL13:
  123              	.L4:
- 132:main.c        ****     snprintf(uartBuffer,
- 124              		.loc 1 132 0 is_stmt 0 discriminator 1
+ 131:main.c        ****     snprintf(uartBuffer,
+ 124              		.loc 1 131 0 is_stmt 0 discriminator 1
  125 0084 4F2C     		cmp	r4, #79
  126 0086 E9D9     		bls	.L5
  127              	.LBE3:
- 139:main.c        ****     // VDAC8_1_SetValue(filter_outputArray[i]);
- 140:main.c        ****   }
- 141:main.c        **** //Skift de samples der lige er blevet processeret ud med 
- 142:main.c        **** firMoveProcSamples(NO_OF_SAMPLES);
- 128              		.loc 1 142 0 is_stmt 1
+ 138:main.c        ****     // VDAC8_1_SetValue(filter_outputArray[i]);
+ 139:main.c        ****   }
+ 140:main.c        **** //Skift de samples der lige er blevet processeret ud med 
+ 141:main.c        **** firMoveProcSamples(NO_OF_SAMPLES);
+ 128              		.loc 1 141 0 is_stmt 1
  129 0088 5020     		movs	r0, #80
  130 008a FFF7FEFF 		bl	firMoveProcSamples
  131              	.LVL14:
- 143:main.c        ****  
- 144:main.c        **** //  binSum1 = FFTResultPtr[7] + FFTResultPtr[8];
- 145:main.c        **** //  binSum2 = FFTResultPtr[12] + FFTResultPtr[13];
- 146:main.c        **** //  binSum3 = FFTResultPtr[19] + FFTResultPtr[20];
- 147:main.c        **** //  binSum4 = FFTResultPtr[24] + FFTResultPtr[25];
- 148:main.c        **** 
- 149:main.c        **** ;
-ARM GAS  C:\Users\adamh\AppData\Local\Temp\cc72H6DU.s 			page 6
+ 142:main.c        ****  
+ 143:main.c        **** //  binSum1 = FFTResultPtr[7] + FFTResultPtr[8];
+ 144:main.c        **** //  binSum2 = FFTResultPtr[12] + FFTResultPtr[13];
+ 145:main.c        **** //  binSum3 = FFTResultPtr[19] + FFTResultPtr[20];
+ 146:main.c        **** //  binSum4 = FFTResultPtr[24] + FFTResultPtr[25];
+ 147:main.c        **** 
+ 148:main.c        **** ;
+ 149:main.c        **** //  snprintf(uartBuffer,
+ARM GAS  C:\Users\danie\AppData\Local\Temp\cckYwplP.s 			page 6
 
 
- 150:main.c        **** //  snprintf(uartBuffer,
- 151:main.c        **** //           sizeof(uartBuffer),
- 152:main.c        **** //           "%d,%d,%d,%d\n",
- 153:main.c        **** //           binSum1,
- 154:main.c        **** //           binSum2,
- 155:main.c        **** //           binSum3,
- 156:main.c        **** //           binSum4);
- 157:main.c        **** //  UART_1_PutString(uartBuffer);
- 158:main.c        **** 
- 159:main.c        ****   dma_done_test_Write(0);
- 132              		.loc 1 159 0
+ 150:main.c        **** //           sizeof(uartBuffer),
+ 151:main.c        **** //           "%d,%d,%d,%d\n",
+ 152:main.c        **** //           binSum1,
+ 153:main.c        **** //           binSum2,
+ 154:main.c        **** //           binSum3,
+ 155:main.c        **** //           binSum4);
+ 156:main.c        **** //  UART_1_PutString(uartBuffer);
+ 157:main.c        **** 
+ 158:main.c        ****   Proc_done_test_Write(0);
+ 132              		.loc 1 158 0
  133 008e 0020     		movs	r0, #0
- 134 0090 FFF7FEFF 		bl	dma_done_test_Write
+ 134 0090 FFF7FEFF 		bl	Proc_done_test_Write
  135              	.LVL15:
- 160:main.c        **** //  ADC_DelSig_StartConvert();
- 161:main.c        **** }
- 136              		.loc 1 161 0
+ 159:main.c        **** //  ADC_DelSig_StartConvert();
+ 160:main.c        **** }
+ 136              		.loc 1 160 0
  137 0094 2AB0     		add	sp, sp, #168
  138              		.cfi_def_cfa_offset 16
  139              		@ sp needed
@@ -358,10 +357,10 @@ ARM GAS  C:\Users\adamh\AppData\Local\Temp\cc72H6DU.s 			page 1
  172              	@ 58 "main.c" 1
  173 0002 62B6     		CPSIE   i
  174              	@ 0 "" 2
-ARM GAS  C:\Users\adamh\AppData\Local\Temp\cc72H6DU.s 			page 7
-
-
   60:main.c        ****   Opamp_1_Start();
+ARM GAS  C:\Users\danie\AppData\Local\Temp\cckYwplP.s 			page 7
+
+
  175              		.loc 1 60 0
  176              		.thumb
  177              		.syntax unified
@@ -418,10 +417,10 @@ ARM GAS  C:\Users\adamh\AppData\Local\Temp\cc72H6DU.s 			page 1
  219              		.loc 1 83 0
  220 004a 2146     		mov	r1, r4
  221 004c 2846     		mov	r0, r5
-ARM GAS  C:\Users\adamh\AppData\Local\Temp\cc72H6DU.s 			page 8
-
-
  222 004e FFF7FEFF 		bl	CyDmaChSetInitialTd
+ARM GAS  C:\Users\danie\AppData\Local\Temp\cckYwplP.s 			page 8
+
+
  223              	.LVL27:
   84:main.c        **** 
  224              		.loc 1 84 0
@@ -478,10 +477,10 @@ ARM GAS  C:\Users\adamh\AppData\Local\Temp\cc72H6DU.s 			page 1
  274 002c CBFD     		.short	-565
  275 002e 9CFE     		.short	-356
  276 0030 92FF     		.short	-110
-ARM GAS  C:\Users\adamh\AppData\Local\Temp\cc72H6DU.s 			page 9
-
-
  277 0032 A600     		.short	166
+ARM GAS  C:\Users\danie\AppData\Local\Temp\cckYwplP.s 			page 9
+
+
  278 0034 CB01     		.short	459
  279 0036 F502     		.short	757
  280 0038 1704     		.short	1047
@@ -538,10 +537,10 @@ ARM GAS  C:\Users\adamh\AppData\Local\Temp\cc72H6DU.s 			page 1
  327              		.bss
  328              		.align	2
  329              		.set	.LANCHOR0,. + 0
-ARM GAS  C:\Users\adamh\AppData\Local\Temp\cc72H6DU.s 			page 10
-
-
  330              		.type	ADC_Sample, %object
+ARM GAS  C:\Users\danie\AppData\Local\Temp\cckYwplP.s 			page 10
+
+
  331              		.size	ADC_Sample, 160
  332              	ADC_Sample:
  333 0000 00000000 		.space	160
@@ -562,7 +561,7 @@ ARM GAS  C:\Users\adamh\AppData\Local\Temp\cc72H6DU.s 			page 1
  344              		.file 6 "Generated_Source\\PSoC5/core_cm3.h"
  345              		.file 7 "c:\\program files (x86)\\cypress\\psoc creator\\4.3\\psoc creator\\import\\gnu\\arm\\5.4.
  346              		.file 8 "Generated_Source\\PSoC5/UART_1.h"
- 347              		.file 9 "Generated_Source\\PSoC5/dma_done_test.h"
+ 347              		.file 9 "Generated_Source\\PSoC5/Proc_done_test.h"
  348              		.file 10 "fir_filter1.h"
  349              		.file 11 "Generated_Source\\PSoC5/ISR_DMA_Done.h"
  350              		.file 12 "Generated_Source\\PSoC5/Opamp_1.h"
@@ -576,21 +575,21 @@ ARM GAS  C:\Users\adamh\AppData\Local\Temp\cc72H6DU.s 			page 1
  358 0006 00000000 		.4byte	.Ldebug_abbrev0
  359 000a 04       		.byte	0x4
  360 000b 01       		.uleb128 0x1
- 361 000c F5000000 		.4byte	.LASF49
+ 361 000c 12010000 		.4byte	.LASF49
  362 0010 0C       		.byte	0xc
- 363 0011 ED020000 		.4byte	.LASF50
- 364 0015 90000000 		.4byte	.LASF51
+ 363 0011 0A030000 		.4byte	.LASF50
+ 364 0015 7C000000 		.4byte	.LASF51
  365 0019 00000000 		.4byte	.Ldebug_ranges0+0
  366 001d 00000000 		.4byte	0
  367 0021 00000000 		.4byte	.Ldebug_line0
  368 0025 02       		.uleb128 0x2
  369 0026 01       		.byte	0x1
  370 0027 06       		.byte	0x6
- 371 0028 3E030000 		.4byte	.LASF0
+ 371 0028 48030000 		.4byte	.LASF0
  372 002c 02       		.uleb128 0x2
  373 002d 01       		.byte	0x1
  374 002e 08       		.byte	0x8
- 375 002f E7000000 		.4byte	.LASF1
+ 375 002f 04010000 		.4byte	.LASF1
  376 0033 03       		.uleb128 0x3
  377 0034 26000000 		.4byte	.LASF4
  378 0038 02       		.byte	0x2
@@ -598,15 +597,15 @@ ARM GAS  C:\Users\adamh\AppData\Local\Temp\cc72H6DU.s 			page 1
  380 003a 3E000000 		.4byte	0x3e
  381 003e 02       		.uleb128 0x2
  382 003f 02       		.byte	0x2
-ARM GAS  C:\Users\adamh\AppData\Local\Temp\cc72H6DU.s 			page 11
-
-
  383 0040 05       		.byte	0x5
- 384 0041 0C030000 		.4byte	.LASF2
+ARM GAS  C:\Users\danie\AppData\Local\Temp\cckYwplP.s 			page 11
+
+
+ 384 0041 16030000 		.4byte	.LASF2
  385 0045 02       		.uleb128 0x2
  386 0046 02       		.byte	0x2
  387 0047 07       		.byte	0x7
- 388 0048 BF010000 		.4byte	.LASF3
+ 388 0048 DC010000 		.4byte	.LASF3
  389 004c 03       		.uleb128 0x3
  390 004d 3B000000 		.4byte	.LASF5
  391 0051 02       		.byte	0x2
@@ -615,19 +614,19 @@ ARM GAS  C:\Users\adamh\AppData\Local\Temp\cc72H6DU.s 			page 1
  394 0057 02       		.uleb128 0x2
  395 0058 04       		.byte	0x4
  396 0059 05       		.byte	0x5
- 397 005a 29030000 		.4byte	.LASF6
+ 397 005a 33030000 		.4byte	.LASF6
  398 005e 02       		.uleb128 0x2
  399 005f 04       		.byte	0x4
  400 0060 07       		.byte	0x7
- 401 0061 AD010000 		.4byte	.LASF7
+ 401 0061 CA010000 		.4byte	.LASF7
  402 0065 02       		.uleb128 0x2
  403 0066 08       		.byte	0x8
  404 0067 05       		.byte	0x5
- 405 0068 CD020000 		.4byte	.LASF8
+ 405 0068 EA020000 		.4byte	.LASF8
  406 006c 02       		.uleb128 0x2
  407 006d 08       		.byte	0x8
  408 006e 07       		.byte	0x7
- 409 006f 72020000 		.4byte	.LASF9
+ 409 006f 8F020000 		.4byte	.LASF9
  410 0073 04       		.uleb128 0x4
  411 0074 04       		.byte	0x4
  412 0075 05       		.byte	0x5
@@ -635,49 +634,49 @@ ARM GAS  C:\Users\adamh\AppData\Local\Temp\cc72H6DU.s 			page 1
  414 007a 02       		.uleb128 0x2
  415 007b 04       		.byte	0x4
  416 007c 07       		.byte	0x7
- 417 007d 65020000 		.4byte	.LASF10
+ 417 007d 6E020000 		.4byte	.LASF10
  418 0081 03       		.uleb128 0x3
- 419 0082 9C020000 		.4byte	.LASF11
+ 419 0082 B9020000 		.4byte	.LASF11
  420 0086 03       		.byte	0x3
  421 0087 20       		.byte	0x20
  422 0088 33000000 		.4byte	0x33
  423 008c 03       		.uleb128 0x3
- 424 008d BC020000 		.4byte	.LASF12
+ 424 008d D9020000 		.4byte	.LASF12
  425 0091 03       		.byte	0x3
  426 0092 2C       		.byte	0x2c
  427 0093 4C000000 		.4byte	0x4c
  428 0097 05       		.uleb128 0x5
- 429 0098 16030000 		.4byte	.LASF13
+ 429 0098 20030000 		.4byte	.LASF13
  430 009c 04       		.byte	0x4
  431 009d E801     		.2byte	0x1e8
  432 009f 2C000000 		.4byte	0x2c
  433 00a3 05       		.uleb128 0x5
- 434 00a4 49020000 		.4byte	.LASF14
+ 434 00a4 52020000 		.4byte	.LASF14
  435 00a8 04       		.byte	0x4
  436 00a9 E901     		.2byte	0x1e9
  437 00ab 45000000 		.4byte	0x45
  438 00af 05       		.uleb128 0x5
- 439 00b0 50020000 		.4byte	.LASF15
-ARM GAS  C:\Users\adamh\AppData\Local\Temp\cc72H6DU.s 			page 12
-
-
+ 439 00b0 59020000 		.4byte	.LASF15
  440 00b4 04       		.byte	0x4
+ARM GAS  C:\Users\danie\AppData\Local\Temp\cckYwplP.s 			page 12
+
+
  441 00b5 EA01     		.2byte	0x1ea
  442 00b7 5E000000 		.4byte	0x5e
  443 00bb 02       		.uleb128 0x2
  444 00bc 04       		.byte	0x4
  445 00bd 04       		.byte	0x4
- 446 00be E1000000 		.4byte	.LASF16
+ 446 00be FE000000 		.4byte	.LASF16
  447 00c2 02       		.uleb128 0x2
  448 00c3 08       		.byte	0x8
  449 00c4 04       		.byte	0x4
- 450 00c5 10020000 		.4byte	.LASF17
+ 450 00c5 19020000 		.4byte	.LASF17
  451 00c9 02       		.uleb128 0x2
  452 00ca 01       		.byte	0x1
  453 00cb 08       		.byte	0x8
- 454 00cc F4020000 		.4byte	.LASF18
+ 454 00cc 11030000 		.4byte	.LASF18
  455 00d0 05       		.uleb128 0x5
- 456 00d1 90010000 		.4byte	.LASF19
+ 456 00d1 AD010000 		.4byte	.LASF19
  457 00d5 04       		.byte	0x4
  458 00d6 9202     		.2byte	0x292
  459 00d8 DC000000 		.4byte	0xdc
@@ -691,13 +690,13 @@ ARM GAS  C:\Users\adamh\AppData\Local\Temp\cc72H6DU.s 			page 1
  467 00ec 02       		.uleb128 0x2
  468 00ed 08       		.byte	0x8
  469 00ee 04       		.byte	0x4
- 470 00ef 32030000 		.4byte	.LASF21
+ 470 00ef 3C030000 		.4byte	.LASF21
  471 00f3 02       		.uleb128 0x2
  472 00f4 04       		.byte	0x4
  473 00f5 07       		.byte	0x7
- 474 00f6 C4020000 		.4byte	.LASF22
+ 474 00f6 E1020000 		.4byte	.LASF22
  475 00fa 07       		.uleb128 0x7
- 476 00fb 1C030000 		.4byte	.LASF52
+ 476 00fb 26030000 		.4byte	.LASF52
  477 00ff 01       		.byte	0x1
  478 0100 5E       		.byte	0x5e
  479 0101 00000000 		.4byte	.LFB65
@@ -706,22 +705,22 @@ ARM GAS  C:\Users\adamh\AppData\Local\Temp\cc72H6DU.s 			page 1
  482 010a 9C       		.byte	0x9c
  483 010b 59020000 		.4byte	0x259
  484 010f 08       		.uleb128 0x8
- 485 0110 69030000 		.4byte	.LASF23
+ 485 0110 73030000 		.4byte	.LASF23
  486 0114 01       		.byte	0x1
  487 0115 76       		.byte	0x76
  488 0116 59020000 		.4byte	0x259
  489 011a 00000000 		.4byte	.LLST0
  490 011e 09       		.uleb128 0x9
- 491 011f 89020000 		.4byte	.LASF24
+ 491 011f A6020000 		.4byte	.LASF24
  492 0123 01       		.byte	0x1
  493 0124 77       		.byte	0x77
  494 0125 5F020000 		.4byte	0x25f
  495 0129 03       		.uleb128 0x3
  496 012a 91       		.byte	0x91
-ARM GAS  C:\Users\adamh\AppData\Local\Temp\cc72H6DU.s 			page 13
-
-
  497 012b D07E     		.sleb128 -176
+ARM GAS  C:\Users\danie\AppData\Local\Temp\cckYwplP.s 			page 13
+
+
  498 012d 0A       		.uleb128 0xa
  499 012e 18000000 		.4byte	.LBB2
  500 0132 30000000 		.4byte	.LBE2-.LBB2
@@ -773,15 +772,15 @@ ARM GAS  C:\Users\adamh\AppData\Local\Temp\cc72H6DU.s 			page 1
  546 0189 0B       		.uleb128 0xb
  547 018a 6900     		.ascii	"i\000"
  548 018c 01       		.byte	0x1
- 549 018d 84       		.byte	0x84
+ 549 018d 83       		.byte	0x83
  550 018e E1000000 		.4byte	0xe1
  551 0192 3D000000 		.4byte	.LLST2
  552 0196 0C       		.uleb128 0xc
  553 0197 7C000000 		.4byte	.LVL11
-ARM GAS  C:\Users\adamh\AppData\Local\Temp\cc72H6DU.s 			page 14
-
-
  554 019b 24040000 		.4byte	0x424
+ARM GAS  C:\Users\danie\AppData\Local\Temp\cckYwplP.s 			page 14
+
+
  555 019f BA010000 		.4byte	0x1ba
  556 01a3 0D       		.uleb128 0xd
  557 01a4 01       		.uleb128 0x1
@@ -838,10 +837,10 @@ ARM GAS  C:\Users\adamh\AppData\Local\Temp\cc72H6DU.s 			page 1
  608 01f9 00000000 		.4byte	.LANCHOR0
  609 01fd 0D       		.uleb128 0xd
  610 01fe 01       		.uleb128 0x1
-ARM GAS  C:\Users\adamh\AppData\Local\Temp\cc72H6DU.s 			page 15
-
-
  611 01ff 51       		.byte	0x51
+ARM GAS  C:\Users\danie\AppData\Local\Temp\cckYwplP.s 			page 15
+
+
  612 0200 02       		.uleb128 0x2
  613 0201 08       		.byte	0x8
  614 0202 50       		.byte	0x50
@@ -898,10 +897,10 @@ ARM GAS  C:\Users\adamh\AppData\Local\Temp\cc72H6DU.s 			page 1
  665 024e 3A040000 		.4byte	0x43a
  666 0252 0D       		.uleb128 0xd
  667 0253 01       		.uleb128 0x1
-ARM GAS  C:\Users\adamh\AppData\Local\Temp\cc72H6DU.s 			page 16
-
-
  668 0254 50       		.byte	0x50
+ARM GAS  C:\Users\danie\AppData\Local\Temp\cckYwplP.s 			page 16
+
+
  669 0255 01       		.uleb128 0x1
  670 0256 30       		.byte	0x30
  671 0257 00       		.byte	0
@@ -917,7 +916,7 @@ ARM GAS  C:\Users\adamh\AppData\Local\Temp\cc72H6DU.s 			page 1
  681 026d 4F       		.byte	0x4f
  682 026e 00       		.byte	0
  683 026f 13       		.uleb128 0x13
- 684 0270 57020000 		.4byte	.LASF53
+ 684 0270 60020000 		.4byte	.LASF53
  685 0274 01       		.byte	0x1
  686 0275 37       		.byte	0x37
  687 0276 73000000 		.4byte	0x73
@@ -934,7 +933,7 @@ ARM GAS  C:\Users\adamh\AppData\Local\Temp\cc72H6DU.s 			page 1
  698 0293 01       		.uleb128 0x1
  699 0294 55       		.byte	0x55
  700 0295 14       		.uleb128 0x14
- 701 0296 D2010000 		.4byte	.LASF54
+ 701 0296 EF010000 		.4byte	.LASF54
  702 029a 01       		.byte	0x1
  703 029b 44       		.byte	0x44
  704 029c 9A030000 		.4byte	0x39a
@@ -958,10 +957,10 @@ ARM GAS  C:\Users\adamh\AppData\Local\Temp\cc72H6DU.s 			page 1
  722 02c9 0F       		.uleb128 0xf
  723 02ca 16000000 		.4byte	.LVL20
  724 02ce 92040000 		.4byte	0x492
-ARM GAS  C:\Users\adamh\AppData\Local\Temp\cc72H6DU.s 			page 17
-
-
  725 02d2 0F       		.uleb128 0xf
+ARM GAS  C:\Users\danie\AppData\Local\Temp\cckYwplP.s 			page 17
+
+
  726 02d3 1A000000 		.4byte	.LVL21
  727 02d7 9D040000 		.4byte	0x49d
  728 02db 0C       		.uleb128 0xc
@@ -1018,10 +1017,10 @@ ARM GAS  C:\Users\adamh\AppData\Local\Temp\cc72H6DU.s 			page 1
  779 0328 00       		.sleb128 0
  780 0329 0D       		.uleb128 0xd
  781 032a 01       		.uleb128 0x1
-ARM GAS  C:\Users\adamh\AppData\Local\Temp\cc72H6DU.s 			page 18
-
-
  782 032b 53       		.byte	0x53
+ARM GAS  C:\Users\danie\AppData\Local\Temp\cckYwplP.s 			page 18
+
+
  783 032c 01       		.uleb128 0x1
  784 032d 36       		.byte	0x36
  785 032e 00       		.byte	0
@@ -1078,10 +1077,10 @@ ARM GAS  C:\Users\adamh\AppData\Local\Temp\cc72H6DU.s 			page 1
  836 0380 0D       		.uleb128 0xd
  837 0381 01       		.uleb128 0x1
  838 0382 51       		.byte	0x51
-ARM GAS  C:\Users\adamh\AppData\Local\Temp\cc72H6DU.s 			page 19
-
-
  839 0383 01       		.uleb128 0x1
+ARM GAS  C:\Users\danie\AppData\Local\Temp\cckYwplP.s 			page 19
+
+
  840 0384 31       		.byte	0x31
  841 0385 00       		.byte	0
  842 0386 0E       		.uleb128 0xe
@@ -1126,22 +1125,22 @@ ARM GAS  C:\Users\adamh\AppData\Local\Temp\cc72H6DU.s 			page 1
  881 03d7 03       		.byte	0x3
  882 03d8 00000000 		.4byte	coeffs
  883 03dc 15       		.uleb128 0x15
- 884 03dd DB010000 		.4byte	.LASF28
+ 884 03dd F8010000 		.4byte	.LASF28
  885 03e1 06       		.byte	0x6
  886 03e2 1207     		.2byte	0x712
  887 03e4 E8030000 		.4byte	0x3e8
  888 03e8 06       		.uleb128 0x6
  889 03e9 8C000000 		.4byte	0x8c
  890 03ed 16       		.uleb128 0x16
- 891 03ee 5B030000 		.4byte	.LASF29
+ 891 03ee 65030000 		.4byte	.LASF29
  892 03f2 01       		.byte	0x1
  893 03f3 16       		.byte	0x16
  894 03f4 FE030000 		.4byte	0x3fe
  895 03f8 05       		.uleb128 0x5
-ARM GAS  C:\Users\adamh\AppData\Local\Temp\cc72H6DU.s 			page 20
-
-
  896 03f9 03       		.byte	0x3
+ARM GAS  C:\Users\danie\AppData\Local\Temp\cckYwplP.s 			page 20
+
+
  897 03fa 00000000 		.4byte	DMA_Done_Flag
  898 03fe 06       		.uleb128 0x6
  899 03ff C9000000 		.4byte	0xc9
@@ -1166,42 +1165,42 @@ ARM GAS  C:\Users\adamh\AppData\Local\Temp\cc72H6DU.s 			page 1
  918 042d 07       		.byte	0x7
  919 042e FD       		.byte	0xfd
  920 042f 17       		.uleb128 0x17
- 921 0430 4A030000 		.4byte	.LASF32
- 922 0434 4A030000 		.4byte	.LASF32
+ 921 0430 54030000 		.4byte	.LASF32
+ 922 0434 54030000 		.4byte	.LASF32
  923 0438 08       		.byte	0x8
  924 0439 8B       		.byte	0x8b
  925 043a 17       		.uleb128 0x17
- 926 043b E8010000 		.4byte	.LASF33
- 927 043f E8010000 		.4byte	.LASF33
+ 926 043b C6000000 		.4byte	.LASF33
+ 927 043f C6000000 		.4byte	.LASF33
  928 0443 09       		.byte	0x9
  929 0444 26       		.byte	0x26
  930 0445 17       		.uleb128 0x17
- 931 0446 83010000 		.4byte	.LASF34
- 932 044a 83010000 		.4byte	.LASF34
+ 931 0446 A0010000 		.4byte	.LASF34
+ 932 044a A0010000 		.4byte	.LASF34
  933 044e 0A       		.byte	0xa
  934 044f 1A       		.byte	0x1a
  935 0450 17       		.uleb128 0x17
- 936 0451 28020000 		.4byte	.LASF35
- 937 0455 28020000 		.4byte	.LASF35
+ 936 0451 31020000 		.4byte	.LASF35
+ 937 0455 31020000 		.4byte	.LASF35
  938 0459 0A       		.byte	0xa
  939 045a 1C       		.byte	0x1c
  940 045b 17       		.uleb128 0x17
- 941 045c 5C020000 		.4byte	.LASF36
- 942 0460 5C020000 		.4byte	.LASF36
+ 941 045c 65020000 		.4byte	.LASF36
+ 942 0460 65020000 		.4byte	.LASF36
  943 0464 0A       		.byte	0xa
  944 0465 1F       		.byte	0x1f
  945 0466 17       		.uleb128 0x17
- 946 0467 F9020000 		.4byte	.LASF37
- 947 046b F9020000 		.4byte	.LASF37
+ 946 0467 DB000000 		.4byte	.LASF37
+ 947 046b DB000000 		.4byte	.LASF37
  948 046f 0A       		.byte	0xa
  949 0470 22       		.byte	0x22
  950 0471 17       		.uleb128 0x17
  951 0472 53000000 		.4byte	.LASF38
  952 0476 53000000 		.4byte	.LASF38
-ARM GAS  C:\Users\adamh\AppData\Local\Temp\cc72H6DU.s 			page 21
-
-
  953 047a 0B       		.byte	0xb
+ARM GAS  C:\Users\danie\AppData\Local\Temp\cckYwplP.s 			page 21
+
+
  954 047b 18       		.byte	0x18
  955 047c 17       		.uleb128 0x17
  956 047d 45000000 		.4byte	.LASF39
@@ -1214,43 +1213,43 @@ ARM GAS  C:\Users\adamh\AppData\Local\Temp\cc72H6DU.s 			page 1
  963 0490 08       		.byte	0x8
  964 0491 54       		.byte	0x54
  965 0492 17       		.uleb128 0x17
- 966 0493 17020000 		.4byte	.LASF41
- 967 0497 17020000 		.4byte	.LASF41
+ 966 0493 20020000 		.4byte	.LASF41
+ 967 0497 20020000 		.4byte	.LASF41
  968 049b 0D       		.byte	0xd
  969 049c 3A       		.byte	0x3a
  970 049d 17       		.uleb128 0x17
- 971 049e A4020000 		.4byte	.LASF42
- 972 04a2 A4020000 		.4byte	.LASF42
+ 971 049e C1020000 		.4byte	.LASF42
+ 972 04a2 C1020000 		.4byte	.LASF42
  973 04a6 0D       		.byte	0xd
  974 04a7 3D       		.byte	0x3d
  975 04a8 17       		.uleb128 0x17
- 976 04a9 FC010000 		.4byte	.LASF43
- 977 04ad FC010000 		.4byte	.LASF43
+ 976 04a9 05020000 		.4byte	.LASF43
+ 977 04ad 05020000 		.4byte	.LASF43
  978 04b1 0E       		.byte	0xe
  979 04b2 1E       		.byte	0x1e
  980 04b3 17       		.uleb128 0x17
- 981 04b4 D1000000 		.4byte	.LASF44
- 982 04b8 D1000000 		.4byte	.LASF44
+ 981 04b4 EE000000 		.4byte	.LASF44
+ 982 04b8 EE000000 		.4byte	.LASF44
  983 04bc 0F       		.byte	0xf
  984 04bd 38       		.byte	0x38
  985 04be 17       		.uleb128 0x17
- 986 04bf 95010000 		.4byte	.LASF45
- 987 04c3 95010000 		.4byte	.LASF45
+ 986 04bf B2010000 		.4byte	.LASF45
+ 987 04c3 B2010000 		.4byte	.LASF45
  988 04c7 0F       		.byte	0xf
  989 04c8 3B       		.byte	0x3b
  990 04c9 17       		.uleb128 0x17
- 991 04ca DB020000 		.4byte	.LASF46
- 992 04ce DB020000 		.4byte	.LASF46
+ 991 04ca F8020000 		.4byte	.LASF46
+ 992 04ce F8020000 		.4byte	.LASF46
  993 04d2 0F       		.byte	0xf
  994 04d3 3F       		.byte	0x3f
  995 04d4 17       		.uleb128 0x17
- 996 04d5 7C000000 		.4byte	.LASF47
- 997 04d9 7C000000 		.4byte	.LASF47
+ 996 04d5 7B020000 		.4byte	.LASF47
+ 997 04d9 7B020000 		.4byte	.LASF47
  998 04dd 0F       		.byte	0xf
  999 04de 2F       		.byte	0x2f
  1000 04df 17       		.uleb128 0x17
- 1001 04e0 3B020000 		.4byte	.LASF48
- 1002 04e4 3B020000 		.4byte	.LASF48
+ 1001 04e0 44020000 		.4byte	.LASF48
+ 1002 04e4 44020000 		.4byte	.LASF48
  1003 04e8 0F       		.byte	0xf
  1004 04e9 29       		.byte	0x29
  1005 04ea 00       		.byte	0
@@ -1258,10 +1257,10 @@ ARM GAS  C:\Users\adamh\AppData\Local\Temp\cc72H6DU.s 			page 1
  1007              	.Ldebug_abbrev0:
  1008 0000 01       		.uleb128 0x1
  1009 0001 11       		.uleb128 0x11
-ARM GAS  C:\Users\adamh\AppData\Local\Temp\cc72H6DU.s 			page 22
-
-
  1010 0002 01       		.byte	0x1
+ARM GAS  C:\Users\danie\AppData\Local\Temp\cckYwplP.s 			page 22
+
+
  1011 0003 25       		.uleb128 0x25
  1012 0004 0E       		.uleb128 0xe
  1013 0005 13       		.uleb128 0x13
@@ -1318,10 +1317,10 @@ ARM GAS  C:\Users\adamh\AppData\Local\Temp\cc72H6DU.s 			page 1
  1064 0038 00       		.byte	0
  1065 0039 03       		.uleb128 0x3
  1066 003a 0E       		.uleb128 0xe
-ARM GAS  C:\Users\adamh\AppData\Local\Temp\cc72H6DU.s 			page 23
-
-
  1067 003b 3A       		.uleb128 0x3a
+ARM GAS  C:\Users\danie\AppData\Local\Temp\cckYwplP.s 			page 23
+
+
  1068 003c 0B       		.uleb128 0xb
  1069 003d 3B       		.uleb128 0x3b
  1070 003e 05       		.uleb128 0x5
@@ -1378,10 +1377,10 @@ ARM GAS  C:\Users\adamh\AppData\Local\Temp\cc72H6DU.s 			page 1
  1121 0072 00       		.byte	0
  1122 0073 09       		.uleb128 0x9
  1123 0074 34       		.uleb128 0x34
-ARM GAS  C:\Users\adamh\AppData\Local\Temp\cc72H6DU.s 			page 24
-
-
  1124 0075 00       		.byte	0
+ARM GAS  C:\Users\danie\AppData\Local\Temp\cckYwplP.s 			page 24
+
+
  1125 0076 03       		.uleb128 0x3
  1126 0077 0E       		.uleb128 0xe
  1127 0078 3A       		.uleb128 0x3a
@@ -1438,10 +1437,10 @@ ARM GAS  C:\Users\adamh\AppData\Local\Temp\cc72H6DU.s 			page 1
  1178 00af 18       		.uleb128 0x18
  1179 00b0 9142     		.uleb128 0x2111
  1180 00b2 18       		.uleb128 0x18
-ARM GAS  C:\Users\adamh\AppData\Local\Temp\cc72H6DU.s 			page 25
-
-
  1181 00b3 00       		.byte	0
+ARM GAS  C:\Users\danie\AppData\Local\Temp\cckYwplP.s 			page 25
+
+
  1182 00b4 00       		.byte	0
  1183 00b5 0E       		.uleb128 0xe
  1184 00b6 898201   		.uleb128 0x4109
@@ -1498,10 +1497,10 @@ ARM GAS  C:\Users\adamh\AppData\Local\Temp\cc72H6DU.s 			page 1
  1235 00ed 3A       		.uleb128 0x3a
  1236 00ee 0B       		.uleb128 0xb
  1237 00ef 3B       		.uleb128 0x3b
-ARM GAS  C:\Users\adamh\AppData\Local\Temp\cc72H6DU.s 			page 26
-
-
  1238 00f0 0B       		.uleb128 0xb
+ARM GAS  C:\Users\danie\AppData\Local\Temp\cckYwplP.s 			page 26
+
+
  1239 00f1 27       		.uleb128 0x27
  1240 00f2 19       		.uleb128 0x19
  1241 00f3 49       		.uleb128 0x49
@@ -1558,10 +1557,10 @@ ARM GAS  C:\Users\adamh\AppData\Local\Temp\cc72H6DU.s 			page 1
  1292 0128 3A       		.uleb128 0x3a
  1293 0129 0B       		.uleb128 0xb
  1294 012a 3B       		.uleb128 0x3b
-ARM GAS  C:\Users\adamh\AppData\Local\Temp\cc72H6DU.s 			page 27
-
-
  1295 012b 0B       		.uleb128 0xb
+ARM GAS  C:\Users\danie\AppData\Local\Temp\cckYwplP.s 			page 27
+
+
  1296 012c 49       		.uleb128 0x49
  1297 012d 13       		.uleb128 0x13
  1298 012e 3F       		.uleb128 0x3f
@@ -1618,10 +1617,10 @@ ARM GAS  C:\Users\adamh\AppData\Local\Temp\cc72H6DU.s 			page 1
  1349 0041 5C000000 		.4byte	.LVL10
  1350 0045 0200     		.2byte	0x2
  1351 0047 30       		.byte	0x30
-ARM GAS  C:\Users\adamh\AppData\Local\Temp\cc72H6DU.s 			page 28
-
-
  1352 0048 9F       		.byte	0x9f
+ARM GAS  C:\Users\danie\AppData\Local\Temp\cckYwplP.s 			page 28
+
+
  1353 0049 5C000000 		.4byte	.LVL10
  1354 004d 98000000 		.4byte	.LVL16
  1355 0051 0100     		.2byte	0x1
@@ -1652,8 +1651,8 @@ ARM GAS  C:\Users\adamh\AppData\Local\Temp\cc72H6DU.s 			page 1
  1380 0014 00000000 		.4byte	0
  1381              		.section	.debug_line,"",%progbits
  1382              	.Ldebug_line0:
- 1383 0000 36030000 		.section	.debug_str,"MS",%progbits,1
- 1383      0200BB02 
+ 1383 0000 35030000 		.section	.debug_str,"MS",%progbits,1
+ 1383      0200BC02 
  1383      00000201 
  1383      FB0E0D00 
  1383      01010101 
@@ -1678,10 +1677,10 @@ ARM GAS  C:\Users\adamh\AppData\Local\Temp\cc72H6DU.s 			page 1
  1393      7400
  1394              	.LASF30:
  1395 0030 75617274 		.ascii	"uartBuffer\000"
-ARM GAS  C:\Users\adamh\AppData\Local\Temp\cc72H6DU.s 			page 29
-
-
  1395      42756666 
+ARM GAS  C:\Users\danie\AppData\Local\Temp\cckYwplP.s 			page 29
+
+
  1395      657200
  1396              	.LASF5:
  1397 003b 5F5F696E 		.ascii	"__int32_t\000"
@@ -1706,237 +1705,237 @@ ARM GAS  C:\Users\adamh\AppData\Local\Temp\cc72H6DU.s 			page 1
  1405 0073 736E7072 		.ascii	"snprintf\000"
  1405      696E7466 
  1405      00
- 1406              	.LASF47:
- 1407 007c 4379446D 		.ascii	"CyDmaChSetInitialTd\000"
- 1407      61436853 
- 1407      6574496E 
- 1407      69746961 
- 1407      6C546400 
- 1408              	.LASF51:
- 1409 0090 433A5C45 		.ascii	"C:\\E3PRJ3\\Software\\Styringsenhed\\ADC\\ADC MK II"
- 1409      3350524A 
- 1409      335C536F 
- 1409      66747761 
- 1409      72655C53 
- 1410 00be 495C4144 		.ascii	"I\\ADC MK III.cydsn\000"
- 1410      43204D4B 
- 1410      20494949 
- 1410      2E637964 
- 1410      736E00
- 1411              	.LASF44:
- 1412 00d1 4379446D 		.ascii	"CyDmaTdAllocate\000"
- 1412      61546441 
- 1412      6C6C6F63 
- 1412      61746500 
- 1413              	.LASF16:
- 1414 00e1 666C6F61 		.ascii	"float\000"
- 1414      7400
- 1415              	.LASF1:
- 1416 00e7 756E7369 		.ascii	"unsigned char\000"
- 1416      676E6564 
- 1416      20636861 
- 1416      7200
- 1417              	.LASF49:
- 1418 00f5 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
-ARM GAS  C:\Users\adamh\AppData\Local\Temp\cc72H6DU.s 			page 30
+ 1406              	.LASF51:
+ 1407 007c 433A5C50 		.ascii	"C:\\PRJ3 git\\E3PRJ3\\Software\\Styringsenhed\\ADC\\"
+ 1407      524A3320 
+ 1407      6769745C 
+ 1407      45335052 
+ 1407      4A335C53 
+ 1408 00aa 41444320 		.ascii	"ADC MK III\\ADC MK III.cydsn\000"
+ 1408      4D4B2049 
+ 1408      49495C41 
+ 1408      4443204D 
+ 1408      4B204949 
+ 1409              	.LASF33:
+ 1410 00c6 50726F63 		.ascii	"Proc_done_test_Write\000"
+ 1410      5F646F6E 
+ 1410      655F7465 
+ 1410      73745F57 
+ 1410      72697465 
+ 1411              	.LASF37:
+ 1412 00db 6669724D 		.ascii	"firMoveProcSamples\000"
+ 1412      6F766550 
+ 1412      726F6353 
+ 1412      616D706C 
+ 1412      657300
+ 1413              	.LASF44:
+ 1414 00ee 4379446D 		.ascii	"CyDmaTdAllocate\000"
+ 1414      61546441 
+ 1414      6C6C6F63 
+ 1414      61746500 
+ 1415              	.LASF16:
+ 1416 00fe 666C6F61 		.ascii	"float\000"
+ 1416      7400
+ 1417              	.LASF1:
+ 1418 0104 756E7369 		.ascii	"unsigned char\000"
+ARM GAS  C:\Users\danie\AppData\Local\Temp\cckYwplP.s 			page 30
 
 
- 1418      43313120 
- 1418      352E342E 
- 1418      31203230 
- 1418      31363036 
- 1419 0128 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
- 1419      20726576 
- 1419      6973696F 
- 1419      6E203233 
- 1419      37373135 
- 1420 015b 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
- 1420      66756E63 
- 1420      74696F6E 
- 1420      2D736563 
- 1420      74696F6E 
- 1421              	.LASF34:
- 1422 0183 66697246 		.ascii	"firFixedInit\000"
- 1422      69786564 
- 1422      496E6974 
- 1422      00
- 1423              	.LASF19:
- 1424 0190 72656738 		.ascii	"reg8\000"
+ 1418      676E6564 
+ 1418      20636861 
+ 1418      7200
+ 1419              	.LASF49:
+ 1420 0112 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 1420      43313120 
+ 1420      352E342E 
+ 1420      31203230 
+ 1420      31363036 
+ 1421 0145 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 1421      20726576 
+ 1421      6973696F 
+ 1421      6E203233 
+ 1421      37373135 
+ 1422 0178 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 1422      66756E63 
+ 1422      74696F6E 
+ 1422      2D736563 
+ 1422      74696F6E 
+ 1423              	.LASF34:
+ 1424 01a0 66697246 		.ascii	"firFixedInit\000"
+ 1424      69786564 
+ 1424      496E6974 
  1424      00
- 1425              	.LASF45:
- 1426 0195 4379446D 		.ascii	"CyDmaTdSetConfiguration\000"
- 1426      61546453 
- 1426      6574436F 
- 1426      6E666967 
- 1426      75726174 
- 1427              	.LASF7:
- 1428 01ad 6C6F6E67 		.ascii	"long unsigned int\000"
- 1428      20756E73 
- 1428      69676E65 
- 1428      6420696E 
- 1428      7400
- 1429              	.LASF3:
- 1430 01bf 73686F72 		.ascii	"short unsigned int\000"
- 1430      7420756E 
- 1430      7369676E 
- 1430      65642069 
- 1430      6E7400
- 1431              	.LASF54:
- 1432 01d2 444D415F 		.ascii	"DMA_1_TD\000"
- 1432      315F5444 
- 1432      00
- 1433              	.LASF28:
- 1434 01db 49544D5F 		.ascii	"ITM_RxBuffer\000"
- 1434      52784275 
- 1434      66666572 
+ 1425              	.LASF19:
+ 1426 01ad 72656738 		.ascii	"reg8\000"
+ 1426      00
+ 1427              	.LASF45:
+ 1428 01b2 4379446D 		.ascii	"CyDmaTdSetConfiguration\000"
+ 1428      61546453 
+ 1428      6574436F 
+ 1428      6E666967 
+ 1428      75726174 
+ 1429              	.LASF7:
+ 1430 01ca 6C6F6E67 		.ascii	"long unsigned int\000"
+ 1430      20756E73 
+ 1430      69676E65 
+ 1430      6420696E 
+ 1430      7400
+ 1431              	.LASF3:
+ 1432 01dc 73686F72 		.ascii	"short unsigned int\000"
+ 1432      7420756E 
+ 1432      7369676E 
+ 1432      65642069 
+ 1432      6E7400
+ 1433              	.LASF54:
+ 1434 01ef 444D415F 		.ascii	"DMA_1_TD\000"
+ 1434      315F5444 
  1434      00
- 1435              	.LASF33:
- 1436 01e8 646D615F 		.ascii	"dma_done_test_Write\000"
- 1436      646F6E65 
- 1436      5F746573 
- 1436      745F5772 
- 1436      69746500 
+ 1435              	.LASF28:
+ 1436 01f8 49544D5F 		.ascii	"ITM_RxBuffer\000"
+ 1436      52784275 
+ 1436      66666572 
+ 1436      00
  1437              	.LASF43:
- 1438 01fc 444D415F 		.ascii	"DMA_1_DmaInitialize\000"
-ARM GAS  C:\Users\adamh\AppData\Local\Temp\cc72H6DU.s 			page 31
-
-
+ 1438 0205 444D415F 		.ascii	"DMA_1_DmaInitialize\000"
  1438      315F446D 
+ARM GAS  C:\Users\danie\AppData\Local\Temp\cckYwplP.s 			page 31
+
+
  1438      61496E69 
  1438      7469616C 
  1438      697A6500 
  1439              	.LASF17:
- 1440 0210 646F7562 		.ascii	"double\000"
+ 1440 0219 646F7562 		.ascii	"double\000"
  1440      6C6500
  1441              	.LASF41:
- 1442 0217 4144435F 		.ascii	"ADC_DelSig_Start\000"
+ 1442 0220 4144435F 		.ascii	"ADC_DelSig_Start\000"
  1442      44656C53 
  1442      69675F53 
  1442      74617274 
  1442      00
  1443              	.LASF35:
- 1444 0228 66697253 		.ascii	"firStoreNewSamples\000"
+ 1444 0231 66697253 		.ascii	"firStoreNewSamples\000"
  1444      746F7265 
  1444      4E657753 
  1444      616D706C 
  1444      657300
  1445              	.LASF48:
- 1446 023b 4379446D 		.ascii	"CyDmaChEnable\000"
+ 1446 0244 4379446D 		.ascii	"CyDmaChEnable\000"
  1446      61436845 
  1446      6E61626C 
  1446      6500
  1447              	.LASF14:
- 1448 0249 75696E74 		.ascii	"uint16\000"
+ 1448 0252 75696E74 		.ascii	"uint16\000"
  1448      313600
  1449              	.LASF15:
- 1450 0250 75696E74 		.ascii	"uint32\000"
+ 1450 0259 75696E74 		.ascii	"uint32\000"
  1450      333200
  1451              	.LASF53:
- 1452 0257 6D61696E 		.ascii	"main\000"
+ 1452 0260 6D61696E 		.ascii	"main\000"
  1452      00
  1453              	.LASF36:
- 1454 025c 66697246 		.ascii	"firFixed\000"
+ 1454 0265 66697246 		.ascii	"firFixed\000"
  1454      69786564 
  1454      00
  1455              	.LASF10:
- 1456 0265 756E7369 		.ascii	"unsigned int\000"
+ 1456 026e 756E7369 		.ascii	"unsigned int\000"
  1456      676E6564 
  1456      20696E74 
  1456      00
- 1457              	.LASF9:
- 1458 0272 6C6F6E67 		.ascii	"long long unsigned int\000"
- 1458      206C6F6E 
- 1458      6720756E 
- 1458      7369676E 
- 1458      65642069 
- 1459              	.LASF24:
- 1460 0289 66696C74 		.ascii	"filter_outputArray\000"
- 1460      65725F6F 
- 1460      75747075 
- 1460      74417272 
- 1460      617900
- 1461              	.LASF11:
- 1462 029c 696E7431 		.ascii	"int16_t\000"
- 1462      365F7400 
-ARM GAS  C:\Users\adamh\AppData\Local\Temp\cc72H6DU.s 			page 32
+ 1457              	.LASF47:
+ 1458 027b 4379446D 		.ascii	"CyDmaChSetInitialTd\000"
+ 1458      61436853 
+ 1458      6574496E 
+ 1458      69746961 
+ 1458      6C546400 
+ 1459              	.LASF9:
+ 1460 028f 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 1460      206C6F6E 
+ 1460      6720756E 
+ 1460      7369676E 
+ 1460      65642069 
+ 1461              	.LASF24:
+ 1462 02a6 66696C74 		.ascii	"filter_outputArray\000"
+ 1462      65725F6F 
+ 1462      75747075 
+ARM GAS  C:\Users\danie\AppData\Local\Temp\cckYwplP.s 			page 32
 
 
- 1463              	.LASF42:
- 1464 02a4 4144435F 		.ascii	"ADC_DelSig_StartConvert\000"
- 1464      44656C53 
- 1464      69675F53 
- 1464      74617274 
- 1464      436F6E76 
- 1465              	.LASF12:
- 1466 02bc 696E7433 		.ascii	"int32_t\000"
- 1466      325F7400 
- 1467              	.LASF22:
- 1468 02c4 73697A65 		.ascii	"sizetype\000"
- 1468      74797065 
- 1468      00
- 1469              	.LASF8:
- 1470 02cd 6C6F6E67 		.ascii	"long long int\000"
- 1470      206C6F6E 
- 1470      6720696E 
- 1470      7400
- 1471              	.LASF46:
- 1472 02db 4379446D 		.ascii	"CyDmaTdSetAddress\000"
- 1472      61546453 
- 1472      65744164 
- 1472      64726573 
- 1472      7300
- 1473              	.LASF50:
- 1474 02ed 6D61696E 		.ascii	"main.c\000"
- 1474      2E6300
- 1475              	.LASF18:
- 1476 02f4 63686172 		.ascii	"char\000"
- 1476      00
- 1477              	.LASF37:
- 1478 02f9 6669724D 		.ascii	"firMoveProcSamples\000"
- 1478      6F766550 
- 1478      726F6353 
- 1478      616D706C 
- 1478      657300
+ 1462      74417272 
+ 1462      617900
+ 1463              	.LASF11:
+ 1464 02b9 696E7431 		.ascii	"int16_t\000"
+ 1464      365F7400 
+ 1465              	.LASF42:
+ 1466 02c1 4144435F 		.ascii	"ADC_DelSig_StartConvert\000"
+ 1466      44656C53 
+ 1466      69675F53 
+ 1466      74617274 
+ 1466      436F6E76 
+ 1467              	.LASF12:
+ 1468 02d9 696E7433 		.ascii	"int32_t\000"
+ 1468      325F7400 
+ 1469              	.LASF22:
+ 1470 02e1 73697A65 		.ascii	"sizetype\000"
+ 1470      74797065 
+ 1470      00
+ 1471              	.LASF8:
+ 1472 02ea 6C6F6E67 		.ascii	"long long int\000"
+ 1472      206C6F6E 
+ 1472      6720696E 
+ 1472      7400
+ 1473              	.LASF46:
+ 1474 02f8 4379446D 		.ascii	"CyDmaTdSetAddress\000"
+ 1474      61546453 
+ 1474      65744164 
+ 1474      64726573 
+ 1474      7300
+ 1475              	.LASF50:
+ 1476 030a 6D61696E 		.ascii	"main.c\000"
+ 1476      2E6300
+ 1477              	.LASF18:
+ 1478 0311 63686172 		.ascii	"char\000"
+ 1478      00
  1479              	.LASF2:
- 1480 030c 73686F72 		.ascii	"short int\000"
+ 1480 0316 73686F72 		.ascii	"short int\000"
  1480      7420696E 
  1480      7400
  1481              	.LASF13:
- 1482 0316 75696E74 		.ascii	"uint8\000"
+ 1482 0320 75696E74 		.ascii	"uint8\000"
  1482      3800
  1483              	.LASF52:
- 1484 031c 4953525F 		.ascii	"ISR_DMA_Done\000"
+ 1484 0326 4953525F 		.ascii	"ISR_DMA_Done\000"
  1484      444D415F 
  1484      446F6E65 
  1484      00
  1485              	.LASF6:
- 1486 0329 6C6F6E67 		.ascii	"long int\000"
+ 1486 0333 6C6F6E67 		.ascii	"long int\000"
  1486      20696E74 
  1486      00
  1487              	.LASF21:
- 1488 0332 6C6F6E67 		.ascii	"long double\000"
+ 1488 033c 6C6F6E67 		.ascii	"long double\000"
  1488      20646F75 
  1488      626C6500 
  1489              	.LASF0:
-ARM GAS  C:\Users\adamh\AppData\Local\Temp\cc72H6DU.s 			page 33
+ 1490 0348 7369676E 		.ascii	"signed char\000"
+ARM GAS  C:\Users\danie\AppData\Local\Temp\cckYwplP.s 			page 33
 
 
- 1490 033e 7369676E 		.ascii	"signed char\000"
  1490      65642063 
  1490      68617200 
  1491              	.LASF32:
- 1492 034a 55415254 		.ascii	"UART_1_PutString\000"
+ 1492 0354 55415254 		.ascii	"UART_1_PutString\000"
  1492      5F315F50 
  1492      75745374 
  1492      72696E67 
  1492      00
  1493              	.LASF29:
- 1494 035b 444D415F 		.ascii	"DMA_Done_Flag\000"
+ 1494 0365 444D415F 		.ascii	"DMA_Done_Flag\000"
  1494      446F6E65 
  1494      5F466C61 
  1494      6700
  1495              	.LASF23:
- 1496 0369 66696C74 		.ascii	"filter_workingArray1\000"
+ 1496 0373 66696C74 		.ascii	"filter_workingArray1\000"
  1496      65725F77 
  1496      6F726B69 
  1496      6E674172 

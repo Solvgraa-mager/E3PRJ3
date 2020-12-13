@@ -3,7 +3,7 @@
 /*I DETTE TILFÆLDE BRUGES DMA TIL AT FLYTTE DATA OG ALLOKERE.
 DER PROCESSERES PÅ PAKKER AF NO_OF_SAMPLES OG IKKE PR. SAMPLE.
 DERFOR BENYTTES firStoreNewInputSamples TIL AT GEMME BÅDE 
-KOEFFICIENTER OG adc_SampleArray[NO_OF_SAMPLES] I ET ARRAY TIL FILTERET.
+KOEFFICIENTER OG ADC_Samples[NO_OF_SAMPLES] I ET ARRAY TIL FILTERET.
 */
 
 //array til at holde både input samples og filter koefficienter
@@ -45,16 +45,18 @@ void firFixed(int16_t *coeffs, int16_t *input, int16_t *output,
        int length, int filterLength )
 {
     int32_t acc;     // accumulator for gange og plus
-    int16_t *coeffp; // pointer til filterkoefficienter
+    //koefficienter fra matlab er formatteret til int16_t
+    //for at passe med input samples
+    int16_t *coeffp;  
+     
     
     //er blevet formateret fra int16
     int16_t *inputp; // pointer til input samples
     int n;
     int k;
 
-    // apply the filter to each input sample
+    // ydre for løkke - ganger filter på hver input sample i sample array
     for ( n = 0; n < length; n++ ) {
-        // calculate output n
         coeffp = coeffs;
         inputp = &input[n];
         //akkumulator til at holde summen 
@@ -70,18 +72,16 @@ void firFixed(int16_t *coeffs, int16_t *input, int16_t *output,
             og gange anden koefficient med sidste sample
             h(k)*x(n-k)*/
             
-            //koefficienter fra matlab er formatteret til int
-            //for at passe med input samples
             acc += (int32_t)(*coeffp++) * (int32_t)(*inputp--);
         }
-        //overflows sikring max +- 2^14 for akkumulator
+        //overflows sikring for akkumulator
         if ( acc > 0x3fffffff ) {
             acc = 0x3fffffff;
         } else if ( acc < -0x40000000 ) {
             acc = -0x40000000;
         }
         
-        //filter output skaleret fra int32 til uint16_t array
+        //filter output skaleret fra int32 til int16_t array
         output[n] = (int16_t)(acc >> 15);
     }
 }
