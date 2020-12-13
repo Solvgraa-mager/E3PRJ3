@@ -1,5 +1,5 @@
 /*******************************************************************************
-* File Name: dma_done_test.c  
+* File Name: MOSI_PIN.c  
 * Version 2.20
 *
 * Description:
@@ -15,15 +15,15 @@
 *******************************************************************************/
 
 #include "cytypes.h"
-#include "dma_done_test.h"
+#include "MOSI_PIN.h"
 
 /* APIs are not generated for P15[7:6] on PSoC 5 */
 #if !(CY_PSOC5A &&\
-	 dma_done_test__PORT == 15 && ((dma_done_test__MASK & 0xC0) != 0))
+	 MOSI_PIN__PORT == 15 && ((MOSI_PIN__MASK & 0xC0) != 0))
 
 
 /*******************************************************************************
-* Function Name: dma_done_test_Write
+* Function Name: MOSI_PIN_Write
 ****************************************************************************//**
 *
 * \brief Writes the value to the physical port (data output register), masking
@@ -52,17 +52,17 @@
 *  this function.
 *
 * \funcusage
-*  \snippet dma_done_test_SUT.c usage_dma_done_test_Write
+*  \snippet MOSI_PIN_SUT.c usage_MOSI_PIN_Write
 *******************************************************************************/
-void dma_done_test_Write(uint8 value)
+void MOSI_PIN_Write(uint8 value)
 {
-    uint8 staticBits = (dma_done_test_DR & (uint8)(~dma_done_test_MASK));
-    dma_done_test_DR = staticBits | ((uint8)(value << dma_done_test_SHIFT) & dma_done_test_MASK);
+    uint8 staticBits = (MOSI_PIN_DR & (uint8)(~MOSI_PIN_MASK));
+    MOSI_PIN_DR = staticBits | ((uint8)(value << MOSI_PIN_SHIFT) & MOSI_PIN_MASK);
 }
 
 
 /*******************************************************************************
-* Function Name: dma_done_test_SetDriveMode
+* Function Name: MOSI_PIN_SetDriveMode
 ****************************************************************************//**
 *
 * \brief Sets the drive mode for each of the Pins component's pins.
@@ -85,16 +85,16 @@ void dma_done_test_Write(uint8 value)
 *  APIs (primary method) or disable interrupts around this function.
 *
 * \funcusage
-*  \snippet dma_done_test_SUT.c usage_dma_done_test_SetDriveMode
+*  \snippet MOSI_PIN_SUT.c usage_MOSI_PIN_SetDriveMode
 *******************************************************************************/
-void dma_done_test_SetDriveMode(uint8 mode)
+void MOSI_PIN_SetDriveMode(uint8 mode)
 {
-	CyPins_SetPinDriveMode(dma_done_test_0, mode);
+	CyPins_SetPinDriveMode(MOSI_PIN_0, mode);
 }
 
 
 /*******************************************************************************
-* Function Name: dma_done_test_Read
+* Function Name: MOSI_PIN_Read
 ****************************************************************************//**
 *
 * \brief Reads the associated physical port (pin status register) and masks 
@@ -108,16 +108,16 @@ void dma_done_test_SetDriveMode(uint8 mode)
 *  The current value for the pins in the component as a right justified number.
 *
 * \funcusage
-*  \snippet dma_done_test_SUT.c usage_dma_done_test_Read  
+*  \snippet MOSI_PIN_SUT.c usage_MOSI_PIN_Read  
 *******************************************************************************/
-uint8 dma_done_test_Read(void)
+uint8 MOSI_PIN_Read(void)
 {
-    return (dma_done_test_PS & dma_done_test_MASK) >> dma_done_test_SHIFT;
+    return (MOSI_PIN_PS & MOSI_PIN_MASK) >> MOSI_PIN_SHIFT;
 }
 
 
 /*******************************************************************************
-* Function Name: dma_done_test_ReadDataReg
+* Function Name: MOSI_PIN_ReadDataReg
 ****************************************************************************//**
 *
 * \brief Reads the associated physical port's data output register and masks 
@@ -126,8 +126,8 @@ uint8 dma_done_test_Read(void)
 *
 * The data output register controls the signal applied to the physical pin in 
 * conjunction with the drive mode parameter. This is not the same as the 
-* preferred dma_done_test_Read() API because the 
-* dma_done_test_ReadDataReg() reads the data register instead of the status 
+* preferred MOSI_PIN_Read() API because the 
+* MOSI_PIN_ReadDataReg() reads the data register instead of the status 
 * register. For output pins this is a useful function to determine the value 
 * just written to the pin.
 *
@@ -136,19 +136,19 @@ uint8 dma_done_test_Read(void)
 *  justified number for the component instance.
 *
 * \funcusage
-*  \snippet dma_done_test_SUT.c usage_dma_done_test_ReadDataReg 
+*  \snippet MOSI_PIN_SUT.c usage_MOSI_PIN_ReadDataReg 
 *******************************************************************************/
-uint8 dma_done_test_ReadDataReg(void)
+uint8 MOSI_PIN_ReadDataReg(void)
 {
-    return (dma_done_test_DR & dma_done_test_MASK) >> dma_done_test_SHIFT;
+    return (MOSI_PIN_DR & MOSI_PIN_MASK) >> MOSI_PIN_SHIFT;
 }
 
 
 /* If interrupt is connected for this Pins component */ 
-#if defined(dma_done_test_INTSTAT) 
+#if defined(MOSI_PIN_INTSTAT) 
 
     /*******************************************************************************
-    * Function Name: dma_done_test_SetInterruptMode
+    * Function Name: MOSI_PIN_SetInterruptMode
     ****************************************************************************//**
     *
     * \brief Configures the interrupt mode for each of the Pins component's
@@ -161,12 +161,12 @@ uint8 dma_done_test_ReadDataReg(void)
     * \param position
     *  The pin position as listed in the Pins component. You may OR these to be 
     *  able to configure the interrupt mode of multiple pins within a Pins 
-    *  component. Or you may use dma_done_test_INTR_ALL to configure the
+    *  component. Or you may use MOSI_PIN_INTR_ALL to configure the
     *  interrupt mode of all the pins in the Pins component.       
-    *  - dma_done_test_0_INTR       (First pin in the list)
-    *  - dma_done_test_1_INTR       (Second pin in the list)
+    *  - MOSI_PIN_0_INTR       (First pin in the list)
+    *  - MOSI_PIN_1_INTR       (Second pin in the list)
     *  - ...
-    *  - dma_done_test_INTR_ALL     (All pins in Pins component)
+    *  - MOSI_PIN_INTR_ALL     (All pins in Pins component)
     *
     * \param mode
     *  Interrupt mode for the selected pins. Valid options are documented in
@@ -182,19 +182,19 @@ uint8 dma_done_test_ReadDataReg(void)
     *  port.
     *
     * \funcusage
-    *  \snippet dma_done_test_SUT.c usage_dma_done_test_SetInterruptMode
+    *  \snippet MOSI_PIN_SUT.c usage_MOSI_PIN_SetInterruptMode
     *******************************************************************************/
-    void dma_done_test_SetInterruptMode(uint16 position, uint16 mode)
+    void MOSI_PIN_SetInterruptMode(uint16 position, uint16 mode)
     {
-		if((position & dma_done_test_0_INTR) != 0u) 
+		if((position & MOSI_PIN_0_INTR) != 0u) 
 		{ 
-			 dma_done_test_0_INTTYPE_REG = (uint8)mode; 
+			 MOSI_PIN_0_INTTYPE_REG = (uint8)mode; 
 		}
     }
     
     
     /*******************************************************************************
-    * Function Name: dma_done_test_ClearInterrupt
+    * Function Name: MOSI_PIN_ClearInterrupt
     ****************************************************************************//**
     *
     * \brief Clears any active interrupts attached with the component and returns 
@@ -211,11 +211,11 @@ uint8 dma_done_test_ReadDataReg(void)
     *  those associated with the Pins component.
     *
     * \funcusage
-    *  \snippet dma_done_test_SUT.c usage_dma_done_test_ClearInterrupt
+    *  \snippet MOSI_PIN_SUT.c usage_MOSI_PIN_ClearInterrupt
     *******************************************************************************/
-    uint8 dma_done_test_ClearInterrupt(void)
+    uint8 MOSI_PIN_ClearInterrupt(void)
     {
-        return (dma_done_test_INTSTAT & dma_done_test_MASK) >> dma_done_test_SHIFT;
+        return (MOSI_PIN_INTSTAT & MOSI_PIN_MASK) >> MOSI_PIN_SHIFT;
     }
 
 #endif /* If Interrupts Are Enabled for this Pins component */ 

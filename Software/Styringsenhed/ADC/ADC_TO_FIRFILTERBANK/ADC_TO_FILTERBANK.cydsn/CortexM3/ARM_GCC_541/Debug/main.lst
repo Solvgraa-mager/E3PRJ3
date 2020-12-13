@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\danie\AppData\Local\Temp\ccMFGOGe.s 			page 1
+ARM GAS  C:\Users\danie\AppData\Local\Temp\cctg4KZL.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\danie\AppData\Local\Temp\ccMFGOGe.s 			page 1
   27:main.c        **** 
   28:main.c        **** //FILTER 1
   29:main.c        **** #define FILTER_LEN 64
-ARM GAS  C:\Users\danie\AppData\Local\Temp\ccMFGOGe.s 			page 2
+ARM GAS  C:\Users\danie\AppData\Local\Temp\cctg4KZL.s 			page 2
 
 
   30:main.c        **** static int16_t coeffs[ FILTER_LEN ] =
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\danie\AppData\Local\Temp\ccMFGOGe.s 			page 1
   49:main.c        ****         output[i] = (double)input[i];
   61              		.loc 1 49 0 is_stmt 0 discriminator 1
   62 0020 B442     		cmp	r4, r6
-ARM GAS  C:\Users\danie\AppData\Local\Temp\ccMFGOGe.s 			page 3
+ARM GAS  C:\Users\danie\AppData\Local\Temp\cctg4KZL.s 			page 3
 
 
   63 0022 F4DB     		blt	.L3
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\danie\AppData\Local\Temp\ccMFGOGe.s 			page 1
  108 0010 0BEBC405 		add	r5, fp, r4, lsl #3
  109 0014 D5E90067 		ldrd	r6, [r5]
  110 0018 11A3     		adr	r3, .L16
-ARM GAS  C:\Users\danie\AppData\Local\Temp\ccMFGOGe.s 			page 4
+ARM GAS  C:\Users\danie\AppData\Local\Temp\cctg4KZL.s 			page 4
 
 
  111 001a D3E90023 		ldrd	r2, [r3]
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\danie\AppData\Local\Temp\ccMFGOGe.s 			page 1
  156 0068 0000E0C0 		.word	-1059061760
  157              		.cfi_endproc
  158              	.LFE65:
-ARM GAS  C:\Users\danie\AppData\Local\Temp\ccMFGOGe.s 			page 5
+ARM GAS  C:\Users\danie\AppData\Local\Temp\cctg4KZL.s 			page 5
 
 
  159              		.size	DoubleToInt, .-DoubleToInt
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\danie\AppData\Local\Temp\ccMFGOGe.s 			page 1
  179 0002 41F6FF73 		movw	r3, #8191
  180 0006 4FF48042 		mov	r2, #16384
  181 000a 0121     		movs	r1, #1
-ARM GAS  C:\Users\danie\AppData\Local\Temp\ccMFGOGe.s 			page 6
+ARM GAS  C:\Users\danie\AppData\Local\Temp\cctg4KZL.s 			page 6
 
 
  182 000c 0220     		movs	r0, #2
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\danie\AppData\Local\Temp\ccMFGOGe.s 			page 1
  214              	.LVL18:
  123:main.c        **** 
  124:main.c        **** 	/* Start ADC */
-ARM GAS  C:\Users\danie\AppData\Local\Temp\ccMFGOGe.s 			page 7
+ARM GAS  C:\Users\danie\AppData\Local\Temp\cctg4KZL.s 			page 7
 
 
  125:main.c        **** 	ADC_DelSig_1_Start();
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\danie\AppData\Local\Temp\ccMFGOGe.s 			page 1
  249 0070 00000000 		.word	.LANCHOR0
  250              		.cfi_endproc
  251              	.LFE66:
-ARM GAS  C:\Users\danie\AppData\Local\Temp\ccMFGOGe.s 			page 8
+ARM GAS  C:\Users\danie\AppData\Local\Temp\cctg4KZL.s 			page 8
 
 
  252              		.size	Init, .-Init
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\danie\AppData\Local\Temp\ccMFGOGe.s 			page 1
  286 001c FFF7FEFF 		bl	firFixed
  287              	.LVL29:
  165:main.c        **** 
-ARM GAS  C:\Users\danie\AppData\Local\Temp\ccMFGOGe.s 			page 9
+ARM GAS  C:\Users\danie\AppData\Local\Temp\cctg4KZL.s 			page 9
 
 
  166:main.c        **** //Skift de samples der lige er blevet processeret ud med 
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\danie\AppData\Local\Temp\ccMFGOGe.s 			page 1
  330              		.comm	DMA_TD,1,4
  331              		.comm	DMA_Chan,1,1
  332              		.data
-ARM GAS  C:\Users\danie\AppData\Local\Temp\ccMFGOGe.s 			page 10
+ARM GAS  C:\Users\danie\AppData\Local\Temp\cctg4KZL.s 			page 10
 
 
  333              		.align	2
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\danie\AppData\Local\Temp\ccMFGOGe.s 			page 1
  387 0062 1500     		.short	21
  388 0064 99FD     		.short	-615
  389 0066 06FD     		.short	-762
-ARM GAS  C:\Users\danie\AppData\Local\Temp\ccMFGOGe.s 			page 11
+ARM GAS  C:\Users\danie\AppData\Local\Temp\cctg4KZL.s 			page 11
 
 
  390 0068 4DFE     		.short	-435
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\danie\AppData\Local\Temp\ccMFGOGe.s 			page 1
  440 0027 06       		.byte	0x6
  441 0028 72030000 		.4byte	.LASF0
  442 002c 02       		.uleb128 0x2
-ARM GAS  C:\Users\danie\AppData\Local\Temp\ccMFGOGe.s 			page 12
+ARM GAS  C:\Users\danie\AppData\Local\Temp\cctg4KZL.s 			page 12
 
 
  443 002d 01       		.byte	0x1
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\danie\AppData\Local\Temp\ccMFGOGe.s 			page 1
  497 0093 4C000000 		.4byte	0x4c
  498 0097 05       		.uleb128 0x5
  499 0098 1F030000 		.4byte	.LASF13
-ARM GAS  C:\Users\danie\AppData\Local\Temp\ccMFGOGe.s 			page 13
+ARM GAS  C:\Users\danie\AppData\Local\Temp\cctg4KZL.s 			page 13
 
 
  500 009c 04       		.byte	0x4
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\danie\AppData\Local\Temp\ccMFGOGe.s 			page 1
  554 0110 08       		.uleb128 0x8
  555 0111 36010000 		.4byte	.LASF23
  556 0115 01       		.byte	0x1
-ARM GAS  C:\Users\danie\AppData\Local\Temp\ccMFGOGe.s 			page 14
+ARM GAS  C:\Users\danie\AppData\Local\Temp\cctg4KZL.s 			page 14
 
 
  557 0116 2D       		.byte	0x2d
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\danie\AppData\Local\Temp\ccMFGOGe.s 			page 1
  611 0195 D1000000 		.4byte	.LLST6
  612 0199 09       		.uleb128 0x9
  613 019a 6900     		.ascii	"i\000"
-ARM GAS  C:\Users\danie\AppData\Local\Temp\ccMFGOGe.s 			page 15
+ARM GAS  C:\Users\danie\AppData\Local\Temp\cctg4KZL.s 			page 15
 
 
  614 019c 01       		.byte	0x1
@@ -898,7 +898,7 @@ ARM GAS  C:\Users\danie\AppData\Local\Temp\ccMFGOGe.s 			page 1
  668 01fe 0D       		.uleb128 0xd
  669 01ff 01       		.uleb128 0x1
  670 0200 53       		.byte	0x53
-ARM GAS  C:\Users\danie\AppData\Local\Temp\ccMFGOGe.s 			page 16
+ARM GAS  C:\Users\danie\AppData\Local\Temp\cctg4KZL.s 			page 16
 
 
  671 0201 01       		.uleb128 0x1
@@ -958,7 +958,7 @@ ARM GAS  C:\Users\danie\AppData\Local\Temp\ccMFGOGe.s 			page 1
  725 027d 00       		.byte	0
  726 027e 0F       		.uleb128 0xf
  727 027f 25030000 		.4byte	.LASF28
-ARM GAS  C:\Users\danie\AppData\Local\Temp\ccMFGOGe.s 			page 17
+ARM GAS  C:\Users\danie\AppData\Local\Temp\cctg4KZL.s 			page 17
 
 
  728 0283 01       		.byte	0x1
@@ -1018,7 +1018,7 @@ ARM GAS  C:\Users\danie\AppData\Local\Temp\ccMFGOGe.s 			page 1
  782 02f0 03       		.uleb128 0x3
  783 02f1 91       		.byte	0x91
  784 02f2 D87E     		.sleb128 -168
-ARM GAS  C:\Users\danie\AppData\Local\Temp\ccMFGOGe.s 			page 18
+ARM GAS  C:\Users\danie\AppData\Local\Temp\cctg4KZL.s 			page 18
 
 
  785 02f4 0D       		.uleb128 0xd
@@ -1078,7 +1078,7 @@ ARM GAS  C:\Users\danie\AppData\Local\Temp\ccMFGOGe.s 			page 1
  839 0357 00000000 		.4byte	.LASF31
  840 035b 01       		.byte	0x1
  841 035c 1E       		.byte	0x1e
-ARM GAS  C:\Users\danie\AppData\Local\Temp\ccMFGOGe.s 			page 19
+ARM GAS  C:\Users\danie\AppData\Local\Temp\cctg4KZL.s 			page 19
 
 
  842 035d 46030000 		.4byte	0x346
@@ -1138,7 +1138,7 @@ ARM GAS  C:\Users\danie\AppData\Local\Temp\ccMFGOGe.s 			page 1
  896 03d6 18       		.uleb128 0x18
  897 03d7 77000000 		.4byte	.LASF37
  898 03db 77000000 		.4byte	.LASF37
-ARM GAS  C:\Users\danie\AppData\Local\Temp\ccMFGOGe.s 			page 20
+ARM GAS  C:\Users\danie\AppData\Local\Temp\cctg4KZL.s 			page 20
 
 
  899 03df 07       		.byte	0x7
@@ -1198,7 +1198,7 @@ ARM GAS  C:\Users\danie\AppData\Local\Temp\ccMFGOGe.s 			page 1
  953 0454 FB020000 		.4byte	.LASF48
  954 0458 0D       		.byte	0xd
  955 0459 17       		.byte	0x17
-ARM GAS  C:\Users\danie\AppData\Local\Temp\ccMFGOGe.s 			page 21
+ARM GAS  C:\Users\danie\AppData\Local\Temp\cctg4KZL.s 			page 21
 
 
  956 045a 18       		.uleb128 0x18
@@ -1258,7 +1258,7 @@ ARM GAS  C:\Users\danie\AppData\Local\Temp\ccMFGOGe.s 			page 1
  1010 001f 16       		.uleb128 0x16
  1011 0020 00       		.byte	0
  1012 0021 03       		.uleb128 0x3
-ARM GAS  C:\Users\danie\AppData\Local\Temp\ccMFGOGe.s 			page 22
+ARM GAS  C:\Users\danie\AppData\Local\Temp\cctg4KZL.s 			page 22
 
 
  1013 0022 0E       		.uleb128 0xe
@@ -1318,7 +1318,7 @@ ARM GAS  C:\Users\danie\AppData\Local\Temp\ccMFGOGe.s 			page 1
  1067 0058 01       		.uleb128 0x1
  1068 0059 12       		.uleb128 0x12
  1069 005a 06       		.uleb128 0x6
-ARM GAS  C:\Users\danie\AppData\Local\Temp\ccMFGOGe.s 			page 23
+ARM GAS  C:\Users\danie\AppData\Local\Temp\cctg4KZL.s 			page 23
 
 
  1070 005b 40       		.uleb128 0x40
@@ -1378,7 +1378,7 @@ ARM GAS  C:\Users\danie\AppData\Local\Temp\ccMFGOGe.s 			page 1
  1124 0092 3A       		.uleb128 0x3a
  1125 0093 0B       		.uleb128 0xb
  1126 0094 3B       		.uleb128 0x3b
-ARM GAS  C:\Users\danie\AppData\Local\Temp\ccMFGOGe.s 			page 24
+ARM GAS  C:\Users\danie\AppData\Local\Temp\cctg4KZL.s 			page 24
 
 
  1127 0095 0B       		.uleb128 0xb
@@ -1438,7 +1438,7 @@ ARM GAS  C:\Users\danie\AppData\Local\Temp\ccMFGOGe.s 			page 1
  1181 00d3 19       		.uleb128 0x19
  1182 00d4 11       		.uleb128 0x11
  1183 00d5 01       		.uleb128 0x1
-ARM GAS  C:\Users\danie\AppData\Local\Temp\ccMFGOGe.s 			page 25
+ARM GAS  C:\Users\danie\AppData\Local\Temp\cctg4KZL.s 			page 25
 
 
  1184 00d6 12       		.uleb128 0x12
@@ -1498,7 +1498,7 @@ ARM GAS  C:\Users\danie\AppData\Local\Temp\ccMFGOGe.s 			page 1
  1238 010f 01       		.uleb128 0x1
  1239 0110 13       		.uleb128 0x13
  1240 0111 00       		.byte	0
-ARM GAS  C:\Users\danie\AppData\Local\Temp\ccMFGOGe.s 			page 26
+ARM GAS  C:\Users\danie\AppData\Local\Temp\cctg4KZL.s 			page 26
 
 
  1241 0112 00       		.byte	0
@@ -1558,7 +1558,7 @@ ARM GAS  C:\Users\danie\AppData\Local\Temp\ccMFGOGe.s 			page 1
  1295 014a 00       		.byte	0
  1296 014b 00       		.byte	0
  1297 014c 17       		.uleb128 0x17
-ARM GAS  C:\Users\danie\AppData\Local\Temp\ccMFGOGe.s 			page 27
+ARM GAS  C:\Users\danie\AppData\Local\Temp\cctg4KZL.s 			page 27
 
 
  1298 014d 34       		.uleb128 0x34
@@ -1618,7 +1618,7 @@ ARM GAS  C:\Users\danie\AppData\Local\Temp\ccMFGOGe.s 			page 1
  1352 0031 0100     		.2byte	0x1
  1353 0033 57       		.byte	0x57
  1354 0034 00000000 		.4byte	0
-ARM GAS  C:\Users\danie\AppData\Local\Temp\ccMFGOGe.s 			page 28
+ARM GAS  C:\Users\danie\AppData\Local\Temp\cctg4KZL.s 			page 28
 
 
  1355 0038 00000000 		.4byte	0
@@ -1678,7 +1678,7 @@ ARM GAS  C:\Users\danie\AppData\Local\Temp\ccMFGOGe.s 			page 1
  1409 00c5 F3       		.byte	0xf3
  1410 00c6 01       		.uleb128 0x1
  1411 00c7 51       		.byte	0x51
-ARM GAS  C:\Users\danie\AppData\Local\Temp\ccMFGOGe.s 			page 29
+ARM GAS  C:\Users\danie\AppData\Local\Temp\cctg4KZL.s 			page 29
 
 
  1412 00c8 9F       		.byte	0x9f
@@ -1738,7 +1738,7 @@ ARM GAS  C:\Users\danie\AppData\Local\Temp\ccMFGOGe.s 			page 1
  1466 0018 00000000 		.4byte	.LFB65
  1467 001c 6C000000 		.4byte	.LFE65-.LFB65
  1468 0020 00000000 		.4byte	.LFB66
-ARM GAS  C:\Users\danie\AppData\Local\Temp\ccMFGOGe.s 			page 30
+ARM GAS  C:\Users\danie\AppData\Local\Temp\cctg4KZL.s 			page 30
 
 
  1469 0024 74000000 		.4byte	.LFE66-.LFB66
@@ -1798,7 +1798,7 @@ ARM GAS  C:\Users\danie\AppData\Local\Temp\ccMFGOGe.s 			page 1
  1504      69746961 
  1504      6C546400 
  1505              	.LASF46:
-ARM GAS  C:\Users\danie\AppData\Local\Temp\ccMFGOGe.s 			page 31
+ARM GAS  C:\Users\danie\AppData\Local\Temp\cctg4KZL.s 			page 31
 
 
  1506 0050 4144435F 		.ascii	"ADC_DelSig_1_IRQ_Disable\000"
@@ -1858,7 +1858,7 @@ ARM GAS  C:\Users\danie\AppData\Local\Temp\ccMFGOGe.s 			page 1
  1526      6E666967 
  1526      75726174 
  1527              	.LASF7:
-ARM GAS  C:\Users\danie\AppData\Local\Temp\ccMFGOGe.s 			page 32
+ARM GAS  C:\Users\danie\AppData\Local\Temp\cctg4KZL.s 			page 32
 
 
  1528 0159 6C6F6E67 		.ascii	"long unsigned int\000"
@@ -1918,7 +1918,7 @@ ARM GAS  C:\Users\danie\AppData\Local\Temp\ccMFGOGe.s 			page 1
  1549      6E61626C 
  1549      6500
  1550              	.LASF14:
-ARM GAS  C:\Users\danie\AppData\Local\Temp\ccMFGOGe.s 			page 33
+ARM GAS  C:\Users\danie\AppData\Local\Temp\cctg4KZL.s 			page 33
 
 
  1551 0235 75696E74 		.ascii	"uint16\000"
@@ -1978,7 +1978,7 @@ ARM GAS  C:\Users\danie\AppData\Local\Temp\ccMFGOGe.s 			page 1
  1577      74797065 
  1577      00
  1578              	.LASF8:
-ARM GAS  C:\Users\danie\AppData\Local\Temp\ccMFGOGe.s 			page 34
+ARM GAS  C:\Users\danie\AppData\Local\Temp\cctg4KZL.s 			page 34
 
 
  1579 02cf 6C6F6E67 		.ascii	"long long int\000"
@@ -2038,7 +2038,7 @@ ARM GAS  C:\Users\danie\AppData\Local\Temp\ccMFGOGe.s 			page 1
  1603 0366 6C6F6E67 		.ascii	"long double\000"
  1603      20646F75 
  1603      626C6500 
-ARM GAS  C:\Users\danie\AppData\Local\Temp\ccMFGOGe.s 			page 35
+ARM GAS  C:\Users\danie\AppData\Local\Temp\cctg4KZL.s 			page 35
 
 
  1604              	.LASF0:

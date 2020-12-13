@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\adamh\AppData\Local\Temp\ccUDcEBi.s 			page 1
+ARM GAS  C:\Users\danie\AppData\Local\Temp\ccgmQat8.s 			page 1
 
 
    1              		.syntax unified
@@ -33,7 +33,7 @@ ARM GAS  C:\Users\adamh\AppData\Local\Temp\ccUDcEBi.s 			page 1
    3:fir_filter1.c **** /*I DETTE TILFÆLDE BRUGES DMA TIL AT FLYTTE DATA OG ALLOKERE.
    4:fir_filter1.c **** DER PROCESSERES PÅ PAKKER AF NO_OF_SAMPLES OG IKKE PR. SAMPLE.
    5:fir_filter1.c **** DERFOR BENYTTES firStoreNewInputSamples TIL AT GEMME BÅDE 
-   6:fir_filter1.c **** KOEFFICIENTER OG adc_SampleArray[NO_OF_SAMPLES] I ET ARRAY TIL FILTERET.
+   6:fir_filter1.c **** KOEFFICIENTER OG ADC_Samples[NO_OF_SAMPLES] I ET ARRAY TIL FILTERET.
    7:fir_filter1.c **** */
    8:fir_filter1.c **** 
    9:fir_filter1.c **** //array til at holde både input samples og filter koefficienter
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\adamh\AppData\Local\Temp\ccUDcEBi.s 			page 1
   37 0002 4FF49372 		mov	r2, #294
   38 0006 0021     		movs	r1, #0
   39 0008 0148     		ldr	r0, .L3
-ARM GAS  C:\Users\adamh\AppData\Local\Temp\ccUDcEBi.s 			page 2
+ARM GAS  C:\Users\danie\AppData\Local\Temp\ccgmQat8.s 			page 2
 
 
   40 000a FFF7FEFF 		bl	memset
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\adamh\AppData\Local\Temp\ccUDcEBi.s 			page 1
   80 0012 00BF     		.align	2
   81              	.L7:
   82 0014 86000000 		.word	insamp+134
-ARM GAS  C:\Users\adamh\AppData\Local\Temp\ccUDcEBi.s 			page 3
+ARM GAS  C:\Users\danie\AppData\Local\Temp\ccgmQat8.s 			page 3
 
 
   83              		.cfi_endproc
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\adamh\AppData\Local\Temp\ccUDcEBi.s 			page 1
   43:fir_filter1.c **** //FIR filter funktion
   44:fir_filter1.c **** void firFixed(int16_t *coeffs, int16_t *input, int16_t *output,
   45:fir_filter1.c ****        int length, int filterLength )
-ARM GAS  C:\Users\adamh\AppData\Local\Temp\ccUDcEBi.s 			page 4
+ARM GAS  C:\Users\danie\AppData\Local\Temp\ccgmQat8.s 			page 4
 
 
   46:fir_filter1.c **** {
@@ -200,57 +200,57 @@ ARM GAS  C:\Users\adamh\AppData\Local\Temp\ccUDcEBi.s 			page 1
  142 0004 DDF82080 		ldr	r8, [sp, #32]
  143              	.LVL9:
   47:fir_filter1.c ****     int32_t acc;     // accumulator for gange og plus
-  48:fir_filter1.c ****     int16_t *coeffp; // pointer til filterkoefficienter
-  49:fir_filter1.c ****     
-  50:fir_filter1.c ****     //er blevet formateret fra int16
-  51:fir_filter1.c ****     int16_t *inputp; // pointer til input samples
-  52:fir_filter1.c ****     int n;
-  53:fir_filter1.c ****     int k;
-  54:fir_filter1.c **** 
-  55:fir_filter1.c ****     // apply the filter to each input sample
-  56:fir_filter1.c ****     for ( n = 0; n < length; n++ ) {
- 144              		.loc 1 56 0
+  48:fir_filter1.c ****     //koefficienter fra matlab er formatteret til int16_t
+  49:fir_filter1.c ****     //for at passe med input samples
+  50:fir_filter1.c ****     int16_t *coeffp;  
+  51:fir_filter1.c ****      
+  52:fir_filter1.c ****     
+  53:fir_filter1.c ****     //er blevet formateret fra int16
+  54:fir_filter1.c ****     int16_t *inputp; // pointer til input samples
+  55:fir_filter1.c ****     int n;
+  56:fir_filter1.c ****     int k;
+  57:fir_filter1.c **** 
+  58:fir_filter1.c ****     // ydre for løkke - ganger filter på hver input sample i sample array
+  59:fir_filter1.c ****     for ( n = 0; n < length; n++ ) {
+ 144              		.loc 1 59 0
  145 0008 4FF00009 		mov	r9, #0
  146 000c 25E0     		b	.L14
  147              	.LVL10:
  148              	.L18:
-  57:fir_filter1.c ****         // calculate output n
-  58:fir_filter1.c ****         coeffp = coeffs;
-  59:fir_filter1.c ****         inputp = &input[n];
- 149              		.loc 1 59 0
+  60:fir_filter1.c ****         coeffp = coeffs;
+  61:fir_filter1.c ****         inputp = &input[n];
+ 149              		.loc 1 61 0
  150 000e 4FEA490A 		lsl	r10, r9, #1
  151 0012 01EB0A06 		add	r6, r1, r10
  152              	.LVL11:
-  58:fir_filter1.c ****         inputp = &input[n];
- 153              		.loc 1 58 0
+  60:fir_filter1.c ****         coeffp = coeffs;
+ 153              		.loc 1 60 0
  154 0016 0546     		mov	r5, r0
-  60:fir_filter1.c ****         //akkumulator til at holde summen 
-  61:fir_filter1.c ****         //af hver input sampl ganget på filter koefficient
-  62:fir_filter1.c ****         acc = 1 << 14;
-  63:fir_filter1.c ****         //gange input igennem koefficienter (impulsrespons for digitalt filter)
-  64:fir_filter1.c ****         //her er shiftet om tidsaksen (delayregisteret er indstillet) inden (funktionen firMoveProc
-  65:fir_filter1.c ****         for ( k = 0; k < filterLength; k++ ) {
- 155              		.loc 1 65 0
+  62:fir_filter1.c ****         //akkumulator til at holde summen 
+  63:fir_filter1.c ****         //af hver input sampl ganget på filter koefficient
+  64:fir_filter1.c ****         acc = 1 << 14;
+  65:fir_filter1.c ****         //gange input igennem koefficienter (impulsrespons for digitalt filter)
+  66:fir_filter1.c ****         //her er shiftet om tidsaksen (delayregisteret er indstillet) inden (funktionen firMoveProc
+  67:fir_filter1.c ****         for ( k = 0; k < filterLength; k++ ) {
+ 155              		.loc 1 67 0
  156 0018 0024     		movs	r4, #0
-  62:fir_filter1.c ****         //gange input igennem koefficienter (impulsrespons for digitalt filter)
- 157              		.loc 1 62 0
+  64:fir_filter1.c ****         //gange input igennem koefficienter (impulsrespons for digitalt filter)
+ 157              		.loc 1 64 0
  158 001a 4FF48047 		mov	r7, #16384
- 159              		.loc 1 65 0
+ 159              		.loc 1 67 0
+ARM GAS  C:\Users\danie\AppData\Local\Temp\ccgmQat8.s 			page 5
+
+
  160 001e 08E0     		b	.L15
  161              	.LVL12:
-ARM GAS  C:\Users\adamh\AppData\Local\Temp\ccUDcEBi.s 			page 5
-
-
  162              	.L16:
-  66:fir_filter1.c ****             
-  67:fir_filter1.c ****             /*koefficienter nederst i filter_workingArray, 
-  68:fir_filter1.c ****             lydinput øverst i filter_workingArray.
-  69:fir_filter1.c ****             Gange første koeff med nuværende sample
-  70:fir_filter1.c ****             og gange anden koefficient med sidste sample
-  71:fir_filter1.c ****             h(k)*x(n-k)*/
-  72:fir_filter1.c ****             
-  73:fir_filter1.c ****             //koefficienter fra matlab er formatteret til int
-  74:fir_filter1.c ****             //for at passe med input samples
+  68:fir_filter1.c ****             
+  69:fir_filter1.c ****             /*koefficienter nederst i filter_workingArray, 
+  70:fir_filter1.c ****             lydinput øverst i filter_workingArray.
+  71:fir_filter1.c ****             Gange første koeff med nuværende sample
+  72:fir_filter1.c ****             og gange anden koefficient med sidste sample
+  73:fir_filter1.c ****             h(k)*x(n-k)*/
+  74:fir_filter1.c ****             
   75:fir_filter1.c ****             acc += (int32_t)(*coeffp++) * (int32_t)(*inputp--);
  163              		.loc 1 75 0 discriminator 3
  164 0020 B5F900E0 		ldrsh	lr, [r5]
@@ -258,8 +258,8 @@ ARM GAS  C:\Users\adamh\AppData\Local\Temp\ccUDcEBi.s 			page 1
  166 0024 B6F900C0 		ldrsh	ip, [r6]
  167 0028 0CFB0E77 		mla	r7, ip, lr, r7
  168              	.LVL14:
-  65:fir_filter1.c ****             
- 169              		.loc 1 65 0 discriminator 3
+  67:fir_filter1.c ****             
+ 169              		.loc 1 67 0 discriminator 3
  170 002c 0134     		adds	r4, r4, #1
  171              	.LVL15:
  172              		.loc 1 75 0 discriminator 3
@@ -268,12 +268,12 @@ ARM GAS  C:\Users\adamh\AppData\Local\Temp\ccUDcEBi.s 			page 1
  175 0030 0235     		adds	r5, r5, #2
  176              	.LVL17:
  177              	.L15:
-  65:fir_filter1.c ****             
- 178              		.loc 1 65 0 discriminator 1
+  67:fir_filter1.c ****             
+ 178              		.loc 1 67 0 discriminator 1
  179 0032 4445     		cmp	r4, r8
  180 0034 F4DB     		blt	.L16
   76:fir_filter1.c ****         }
-  77:fir_filter1.c ****         //overflows sikring max +- 2^14 for akkumulator
+  77:fir_filter1.c ****         //overflows sikring for akkumulator
   78:fir_filter1.c ****         if ( acc > 0x3fffffff ) {
  181              		.loc 1 78 0
  182 0036 B7F1804F 		cmp	r7, #1073741824
@@ -298,23 +298,23 @@ ARM GAS  C:\Users\adamh\AppData\Local\Temp\ccUDcEBi.s 			page 1
  197              	.LVL20:
  198              	.L17:
   82:fir_filter1.c ****         }
-ARM GAS  C:\Users\adamh\AppData\Local\Temp\ccUDcEBi.s 			page 6
+ARM GAS  C:\Users\danie\AppData\Local\Temp\ccgmQat8.s 			page 6
 
 
   83:fir_filter1.c ****         
-  84:fir_filter1.c ****         //filter output skaleret fra int32 til uint16_t array
+  84:fir_filter1.c ****         //filter output skaleret fra int32 til int16_t array
   85:fir_filter1.c ****         output[n] = (int16_t)(acc >> 15);
  199              		.loc 1 85 0 discriminator 2
  200 004e 47F3CF37 		sbfx	r7, r7, #15, #16
  201              	.LVL21:
  202 0052 22F80A70 		strh	r7, [r2, r10]	@ movhi
-  56:fir_filter1.c ****         // calculate output n
- 203              		.loc 1 56 0 discriminator 2
+  59:fir_filter1.c ****         coeffp = coeffs;
+ 203              		.loc 1 59 0 discriminator 2
  204 0056 09F10109 		add	r9, r9, #1
  205              	.LVL22:
  206              	.L14:
-  56:fir_filter1.c ****         // calculate output n
- 207              		.loc 1 56 0 is_stmt 0 discriminator 1
+  59:fir_filter1.c ****         coeffp = coeffs;
+ 207              		.loc 1 59 0 is_stmt 0 discriminator 1
  208 005a 9945     		cmp	r9, r3
  209 005c D7DB     		blt	.L18
   86:fir_filter1.c ****     }
@@ -338,9 +338,9 @@ ARM GAS  C:\Users\adamh\AppData\Local\Temp\ccUDcEBi.s 			page 1
  226 0006 00000000 		.4byte	.Ldebug_abbrev0
  227 000a 04       		.byte	0x4
  228 000b 01       		.uleb128 0x1
- 229 000c 8C000000 		.4byte	.LASF32
+ 229 000c 95000000 		.4byte	.LASF32
  230 0010 0C       		.byte	0xc
- 231 0011 AE010000 		.4byte	.LASF33
+ 231 0011 B7010000 		.4byte	.LASF33
  232 0015 2A000000 		.4byte	.LASF34
  233 0019 00000000 		.4byte	.Ldebug_ranges0+0
  234 001d 00000000 		.4byte	0
@@ -348,27 +348,27 @@ ARM GAS  C:\Users\adamh\AppData\Local\Temp\ccUDcEBi.s 			page 1
  236 0025 02       		.uleb128 0x2
  237 0026 01       		.byte	0x1
  238 0027 06       		.byte	0x6
- 239 0028 22020000 		.4byte	.LASF0
+ 239 0028 2B020000 		.4byte	.LASF0
  240 002c 02       		.uleb128 0x2
  241 002d 01       		.byte	0x1
  242 002e 08       		.byte	0x8
- 243 002f 7E000000 		.4byte	.LASF1
+ 243 002f 87000000 		.4byte	.LASF1
  244 0033 03       		.uleb128 0x3
  245 0034 16000000 		.4byte	.LASF4
  246 0038 02       		.byte	0x2
  247 0039 29       		.byte	0x29
  248 003a 3E000000 		.4byte	0x3e
-ARM GAS  C:\Users\adamh\AppData\Local\Temp\ccUDcEBi.s 			page 7
+ARM GAS  C:\Users\danie\AppData\Local\Temp\ccgmQat8.s 			page 7
 
 
  249 003e 02       		.uleb128 0x2
  250 003f 02       		.byte	0x2
  251 0040 05       		.byte	0x5
- 252 0041 FC010000 		.4byte	.LASF2
+ 252 0041 05020000 		.4byte	.LASF2
  253 0045 02       		.uleb128 0x2
  254 0046 02       		.byte	0x2
  255 0047 07       		.byte	0x7
- 256 0048 32010000 		.4byte	.LASF3
+ 256 0048 3B010000 		.4byte	.LASF3
  257 004c 03       		.uleb128 0x3
  258 004d 20000000 		.4byte	.LASF5
  259 0051 02       		.byte	0x2
@@ -377,19 +377,19 @@ ARM GAS  C:\Users\adamh\AppData\Local\Temp\ccUDcEBi.s 			page 1
  262 0057 02       		.uleb128 0x2
  263 0058 04       		.byte	0x4
  264 0059 05       		.byte	0x5
- 265 005a 0D020000 		.4byte	.LASF6
+ 265 005a 16020000 		.4byte	.LASF6
  266 005e 02       		.uleb128 0x2
  267 005f 04       		.byte	0x4
  268 0060 07       		.byte	0x7
- 269 0061 20010000 		.4byte	.LASF7
+ 269 0061 29010000 		.4byte	.LASF7
  270 0065 02       		.uleb128 0x2
  271 0066 08       		.byte	0x8
  272 0067 05       		.byte	0x5
- 273 0068 E2010000 		.4byte	.LASF8
+ 273 0068 EB010000 		.4byte	.LASF8
  274 006c 02       		.uleb128 0x2
  275 006d 08       		.byte	0x8
  276 006e 07       		.byte	0x7
- 277 006f 97010000 		.4byte	.LASF9
+ 277 006f A0010000 		.4byte	.LASF9
  278 0073 04       		.uleb128 0x4
  279 0074 04       		.byte	0x4
  280 0075 05       		.byte	0x5
@@ -397,42 +397,42 @@ ARM GAS  C:\Users\adamh\AppData\Local\Temp\ccUDcEBi.s 			page 1
  282 007a 02       		.uleb128 0x2
  283 007b 04       		.byte	0x4
  284 007c 07       		.byte	0x7
- 285 007d 83010000 		.4byte	.LASF10
+ 285 007d 8C010000 		.4byte	.LASF10
  286 0081 03       		.uleb128 0x3
- 287 0082 C9010000 		.4byte	.LASF11
+ 287 0082 D2010000 		.4byte	.LASF11
  288 0086 03       		.byte	0x3
  289 0087 20       		.byte	0x20
  290 0088 33000000 		.4byte	0x33
  291 008c 03       		.uleb128 0x3
- 292 008d D1010000 		.4byte	.LASF12
+ 292 008d DA010000 		.4byte	.LASF12
  293 0091 03       		.byte	0x3
  294 0092 2C       		.byte	0x2c
  295 0093 4C000000 		.4byte	0x4c
  296 0097 02       		.uleb128 0x2
  297 0098 04       		.byte	0x4
  298 0099 04       		.byte	0x4
- 299 009a 78000000 		.4byte	.LASF13
+ 299 009a 81000000 		.4byte	.LASF13
  300 009e 02       		.uleb128 0x2
  301 009f 08       		.byte	0x8
  302 00a0 04       		.byte	0x4
- 303 00a1 59010000 		.4byte	.LASF14
+ 303 00a1 62010000 		.4byte	.LASF14
  304 00a5 02       		.uleb128 0x2
  305 00a6 01       		.byte	0x1
-ARM GAS  C:\Users\adamh\AppData\Local\Temp\ccUDcEBi.s 			page 8
+ARM GAS  C:\Users\danie\AppData\Local\Temp\ccgmQat8.s 			page 8
 
 
  306 00a7 08       		.byte	0x8
- 307 00a8 F0010000 		.4byte	.LASF15
+ 307 00a8 F9010000 		.4byte	.LASF15
  308 00ac 02       		.uleb128 0x2
  309 00ad 08       		.byte	0x8
  310 00ae 04       		.byte	0x4
- 311 00af 16020000 		.4byte	.LASF16
+ 311 00af 1F020000 		.4byte	.LASF16
  312 00b3 02       		.uleb128 0x2
  313 00b4 04       		.byte	0x4
  314 00b5 07       		.byte	0x7
- 315 00b6 D9010000 		.4byte	.LASF17
+ 315 00b6 E2010000 		.4byte	.LASF17
  316 00ba 05       		.uleb128 0x5
- 317 00bb 6B000000 		.4byte	.LASF19
+ 317 00bb 74000000 		.4byte	.LASF19
  318 00bf 01       		.byte	0x1
  319 00c0 10       		.byte	0x10
  320 00c1 00000000 		.4byte	.LFB64
@@ -463,7 +463,7 @@ ARM GAS  C:\Users\adamh\AppData\Local\Temp\ccUDcEBi.s 			page 1
  345 00ed 00       		.byte	0
  346 00ee 00       		.byte	0
  347 00ef 08       		.uleb128 0x8
- 348 00f0 60010000 		.4byte	.LASF35
+ 348 00f0 69010000 		.4byte	.LASF35
  349 00f4 01       		.byte	0x1
  350 00f5 16       		.byte	0x16
  351 00f6 47010000 		.4byte	0x147
@@ -478,11 +478,11 @@ ARM GAS  C:\Users\adamh\AppData\Local\Temp\ccUDcEBi.s 			page 1
  360 010e 16       		.byte	0x16
  361 010f 47010000 		.4byte	0x147
  362 0113 00000000 		.4byte	.LLST0
-ARM GAS  C:\Users\adamh\AppData\Local\Temp\ccUDcEBi.s 			page 9
+ARM GAS  C:\Users\danie\AppData\Local\Temp\ccgmQat8.s 			page 9
 
 
  363 0117 0A       		.uleb128 0xa
- 364 0118 41020000 		.4byte	.LASF18
+ 364 0118 4A020000 		.4byte	.LASF18
  365 011c 01       		.byte	0x1
  366 011d 16       		.byte	0x16
  367 011e 73000000 		.4byte	0x73
@@ -518,7 +518,7 @@ ARM GAS  C:\Users\adamh\AppData\Local\Temp\ccUDcEBi.s 			page 1
  397 0148 04       		.byte	0x4
  398 0149 81000000 		.4byte	0x81
  399 014d 05       		.uleb128 0x5
- 400 014e 2E020000 		.4byte	.LASF20
+ 400 014e 37020000 		.4byte	.LASF20
  401 0152 01       		.byte	0x1
  402 0153 25       		.byte	0x25
  403 0154 00000000 		.4byte	.LFB66
@@ -527,7 +527,7 @@ ARM GAS  C:\Users\adamh\AppData\Local\Temp\ccUDcEBi.s 			page 1
  406 015d 9C       		.byte	0x9c
  407 015e 9A010000 		.4byte	0x19a
  408 0162 0A       		.uleb128 0xa
- 409 0163 41020000 		.4byte	.LASF18
+ 409 0163 4A020000 		.4byte	.LASF18
  410 0167 01       		.byte	0x1
  411 0168 25       		.byte	0x25
  412 0169 73000000 		.4byte	0x73
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\adamh\AppData\Local\Temp\ccUDcEBi.s 			page 1
  417 017a 07       		.uleb128 0x7
  418 017b 01       		.uleb128 0x1
  419 017c 50       		.byte	0x50
-ARM GAS  C:\Users\adamh\AppData\Local\Temp\ccUDcEBi.s 			page 10
+ARM GAS  C:\Users\danie\AppData\Local\Temp\ccgmQat8.s 			page 10
 
 
  420 017d 05       		.uleb128 0x5
@@ -565,7 +565,7 @@ ARM GAS  C:\Users\adamh\AppData\Local\Temp\ccUDcEBi.s 			page 1
  441 0198 00       		.byte	0
  442 0199 00       		.byte	0
  443 019a 05       		.uleb128 0x5
- 444 019b 73010000 		.4byte	.LASF21
+ 444 019b 7C010000 		.4byte	.LASF21
  445 019f 01       		.byte	0x1
  446 01a0 2C       		.byte	0x2c
  447 01a1 00000000 		.4byte	.LFB67
@@ -581,31 +581,31 @@ ARM GAS  C:\Users\adamh\AppData\Local\Temp\ccUDcEBi.s 			page 1
  457 01ba 01       		.uleb128 0x1
  458 01bb 50       		.byte	0x50
  459 01bc 0C       		.uleb128 0xc
- 460 01bd 1A010000 		.4byte	.LASF23
+ 460 01bd 23010000 		.4byte	.LASF23
  461 01c1 01       		.byte	0x1
  462 01c2 2C       		.byte	0x2c
  463 01c3 47010000 		.4byte	0x147
  464 01c7 01       		.uleb128 0x1
  465 01c8 51       		.byte	0x51
  466 01c9 0C       		.uleb128 0xc
- 467 01ca 06020000 		.4byte	.LASF24
+ 467 01ca 0F020000 		.4byte	.LASF24
  468 01ce 01       		.byte	0x1
  469 01cf 2C       		.byte	0x2c
  470 01d0 47010000 		.4byte	0x147
  471 01d4 01       		.uleb128 0x1
  472 01d5 52       		.byte	0x52
  473 01d6 0C       		.uleb128 0xc
- 474 01d7 41020000 		.4byte	.LASF18
+ 474 01d7 4A020000 		.4byte	.LASF18
  475 01db 01       		.byte	0x1
  476 01dc 2D       		.byte	0x2d
-ARM GAS  C:\Users\adamh\AppData\Local\Temp\ccUDcEBi.s 			page 11
+ARM GAS  C:\Users\danie\AppData\Local\Temp\ccgmQat8.s 			page 11
 
 
  477 01dd 73000000 		.4byte	0x73
  478 01e1 01       		.uleb128 0x1
  479 01e2 53       		.byte	0x53
  480 01e3 0C       		.uleb128 0xc
- 481 01e4 BC010000 		.4byte	.LASF25
+ 481 01e4 C5010000 		.4byte	.LASF25
  482 01e8 01       		.byte	0x1
  483 01e9 2D       		.byte	0x2d
  484 01ea 73000000 		.4byte	0x73
@@ -621,30 +621,30 @@ ARM GAS  C:\Users\adamh\AppData\Local\Temp\ccUDcEBi.s 			page 1
  494 0200 0E       		.uleb128 0xe
  495 0201 00000000 		.4byte	.LASF26
  496 0205 01       		.byte	0x1
- 497 0206 30       		.byte	0x30
+ 497 0206 32       		.byte	0x32
  498 0207 47010000 		.4byte	0x147
  499 020b 9A000000 		.4byte	.LLST4
  500 020f 0E       		.uleb128 0xe
- 501 0210 7C010000 		.4byte	.LASF27
+ 501 0210 85010000 		.4byte	.LASF27
  502 0214 01       		.byte	0x1
- 503 0215 33       		.byte	0x33
+ 503 0215 36       		.byte	0x36
  504 0216 47010000 		.4byte	0x147
  505 021a C5000000 		.4byte	.LLST5
  506 021e 0D       		.uleb128 0xd
  507 021f 6E00     		.ascii	"n\000"
  508 0221 01       		.byte	0x1
- 509 0222 34       		.byte	0x34
+ 509 0222 37       		.byte	0x37
  510 0223 73000000 		.4byte	0x73
  511 0227 F0000000 		.4byte	.LLST6
  512 022b 0D       		.uleb128 0xd
  513 022c 6B00     		.ascii	"k\000"
  514 022e 01       		.byte	0x1
- 515 022f 35       		.byte	0x35
+ 515 022f 38       		.byte	0x38
  516 0230 73000000 		.4byte	0x73
  517 0234 0F010000 		.4byte	.LLST7
  518 0238 00       		.byte	0
  519 0239 0F       		.uleb128 0xf
- 520 023a 45010000 		.4byte	.LASF28
+ 520 023a 4E010000 		.4byte	.LASF28
  521 023e 04       		.byte	0x4
  522 023f 1207     		.2byte	0x712
  523 0241 45020000 		.4byte	0x245
@@ -658,10 +658,10 @@ ARM GAS  C:\Users\adamh\AppData\Local\Temp\ccUDcEBi.s 			page 1
  531 0258 92       		.byte	0x92
  532 0259 00       		.byte	0
  533 025a 13       		.uleb128 0x13
-ARM GAS  C:\Users\adamh\AppData\Local\Temp\ccUDcEBi.s 			page 12
+ARM GAS  C:\Users\danie\AppData\Local\Temp\ccgmQat8.s 			page 12
 
 
- 534 025b 90010000 		.4byte	.LASF29
+ 534 025b 99010000 		.4byte	.LASF29
  535 025f 01       		.byte	0x1
  536 0260 0A       		.byte	0xa
  537 0261 4A020000 		.4byte	0x24a
@@ -669,11 +669,11 @@ ARM GAS  C:\Users\adamh\AppData\Local\Temp\ccUDcEBi.s 			page 1
  539 0266 03       		.byte	0x3
  540 0267 00000000 		.4byte	insamp
  541 026b 14       		.uleb128 0x14
- 542 026c 52010000 		.4byte	.LASF30
- 543 0270 52010000 		.4byte	.LASF30
+ 542 026c 5B010000 		.4byte	.LASF30
+ 543 0270 5B010000 		.4byte	.LASF30
  544 0274 14       		.uleb128 0x14
- 545 0275 F5010000 		.4byte	.LASF31
- 546 0279 F5010000 		.4byte	.LASF31
+ 545 0275 FE010000 		.4byte	.LASF31
+ 546 0279 FE010000 		.4byte	.LASF31
  547 027d 15       		.uleb128 0x15
  548 027e 07000000 		.4byte	.LASF36
  549 0282 07000000 		.4byte	.LASF36
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\adamh\AppData\Local\Temp\ccUDcEBi.s 			page 1
  588 0021 03       		.uleb128 0x3
  589 0022 0E       		.uleb128 0xe
  590 0023 3A       		.uleb128 0x3a
-ARM GAS  C:\Users\adamh\AppData\Local\Temp\ccUDcEBi.s 			page 13
+ARM GAS  C:\Users\danie\AppData\Local\Temp\ccgmQat8.s 			page 13
 
 
  591 0024 0B       		.uleb128 0xb
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\adamh\AppData\Local\Temp\ccUDcEBi.s 			page 1
  645 005f 00       		.byte	0
  646 0060 02       		.uleb128 0x2
  647 0061 18       		.uleb128 0x18
-ARM GAS  C:\Users\adamh\AppData\Local\Temp\ccUDcEBi.s 			page 14
+ARM GAS  C:\Users\danie\AppData\Local\Temp\ccgmQat8.s 			page 14
 
 
  648 0062 9142     		.uleb128 0x2111
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\adamh\AppData\Local\Temp\ccUDcEBi.s 			page 1
  702 009a 0B       		.uleb128 0xb
  703 009b 49       		.uleb128 0x49
  704 009c 13       		.uleb128 0x13
-ARM GAS  C:\Users\adamh\AppData\Local\Temp\ccUDcEBi.s 			page 15
+ARM GAS  C:\Users\danie\AppData\Local\Temp\ccgmQat8.s 			page 15
 
 
  705 009d 02       		.uleb128 0x2
@@ -898,7 +898,7 @@ ARM GAS  C:\Users\adamh\AppData\Local\Temp\ccUDcEBi.s 			page 1
  759 00d3 02       		.uleb128 0x2
  760 00d4 17       		.uleb128 0x17
  761 00d5 00       		.byte	0
-ARM GAS  C:\Users\adamh\AppData\Local\Temp\ccUDcEBi.s 			page 16
+ARM GAS  C:\Users\danie\AppData\Local\Temp\ccgmQat8.s 			page 16
 
 
  762 00d6 00       		.byte	0
@@ -958,7 +958,7 @@ ARM GAS  C:\Users\adamh\AppData\Local\Temp\ccUDcEBi.s 			page 1
  816 010c 3F       		.uleb128 0x3f
  817 010d 19       		.uleb128 0x19
  818 010e 02       		.uleb128 0x2
-ARM GAS  C:\Users\adamh\AppData\Local\Temp\ccUDcEBi.s 			page 17
+ARM GAS  C:\Users\danie\AppData\Local\Temp\ccgmQat8.s 			page 17
 
 
  819 010f 18       		.uleb128 0x18
@@ -1018,7 +1018,7 @@ ARM GAS  C:\Users\adamh\AppData\Local\Temp\ccUDcEBi.s 			page 1
  873              	.LLST1:
  874 002c 00000000 		.4byte	.LVL1
  875 0030 08000000 		.4byte	.LVL2
-ARM GAS  C:\Users\adamh\AppData\Local\Temp\ccUDcEBi.s 			page 18
+ARM GAS  C:\Users\danie\AppData\Local\Temp\ccgmQat8.s 			page 18
 
 
  876 0034 0100     		.2byte	0x1
@@ -1078,7 +1078,7 @@ ARM GAS  C:\Users\adamh\AppData\Local\Temp\ccUDcEBi.s 			page 1
  930 00b6 5A000000 		.4byte	.LVL22
  931 00ba 0100     		.2byte	0x1
  932 00bc 55       		.byte	0x55
-ARM GAS  C:\Users\adamh\AppData\Local\Temp\ccUDcEBi.s 			page 19
+ARM GAS  C:\Users\danie\AppData\Local\Temp\ccgmQat8.s 			page 19
 
 
  933 00bd 00000000 		.4byte	0
@@ -1138,7 +1138,7 @@ ARM GAS  C:\Users\adamh\AppData\Local\Temp\ccUDcEBi.s 			page 1
  987 001c 18000000 		.4byte	.LFE65-.LFB65
  988 0020 00000000 		.4byte	.LFB66
  989 0024 18000000 		.4byte	.LFE66-.LFB66
-ARM GAS  C:\Users\adamh\AppData\Local\Temp\ccUDcEBi.s 			page 20
+ARM GAS  C:\Users\danie\AppData\Local\Temp\ccgmQat8.s 			page 20
 
 
  990 0028 00000000 		.4byte	.LFB67
@@ -1159,7 +1159,7 @@ ARM GAS  C:\Users\adamh\AppData\Local\Temp\ccUDcEBi.s 			page 1
  1005 0024 00000000 		.4byte	0
  1006              		.section	.debug_line,"",%progbits
  1007              	.Ldebug_line0:
- 1008 0000 40020000 		.section	.debug_str,"MS",%progbits,1
+ 1008 0000 3C020000 		.section	.debug_str,"MS",%progbits,1
  1008      0200BA01 
  1008      00000201 
  1008      FB0E0D00 
@@ -1182,164 +1182,164 @@ ARM GAS  C:\Users\adamh\AppData\Local\Temp\ccUDcEBi.s 			page 1
  1018      7433325F 
  1018      7400
  1019              	.LASF34:
- 1020 002a 433A5C45 		.ascii	"C:\\E3PRJ3\\Software\\Styringsenhed\\ADC\\ADC MK II"
- 1020      3350524A 
- 1020      335C536F 
- 1020      66747761 
- 1020      72655C53 
- 1021 0058 495C4144 		.ascii	"I\\ADC MK III.cydsn\000"
- 1021      43204D4B 
- 1021      20494949 
- 1021      2E637964 
- 1021      736E00
+ 1020 002a 433A5C50 		.ascii	"C:\\PRJ3 git\\E3PRJ3\\Software\\Styringsenhed\\ADC\\"
+ 1020      524A3320 
+ 1020      6769745C 
+ 1020      45335052 
+ 1020      4A335C53 
+ 1021 0058 41444320 		.ascii	"ADC MK III\\ADC MK III.cydsn\000"
+ 1021      4D4B2049 
+ 1021      49495C41 
+ 1021      4443204D 
+ 1021      4B204949 
  1022              	.LASF19:
- 1023 006b 66697246 		.ascii	"firFixedInit\000"
+ 1023 0074 66697246 		.ascii	"firFixedInit\000"
  1023      69786564 
  1023      496E6974 
  1023      00
  1024              	.LASF13:
-ARM GAS  C:\Users\adamh\AppData\Local\Temp\ccUDcEBi.s 			page 21
+ARM GAS  C:\Users\danie\AppData\Local\Temp\ccgmQat8.s 			page 21
 
 
- 1025 0078 666C6F61 		.ascii	"float\000"
+ 1025 0081 666C6F61 		.ascii	"float\000"
  1025      7400
  1026              	.LASF1:
- 1027 007e 756E7369 		.ascii	"unsigned char\000"
+ 1027 0087 756E7369 		.ascii	"unsigned char\000"
  1027      676E6564 
  1027      20636861 
  1027      7200
  1028              	.LASF32:
- 1029 008c 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 1029 0095 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
  1029      43313120 
  1029      352E342E 
  1029      31203230 
  1029      31363036 
- 1030 00bf 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 1030 00c8 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
  1030      20726576 
  1030      6973696F 
  1030      6E203233 
  1030      37373135 
- 1031 00f2 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 1031 00fb 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
  1031      66756E63 
  1031      74696F6E 
  1031      2D736563 
  1031      74696F6E 
  1032              	.LASF23:
- 1033 011a 696E7075 		.ascii	"input\000"
+ 1033 0123 696E7075 		.ascii	"input\000"
  1033      7400
  1034              	.LASF7:
- 1035 0120 6C6F6E67 		.ascii	"long unsigned int\000"
+ 1035 0129 6C6F6E67 		.ascii	"long unsigned int\000"
  1035      20756E73 
  1035      69676E65 
  1035      6420696E 
  1035      7400
  1036              	.LASF3:
- 1037 0132 73686F72 		.ascii	"short unsigned int\000"
+ 1037 013b 73686F72 		.ascii	"short unsigned int\000"
  1037      7420756E 
  1037      7369676E 
  1037      65642069 
  1037      6E7400
  1038              	.LASF28:
- 1039 0145 49544D5F 		.ascii	"ITM_RxBuffer\000"
+ 1039 014e 49544D5F 		.ascii	"ITM_RxBuffer\000"
  1039      52784275 
  1039      66666572 
  1039      00
  1040              	.LASF30:
- 1041 0152 6D656D73 		.ascii	"memset\000"
+ 1041 015b 6D656D73 		.ascii	"memset\000"
  1041      657400
  1042              	.LASF14:
- 1043 0159 646F7562 		.ascii	"double\000"
+ 1043 0162 646F7562 		.ascii	"double\000"
  1043      6C6500
  1044              	.LASF35:
- 1045 0160 66697253 		.ascii	"firStoreNewSamples\000"
+ 1045 0169 66697253 		.ascii	"firStoreNewSamples\000"
  1045      746F7265 
  1045      4E657753 
  1045      616D706C 
  1045      657300
  1046              	.LASF21:
- 1047 0173 66697246 		.ascii	"firFixed\000"
-ARM GAS  C:\Users\adamh\AppData\Local\Temp\ccUDcEBi.s 			page 22
+ 1047 017c 66697246 		.ascii	"firFixed\000"
+ARM GAS  C:\Users\danie\AppData\Local\Temp\ccgmQat8.s 			page 22
 
 
  1047      69786564 
  1047      00
  1048              	.LASF27:
- 1049 017c 696E7075 		.ascii	"inputp\000"
+ 1049 0185 696E7075 		.ascii	"inputp\000"
  1049      747000
  1050              	.LASF10:
- 1051 0183 756E7369 		.ascii	"unsigned int\000"
+ 1051 018c 756E7369 		.ascii	"unsigned int\000"
  1051      676E6564 
  1051      20696E74 
  1051      00
  1052              	.LASF29:
- 1053 0190 696E7361 		.ascii	"insamp\000"
+ 1053 0199 696E7361 		.ascii	"insamp\000"
  1053      6D7000
  1054              	.LASF9:
- 1055 0197 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 1055 01a0 6C6F6E67 		.ascii	"long long unsigned int\000"
  1055      206C6F6E 
  1055      6720756E 
  1055      7369676E 
  1055      65642069 
  1056              	.LASF33:
- 1057 01ae 6669725F 		.ascii	"fir_filter1.c\000"
+ 1057 01b7 6669725F 		.ascii	"fir_filter1.c\000"
  1057      66696C74 
  1057      6572312E 
  1057      6300
  1058              	.LASF25:
- 1059 01bc 66696C74 		.ascii	"filterLength\000"
+ 1059 01c5 66696C74 		.ascii	"filterLength\000"
  1059      65724C65 
  1059      6E677468 
  1059      00
  1060              	.LASF11:
- 1061 01c9 696E7431 		.ascii	"int16_t\000"
+ 1061 01d2 696E7431 		.ascii	"int16_t\000"
  1061      365F7400 
  1062              	.LASF12:
- 1063 01d1 696E7433 		.ascii	"int32_t\000"
+ 1063 01da 696E7433 		.ascii	"int32_t\000"
  1063      325F7400 
  1064              	.LASF17:
- 1065 01d9 73697A65 		.ascii	"sizetype\000"
+ 1065 01e2 73697A65 		.ascii	"sizetype\000"
  1065      74797065 
  1065      00
  1066              	.LASF8:
- 1067 01e2 6C6F6E67 		.ascii	"long long int\000"
+ 1067 01eb 6C6F6E67 		.ascii	"long long int\000"
  1067      206C6F6E 
  1067      6720696E 
  1067      7400
  1068              	.LASF15:
- 1069 01f0 63686172 		.ascii	"char\000"
+ 1069 01f9 63686172 		.ascii	"char\000"
  1069      00
  1070              	.LASF31:
- 1071 01f5 6D656D63 		.ascii	"memcpy\000"
+ 1071 01fe 6D656D63 		.ascii	"memcpy\000"
  1071      707900
  1072              	.LASF2:
- 1073 01fc 73686F72 		.ascii	"short int\000"
+ 1073 0205 73686F72 		.ascii	"short int\000"
  1073      7420696E 
  1073      7400
  1074              	.LASF24:
- 1075 0206 6F757470 		.ascii	"output\000"
+ 1075 020f 6F757470 		.ascii	"output\000"
  1075      757400
-ARM GAS  C:\Users\adamh\AppData\Local\Temp\ccUDcEBi.s 			page 23
+ARM GAS  C:\Users\danie\AppData\Local\Temp\ccgmQat8.s 			page 23
 
 
  1076              	.LASF6:
- 1077 020d 6C6F6E67 		.ascii	"long int\000"
+ 1077 0216 6C6F6E67 		.ascii	"long int\000"
  1077      20696E74 
  1077      00
  1078              	.LASF16:
- 1079 0216 6C6F6E67 		.ascii	"long double\000"
+ 1079 021f 6C6F6E67 		.ascii	"long double\000"
  1079      20646F75 
  1079      626C6500 
  1080              	.LASF0:
- 1081 0222 7369676E 		.ascii	"signed char\000"
+ 1081 022b 7369676E 		.ascii	"signed char\000"
  1081      65642063 
  1081      68617200 
  1082              	.LASF20:
- 1083 022e 6669724D 		.ascii	"firMoveProcSamples\000"
+ 1083 0237 6669724D 		.ascii	"firMoveProcSamples\000"
  1083      6F766550 
  1083      726F6353 
  1083      616D706C 
  1083      657300
  1084              	.LASF18:
- 1085 0241 6C656E67 		.ascii	"length\000"
+ 1085 024a 6C656E67 		.ascii	"length\000"
  1085      746800
  1086              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

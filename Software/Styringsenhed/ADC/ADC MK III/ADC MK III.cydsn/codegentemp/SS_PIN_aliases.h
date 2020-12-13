@@ -1,5 +1,5 @@
 /*******************************************************************************
-* File Name: dma_done_test.h  
+* File Name: SS_PIN.h  
 * Version 2.20
 *
 * Description:
@@ -15,8 +15,8 @@
 * the software package with which this file was provided.
 *******************************************************************************/
 
-#if !defined(CY_PINS_dma_done_test_ALIASES_H) /* Pins dma_done_test_ALIASES_H */
-#define CY_PINS_dma_done_test_ALIASES_H
+#if !defined(CY_PINS_SS_PIN_ALIASES_H) /* Pins SS_PIN_ALIASES_H */
+#define CY_PINS_SS_PIN_ALIASES_H
 
 #include "cytypes.h"
 #include "cyfitter.h"
@@ -25,12 +25,12 @@
 /***************************************
 *              Constants        
 ***************************************/
-#define dma_done_test_0			(dma_done_test__0__PC)
-#define dma_done_test_0_INTR	((uint16)((uint16)0x0001u << dma_done_test__0__SHIFT))
+#define SS_PIN_0			(SS_PIN__0__PC)
+#define SS_PIN_0_INTR	((uint16)((uint16)0x0001u << SS_PIN__0__SHIFT))
 
-#define dma_done_test_INTR_ALL	 ((uint16)(dma_done_test_0_INTR))
+#define SS_PIN_INTR_ALL	 ((uint16)(SS_PIN_0_INTR))
 
-#endif /* End Pins dma_done_test_ALIASES_H */
+#endif /* End Pins SS_PIN_ALIASES_H */
 
 
 /* [] END OF FILE */

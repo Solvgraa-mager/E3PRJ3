@@ -11329,11 +11329,11 @@ ARM GAS  Generated_Source\PSoC5\CyBootAsmGnu.s 			page 1
   32              	.set DMA_1__TERMOUT1_SEL, 0
   33              	
   34              	/* ADC_IN */
-  35              	.set ADC_IN__0__INTTYPE, CYREG_PICU0_INTTYPE0
-  36              	.set ADC_IN__0__MASK, 0x01
-  37              	.set ADC_IN__0__PC, CYREG_PRT0_PC0
+  35              	.set ADC_IN__0__INTTYPE, CYREG_PICU0_INTTYPE7
+  36              	.set ADC_IN__0__MASK, 0x80
+  37              	.set ADC_IN__0__PC, CYREG_PRT0_PC7
   38              	.set ADC_IN__0__PORT, 0
-  39              	.set ADC_IN__0__SHIFT, 0
+  39              	.set ADC_IN__0__SHIFT, 7
   40              	.set ADC_IN__AG, CYREG_PRT0_AG
   41              	.set ADC_IN__AMUX, CYREG_PRT0_AMUX
   42              	.set ADC_IN__BIE, CYREG_PRT0_BIE
@@ -11351,7 +11351,7 @@ ARM GAS  Generated_Source\PSoC5\CyBootAsmGnu.s 			page 1
   51              	.set ADC_IN__INTTYPE_BASE, CYDEV_PICU_INTTYPE_PICU0_BASE
   52              	.set ADC_IN__LCD_COM_SEG, CYREG_PRT0_LCD_COM_SEG
   53              	.set ADC_IN__LCD_EN, CYREG_PRT0_LCD_EN
-  54              	.set ADC_IN__MASK, 0x01
+  54              	.set ADC_IN__MASK, 0x80
   55              	.set ADC_IN__PORT, 0
   56              	.set ADC_IN__PRT, CYREG_PRT0_PRT
   57              	.set ADC_IN__PRTDSI__CAPS_SEL, CYREG_PRT0_CAPS_SEL
@@ -11362,42 +11362,42 @@ ARM GAS  Generated_Source\PSoC5\CyBootAsmGnu.s 			page 1
   62              	.set ADC_IN__PRTDSI__OUT_SEL1, CYREG_PRT0_OUT_SEL1
   63              	.set ADC_IN__PRTDSI__SYNC_OUT, CYREG_PRT0_SYNC_OUT
   64              	.set ADC_IN__PS, CYREG_PRT0_PS
-  65              	.set ADC_IN__SHIFT, 0
+  65              	.set ADC_IN__SHIFT, 7
   66              	.set ADC_IN__SLW, CYREG_PRT0_SLW
   67              	
   68              	/* DAC_OUT */
-  69              	.set DAC_OUT__0__INTTYPE, CYREG_PICU2_INTTYPE5
-  70              	.set DAC_OUT__0__MASK, 0x20
-  71              	.set DAC_OUT__0__PC, CYREG_PRT2_PC5
-  72              	.set DAC_OUT__0__PORT, 2
-  73              	.set DAC_OUT__0__SHIFT, 5
-  74              	.set DAC_OUT__AG, CYREG_PRT2_AG
-  75              	.set DAC_OUT__AMUX, CYREG_PRT2_AMUX
-  76              	.set DAC_OUT__BIE, CYREG_PRT2_BIE
-  77              	.set DAC_OUT__BIT_MASK, CYREG_PRT2_BIT_MASK
-  78              	.set DAC_OUT__BYP, CYREG_PRT2_BYP
-  79              	.set DAC_OUT__CTL, CYREG_PRT2_CTL
-  80              	.set DAC_OUT__DM0, CYREG_PRT2_DM0
-  81              	.set DAC_OUT__DM1, CYREG_PRT2_DM1
-  82              	.set DAC_OUT__DM2, CYREG_PRT2_DM2
-  83              	.set DAC_OUT__DR, CYREG_PRT2_DR
-  84              	.set DAC_OUT__INP_DIS, CYREG_PRT2_INP_DIS
-  85              	.set DAC_OUT__INTTYPE_BASE, CYDEV_PICU_INTTYPE_PICU2_BASE
-  86              	.set DAC_OUT__LCD_COM_SEG, CYREG_PRT2_LCD_COM_SEG
-  87              	.set DAC_OUT__LCD_EN, CYREG_PRT2_LCD_EN
-  88              	.set DAC_OUT__MASK, 0x20
-  89              	.set DAC_OUT__PORT, 2
-  90              	.set DAC_OUT__PRT, CYREG_PRT2_PRT
-  91              	.set DAC_OUT__PRTDSI__CAPS_SEL, CYREG_PRT2_CAPS_SEL
-  92              	.set DAC_OUT__PRTDSI__DBL_SYNC_IN, CYREG_PRT2_DBL_SYNC_IN
-  93              	.set DAC_OUT__PRTDSI__OE_SEL0, CYREG_PRT2_OE_SEL0
-  94              	.set DAC_OUT__PRTDSI__OE_SEL1, CYREG_PRT2_OE_SEL1
-  95              	.set DAC_OUT__PRTDSI__OUT_SEL0, CYREG_PRT2_OUT_SEL0
-  96              	.set DAC_OUT__PRTDSI__OUT_SEL1, CYREG_PRT2_OUT_SEL1
-  97              	.set DAC_OUT__PRTDSI__SYNC_OUT, CYREG_PRT2_SYNC_OUT
-  98              	.set DAC_OUT__PS, CYREG_PRT2_PS
-  99              	.set DAC_OUT__SHIFT, 5
- 100              	.set DAC_OUT__SLW, CYREG_PRT2_SLW
+  69              	.set DAC_OUT__0__INTTYPE, CYREG_PICU3_INTTYPE7
+  70              	.set DAC_OUT__0__MASK, 0x80
+  71              	.set DAC_OUT__0__PC, CYREG_PRT3_PC7
+  72              	.set DAC_OUT__0__PORT, 3
+  73              	.set DAC_OUT__0__SHIFT, 7
+  74              	.set DAC_OUT__AG, CYREG_PRT3_AG
+  75              	.set DAC_OUT__AMUX, CYREG_PRT3_AMUX
+  76              	.set DAC_OUT__BIE, CYREG_PRT3_BIE
+  77              	.set DAC_OUT__BIT_MASK, CYREG_PRT3_BIT_MASK
+  78              	.set DAC_OUT__BYP, CYREG_PRT3_BYP
+  79              	.set DAC_OUT__CTL, CYREG_PRT3_CTL
+  80              	.set DAC_OUT__DM0, CYREG_PRT3_DM0
+  81              	.set DAC_OUT__DM1, CYREG_PRT3_DM1
+  82              	.set DAC_OUT__DM2, CYREG_PRT3_DM2
+  83              	.set DAC_OUT__DR, CYREG_PRT3_DR
+  84              	.set DAC_OUT__INP_DIS, CYREG_PRT3_INP_DIS
+  85              	.set DAC_OUT__INTTYPE_BASE, CYDEV_PICU_INTTYPE_PICU3_BASE
+  86              	.set DAC_OUT__LCD_COM_SEG, CYREG_PRT3_LCD_COM_SEG
+  87              	.set DAC_OUT__LCD_EN, CYREG_PRT3_LCD_EN
+  88              	.set DAC_OUT__MASK, 0x80
+  89              	.set DAC_OUT__PORT, 3
+  90              	.set DAC_OUT__PRT, CYREG_PRT3_PRT
+  91              	.set DAC_OUT__PRTDSI__CAPS_SEL, CYREG_PRT3_CAPS_SEL
+  92              	.set DAC_OUT__PRTDSI__DBL_SYNC_IN, CYREG_PRT3_DBL_SYNC_IN
+  93              	.set DAC_OUT__PRTDSI__OE_SEL0, CYREG_PRT3_OE_SEL0
+  94              	.set DAC_OUT__PRTDSI__OE_SEL1, CYREG_PRT3_OE_SEL1
+  95              	.set DAC_OUT__PRTDSI__OUT_SEL0, CYREG_PRT3_OUT_SEL0
+  96              	.set DAC_OUT__PRTDSI__OUT_SEL1, CYREG_PRT3_OUT_SEL1
+  97              	.set DAC_OUT__PRTDSI__SYNC_OUT, CYREG_PRT3_SYNC_OUT
+  98              	.set DAC_OUT__PS, CYREG_PRT3_PS
+  99              	.set DAC_OUT__SHIFT, 7
+ 100              	.set DAC_OUT__SLW, CYREG_PRT3_SLW
 ARM GAS  Generated_Source\PSoC5\CyBootAsmGnu.s 			page 191
 
 

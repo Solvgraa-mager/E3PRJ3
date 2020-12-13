@@ -16,58 +16,11 @@
 <CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="ADC_TO_FIRFILTERBANK\ADC_TO_FILTERBANK">
 <ExpandedNodeIds>
 <v>ADC_TO_FIRFILTERBANK</v>
-<v>ADC_TO_FIRFILTERBANK\ADC_TO_FILTERBANK</v>
 <v>ADC_TO_FIRFILTERBANK\ADC_TO_FILTERBANK\TopDesign</v>
-<v>ADC_TO_FIRFILTERBANK\ADC_TO_FILTERBANK\ADC_TO_FILTERBANK.cydwr</v>
-<v>ADC_TO_FIRFILTERBANK\ADC_TO_FILTERBANK\ADC_TO_FILTERBANK.cydwr\Pins</v>
-<v>ADC_TO_FIRFILTERBANK\ADC_TO_FILTERBANK\ADC_TO_FILTERBANK.cydwr\Analog</v>
-<v>ADC_TO_FIRFILTERBANK\ADC_TO_FILTERBANK\ADC_TO_FILTERBANK.cydwr\Clocks</v>
-<v>ADC_TO_FIRFILTERBANK\ADC_TO_FILTERBANK\ADC_TO_FILTERBANK.cydwr\Interrupts</v>
-<v>ADC_TO_FIRFILTERBANK\ADC_TO_FILTERBANK\ADC_TO_FILTERBANK.cydwr\DMA</v>
-<v>ADC_TO_FIRFILTERBANK\ADC_TO_FILTERBANK\ADC_TO_FILTERBANK.cydwr\System</v>
-<v>ADC_TO_FIRFILTERBANK\ADC_TO_FILTERBANK\ADC_TO_FILTERBANK.cydwr\Directives</v>
-<v>ADC_TO_FIRFILTERBANK\ADC_TO_FILTERBANK\ADC_TO_FILTERBANK.cydwr\Flash Security</v>
-<v>ADC_TO_FIRFILTERBANK\ADC_TO_FILTERBANK\ADC_TO_FILTERBANK.cydwr\EEPROM</v>
-<v>ADC_TO_FIRFILTERBANK\ADC_TO_FILTERBANK\Header Files</v>
-<v>ADC_TO_FIRFILTERBANK\ADC_TO_FILTERBANK\Header Files\cyapicallbacks.h</v>
-<v>ADC_TO_FIRFILTERBANK\ADC_TO_FILTERBANK\Header Files\encoding.h</v>
-<v>ADC_TO_FIRFILTERBANK\ADC_TO_FILTERBANK\Header Files\fir_filter1.h</v>
-<v>ADC_TO_FIRFILTERBANK\ADC_TO_FILTERBANK\Source Files</v>
-<v>ADC_TO_FIRFILTERBANK\ADC_TO_FILTERBANK\Source Files\encoding.c</v>
-<v>ADC_TO_FIRFILTERBANK\ADC_TO_FILTERBANK\Source Files\fir_filter1.c</v>
-<v>ADC_TO_FIRFILTERBANK\ADC_TO_FILTERBANK\Source Files\main.c</v>
-<v>ADC_TO_FIRFILTERBANK\ADC_TO_FILTERBANK\Generated_Source</v>
-<v>ADC_TO_FIRFILTERBANK\ADC_TO_FILTERBANK\Generated_Source\PSoC5</v>
 </ExpandedNodeIds>
 <VisibleNodeIds>
+<v>ADC_TO_FIRFILTERBANK</v>
 <v>ADC_TO_FIRFILTERBANK\ADC_TO_FILTERBANK</v>
-<v>ADC_TO_FIRFILTERBANK\ADC_TO_FILTERBANK\TopDesign</v>
-<v>ADC_TO_FIRFILTERBANK\ADC_TO_FILTERBANK\ADC_TO_FILTERBANK.cydwr</v>
-<v>ADC_TO_FIRFILTERBANK\ADC_TO_FILTERBANK\ADC_TO_FILTERBANK.cydwr\Pins</v>
-<v>ADC_TO_FIRFILTERBANK\ADC_TO_FILTERBANK\ADC_TO_FILTERBANK.cydwr\Analog</v>
-<v>ADC_TO_FIRFILTERBANK\ADC_TO_FILTERBANK\ADC_TO_FILTERBANK.cydwr\Clocks</v>
-<v>ADC_TO_FIRFILTERBANK\ADC_TO_FILTERBANK\ADC_TO_FILTERBANK.cydwr\Interrupts</v>
-<v>ADC_TO_FIRFILTERBANK\ADC_TO_FILTERBANK\ADC_TO_FILTERBANK.cydwr\DMA</v>
-<v>ADC_TO_FIRFILTERBANK\ADC_TO_FILTERBANK\ADC_TO_FILTERBANK.cydwr\System</v>
-<v>ADC_TO_FIRFILTERBANK\ADC_TO_FILTERBANK\ADC_TO_FILTERBANK.cydwr\Directives</v>
-<v>ADC_TO_FIRFILTERBANK\ADC_TO_FILTERBANK\ADC_TO_FILTERBANK.cydwr\Flash Security</v>
-<v>ADC_TO_FIRFILTERBANK\ADC_TO_FILTERBANK\ADC_TO_FILTERBANK.cydwr\EEPROM</v>
-<v>ADC_TO_FIRFILTERBANK\ADC_TO_FILTERBANK\Header Files</v>
-<v>ADC_TO_FIRFILTERBANK\ADC_TO_FILTERBANK\Header Files\cyapicallbacks.h</v>
-<v>ADC_TO_FIRFILTERBANK\ADC_TO_FILTERBANK\Header Files\encoding.h</v>
-<v>ADC_TO_FIRFILTERBANK\ADC_TO_FILTERBANK\Header Files\fir_filter1.h</v>
-<v>ADC_TO_FIRFILTERBANK\ADC_TO_FILTERBANK\Source Files</v>
-<v>ADC_TO_FIRFILTERBANK\ADC_TO_FILTERBANK\Source Files\encoding.c</v>
-<v>ADC_TO_FIRFILTERBANK\ADC_TO_FILTERBANK\Source Files\fir_filter1.c</v>
-<v>ADC_TO_FIRFILTERBANK\ADC_TO_FILTERBANK\Source Files\main.c</v>
-<v>ADC_TO_FIRFILTERBANK\ADC_TO_FILTERBANK\Generated_Source</v>
-<v>ADC_TO_FIRFILTERBANK\ADC_TO_FILTERBANK\Generated_Source\PSoC5</v>
-<v>ADC_TO_FIRFILTERBANK\ADC_TO_FILTERBANK\Generated_Source\PSoC5\ADC_DelSig_1</v>
-<v>ADC_TO_FIRFILTERBANK\ADC_TO_FILTERBANK\Generated_Source\PSoC5\ADC_DelSig_1_AMux</v>
-<v>ADC_TO_FIRFILTERBANK\ADC_TO_FILTERBANK\Generated_Source\PSoC5\ADC_DelSig_1_Ext_CP_Clk</v>
-<v>ADC_TO_FIRFILTERBANK\ADC_TO_FILTERBANK\Generated_Source\PSoC5\ADC_DelSig_1_IRQ</v>
-<v>ADC_TO_FIRFILTERBANK\ADC_TO_FILTERBANK\Generated_Source\PSoC5\ADC_DelSig_1_theACLK</v>
-<v>ADC_TO_FIRFILTERBANK\ADC_TO_FILTERBANK\Generated_Source\PSoC5\ADC_IN</v>
 </VisibleNodeIds>
 </CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
 <CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="">
@@ -133,6 +86,32 @@
 <VisibleNodeIds>
 <v>ADC_TO_FIRFILTERBANK</v>
 <v>ADC_TO_FIRFILTERBANK\ADC_TO_FILTERBANK</v>
+<v>ADC_TO_FIRFILTERBANK\ADC_TO_FILTERBANK\CortexM3</v>
+<v>ADC_TO_FIRFILTERBANK\ADC_TO_FILTERBANK\CortexM3\ARM_GCC_541</v>
+<v>ADC_TO_FIRFILTERBANK\ADC_TO_FILTERBANK\CortexM3\ARM_GCC_541\Debug</v>
+<v>ADC_TO_FIRFILTERBANK\ADC_TO_FILTERBANK\CortexM3\ARM_GCC_541\Debug\Listing Files</v>
+<v>ADC_TO_FIRFILTERBANK\ADC_TO_FILTERBANK\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_DelSig_1.lst</v>
+<v>ADC_TO_FIRFILTERBANK\ADC_TO_FILTERBANK\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_DelSig_1_AMux.lst</v>
+<v>ADC_TO_FIRFILTERBANK\ADC_TO_FILTERBANK\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_DelSig_1_Ext_CP_Clk.lst</v>
+<v>ADC_TO_FIRFILTERBANK\ADC_TO_FILTERBANK\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_DelSig_1_INT.lst</v>
+<v>ADC_TO_FIRFILTERBANK\ADC_TO_FILTERBANK\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_DelSig_1_IRQ.lst</v>
+<v>ADC_TO_FIRFILTERBANK\ADC_TO_FILTERBANK\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_DelSig_1_PM.lst</v>
+<v>ADC_TO_FIRFILTERBANK\ADC_TO_FILTERBANK\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_DelSig_1_theACLK.lst</v>
+<v>ADC_TO_FIRFILTERBANK\ADC_TO_FILTERBANK\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC_IN.lst</v>
+<v>ADC_TO_FIRFILTERBANK\ADC_TO_FILTERBANK\CortexM3\ARM_GCC_541\Debug\Listing Files\Cm3Start.lst</v>
+<v>ADC_TO_FIRFILTERBANK\ADC_TO_FILTERBANK\CortexM3\ARM_GCC_541\Debug\Listing Files\cy_em_eeprom.lst</v>
+<v>ADC_TO_FIRFILTERBANK\ADC_TO_FILTERBANK\CortexM3\ARM_GCC_541\Debug\Listing Files\CyBootAsmGnu.lst</v>
+<v>ADC_TO_FIRFILTERBANK\ADC_TO_FILTERBANK\CortexM3\ARM_GCC_541\Debug\Listing Files\CyDmac.lst</v>
+<v>ADC_TO_FIRFILTERBANK\ADC_TO_FILTERBANK\CortexM3\ARM_GCC_541\Debug\Listing Files\cyfitter_cfg.lst</v>
+<v>ADC_TO_FIRFILTERBANK\ADC_TO_FILTERBANK\CortexM3\ARM_GCC_541\Debug\Listing Files\CyFlash.lst</v>
+<v>ADC_TO_FIRFILTERBANK\ADC_TO_FILTERBANK\CortexM3\ARM_GCC_541\Debug\Listing Files\CyLib.lst</v>
+<v>ADC_TO_FIRFILTERBANK\ADC_TO_FILTERBANK\CortexM3\ARM_GCC_541\Debug\Listing Files\cymetadata.lst</v>
+<v>ADC_TO_FIRFILTERBANK\ADC_TO_FILTERBANK\CortexM3\ARM_GCC_541\Debug\Listing Files\cyPm.lst</v>
+<v>ADC_TO_FIRFILTERBANK\ADC_TO_FILTERBANK\CortexM3\ARM_GCC_541\Debug\Listing Files\CySpc.lst</v>
+<v>ADC_TO_FIRFILTERBANK\ADC_TO_FILTERBANK\CortexM3\ARM_GCC_541\Debug\Listing Files\cyutils.lst</v>
+<v>ADC_TO_FIRFILTERBANK\ADC_TO_FILTERBANK\CortexM3\ARM_GCC_541\Debug\Listing Files\DAC_OUT.lst</v>
+<v>ADC_TO_FIRFILTERBANK\ADC_TO_FILTERBANK\CortexM3\ARM_GCC_541\Debug\Listing Files\DMA_1_dma.lst</v>
+<v>ADC_TO_FIRFILTERBANK\ADC_TO_FILTERBANK\CortexM3\ARM_GCC_541\Debug\Listing Files\encoding.lst</v>
 </VisibleNodeIds>
 </CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
 </TreeStates>
@@ -183,10 +162,13 @@
 </CyGuid_fdba8dfd-b15b-4469-9bbb-9e40c3e70997>
 <Unloaded />
 <OpenDocs>
+<name v=".\ADC_TO_FILTERBANK.cydsn\encoding.h" />
+<name v=".\ADC_TO_FILTERBANK.cydsn\encoding.c" />
+<name v=".\ADC_TO_FILTERBANK.cydsn\fir_filter1.h" />
 <name v=".\ADC_TO_FILTERBANK.cydsn\fir_filter1.c" />
-<name v=".\ADC_TO_FILTERBANK.cydsn\main.c" />
 <name v=".\ADC_TO_FILTERBANK.cydsn\TopDesign\TopDesign.cysch" />
 <name v=".\ADC_TO_FILTERBANK.cydsn\ADC_TO_FILTERBANK.cydwr" />
+<name v=".\ADC_TO_FILTERBANK.cydsn\main.c" />
 </OpenDocs>
 <OpenDocsLayout><![CDATA[<?xml version="1.0"?><!--
 
@@ -194,7 +176,7 @@
   Copyright (c) 2001-2016 Actipro Software LLC.  All rights reserved.
   http://www.actiprosoftware.com
 
---><DocumentLayout Version="1.0"><LayoutData><TabbedMdiRootContainer Orientation="Horizontal"><TabbedMdiContainer Size="1035, 371" SelectedTabbedMdiWindow="56f5e9e8-0875-4391-af14-9e06020b5ef8"><DocumentWindow Key="C:\Users\danie\OneDrive - Aarhus Universitet\3. semester\eprj3 grp\ADC_TO_FIRFILTERBANK\ADC_TO_FILTERBANK.cydsn\fir_filter1.c" Guid="3ca3c053-e08e-4be4-9771-e719af68d0e5" /><DocumentWindow Key="C:\Users\danie\OneDrive - Aarhus Universitet\3. semester\eprj3 grp\ADC_TO_FIRFILTERBANK\ADC_TO_FILTERBANK.cydsn\main.c" Guid="56f5e9e8-0875-4391-af14-9e06020b5ef8" /><DocumentWindow Key="C:\Users\danie\OneDrive - Aarhus Universitet\3. semester\eprj3 grp\ADC_TO_FIRFILTERBANK\ADC_TO_FILTERBANK.cydsn\TopDesign\TopDesign.cysch" Guid="eceb4372-eda0-42f2-8689-d432182b5eca" /><DocumentWindow Key="C:\Users\danie\OneDrive - Aarhus Universitet\3. semester\eprj3 grp\ADC_TO_FIRFILTERBANK\ADC_TO_FILTERBANK.cydsn\ADC_TO_FILTERBANK.cydwr" Guid="508d7ee9-085e-4fa7-a8ac-5caad0d358a2" /></TabbedMdiContainer></TabbedMdiRootContainer><FloatingContainers /></LayoutData></DocumentLayout>]]></OpenDocsLayout>
+--><DocumentLayout Version="1.0"><LayoutData><TabbedMdiRootContainer Orientation="Horizontal"><TabbedMdiContainer Size="822, 374" SelectedTabbedMdiWindow="47448958-7141-4b66-9919-ff4ded6bc77f"><DocumentWindow Key="C:\PRJ3 git\E3PRJ3\Software\Styringsenhed\ADC\ADC_TO_FIRFILTERBANK\ADC_TO_FILTERBANK.cydsn\encoding.h" Guid="8aae5b71-f749-4a44-ae66-594802a68804" /><DocumentWindow Key="C:\PRJ3 git\E3PRJ3\Software\Styringsenhed\ADC\ADC_TO_FIRFILTERBANK\ADC_TO_FILTERBANK.cydsn\encoding.c" Guid="79720780-76a2-4492-a600-42be36535fa8" /><DocumentWindow Key="C:\PRJ3 git\E3PRJ3\Software\Styringsenhed\ADC\ADC_TO_FIRFILTERBANK\ADC_TO_FILTERBANK.cydsn\fir_filter1.h" Guid="c9da9ad4-c369-4baa-a3b1-bf136b1928b6" /><DocumentWindow Key="C:\PRJ3 git\E3PRJ3\Software\Styringsenhed\ADC\ADC_TO_FIRFILTERBANK\ADC_TO_FILTERBANK.cydsn\fir_filter1.c" Guid="e71afb86-b769-4fb3-8b44-cfd0b068187a" /><DocumentWindow Key="C:\PRJ3 git\E3PRJ3\Software\Styringsenhed\ADC\ADC_TO_FIRFILTERBANK\ADC_TO_FILTERBANK.cydsn\TopDesign\TopDesign.cysch" Guid="47448958-7141-4b66-9919-ff4ded6bc77f" /><DocumentWindow Key="C:\PRJ3 git\E3PRJ3\Software\Styringsenhed\ADC\ADC_TO_FIRFILTERBANK\ADC_TO_FILTERBANK.cydsn\ADC_TO_FILTERBANK.cydwr" Guid="6f3c4e78-737d-4593-a0d4-9a88bfd98c74" /><DocumentWindow Key="C:\PRJ3 git\E3PRJ3\Software\Styringsenhed\ADC\ADC_TO_FIRFILTERBANK\ADC_TO_FILTERBANK.cydsn\main.c" Guid="de9532fa-5d95-44b9-9a76-c69bf000fb80" /><ToolWindow Key="Start Page:bd4649ab-da6b-4d04-a663-c722b8bf99db:Start Page" Guid="f6545309-02d0-488d-a51a-3dba0a87c115" /></TabbedMdiContainer></TabbedMdiRootContainer><FloatingContainers /></LayoutData></DocumentLayout>]]></OpenDocsLayout>
 <config v="" />
 <AutoUpdate v="true" />
 </CyGuid_843a90a4-0c4b-4e44-991d-05e7fb117a21>

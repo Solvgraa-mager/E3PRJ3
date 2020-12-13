@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\adamh\AppData\Local\Temp\ccErvFyL.s 			page 1
+ARM GAS  C:\Users\danie\AppData\Local\Temp\ccIFs4RE.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\adamh\AppData\Local\Temp\ccErvFyL.s 			page 1
   28:Generated_Source\PSoC5/DMA_1_dma.c **** * The following defines are available in Cyfitter.h
   29:Generated_Source\PSoC5/DMA_1_dma.c **** * 
   30:Generated_Source\PSoC5/DMA_1_dma.c **** * 
-ARM GAS  C:\Users\adamh\AppData\Local\Temp\ccErvFyL.s 			page 2
+ARM GAS  C:\Users\danie\AppData\Local\Temp\ccIFs4RE.s 			page 2
 
 
   31:Generated_Source\PSoC5/DMA_1_dma.c **** * 
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\adamh\AppData\Local\Temp\ccErvFyL.s 			page 1
   85:Generated_Source\PSoC5/DMA_1_dma.c **** *   UpperSrcAddress.
   86:Generated_Source\PSoC5/DMA_1_dma.c **** *       
   87:Generated_Source\PSoC5/DMA_1_dma.c **** *       
-ARM GAS  C:\Users\adamh\AppData\Local\Temp\ccErvFyL.s 			page 3
+ARM GAS  C:\Users\danie\AppData\Local\Temp\ccIFs4RE.s 			page 3
 
 
   88:Generated_Source\PSoC5/DMA_1_dma.c **** *   UpperDestAddress.
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\adamh\AppData\Local\Temp\ccErvFyL.s 			page 1
  108:Generated_Source\PSoC5/DMA_1_dma.c ****                                   (uint8)DMA_1__TERMOUT1_SEL,
  109:Generated_Source\PSoC5/DMA_1_dma.c ****                                   (uint8)DMA_1__TERMIN_SEL);
  110:Generated_Source\PSoC5/DMA_1_dma.c **** 
-ARM GAS  C:\Users\adamh\AppData\Local\Temp\ccErvFyL.s 			page 4
+ARM GAS  C:\Users\danie\AppData\Local\Temp\ccIFs4RE.s 			page 4
 
 
  111:Generated_Source\PSoC5/DMA_1_dma.c ****     /* Set the extended address for the transfers */
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\adamh\AppData\Local\Temp\ccErvFyL.s 			page 1
  133:Generated_Source\PSoC5/DMA_1_dma.c **** *   void.
  134:Generated_Source\PSoC5/DMA_1_dma.c **** *
  135:Generated_Source\PSoC5/DMA_1_dma.c **** *******************************************************************/
-ARM GAS  C:\Users\adamh\AppData\Local\Temp\ccErvFyL.s 			page 5
+ARM GAS  C:\Users\danie\AppData\Local\Temp\ccIFs4RE.s 			page 5
 
 
  136:Generated_Source\PSoC5/DMA_1_dma.c **** void DMA_1_DmaRelease(void) 
@@ -284,10 +284,10 @@ ARM GAS  C:\Users\adamh\AppData\Local\Temp\ccErvFyL.s 			page 1
  130 0006 00000000 		.4byte	.Ldebug_abbrev0
  131 000a 04       		.byte	0x4
  132 000b 01       		.uleb128 0x1
- 133 000c 97000000 		.4byte	.LASF24
+ 133 000c 56000000 		.4byte	.LASF24
  134 0010 0C       		.byte	0xc
- 135 0011 8B010000 		.4byte	.LASF25
- 136 0015 42000000 		.4byte	.LASF26
+ 135 0011 4A010000 		.4byte	.LASF25
+ 136 0015 6D010000 		.4byte	.LASF26
  137 0019 00000000 		.4byte	.Ldebug_ranges0+0
  138 001d 00000000 		.4byte	0
  139 0021 00000000 		.4byte	.Ldebug_line0
@@ -298,30 +298,30 @@ ARM GAS  C:\Users\adamh\AppData\Local\Temp\ccErvFyL.s 			page 1
  144 002c 03       		.uleb128 0x3
  145 002d 04       		.byte	0x4
  146 002e 07       		.byte	0x7
-ARM GAS  C:\Users\adamh\AppData\Local\Temp\ccErvFyL.s 			page 6
+ARM GAS  C:\Users\danie\AppData\Local\Temp\ccIFs4RE.s 			page 6
 
 
- 147 002f AE010000 		.4byte	.LASF0
+ 147 002f B7010000 		.4byte	.LASF0
  148 0033 03       		.uleb128 0x3
  149 0034 08       		.byte	0x8
  150 0035 05       		.byte	0x5
- 151 0036 EC010000 		.4byte	.LASF1
+ 151 0036 F5010000 		.4byte	.LASF1
  152 003a 03       		.uleb128 0x3
  153 003b 08       		.byte	0x8
  154 003c 04       		.byte	0x4
- 155 003d 2C020000 		.4byte	.LASF2
+ 155 003d 35020000 		.4byte	.LASF2
  156 0041 03       		.uleb128 0x3
  157 0042 01       		.byte	0x1
  158 0043 06       		.byte	0x6
- 159 0044 38020000 		.4byte	.LASF3
+ 159 0044 41020000 		.4byte	.LASF3
  160 0048 03       		.uleb128 0x3
  161 0049 01       		.byte	0x1
  162 004a 08       		.byte	0x8
- 163 004b 89000000 		.4byte	.LASF4
+ 163 004b 48000000 		.4byte	.LASF4
  164 004f 03       		.uleb128 0x3
  165 0050 02       		.byte	0x2
  166 0051 05       		.byte	0x5
- 167 0052 19020000 		.4byte	.LASF5
+ 167 0052 22020000 		.4byte	.LASF5
  168 0056 03       		.uleb128 0x3
  169 0057 02       		.byte	0x2
  170 0058 07       		.byte	0x7
@@ -329,46 +329,46 @@ ARM GAS  C:\Users\adamh\AppData\Local\Temp\ccErvFyL.s 			page 1
  172 005d 03       		.uleb128 0x3
  173 005e 04       		.byte	0x4
  174 005f 05       		.byte	0x5
- 175 0060 23020000 		.4byte	.LASF7
+ 175 0060 2C020000 		.4byte	.LASF7
  176 0064 03       		.uleb128 0x3
  177 0065 04       		.byte	0x4
  178 0066 07       		.byte	0x7
- 179 0067 30010000 		.4byte	.LASF8
+ 179 0067 EF000000 		.4byte	.LASF8
  180 006b 03       		.uleb128 0x3
  181 006c 08       		.byte	0x8
  182 006d 07       		.byte	0x7
- 183 006e BB010000 		.4byte	.LASF9
+ 183 006e C4010000 		.4byte	.LASF9
  184 0072 03       		.uleb128 0x3
  185 0073 04       		.byte	0x4
  186 0074 07       		.byte	0x7
- 187 0075 E3010000 		.4byte	.LASF10
+ 187 0075 EC010000 		.4byte	.LASF10
  188 0079 03       		.uleb128 0x3
  189 007a 01       		.byte	0x1
  190 007b 08       		.byte	0x8
- 191 007c 14020000 		.4byte	.LASF11
+ 191 007c 1D020000 		.4byte	.LASF11
  192 0080 04       		.uleb128 0x4
- 193 0081 42010000 		.4byte	.LASF12
+ 193 0081 01010000 		.4byte	.LASF12
  194 0085 02       		.byte	0x2
  195 0086 E801     		.2byte	0x1e8
  196 0088 48000000 		.4byte	0x48
  197 008c 04       		.uleb128 0x4
- 198 008d 84010000 		.4byte	.LASF13
+ 198 008d 43010000 		.4byte	.LASF13
  199 0091 02       		.byte	0x2
  200 0092 E901     		.2byte	0x1e9
  201 0094 56000000 		.4byte	0x56
  202 0098 03       		.uleb128 0x3
  203 0099 04       		.byte	0x4
-ARM GAS  C:\Users\adamh\AppData\Local\Temp\ccErvFyL.s 			page 7
+ARM GAS  C:\Users\danie\AppData\Local\Temp\ccIFs4RE.s 			page 7
 
 
  204 009a 04       		.byte	0x4
- 205 009b 83000000 		.4byte	.LASF14
+ 205 009b 42000000 		.4byte	.LASF14
  206 009f 03       		.uleb128 0x3
  207 00a0 08       		.byte	0x8
  208 00a1 04       		.byte	0x4
- 209 00a2 6C010000 		.4byte	.LASF15
+ 209 00a2 2B010000 		.4byte	.LASF15
  210 00a6 05       		.uleb128 0x5
- 211 00a7 58010000 		.4byte	.LASF27
+ 211 00a7 17010000 		.4byte	.LASF27
  212 00ab 01       		.byte	0x1
  213 00ac 61       		.byte	0x61
  214 00ad 80000000 		.4byte	0x80
@@ -378,7 +378,7 @@ ARM GAS  C:\Users\adamh\AppData\Local\Temp\ccErvFyL.s 			page 1
  218 00ba 9C       		.byte	0x9c
  219 00bb 4B010000 		.4byte	0x14b
  220 00bf 06       		.uleb128 0x6
- 221 00c0 25010000 		.4byte	.LASF16
+ 221 00c0 E4000000 		.4byte	.LASF16
  222 00c4 01       		.byte	0x1
  223 00c5 61       		.byte	0x61
  224 00c6 80000000 		.4byte	0x80
@@ -396,7 +396,7 @@ ARM GAS  C:\Users\adamh\AppData\Local\Temp\ccErvFyL.s 			page 1
  236 00e4 8C000000 		.4byte	0x8c
  237 00e8 42000000 		.4byte	.LLST2
  238 00ec 06       		.uleb128 0x6
- 239 00ed D2010000 		.4byte	.LASF19
+ 239 00ed DB010000 		.4byte	.LASF19
  240 00f1 01       		.byte	0x1
  241 00f2 61       		.byte	0x61
  242 00f3 8C000000 		.4byte	0x8c
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\adamh\AppData\Local\Temp\ccErvFyL.s 			page 1
  258 0112 75       		.byte	0x75
  259 0113 00       		.sleb128 0
  260 0114 08       		.uleb128 0x8
-ARM GAS  C:\Users\adamh\AppData\Local\Temp\ccErvFyL.s 			page 8
+ARM GAS  C:\Users\danie\AppData\Local\Temp\ccIFs4RE.s 			page 8
 
 
  261 0115 02       		.uleb128 0x2
@@ -461,7 +461,7 @@ ARM GAS  C:\Users\adamh\AppData\Local\Temp\ccErvFyL.s 			page 1
  298 0149 00       		.byte	0
  299 014a 00       		.byte	0
  300 014b 0A       		.uleb128 0xa
- 301 014c 73010000 		.4byte	.LASF28
+ 301 014c 32010000 		.4byte	.LASF28
  302 0150 01       		.byte	0x1
  303 0151 88       		.byte	0x88
  304 0152 00000000 		.4byte	.LFB1
@@ -474,24 +474,24 @@ ARM GAS  C:\Users\adamh\AppData\Local\Temp\ccErvFyL.s 			page 1
  311 0165 9C010000 		.4byte	0x19c
  312 0169 00       		.byte	0
  313 016a 0C       		.uleb128 0xc
- 314 016b 48010000 		.4byte	.LASF29
+ 314 016b 07010000 		.4byte	.LASF29
  315 016f 01       		.byte	0x1
  316 0170 45       		.byte	0x45
  317 0171 80000000 		.4byte	0x80
-ARM GAS  C:\Users\adamh\AppData\Local\Temp\ccErvFyL.s 			page 9
+ARM GAS  C:\Users\danie\AppData\Local\Temp\ccIFs4RE.s 			page 9
 
 
  318 0175 05       		.uleb128 0x5
  319 0176 03       		.byte	0x3
  320 0177 00000000 		.4byte	DMA_1_DmaHandle
  321 017b 0D       		.uleb128 0xd
- 322 017c 53020000 		.4byte	.LASF20
- 323 0180 53020000 		.4byte	.LASF20
+ 322 017c 5C020000 		.4byte	.LASF20
+ 323 0180 5C020000 		.4byte	.LASF20
  324 0184 03       		.byte	0x3
  325 0185 33       		.byte	0x33
  326 0186 0D       		.uleb128 0xd
- 327 0187 FA010000 		.4byte	.LASF21
- 328 018b FA010000 		.4byte	.LASF21
+ 327 0187 03020000 		.4byte	.LASF21
+ 328 018b 03020000 		.4byte	.LASF21
  329 018f 03       		.byte	0x3
  330 0190 2D       		.byte	0x2d
  331 0191 0D       		.uleb128 0xd
@@ -500,8 +500,8 @@ ARM GAS  C:\Users\adamh\AppData\Local\Temp\ccErvFyL.s 			page 1
  334 019a 03       		.byte	0x3
  335 019b 2C       		.byte	0x2c
  336 019c 0D       		.uleb128 0xd
- 337 019d 44020000 		.4byte	.LASF23
- 338 01a1 44020000 		.4byte	.LASF23
+ 337 019d 4D020000 		.4byte	.LASF23
+ 338 01a1 4D020000 		.4byte	.LASF23
  339 01a5 03       		.byte	0x3
  340 01a6 2A       		.byte	0x2a
  341 01a7 00       		.byte	0
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\adamh\AppData\Local\Temp\ccErvFyL.s 			page 1
  372 001c 00       		.byte	0
  373 001d 00       		.byte	0
  374 001e 03       		.uleb128 0x3
-ARM GAS  C:\Users\adamh\AppData\Local\Temp\ccErvFyL.s 			page 10
+ARM GAS  C:\Users\danie\AppData\Local\Temp\ccIFs4RE.s 			page 10
 
 
  375 001f 24       		.uleb128 0x24
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\adamh\AppData\Local\Temp\ccErvFyL.s 			page 1
  429 0056 0E       		.uleb128 0xe
  430 0057 3A       		.uleb128 0x3a
  431 0058 0B       		.uleb128 0xb
-ARM GAS  C:\Users\adamh\AppData\Local\Temp\ccErvFyL.s 			page 11
+ARM GAS  C:\Users\danie\AppData\Local\Temp\ccIFs4RE.s 			page 11
 
 
  432 0059 3B       		.uleb128 0x3b
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\adamh\AppData\Local\Temp\ccErvFyL.s 			page 1
  486 0096 40       		.uleb128 0x40
  487 0097 18       		.uleb128 0x18
  488 0098 9742     		.uleb128 0x2117
-ARM GAS  C:\Users\adamh\AppData\Local\Temp\ccErvFyL.s 			page 12
+ARM GAS  C:\Users\danie\AppData\Local\Temp\ccIFs4RE.s 			page 12
 
 
  489 009a 19       		.uleb128 0x19
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\adamh\AppData\Local\Temp\ccErvFyL.s 			page 1
  543 0008 0100     		.2byte	0x1
  544 000a 50       		.byte	0x50
  545 000b 1C000000 		.4byte	.LVL4
-ARM GAS  C:\Users\adamh\AppData\Local\Temp\ccErvFyL.s 			page 13
+ARM GAS  C:\Users\danie\AppData\Local\Temp\ccIFs4RE.s 			page 13
 
 
  546 000f 3C000000 		.4byte	.LFE0
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\adamh\AppData\Local\Temp\ccErvFyL.s 			page 1
  600 000a 04       		.byte	0x4
  601 000b 00       		.byte	0
  602 000c 0000     		.2byte	0
-ARM GAS  C:\Users\adamh\AppData\Local\Temp\ccErvFyL.s 			page 14
+ARM GAS  C:\Users\danie\AppData\Local\Temp\ccIFs4RE.s 			page 14
 
 
  603 000e 0000     		.2byte	0
@@ -824,150 +824,150 @@ ARM GAS  C:\Users\adamh\AppData\Local\Temp\ccErvFyL.s 			page 1
  628      7369676E 
  628      65642069 
  628      6E7400
- 629              	.LASF26:
- 630 0042 433A5C45 		.ascii	"C:\\E3PRJ3\\Software\\Styringsenhed\\ADC\\ADC MK II"
- 630      3350524A 
- 630      335C536F 
- 630      66747761 
- 630      72655C53 
- 631 0070 495C4144 		.ascii	"I\\ADC MK III.cydsn\000"
- 631      43204D4B 
- 631      20494949 
- 631      2E637964 
- 631      736E00
- 632              	.LASF14:
- 633 0083 666C6F61 		.ascii	"float\000"
- 633      7400
-ARM GAS  C:\Users\adamh\AppData\Local\Temp\ccErvFyL.s 			page 15
+ 629              	.LASF14:
+ 630 0042 666C6F61 		.ascii	"float\000"
+ 630      7400
+ 631              	.LASF4:
+ 632 0048 756E7369 		.ascii	"unsigned char\000"
+ 632      676E6564 
+ 632      20636861 
+ 632      7200
+ 633              	.LASF24:
+ 634 0056 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 634      43313120 
+ 634      352E342E 
+ 634      31203230 
+ 634      31363036 
+ARM GAS  C:\Users\danie\AppData\Local\Temp\ccIFs4RE.s 			page 15
 
 
- 634              	.LASF4:
- 635 0089 756E7369 		.ascii	"unsigned char\000"
- 635      676E6564 
- 635      20636861 
- 635      7200
- 636              	.LASF24:
- 637 0097 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
- 637      43313120 
- 637      352E342E 
- 637      31203230 
- 637      31363036 
- 638 00ca 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
- 638      20726576 
- 638      6973696F 
- 638      6E203233 
- 638      37373135 
- 639 00fd 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
- 639      66756E63 
- 639      74696F6E 
- 639      2D736563 
- 639      74696F6E 
- 640              	.LASF16:
- 641 0125 42757273 		.ascii	"BurstCount\000"
- 641      74436F75 
- 641      6E7400
- 642              	.LASF8:
- 643 0130 6C6F6E67 		.ascii	"long unsigned int\000"
- 643      20756E73 
- 643      69676E65 
- 643      6420696E 
- 643      7400
- 644              	.LASF12:
- 645 0142 75696E74 		.ascii	"uint8\000"
- 645      3800
- 646              	.LASF29:
- 647 0148 444D415F 		.ascii	"DMA_1_DmaHandle\000"
- 647      315F446D 
- 647      6148616E 
- 647      646C6500 
- 648              	.LASF27:
- 649 0158 444D415F 		.ascii	"DMA_1_DmaInitialize\000"
- 649      315F446D 
- 649      61496E69 
- 649      7469616C 
- 649      697A6500 
- 650              	.LASF15:
- 651 016c 646F7562 		.ascii	"double\000"
- 651      6C6500
- 652              	.LASF28:
- 653 0173 444D415F 		.ascii	"DMA_1_DmaRelease\000"
- 653      315F446D 
- 653      6152656C 
- 653      65617365 
- 653      00
- 654              	.LASF13:
- 655 0184 75696E74 		.ascii	"uint16\000"
- 655      313600
-ARM GAS  C:\Users\adamh\AppData\Local\Temp\ccErvFyL.s 			page 16
+ 635 0089 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 635      20726576 
+ 635      6973696F 
+ 635      6E203233 
+ 635      37373135 
+ 636 00bc 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 636      66756E63 
+ 636      74696F6E 
+ 636      2D736563 
+ 636      74696F6E 
+ 637              	.LASF16:
+ 638 00e4 42757273 		.ascii	"BurstCount\000"
+ 638      74436F75 
+ 638      6E7400
+ 639              	.LASF8:
+ 640 00ef 6C6F6E67 		.ascii	"long unsigned int\000"
+ 640      20756E73 
+ 640      69676E65 
+ 640      6420696E 
+ 640      7400
+ 641              	.LASF12:
+ 642 0101 75696E74 		.ascii	"uint8\000"
+ 642      3800
+ 643              	.LASF29:
+ 644 0107 444D415F 		.ascii	"DMA_1_DmaHandle\000"
+ 644      315F446D 
+ 644      6148616E 
+ 644      646C6500 
+ 645              	.LASF27:
+ 646 0117 444D415F 		.ascii	"DMA_1_DmaInitialize\000"
+ 646      315F446D 
+ 646      61496E69 
+ 646      7469616C 
+ 646      697A6500 
+ 647              	.LASF15:
+ 648 012b 646F7562 		.ascii	"double\000"
+ 648      6C6500
+ 649              	.LASF28:
+ 650 0132 444D415F 		.ascii	"DMA_1_DmaRelease\000"
+ 650      315F446D 
+ 650      6152656C 
+ 650      65617365 
+ 650      00
+ 651              	.LASF13:
+ 652 0143 75696E74 		.ascii	"uint16\000"
+ 652      313600
+ 653              	.LASF25:
+ 654 014a 47656E65 		.ascii	"Generated_Source\\PSoC5\\DMA_1_dma.c\000"
+ 654      72617465 
+ 654      645F536F 
+ 654      75726365 
+ 654      5C50536F 
+ 655              	.LASF26:
+ 656 016d 433A5C50 		.ascii	"C:\\PRJ3 git\\E3PRJ3\\Software\\Styringsenhed\\ADC\\"
+ 656      524A3320 
+ 656      6769745C 
+ 656      45335052 
+ARM GAS  C:\Users\danie\AppData\Local\Temp\ccIFs4RE.s 			page 16
 
 
- 656              	.LASF25:
- 657 018b 47656E65 		.ascii	"Generated_Source\\PSoC5\\DMA_1_dma.c\000"
- 657      72617465 
- 657      645F536F 
- 657      75726365 
- 657      5C50536F 
+ 656      4A335C53 
+ 657 019b 41444320 		.ascii	"ADC MK III\\ADC MK III.cydsn\000"
+ 657      4D4B2049 
+ 657      49495C41 
+ 657      4443204D 
+ 657      4B204949 
  658              	.LASF0:
- 659 01ae 756E7369 		.ascii	"unsigned int\000"
+ 659 01b7 756E7369 		.ascii	"unsigned int\000"
  659      676E6564 
  659      20696E74 
  659      00
  660              	.LASF9:
- 661 01bb 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 661 01c4 6C6F6E67 		.ascii	"long long unsigned int\000"
  661      206C6F6E 
  661      6720756E 
  661      7369676E 
  661      65642069 
  662              	.LASF19:
- 663 01d2 55707065 		.ascii	"UpperDestAddress\000"
+ 663 01db 55707065 		.ascii	"UpperDestAddress\000"
  663      72446573 
  663      74416464 
  663      72657373 
  663      00
  664              	.LASF10:
- 665 01e3 73697A65 		.ascii	"sizetype\000"
+ 665 01ec 73697A65 		.ascii	"sizetype\000"
  665      74797065 
  665      00
  666              	.LASF1:
- 667 01ec 6C6F6E67 		.ascii	"long long int\000"
+ 667 01f5 6C6F6E67 		.ascii	"long long int\000"
  667      206C6F6E 
  667      6720696E 
  667      7400
  668              	.LASF21:
- 669 01fa 4379446D 		.ascii	"CyDmaChSetExtendedAddress\000"
+ 669 0203 4379446D 		.ascii	"CyDmaChSetExtendedAddress\000"
  669      61436853 
  669      65744578 
  669      74656E64 
  669      65644164 
  670              	.LASF11:
- 671 0214 63686172 		.ascii	"char\000"
+ 671 021d 63686172 		.ascii	"char\000"
  671      00
  672              	.LASF5:
- 673 0219 73686F72 		.ascii	"short int\000"
+ 673 0222 73686F72 		.ascii	"short int\000"
  673      7420696E 
  673      7400
  674              	.LASF7:
- 675 0223 6C6F6E67 		.ascii	"long int\000"
+ 675 022c 6C6F6E67 		.ascii	"long int\000"
  675      20696E74 
  675      00
  676              	.LASF2:
- 677 022c 6C6F6E67 		.ascii	"long double\000"
+ 677 0235 6C6F6E67 		.ascii	"long double\000"
  677      20646F75 
  677      626C6500 
  678              	.LASF3:
- 679 0238 7369676E 		.ascii	"signed char\000"
+ 679 0241 7369676E 		.ascii	"signed char\000"
  679      65642063 
  679      68617200 
-ARM GAS  C:\Users\adamh\AppData\Local\Temp\ccErvFyL.s 			page 17
+ARM GAS  C:\Users\danie\AppData\Local\Temp\ccIFs4RE.s 			page 17
 
 
  680              	.LASF23:
- 681 0244 4379446D 		.ascii	"CyDmaChDisable\000"
+ 681 024d 4379446D 		.ascii	"CyDmaChDisable\000"
  681      61436844 
  681      69736162 
  681      6C6500
  682              	.LASF20:
- 683 0253 4379446D 		.ascii	"CyDmaChSetConfiguration\000"
+ 683 025c 4379446D 		.ascii	"CyDmaChSetConfiguration\000"
  683      61436853 
  683      6574436F 
  683      6E666967 
