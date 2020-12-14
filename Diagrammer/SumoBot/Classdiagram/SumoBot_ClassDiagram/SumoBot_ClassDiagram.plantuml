@@ -6,13 +6,13 @@ class UC1 <<controller>>{
     +Run() : int
 }
 
-class Attacksensor<<Boundary>>{
+class AttacksensorIF<<Boundary>>{
     -attackStatus_ : int
     +getAttackStatus() : bool 
 }
 
-class Motor <<Boundary>>{
-    +setDirSpeed(char *speedDir) : void
+class MotorstyringIF <<Boundary>>{
+    +setSpeedDir(char *speedDir) : void
 }
 class CentralComputerIF <<Boundary>>{
     -_dir : int
@@ -21,7 +21,7 @@ class CentralComputerIF <<Boundary>>{
 }
 
 CentralComputerIF -- UC1
-UC1 -- Motor
-UC1 - Attacksensor
+UC1 -- MotorstyringIF
+UC1 - AttacksensorIF
 
 @enduml
