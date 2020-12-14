@@ -1,5 +1,6 @@
 #include "MotorstyringIF.h"
 
+/// MotorstyringIFStart
 MotorstyringIF::MotorstyringIF()
 {
 	// init af gpio porte jævnfør wirinPi
@@ -16,7 +17,9 @@ MotorstyringIF::MotorstyringIF()
 	pwmWrite(26, 0); //reset HardWarePWMvalue
 	pwmWrite(23, 0); //reset HardWarePWMvalue
 }
+/// MotorstyringIFStop
 
+/// setSpeedDirStart
 void MotorstyringIF::setSpeedDir(char *C1)
 {
 		int Derection = 0; int PWM_Size = 0; int ValueDerection = 0; int Angle_Size = 0;     // Sætter værdier til default
@@ -73,3 +76,4 @@ void MotorstyringIF::setSpeedDir(char *C1)
 		pwmWrite(26, MotorV*10);
 		pwmWrite(23, MotorH*10);
 };
+/// setSpeedDirStop
