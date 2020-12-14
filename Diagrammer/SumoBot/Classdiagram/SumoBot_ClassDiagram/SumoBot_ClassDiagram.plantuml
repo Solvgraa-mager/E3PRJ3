@@ -7,19 +7,17 @@ class UC1 <<controller>>{
 }
 
 class Attacksensor<<Boundary>>{
-    -attackStatus : int
+    -attackStatus_ : int
     +getAttackStatus() : bool 
 }
 
 class Motor <<Boundary>>{
-    -dir : int
-    -speed : int
-    +setDirSpeed() : void
+    +setDirSpeed(char *speedDir) : void
 }
 class CentralComputerIF <<Boundary>>{
-    -dir : int
-    -speed : int
-    +getDirSpeed() : int
+    -_dir : int
+    -_speed : int
+    +getDirSpeed() : char[]
 }
 
 CentralComputerIF -- UC1
