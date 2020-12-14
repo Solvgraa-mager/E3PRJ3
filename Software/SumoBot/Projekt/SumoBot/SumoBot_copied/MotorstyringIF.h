@@ -13,5 +13,5 @@ class MotorstyringIF
 {
 public:
 	MotorstyringIF(); //Constructor
-	void setSpeedDir(char *C1);
+	void setSpeedDir(char *speedDir);
 };
