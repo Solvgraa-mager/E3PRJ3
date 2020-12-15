@@ -6,7 +6,7 @@
 class UC1
 {
 public:
-	UC1(string SSID, string passphrase, string IPAddress, string MAC, int TCPClientPort);
+	UC1(string SSID, string passphrase, string IPAddress, string MAC, int playerNr);
 	~UC1();
 	void run();
 private:
