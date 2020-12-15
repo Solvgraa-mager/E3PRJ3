@@ -65,6 +65,7 @@ int TCPClient::receiveMsg(char *buffer, int length)
     if (bytesReceived == -1)
     {
         cout << "There was an error getting response from server\r\n";
+        return -1;
     }
     else
     {

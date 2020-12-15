@@ -9,6 +9,7 @@ SPIMaster::SPIMaster(int channel, int speed, int bufferSize)
 {
 }
 
+/// SendMsgStart
 int SPIMaster::sendMsg(string msg)
 {
 	//Tjek om størrelsen af msg er lig med buffersize
@@ -28,6 +29,7 @@ int SPIMaster::sendMsg(string msg)
 	
 	return 0;
 }
+/// SendMsgStop
 
 int SPIMaster::sendChar(unsigned char msg)
 {
@@ -39,7 +41,7 @@ int SPIMaster::sendChar(unsigned char msg)
 	}
 	return 0;
 }
-
+/// ReceiveMsgStart
 int SPIMaster::receiveMsg(char *buffer, int length)
 {
 	int err = 0; 
@@ -55,7 +57,7 @@ int SPIMaster::receiveMsg(char *buffer, int length)
 	cout << "Received: " << buffer << endl; 
 	return 0;
 }
-
+/// ReceiveMsgStop
 
 
 SPIMaster::~SPIMaster()
