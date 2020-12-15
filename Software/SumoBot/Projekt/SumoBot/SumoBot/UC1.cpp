@@ -28,20 +28,52 @@ void UC1::run()
     char sekvens5[] = { '5','0','|','9','0','\0' };
     char sekvens6[] = { '-','7','7','|','-','5','5','\0' };
 
+    char attacksekvens[] = {'0','|','0','\0' };
+
     while (true)
     {
          //CCIF_->getDirSpeed((ASIF_->getAttackStatus() == true ? "1" : "0"), receiverBuffer, receiverBufferLength); //Send attackStatus, Receive dir|speed.
 
+        if(ASIF_->getAttackStatus() == true)
+        {
+            MSIF_->setSpeedDir(attacksekvens);
+            delay(3000);
+        }
         MSIF_->setSpeedDir(sekvens1); //byt til recievebuffer
         delay(1000);
+        if (ASIF_->getAttackStatus() == true)
+        {
+            MSIF_->setSpeedDir(attacksekvens);
+            delay(3000);
+        }
         MSIF_->setSpeedDir(sekvens2);
         delay(1000);
+        if (ASIF_->getAttackStatus() == true)
+        {
+            MSIF_->setSpeedDir(attacksekvens);
+            delay(3000);
+        }
         MSIF_->setSpeedDir(sekvens3);
         delay(1000);
+        if (ASIF_->getAttackStatus() == true)
+        {
+            MSIF_->setSpeedDir(attacksekvens);
+            delay(3000);
+        }
         MSIF_->setSpeedDir(sekvens4);
         delay(1000);
+        if (ASIF_->getAttackStatus() == true)
+        {
+            MSIF_->setSpeedDir(attacksekvens);
+            delay(3000);
+        }
         MSIF_->setSpeedDir(sekvens5);
         delay(1000);
+        if (ASIF_->getAttackStatus() == true)
+        {
+            MSIF_->setSpeedDir(attacksekvens);
+            delay(3000);
+        }
         MSIF_->setSpeedDir(sekvens6);
         delay(1000);
     }
