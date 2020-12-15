@@ -1,0 +1,23 @@
+@startuml
+actor Players #red
+actor SumoBot1 #green
+participant CC
+actor SumoBot2 #yellow
+!pragma teoz true
+
+skinparam MaxMessageSize 100000
+
+title Initialization
+
+{start} Players -> CC : Turn on
+CC -> CC : Start Wifi
+CC -> CC : Open Server for SumoBot 1
+{end}  Players -> SumoBot1: Turn on 
+{start} <-> {end} : Min. 20 sec
+SumoBot1 -> CC : Connect to Server
+CC -> CC : Open Server for SumoBot 2
+{end2} Players -> SumoBot2 : Turn on
+{end} <-> {end2} : \n\n\n\nMin. 20 sec
+SumoBot2 -> CC : Connect to server
+CC --> Players : Display "Welcome to Robo-Sumo-Battle"
+@enduml

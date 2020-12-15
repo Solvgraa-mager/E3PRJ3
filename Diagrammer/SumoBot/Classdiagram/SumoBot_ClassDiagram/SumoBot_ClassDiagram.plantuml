@@ -1,0 +1,27 @@
+@startuml
+title SumoBot Class diagram for UC1
+
+
+class UC1 <<controller>>{
+    +Run() : int
+}
+
+class AttacksensorIF<<Boundary>>{
+    -attackStatus_ : int
+    +getAttackStatus() : bool 
+}
+
+class MotorstyringIF <<Boundary>>{
+    +setSpeedDir(char *speedDir) : void
+}
+class CentralComputerIF <<Boundary>>{
+    -_dir : int
+    -_speed : int
+    +getDirSpeed() : char[]
+}
+
+CentralComputerIF -- UC1
+UC1 -- MotorstyringIF
+UC1 - AttacksensorIF
+
+@enduml

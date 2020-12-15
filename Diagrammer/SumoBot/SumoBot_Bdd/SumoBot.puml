@@ -6,16 +6,16 @@ title BDD for SumoBot
 object "SumoBot" as SumoBot
 object "Motor" as Motor
 object "Motorstyring" as Motorstyring
+object "Attacksensor" as attacksensor
+object "Microcontroller" as MC
 object "PSU" as PSU
 object "Batteri" as Batteri
-object "MicroController" as muc_SumoBot
-object "Attack Sensor" as AttackSensor
 
 SumoBot *-- Motor
-  Motor *-- Motorstyring
+SumoBot *-- Batteri
+SumoBot *-- MC
+SumoBot *-- Motorstyring
 SumoBot *-- PSU
-  PSU *-- Batteri
-SumoBot *-- muc_SumoBot
-SumoBot *-- AttackSensor
+SumoBot *-- attacksensor
 
 @enduml

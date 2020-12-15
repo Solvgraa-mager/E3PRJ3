@@ -1,0 +1,23 @@
+@startuml
+
+participant UC1
+participant CentralComputerIF
+participant MotorstyringIF
+participant AttackSensorIF
+
+'Punkt 3'
+loop While true
+        UC1 -> AttackSensorIF: getAttackStatus()
+        activate AttackSensorIF
+        AttackSensorIF --> UC1: AttackStatus
+        deactivate AttackSensorIF
+        UC1 -> CentralComputerIF : getDirSpeed(AttackStatus)
+        activate CentralComputerIF
+        CentralComputerIF --> UC1: speedDir
+        deactivate CentralComputerIF
+        UC1 -> MotorstyringIF: setSpeedDir(speedDir)
+        activate MotorstyringIF
+        deactivate MotorstyringIF
+end loop 
+
+@enduml

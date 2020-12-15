@@ -2,6 +2,7 @@
 #include "Wifi.h"
 #include "TCPServer.h"
 
+/// ConstructorStart
 UC1::UC1(Startknap* SK, Display* D)
 {
 	//Connect to wifi
@@ -10,18 +11,22 @@ UC1::UC1(Startknap* SK, Display* D)
 	cout << "Hotspot made" << endl;
 	
 	//Assign attributes
-	_SK = SK; 
-	_D = D; 
+	_SK = SK; _D = D; 
 
 	//Define initial direction, speed, attack-status,SumoBot ptr and Styringsenheds ptr for UC1
-	_player[0] = { 0,0,false,new SumoBot(3,1),new Styringsenhed(1,10000,1)};
-	_player[1] = { 0,0,false,new SumoBot(3,2),new Styringsenhed(2,10000,1)};
+	_player[0] = { 0,0,false,new SumoBot(3,1),new Styringsenhed(0,10000,1)};
+	_player[1] = { 0,0,false,new SumoBot(3,2),new Styringsenhed(1,10000,1)};
 	cout << "SumoBot og Styringsenhed constructed" << endl;
 	_D->writeToScreen("Welcome to Robo Sumo Battle");
+	
 }
+/// ConstructorStop
 
+/// UC1RunStart
 void UC1::run()
 {
+	_D->writeToScreen("Press start..");
+	_SK->waitForStart();
 	_D->startCountDown(3);
 
 	//While no players have 0 lives
@@ -37,15 +42,15 @@ void UC1::run()
 			//If attack has happened
 			if (_player[i].attack)
 			{
-				_player[0].SBptr->setDirectionAndSpeed(0,0);
-				_player[1].SBptr->setDirectionAndSpeed(0,0);
+				//Stop alle SumoBots
+				for(int k = 0; k<PLAYER_COUNT; k++)
+					_player[k].SBptr->setDirectionAndSpeed(0,0);
+
 				_player[i].SBptr->substractLife();
+				//lostLife(player, SumoBot1, SumoBot2)
 				_D->lostLife((i+1),_player[i].SBptr, _player[(i ? 0 : 1)].SBptr);
 				_player[i].attack = false;
 				break;
-				_D->writeToScreen("Press start..");
-				_SK->waitForStart();
-				_D->startCountDown(3);
 			}
 		}
 	}
@@ -54,6 +59,7 @@ void UC1::run()
 		(!_player[0].SBptr->getLife() ? 1 :
 		(!_player[1].SBptr->getLife() ? 2 : 0)) );
 }
+/// UC1RunStop
 
 UC1::~UC1()
 {

@@ -6,16 +6,18 @@ SumoBot::SumoBot(int lifes, int player)
 	_lifes = lifes;
 	_direction = 0; _speed = 0; 
 	_attackStatus = false;
-
+/// SumoBotCreateTCPServerStart
 	//Create TCP-Server 
 	_TCPS = new TCPServer();
 	_TCPS->openServer(54000 + player);
 	cout << "SumoBot player " << player << " connected!" << endl;
+/// SumoBotCreateTCPServerStop
 
 }
 
 bool SumoBot::setDirectionAndSpeed(int dir, int speed)
 {
+/// SumoBotSetDirectionAndSpeedStart
 	_direction = dir; 
 	_speed = speed;
 	string divider = "|";
@@ -37,9 +39,11 @@ bool SumoBot::setDirectionAndSpeed(int dir, int speed)
 		return -2;
 	}
 
+	//Retrieve false/true from asci '0'/'1'
 	_attackStatus = attackStatusBuffer[0] - '0';
-	
+
 	return (_attackStatus ? true : false);
+/// SumoBotSetDirectionAndSpeedStop
 }
 
 int SumoBot::substractLife()
