@@ -1,5 +1,4 @@
 #pragma once
-#include <dos.h> //delay function
 #include "AttackSensorIF.h"
 #include "CentralComputerIF.h"
 #include "MotorstyringIF.h"
