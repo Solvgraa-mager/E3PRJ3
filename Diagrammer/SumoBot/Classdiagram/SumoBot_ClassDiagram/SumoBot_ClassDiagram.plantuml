@@ -4,7 +4,7 @@ title SumoBot Class diagram for UC1
 
 class UC1 <<controller>>{
     -*ASIF_ : AttacksensorIF
-    -*CCIF_ : CentralComputer
+    -*CCIF_ : CentralComputerIF
     -*MSIF_ : MotorstyringIF
     +UC1(string, string, string, int)
     +~UC1()
