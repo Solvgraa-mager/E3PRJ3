@@ -17,8 +17,7 @@ int TCPServer::openServer(int port)
     sockaddr_in serverStructure; //create socket object from sock_in stuckaddr_in 
     serverStructure.sin_family = AF_INET; // AF_INET standart is used
     serverStructure.sin_port = htons(port); //insert used port to socket object
-    inet_pton(AF_INET, "0.0.0.0", &serverStructure.sin_addr); //Inet function******
- 
+    inet_pton(AF_INET, "0.0.0.0", &serverStructure.sin_addr); //Inet function
     bind(listening, (sockaddr*)&serverStructure, sizeof(serverStructure));//binding socket to address
 
     // Tell Winsock the socket is for listening
@@ -30,9 +29,7 @@ int TCPServer::openServer(int port)
     socklen_t clientSize = sizeof(client);
     
     cout << "about to accept client on socket" << endl;
-
     clientSocket_ = accept(listening, (sockaddr*)&client, &clientSize);
-
     cout << "accept client on socket" << endl;
 
 //*******************DET SKAL JEG LIGE FATTE**************************

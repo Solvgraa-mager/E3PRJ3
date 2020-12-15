@@ -1,13 +1,15 @@
+/// ConstructorStart
 #include "SPI.h"
 #include "wiringPi/wiringPiSPI.h"
 
-
 SPI::SPI(int channel, int speed, int bufferSize)
 {
-    _fd = wiringPiSPISetup(channel, 10000);
+    _fd = wiringPiSPISetup(channel, speed);
     _buffer_size = bufferSize; 
     _channel = channel; 
 }
+/// ConstructorStop
+
 int SPI::getBufferSize(){
     return _buffer_size;
 }
