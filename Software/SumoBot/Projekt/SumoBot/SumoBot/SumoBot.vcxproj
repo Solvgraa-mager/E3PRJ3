@@ -148,7 +148,8 @@
     <ClCompile Include="TCP.cpp" />
     <ClCompile Include="TCPClient.cpp" />
     <ClCompile Include="TCPServer.cpp" />
-    <ClCompile Include="Test_SB.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="UC1.cpp" />
     <ClCompile Include="Wifi.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -161,6 +162,7 @@
     <ClInclude Include="TCP.h" />
     <ClInclude Include="TCPClient.h" />
     <ClInclude Include="TCPServer.h" />
+    <ClInclude Include="UC1.h" />
     <ClInclude Include="Wifi.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

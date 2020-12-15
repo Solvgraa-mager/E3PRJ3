@@ -39,13 +39,16 @@
     <ClCompile Include="Wifi.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Test_SB.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="AttackSensorIF.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="MotorstyringIF.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="UC1.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -78,6 +81,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="MotorstyringIF.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="UC1.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
