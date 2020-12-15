@@ -7,7 +7,7 @@ object "SumoBot" as SumoBot
 object "Motor" as Motor
 object "Motorstyring" as Motorstyring
 object "Attacksensor" as attacksensor
-object "MicroController" as MC
+object "Microcontroller" as MC
 object "PSU" as PSU
 object "Batteri" as Batteri
 
