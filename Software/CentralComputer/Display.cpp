@@ -25,7 +25,7 @@ Display::Display(int rows, int cols, int bits, int rs, int strb,
 void Display::startCountDown(int count)
 {
 	string msgToSend;
-	for (int i = 0; i < count; i++)
+	for (int i = count; i <= 0; i--)
 	{
 		//Center message on screen
 		msgToSend =to_string(i);
@@ -55,7 +55,6 @@ void Display::showWinner(int winner)
 	string prefix = "Winner is ";
 	string msg = prefix + to_string(winner);
 	writeToScreen(msg);
-	
 }
 
 int Display::writeToScreen(string msg)
@@ -71,22 +70,38 @@ int Display::writeToScreen(string msg)
 	/*                     */	
 	
 	int x, y;
+	//Clear LCD screen
+	lcdClear(_displayfd);
 	//Set LCD cursor to start
-	
-	//lcdHome(_displayfd);
-	for (int i = 0; i >= msg.length(); i++)
-	{
-		//putchar(msg[i]);
+	lcdHome(_displayfd);
 
-		//Update position on display. Change line if x == _cols or new line char.
-		if (x >= _cols || msg[i+1] == '\n')
+	for (int i = 0; i <= msg.length(); i++)
+	{
+		//Null-termination = done
+		if (msg[i] == '\0')
+		{
+			break;
+		}
+		//End of cols = new line
+		if (x > _cols)
+		{
+			y++;
+			x = 0;
+			i--;
+		}
+		//New-line char == new line
+		else if (msg[i] == '\n')
 		{
 			y++;
 			x = 0;
 		}
-		//lcdPosition(_displayfd, x++, y);
-
-		//If more than _rows new lines return
+		//Else write to screen on position
+		else
+		{
+			lcdPosition(_displayfd, x, y);
+			putchar(msg[i]);
+			x++;
+		}
 		if (y > _rows)
 		{
 			cout << "DISPLAY: Display only has " << _rows << endl;

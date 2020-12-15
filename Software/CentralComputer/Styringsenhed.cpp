@@ -21,11 +21,6 @@ int Styringsenhed::getDirectionAndSpeed(int& dir, int& speed)
 		cout << "STYRINGSENHED: Receive failed" << endl; 
 		return -1; 
 	}
-	
-	//Input for test purposes
-	cout << "Input char from Styringsenhed "; 
-	cout << ">"; 
-	cin >> receiveBuffer; 
 
 	//Extract direction 
 	dirBuffer = (receiveBuffer & 0b00000111);
@@ -44,11 +39,14 @@ int Styringsenhed::getDirectionAndSpeed(int& dir, int& speed)
 	else if (dirBuffer = 0b001)
 		_direction = 11;
 	else
-		dir = 0; 
-	//Convert right/left byte to +/-. + for right, - for left
-	if (!(receiveBuffer << 3) && 0b10000000)
-		dir *= (-1);
+		_direction = 0; 
 
+	//Convert right/left-byte to +/-.
+	//bit 3 = 1 for right (positive angle), bit 3 = 1 for left (negative angle)
+	if (!(receiveBuffer & (1 << 3)))
+		_direction *= (-1);
+
+/// StyringsenhedExtractSpeedStart
 	//Extract speed
 	speedBuffer = ((receiveBuffer & 0b01110000) >> 4); 
 	if (speedBuffer == 0b111)
@@ -67,9 +65,11 @@ int Styringsenhed::getDirectionAndSpeed(int& dir, int& speed)
 		_speed = 25;
 	else
 		_speed = 0; 
-	//Convert forward/backward byte to +/-. + for forward, - for backwards
-	if (!(receiveBuffer << 7) && 0b10000000)
-		speed *= (-1);
+	//Convert forward/backward byte to +/-.
+	//bit 7 = 1 for forward (positive speed), bit 7 = 0 for backwards (negative speed)
+	if (!(receiveBuffer & (1 << 7)))
+		_speed *= (-1);
+/// StyringsenhedExtractSpeedStop
 
 	cout << "Received speed: " << _speed << " and Direction: "<< _direction << endl;
  	speed = _speed; 

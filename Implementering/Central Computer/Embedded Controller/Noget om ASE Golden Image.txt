@@ -1,0 +1,2 @@
+\textbf{Prerequisites:}
+Startknappen gør brug af indbyggede funktioner i Linux Distributionen "ASE Golden Image"\footnote{Benyttet ifm. undervisning i faget E3HAL. Distributionen er kaldet Poky Linux og kan læses mere om her:  https://www.yoctoproject.org/software-item/poky/} til at skrive til og læse fra GPIO'er. 

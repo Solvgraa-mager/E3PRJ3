@@ -3,3 +3,4 @@ Tests
 Test 1A: Test af Wifi-klassen
 Test 2A: Test af TCPServer og TCPClient klasserne 
 Test 3A: Test af SumoBot klasse send og ComputerIF-klasse modtag
+Test 4A: Test af UC1

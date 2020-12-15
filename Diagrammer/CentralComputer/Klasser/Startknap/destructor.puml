@@ -3,15 +3,14 @@ title Startknap_Destructor
 
 actor UC1 #Red
 participant Startknap
-actor Linux #Red
+actor OS #Red
 
 UC1 -> Startknap : ~Startknap()
-note over Startknap : Freeing GPIOs
 loop for all GPIO's
-Startknap -> Linux : echo gpio1 >/sys/class/gpio/unexport
-Linux --> Startknap : 
-Startknap -> Linux : echo gpio2 >/sys/class/gpio/unexport
-Linux --> Startknap : 
+Startknap -> OS : Free GPIO1
+OS --> Startknap : 
+Startknap -> OS : Free GPIO2
+OS --> Startknap : 
 UC1 <-- Startknap :
 destroy Startknap
 

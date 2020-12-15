@@ -1,0 +1,17 @@
+@startuml
+title Integrationstest_SumoBot
+
+skinparam wrapWidth 40
+skinparam MaxMessageSize 150
+
+actor SumoBot
+
+SumoBot -> SumoBot : CentralComputerIF C1(SSID,passphrase,IPadress,playerNr)
+loop while(1)
+SumoBot -> SumoBot : C1.getDirSpeed(attackStatus, buffer, bufferLength)
+    opt count >= 3
+        SumoBot -> SumoBot : count++
+    end opt
+end loop
+
+@enduml

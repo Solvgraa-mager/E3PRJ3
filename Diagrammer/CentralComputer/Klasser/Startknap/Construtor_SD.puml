@@ -2,15 +2,15 @@
 title Startknap_Constructor
 actor UC1 #Red
 participant Startknap
-actor Linux #Red
+actor OS #Red
 
 UC1 -> Startknap ** : Startknap(Gpio1, Gpio2)
 Startknap ->Startknap : Set GPIO-attributes
 Startknap->Startknap : Set Status = false
-Startknap -> Linux : echo gpio1 >/sys/class/gpio/export
-Linux --> Startknap
-Startknap -> Linux : echo gpio2 >/sys/class/gpio/export
-Linux --> Startknap
+Startknap -> OS : Reserve GPIO1
+OS --> Startknap
+Startknap -> OS : Reserve GPIO2
+OS --> Startknap
 Startknap --> UC1
 
 

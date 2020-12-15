@@ -4,7 +4,7 @@ title SD_writeToScreen
 
 actor UC1 #red
 participant Display
-participant wiringPi
+participant LCD_Driver
 actor LCD #red
 
 skinparam wrapWidth 150
@@ -14,20 +14,20 @@ opt if msg.lenght > (_rows*_cols)
     Display->UC1 : return -1 (Msg to long)
 end
 
-Display -> wiringPi : lcdHome()
-wiringPi -> LCD : Cursor left upper corner
-wiringPi --> Display : 
+Display -> LCD_Driver : lcdHome()
+LCD_Driver -> LCD : Cursor left upper corner
+LCD_Driver --> Display : 
 
 note over Display : x = horisontal cursor position, y = vertical cursor position
 
 loop for each char in string
-    Display -> wiringPi : putChar(char)
-    wiringPi -> LCD : Show char
+    Display -> LCD_Driver : putChar(char)
+    LCD_Driver -> LCD : Show char
     opt if x > _cols || next char == '\ n' 
         Display -> Display : y++
     end opt
-    Display -> wiringPi : lcdPosition(x,y)
-    wiringPi -> LCD : Move cursor to position
+    Display -> LCD_Driver : lcdPosition(x,y)
+    LCD_Driver -> LCD : Move cursor to position
     Display -> Display : x++
     opt if y > _rows
         Display --> UC1 : return -2 (Display only has _rows)
