@@ -74,14 +74,14 @@ void firFixed(int16_t *coeffs, int16_t *input, int16_t *output,
             //for at passe med input samples
             acc += (int32_t)(*coeffp++) * (int32_t)(*inputp--);
         }
-        //overflows sikring max +- 2^14 for akkumulator
+        //overflows sikring
         if ( acc > 0x3fffffff ) {
             acc = 0x3fffffff;
         } else if ( acc < -0x40000000 ) {
             acc = -0x40000000;
         }
         
-        //filter output skaleret fra int32 til uint16_t array
+        //filter output skaleret fra int32_t til int16_t array
         output[n] = (int16_t)(acc >> 15);
     }
 }

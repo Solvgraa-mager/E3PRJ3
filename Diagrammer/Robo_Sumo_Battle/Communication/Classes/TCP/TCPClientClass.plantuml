@@ -7,3 +7,4 @@ class TCPClient{
 	+receiveMsg(char *buffer, int lenght) : int
 	~TCPClient()
 	-socket_
+}

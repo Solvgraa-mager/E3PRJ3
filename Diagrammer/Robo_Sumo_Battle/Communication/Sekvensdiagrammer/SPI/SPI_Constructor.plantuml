@@ -1,0 +1,12 @@
+@startuml
+title SPI::SPI(int channel, int speed, int bufferSize)
+participant UC1
+participant SPI
+participant WiringPi
+
+UC1 -> SPI : SPI(channel, speed, bufferSize)
+SPI -> SPI : channel_ = channel\nclkFrequency = speed\nbufferSize_ = bufferSize
+SPI -> WiringPi : _fd = wiringPiSPISetup(channel_, clkFrequenzy_)
+SPI <-- WiringPi 
+UC1 <-- SPI
+@enduml

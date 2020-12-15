@@ -103,3 +103,6 @@ ylim([-60 0]);
 ylabel('Mag (dB)');
 xlabel('Frekvens');
 title('4x båndpas filtre, blackman vindue, 134 koefficienter');
+
+%% TRÆK KOEFFICIENTER UD
+hamming900_1050_koeff=int16(fir1_1.Numerator*2^15);

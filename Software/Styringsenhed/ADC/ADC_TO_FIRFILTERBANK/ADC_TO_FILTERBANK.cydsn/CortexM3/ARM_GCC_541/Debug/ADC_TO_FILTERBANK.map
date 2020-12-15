@@ -662,7 +662,7 @@ END GROUP
                 0x00000800                ee_size = (CY_APPL_LOADABLE && ! (CY_EE_IN_BTLDR))?(CY_EE_SIZE / CY_APPL_MAX):CY_EE_SIZE
                 [!provide]                PROVIDE (CY_ECC_OFFSET, ecc_offset)
 
-.text           0x00000000     0x124e
+.text           0x00000000     0x1246
  CREATE_OBJECT_SYMBOLS
                 0x00000000                PROVIDE (__cy_interrupt_vector, RomVectors)
  *(.romvectors)
@@ -688,294 +688,295 @@ END GROUP
  .text.cfg_write_bytes32
                 0x00000104       0x34 .\CortexM3\ARM_GCC_541\Debug\cyfitter_cfg.o
  .text.AnalogSetDefault
-                0x00000138       0x64 .\CortexM3\ARM_GCC_541\Debug\cyfitter_cfg.o
+                0x00000138       0x58 .\CortexM3\ARM_GCC_541\Debug\cyfitter_cfg.o
  .text.CYMEMZERO
-                0x0000019c        0xc .\CortexM3\ARM_GCC_541\Debug\cyfitter_cfg.o
+                0x00000190        0xc .\CortexM3\ARM_GCC_541\Debug\cyfitter_cfg.o
  .text.CYCONFIGCPY
-                0x000001a8        0x8 .\CortexM3\ARM_GCC_541\Debug\cyfitter_cfg.o
+                0x0000019c        0x8 .\CortexM3\ARM_GCC_541\Debug\cyfitter_cfg.o
  .text.ClockSetup
-                0x000001b0       0xe4 .\CortexM3\ARM_GCC_541\Debug\cyfitter_cfg.o
+                0x000001a4       0xe4 .\CortexM3\ARM_GCC_541\Debug\cyfitter_cfg.o
  .text.ADC_DelSig_1_AMux_Set
-                0x00000294       0x1c .\CortexM3\ARM_GCC_541\Debug\cyfitter_cfg.o
-                0x00000294                ADC_DelSig_1_AMux_Set
+                0x00000288       0x1c .\CortexM3\ARM_GCC_541\Debug\cyfitter_cfg.o
+                0x00000288                ADC_DelSig_1_AMux_Set
  .text.ADC_DelSig_1_AMux_Unset
-                0x000002b0       0x1c .\CortexM3\ARM_GCC_541\Debug\cyfitter_cfg.o
-                0x000002b0                ADC_DelSig_1_AMux_Unset
+                0x000002a4       0x1c .\CortexM3\ARM_GCC_541\Debug\cyfitter_cfg.o
+                0x000002a4                ADC_DelSig_1_AMux_Unset
  .text.cyfitter_cfg
-                0x000002cc      0x108 .\CortexM3\ARM_GCC_541\Debug\cyfitter_cfg.o
-                0x000002cc                cyfitter_cfg
+                0x000002c0      0x108 .\CortexM3\ARM_GCC_541\Debug\cyfitter_cfg.o
+                0x000002c0                cyfitter_cfg
  .text.IntDefaultHandler
-                0x000003d4       0x10 .\CortexM3\ARM_GCC_541\Debug\Cm3Start.o
-                0x000003d4                IntDefaultHandler
- .text.Start_c  0x000003e4       0x4c .\CortexM3\ARM_GCC_541\Debug\Cm3Start.o
-                0x000003e4                Start_c
+                0x000003c8       0x10 .\CortexM3\ARM_GCC_541\Debug\Cm3Start.o
+                0x000003c8                IntDefaultHandler
+ .text.Start_c  0x000003d8       0x4c .\CortexM3\ARM_GCC_541\Debug\Cm3Start.o
+                0x000003d8                Start_c
  .text.initialize_psoc
-                0x00000430       0x6c .\CortexM3\ARM_GCC_541\Debug\Cm3Start.o
-                0x00000430                initialize_psoc
+                0x00000424       0x6c .\CortexM3\ARM_GCC_541\Debug\Cm3Start.o
+                0x00000424                initialize_psoc
  .text.ADC_DelSig_1_GainCompensation
-                0x0000049c       0xe0 .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(ADC_DelSig_1.o)
+                0x00000490       0xe0 .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(ADC_DelSig_1.o)
  .text.ADC_DelSig_1_SetDSMRef0Reg
-                0x0000057c       0x4c .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(ADC_DelSig_1.o)
+                0x00000570       0x4c .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(ADC_DelSig_1.o)
  .text.ADC_DelSig_1_InitConfig
-                0x000005c8      0x32c .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(ADC_DelSig_1.o)
+                0x000005bc      0x32c .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(ADC_DelSig_1.o)
  .text.ADC_DelSig_1_Init
-                0x000008f4      0x108 .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(ADC_DelSig_1.o)
-                0x000008f4                ADC_DelSig_1_Init
+                0x000008e8      0x108 .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(ADC_DelSig_1.o)
+                0x000008e8                ADC_DelSig_1_Init
  .text.ADC_DelSig_1_Enable
-                0x000009fc       0xd8 .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(ADC_DelSig_1.o)
-                0x000009fc                ADC_DelSig_1_Enable
+                0x000009f0       0xd8 .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(ADC_DelSig_1.o)
+                0x000009f0                ADC_DelSig_1_Enable
  .text.ADC_DelSig_1_Start
-                0x00000ad4       0x28 .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(ADC_DelSig_1.o)
-                0x00000ad4                ADC_DelSig_1_Start
+                0x00000ac8       0x28 .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(ADC_DelSig_1.o)
+                0x00000ac8                ADC_DelSig_1_Start
  .text.ADC_DelSig_1_StartConvert
-                0x00000afc       0x10 .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(ADC_DelSig_1.o)
-                0x00000afc                ADC_DelSig_1_StartConvert
+                0x00000af0       0x10 .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(ADC_DelSig_1.o)
+                0x00000af0                ADC_DelSig_1_StartConvert
  .text.ADC_DelSig_1_ISR1
-                0x00000b0c        0x4 .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(ADC_DelSig_1_INT.o)
-                0x00000b0c                ADC_DelSig_1_ISR1
+                0x00000b00        0x4 .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(ADC_DelSig_1_INT.o)
+                0x00000b00                ADC_DelSig_1_ISR1
  .text.ADC_DelSig_1_ISR2
-                0x00000b10        0x4 .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(ADC_DelSig_1_INT.o)
-                0x00000b10                ADC_DelSig_1_ISR2
+                0x00000b04        0x4 .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(ADC_DelSig_1_INT.o)
+                0x00000b04                ADC_DelSig_1_ISR2
  .text.ADC_DelSig_1_ISR3
-                0x00000b14        0x4 .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(ADC_DelSig_1_INT.o)
-                0x00000b14                ADC_DelSig_1_ISR3
+                0x00000b08        0x4 .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(ADC_DelSig_1_INT.o)
+                0x00000b08                ADC_DelSig_1_ISR3
  .text.ADC_DelSig_1_ISR4
-                0x00000b18        0x4 .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(ADC_DelSig_1_INT.o)
-                0x00000b18                ADC_DelSig_1_ISR4
+                0x00000b0c        0x4 .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(ADC_DelSig_1_INT.o)
+                0x00000b0c                ADC_DelSig_1_ISR4
  .text.Opamp_1_Enable
-                0x00000b1c       0x28 .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(Opamp_1.o)
-                0x00000b1c                Opamp_1_Enable
+                0x00000b10       0x28 .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(Opamp_1.o)
+                0x00000b10                Opamp_1_Enable
  .text.Opamp_1_SetPower
-                0x00000b44       0x1c .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(Opamp_1.o)
-                0x00000b44                Opamp_1_SetPower
+                0x00000b38       0x1c .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(Opamp_1.o)
+                0x00000b38                Opamp_1_SetPower
  .text.Opamp_1_Init
-                0x00000b60        0xc .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(Opamp_1.o)
-                0x00000b60                Opamp_1_Init
+                0x00000b54        0xc .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(Opamp_1.o)
+                0x00000b54                Opamp_1_Init
  .text.Opamp_1_Start
-                0x00000b6c       0x1c .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(Opamp_1.o)
-                0x00000b6c                Opamp_1_Start
+                0x00000b60       0x1c .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(Opamp_1.o)
+                0x00000b60                Opamp_1_Start
  .text.DMA_1_DmaInitialize
-                0x00000b88       0x3c .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(DMA_1_dma.o)
-                0x00000b88                DMA_1_DmaInitialize
+                0x00000b7c       0x3c .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(DMA_1_dma.o)
+                0x00000b7c                DMA_1_DmaInitialize
  .text.ADC_DelSig_1_Ext_CP_Clk_GetDividerRegister
-                0x00000bc4        0xc .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(ADC_DelSig_1_Ext_CP_Clk.o)
-                0x00000bc4                ADC_DelSig_1_Ext_CP_Clk_GetDividerRegister
+                0x00000bb8        0xc .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(ADC_DelSig_1_Ext_CP_Clk.o)
+                0x00000bb8                ADC_DelSig_1_Ext_CP_Clk_GetDividerRegister
  .text.ADC_DelSig_1_Ext_CP_Clk_SetModeRegister
-                0x00000bd0       0x14 .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(ADC_DelSig_1_Ext_CP_Clk.o)
-                0x00000bd0                ADC_DelSig_1_Ext_CP_Clk_SetModeRegister
+                0x00000bc4       0x14 .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(ADC_DelSig_1_Ext_CP_Clk.o)
+                0x00000bc4                ADC_DelSig_1_Ext_CP_Clk_SetModeRegister
  .text.ADC_DelSig_1_Ext_CP_Clk_GetSourceRegister
-                0x00000be4       0x10 .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(ADC_DelSig_1_Ext_CP_Clk.o)
-                0x00000be4                ADC_DelSig_1_Ext_CP_Clk_GetSourceRegister
+                0x00000bd8       0x10 .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(ADC_DelSig_1_Ext_CP_Clk.o)
+                0x00000bd8                ADC_DelSig_1_Ext_CP_Clk_GetSourceRegister
  .text.ADC_DelSig_1_Ext_CP_Clk_SetDividerRegister
-                0x00000bf4       0xd8 .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(ADC_DelSig_1_Ext_CP_Clk.o)
-                0x00000bf4                ADC_DelSig_1_Ext_CP_Clk_SetDividerRegister
+                0x00000be8       0xd8 .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(ADC_DelSig_1_Ext_CP_Clk.o)
+                0x00000be8                ADC_DelSig_1_Ext_CP_Clk_SetDividerRegister
  .text.ADC_DelSig_1_IRQ_Disable
-                0x00000ccc       0x10 .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(ADC_DelSig_1_IRQ.o)
-                0x00000ccc                ADC_DelSig_1_IRQ_Disable
+                0x00000cc0       0x10 .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(ADC_DelSig_1_IRQ.o)
+                0x00000cc0                ADC_DelSig_1_IRQ_Disable
  .text.ADC_DelSig_1_theACLK_GetDividerRegister
-                0x00000cdc        0xc .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(ADC_DelSig_1_theACLK.o)
-                0x00000cdc                ADC_DelSig_1_theACLK_GetDividerRegister
+                0x00000cd0        0xc .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(ADC_DelSig_1_theACLK.o)
+                0x00000cd0                ADC_DelSig_1_theACLK_GetDividerRegister
  .text.ADC_DelSig_1_theACLK_SetModeRegister
-                0x00000ce8       0x14 .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(ADC_DelSig_1_theACLK.o)
-                0x00000ce8                ADC_DelSig_1_theACLK_SetModeRegister
+                0x00000cdc       0x14 .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(ADC_DelSig_1_theACLK.o)
+                0x00000cdc                ADC_DelSig_1_theACLK_SetModeRegister
  .text.ADC_DelSig_1_theACLK_GetSourceRegister
-                0x00000cfc       0x10 .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(ADC_DelSig_1_theACLK.o)
-                0x00000cfc                ADC_DelSig_1_theACLK_GetSourceRegister
+                0x00000cf0       0x10 .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(ADC_DelSig_1_theACLK.o)
+                0x00000cf0                ADC_DelSig_1_theACLK_GetSourceRegister
  .text.ADC_DelSig_1_theACLK_SetDividerRegister
-                0x00000d0c       0xd8 .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(ADC_DelSig_1_theACLK.o)
-                0x00000d0c                ADC_DelSig_1_theACLK_SetDividerRegister
+                0x00000d00       0xd8 .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(ADC_DelSig_1_theACLK.o)
+                0x00000d00                ADC_DelSig_1_theACLK_SetDividerRegister
  .text.CyDmacConfigure
-                0x00000de4       0x34 .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(CyDmac.o)
-                0x00000de4                CyDmacConfigure
+                0x00000dd8       0x34 .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(CyDmac.o)
+                0x00000dd8                CyDmacConfigure
  .text.CyDmaChEnable
-                0x00000e18       0x38 .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(CyDmac.o)
-                0x00000e18                CyDmaChEnable
+                0x00000e0c       0x38 .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(CyDmac.o)
+                0x00000e0c                CyDmaChEnable
  .text.CyDmaChPriority
-                0x00000e50       0x24 .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(CyDmac.o)
-                0x00000e50                CyDmaChPriority
+                0x00000e44       0x24 .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(CyDmac.o)
+                0x00000e44                CyDmaChPriority
  .text.CyDmaChSetExtendedAddress
-                0x00000e74       0x34 .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(CyDmac.o)
-                0x00000e74                CyDmaChSetExtendedAddress
+                0x00000e68       0x34 .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(CyDmac.o)
+                0x00000e68                CyDmaChSetExtendedAddress
  .text.CyDmaChSetInitialTd
-                0x00000ea8       0x18 .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(CyDmac.o)
-                0x00000ea8                CyDmaChSetInitialTd
+                0x00000e9c       0x18 .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(CyDmac.o)
+                0x00000e9c                CyDmaChSetInitialTd
  .text.CyDmaChSetConfiguration
-                0x00000ec0       0x44 .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(CyDmac.o)
-                0x00000ec0                CyDmaChSetConfiguration
+                0x00000eb4       0x44 .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(CyDmac.o)
+                0x00000eb4                CyDmaChSetConfiguration
  .text.CyDmaTdAllocate
-                0x00000f04       0x34 .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(CyDmac.o)
-                0x00000f04                CyDmaTdAllocate
+                0x00000ef8       0x34 .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(CyDmac.o)
+                0x00000ef8                CyDmaTdAllocate
  .text.CyDmaTdSetConfiguration
-                0x00000f38       0x28 .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(CyDmac.o)
-                0x00000f38                CyDmaTdSetConfiguration
+                0x00000f2c       0x28 .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(CyDmac.o)
+                0x00000f2c                CyDmaTdSetConfiguration
  .text.CyDmaTdSetAddress
-                0x00000f60       0x1c .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(CyDmac.o)
-                0x00000f60                CyDmaTdSetAddress
- .text.CyHalt   0x00000f7c        0x4 .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(CyLib.o)
-                0x00000f7c                CyHalt
+                0x00000f54       0x1c .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(CyDmac.o)
+                0x00000f54                CyDmaTdSetAddress
+ .text.CyHalt   0x00000f70        0x4 .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(CyLib.o)
+                0x00000f70                CyHalt
  .text.CyDelayUs
-                0x00000f80       0x14 .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(CyLib.o)
-                0x00000f80                CyDelayUs
+                0x00000f74       0x14 .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(CyLib.o)
+                0x00000f74                CyDelayUs
  .text.CyIntSetVector
-                0x00000f94       0x28 .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(CyLib.o)
-                0x00000f94                CyIntSetVector
+                0x00000f88       0x28 .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(CyLib.o)
+                0x00000f88                CyIntSetVector
  .text.CyIntSetPriority
-                0x00000fbc       0x30 .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(CyLib.o)
-                0x00000fbc                CyIntSetPriority
+                0x00000fb0       0x30 .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(CyLib.o)
+                0x00000fb0                CyIntSetPriority
  .text.ISR_DMA_Done_Interrupt
-                0x00000fec        0x4 .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(ISR_DMA_Done.o)
-                0x00000fec                ISR_DMA_Done_Interrupt
+                0x00000fe0        0x4 .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(ISR_DMA_Done.o)
+                0x00000fe0                ISR_DMA_Done_Interrupt
  .text.ISR_DMA_Done_SetVector
-                0x00000ff0        0xc .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(ISR_DMA_Done.o)
-                0x00000ff0                ISR_DMA_Done_SetVector
+                0x00000fe4        0xc .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(ISR_DMA_Done.o)
+                0x00000fe4                ISR_DMA_Done_SetVector
  .text.ISR_DMA_Done_SetPriority
-                0x00000ffc       0x10 .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(ISR_DMA_Done.o)
-                0x00000ffc                ISR_DMA_Done_SetPriority
+                0x00000ff0       0x10 .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(ISR_DMA_Done.o)
+                0x00000ff0                ISR_DMA_Done_SetPriority
  .text.ISR_DMA_Done_Enable
-                0x0000100c        0xc .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(ISR_DMA_Done.o)
-                0x0000100c                ISR_DMA_Done_Enable
+                0x00001000        0xc .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(ISR_DMA_Done.o)
+                0x00001000                ISR_DMA_Done_Enable
  .text.ISR_DMA_Done_Disable
-                0x00001018        0xc .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(ISR_DMA_Done.o)
-                0x00001018                ISR_DMA_Done_Disable
+                0x0000100c        0xc .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(ISR_DMA_Done.o)
+                0x0000100c                ISR_DMA_Done_Disable
  .text.ISR_DMA_Done_Start
-                0x00001024       0x1c .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(ISR_DMA_Done.o)
-                0x00001024                ISR_DMA_Done_Start
+                0x00001018       0x1c .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(ISR_DMA_Done.o)
+                0x00001018                ISR_DMA_Done_Start
  .text.VDAC8_1_Enable
-                0x00001040       0x1c .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(VDAC8_1.o)
-                0x00001040                VDAC8_1_Enable
+                0x00001034       0x1c .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(VDAC8_1.o)
+                0x00001034                VDAC8_1_Enable
  .text.VDAC8_1_SetSpeed
-                0x0000105c       0x1c .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(VDAC8_1.o)
-                0x0000105c                VDAC8_1_SetSpeed
+                0x00001050       0x1c .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(VDAC8_1.o)
+                0x00001050                VDAC8_1_SetSpeed
  .text.VDAC8_1_SetValue
-                0x00001078        0xc .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(VDAC8_1.o)
-                0x00001078                VDAC8_1_SetValue
+                0x0000106c        0xc .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(VDAC8_1.o)
+                0x0000106c                VDAC8_1_SetValue
  .text.VDAC8_1_DacTrim
-                0x00001084       0x24 .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(VDAC8_1.o)
-                0x00001084                VDAC8_1_DacTrim
+                0x00001078       0x24 .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(VDAC8_1.o)
+                0x00001078                VDAC8_1_DacTrim
  .text.VDAC8_1_SetRange
-                0x000010a8       0x20 .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(VDAC8_1.o)
-                0x000010a8                VDAC8_1_SetRange
+                0x0000109c       0x20 .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(VDAC8_1.o)
+                0x0000109c                VDAC8_1_SetRange
  .text.VDAC8_1_Init
-                0x000010c8       0x20 .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(VDAC8_1.o)
-                0x000010c8                VDAC8_1_Init
+                0x000010bc       0x20 .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(VDAC8_1.o)
+                0x000010bc                VDAC8_1_Init
  .text.VDAC8_1_Start
-                0x000010e8       0x24 .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(VDAC8_1.o)
-                0x000010e8                VDAC8_1_Start
+                0x000010dc       0x24 .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(VDAC8_1.o)
+                0x000010dc                VDAC8_1_Start
  .text.Opamp_2_Enable
-                0x0000110c       0x28 .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(Opamp_2.o)
-                0x0000110c                Opamp_2_Enable
+                0x00001100       0x28 .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(Opamp_2.o)
+                0x00001100                Opamp_2_Enable
  .text.Opamp_2_SetPower
-                0x00001134       0x1c .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(Opamp_2.o)
-                0x00001134                Opamp_2_SetPower
+                0x00001128       0x1c .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(Opamp_2.o)
+                0x00001128                Opamp_2_SetPower
  .text.Opamp_2_Init
-                0x00001150        0xc .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(Opamp_2.o)
-                0x00001150                Opamp_2_Init
+                0x00001144        0xc .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(Opamp_2.o)
+                0x00001144                Opamp_2_Init
  .text.Opamp_2_Start
-                0x0000115c       0x1c .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(Opamp_2.o)
-                0x0000115c                Opamp_2_Start
+                0x00001150       0x1c .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(Opamp_2.o)
+                0x00001150                Opamp_2_Start
  .text.ADC_DelSig_1_AMux_Start
-                0x00001178       0x20 .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(ADC_DelSig_1_AMux.o)
-                0x00001178                ADC_DelSig_1_AMux_Start
+                0x0000116c       0x20 .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(ADC_DelSig_1_AMux.o)
+                0x0000116c                ADC_DelSig_1_AMux_Start
  .text.ADC_DelSig_1_AMux_Select
-                0x00001198       0x18 .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(ADC_DelSig_1_AMux.o)
-                0x00001198                ADC_DelSig_1_AMux_Select
- .text          0x000011b0       0x20 .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(CyBootAsmGnu.o)
-                0x000011b0                CyDelayCycles
-                0x000011c0                CyEnterCriticalSection
-                0x000011c8                CyExitCriticalSection
- .text.__errno  0x000011d0        0xc c:/program files (x86)/cypress/psoc creator/4.3/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-errno.o)
-                0x000011d0                __errno
+                0x0000118c       0x18 .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(ADC_DelSig_1_AMux.o)
+                0x0000118c                ADC_DelSig_1_AMux_Select
+ *fill*         0x000011a4        0x4 
+ .text          0x000011a8       0x20 .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(CyBootAsmGnu.o)
+                0x000011a8                CyDelayCycles
+                0x000011b8                CyEnterCriticalSection
+                0x000011c0                CyExitCriticalSection
+ .text.__errno  0x000011c8        0xc c:/program files (x86)/cypress/psoc creator/4.3/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-errno.o)
+                0x000011c8                __errno
  .text.__libc_init_array
-                0x000011dc       0x4c c:/program files (x86)/cypress/psoc creator/4.3/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-init.o)
-                0x000011dc                __libc_init_array
- .text.memcpy   0x00001228       0x16 c:/program files (x86)/cypress/psoc creator/4.3/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-memcpy-stub.o)
-                0x00001228                memcpy
- .text.memset   0x0000123e       0x10 c:/program files (x86)/cypress/psoc creator/4.3/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-memset.o)
-                0x0000123e                memset
+                0x000011d4       0x4c c:/program files (x86)/cypress/psoc creator/4.3/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-init.o)
+                0x000011d4                __libc_init_array
+ .text.memcpy   0x00001220       0x16 c:/program files (x86)/cypress/psoc creator/4.3/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-memcpy-stub.o)
+                0x00001220                memcpy
+ .text.memset   0x00001236       0x10 c:/program files (x86)/cypress/psoc creator/4.3/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-memset.o)
+                0x00001236                memset
  *(.plt)
  *(.gnu.warning)
  *(.glue_7t)
- .glue_7t       0x0000124e        0x0 linker stubs
+ .glue_7t       0x00001246        0x0 linker stubs
  *(.glue_7)
- .glue_7        0x0000124e        0x0 linker stubs
+ .glue_7        0x00001246        0x0 linker stubs
  *(.vfp11_veneer)
- .vfp11_veneer  0x0000124e        0x0 linker stubs
+ .vfp11_veneer  0x00001246        0x0 linker stubs
  *(.bootloader)
  *(.ARM.extab* .gnu.linkonce.armextab.*)
  *(.gcc_except_table)
 
-.v4_bx          0x00001250        0x0
- .v4_bx         0x00001250        0x0 linker stubs
+.v4_bx          0x00001248        0x0
+ .v4_bx         0x00001248        0x0 linker stubs
 
-.iplt           0x00001250        0x0
- .iplt          0x00001250        0x0 c:/program files (x86)/cypress/psoc creator/4.3/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crtbegin.o
+.iplt           0x00001248        0x0
+ .iplt          0x00001248        0x0 c:/program files (x86)/cypress/psoc creator/4.3/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crtbegin.o
 
 .eh_frame_hdr
  *(.eh_frame_hdr)
 
-.eh_frame       0x00001250        0x4
+.eh_frame       0x00001248        0x4
  *(.eh_frame)
- .eh_frame      0x00001250        0x0 c:/program files (x86)/cypress/psoc creator/4.3/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crtbegin.o
- .eh_frame      0x00001250        0x4 c:/program files (x86)/cypress/psoc creator/4.3/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crtend.o
+ .eh_frame      0x00001248        0x0 c:/program files (x86)/cypress/psoc creator/4.3/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crtbegin.o
+ .eh_frame      0x00001248        0x4 c:/program files (x86)/cypress/psoc creator/4.3/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crtend.o
                 [!provide]                PROVIDE (__exidx_start, .)
 
 .ARM.exidx
  *(.ARM.exidx* .gnu.linkonce.armexidx.*)
-                0x00001254                __exidx_end = .
+                0x0000124c                __exidx_end = .
 
-.rodata         0x00001254       0x74
+.rodata         0x0000124c       0x7c
  *(.rodata .rodata.* .gnu.linkonce.r.*)
- .rodata        0x00001254       0x3c .\CortexM3\ARM_GCC_541\Debug\cyfitter_cfg.o
-                0x00001254                ADC_DelSig_1_AMux__addrTable
-                0x0000125c                ADC_DelSig_1_AMux__maskTable
+ .rodata        0x0000124c       0x42 .\CortexM3\ARM_GCC_541\Debug\cyfitter_cfg.o
+                0x0000124c                ADC_DelSig_1_AMux__addrTable
+                0x00001254                ADC_DelSig_1_AMux__maskTable
  .rodata.str1.1
-                0x00001290        0x2 c:/program files (x86)/cypress/psoc creator/4.3/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-impure.o)
-                0x00001294                . = ALIGN (0x4)
- *fill*         0x00001292        0x2 
+                0x0000128e        0x2 c:/program files (x86)/cypress/psoc creator/4.3/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/../../../../arm-none-eabi/lib/armv7-m\libg_nano.a(lib_a-impure.o)
+                0x00001290                . = ALIGN (0x4)
  *(.init)
- .init          0x00001294        0x4 c:/program files (x86)/cypress/psoc creator/4.3/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crti.o
-                0x00001294                _init
- .init          0x00001298        0x8 c:/program files (x86)/cypress/psoc creator/4.3/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crtn.o
-                0x000012a0                . = ALIGN (0x4)
-                0x000012a0                __preinit_array_start = .
+ .init          0x00001290        0x4 c:/program files (x86)/cypress/psoc creator/4.3/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crti.o
+                0x00001290                _init
+ .init          0x00001294        0x8 c:/program files (x86)/cypress/psoc creator/4.3/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crtn.o
+                0x0000129c                . = ALIGN (0x4)
+                0x0000129c                __preinit_array_start = .
  *(.preinit_array)
-                0x000012a0                __preinit_array_end = .
-                0x000012a0                . = ALIGN (0x4)
-                0x000012a0                __init_array_start = .
+                0x0000129c                __preinit_array_end = .
+                0x0000129c                . = ALIGN (0x4)
+                0x0000129c                __init_array_start = .
  *(SORT(.init_array.*))
  *(.init_array)
- .init_array    0x000012a0        0x4 c:/program files (x86)/cypress/psoc creator/4.3/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crtbegin.o
- .init_array    0x000012a4        0x4 .\CortexM3\ARM_GCC_541\Debug\Cm3Start.o
-                0x000012a8                __init_array_end = .
-                0x000012a8                . = ALIGN (0x4)
+ .init_array    0x0000129c        0x4 c:/program files (x86)/cypress/psoc creator/4.3/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crtbegin.o
+ .init_array    0x000012a0        0x4 .\CortexM3\ARM_GCC_541\Debug\Cm3Start.o
+                0x000012a4                __init_array_end = .
+                0x000012a4                . = ALIGN (0x4)
  *(.fini)
- .fini          0x000012a8        0x4 c:/program files (x86)/cypress/psoc creator/4.3/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crti.o
-                0x000012a8                _fini
- .fini          0x000012ac        0x8 c:/program files (x86)/cypress/psoc creator/4.3/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crtn.o
-                0x000012b4                . = ALIGN (0x4)
-                0x000012b4                __fini_array_start = .
+ .fini          0x000012a4        0x4 c:/program files (x86)/cypress/psoc creator/4.3/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crti.o
+                0x000012a4                _fini
+ .fini          0x000012a8        0x8 c:/program files (x86)/cypress/psoc creator/4.3/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crtn.o
+                0x000012b0                . = ALIGN (0x4)
+                0x000012b0                __fini_array_start = .
  *(.fini_array)
- .fini_array    0x000012b4        0x4 c:/program files (x86)/cypress/psoc creator/4.3/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crtbegin.o
+ .fini_array    0x000012b0        0x4 c:/program files (x86)/cypress/psoc creator/4.3/psoc creator/import/gnu/arm/5.4.1/bin/../lib/gcc/arm-none-eabi/5.4.1/armv7-m/crtbegin.o
  *(SORT(.fini_array.*))
-                0x000012b8                __fini_array_end = .
-                0x000012b8                . = ALIGN (0x4)
+                0x000012b4                __fini_array_end = .
+                0x000012b4                . = ALIGN (0x4)
  *crtbegin.o(.ctors)
  *(EXCLUDE_FILE(*crtend.o) .ctors)
  *(SORT(.ctors.*))
  *crtend.o(.ctors)
-                0x000012b8                . = ALIGN (0x4)
+                0x000012b4                . = ALIGN (0x4)
  *crtbegin.o(.dtors)
  *(EXCLUDE_FILE(*crtend.o) .dtors)
  *(SORT(.dtors.*))
  *crtend.o(.dtors)
-                0x000012b8                . = ALIGN (0x4)
-                0x000012b8                __cy_regions = .
-                0x000012b8        0x4 LONG 0x12c8 __cy_region_init_ram
-                0x000012bc        0x4 LONG 0x1fff80c8 __cy_region_start_data
-                0x000012c0        0x4 LONG 0x88 __cy_region_init_size_ram
-                0x000012c4        0x4 LONG 0xe0 __cy_region_zero_size_ram
-                0x000012c8                __cy_regions_end = .
+                0x000012b4                . = ALIGN (0x4)
+                0x000012b4                __cy_regions = .
+                0x000012b4        0x4 LONG 0x12c8 __cy_region_init_ram
+                0x000012b8        0x4 LONG 0x1fff80c8 __cy_region_start_data
+                0x000012bc        0x4 LONG 0x88 __cy_region_init_size_ram
+                0x000012c0        0x4 LONG 0xe0 __cy_region_zero_size_ram
+                0x000012c4                __cy_regions_end = .
                 0x000012c8                . = ALIGN (0x8)
+ *fill*         0x000012c4        0x4 
                 0x000012c8                _etext = .
 
 .cy_checksum_exclude
@@ -1235,31 +1236,31 @@ END GROUP
  .debug_abbrev  0x0000180e      0x1a7 .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(CyFlash.o)
  .debug_abbrev  0x000019b5      0x194 .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(CySpc.o)
 
-.debug_line     0x00000000     0x2b09
+.debug_line     0x00000000     0x2b07
  *(.debug_line)
  .debug_line    0x00000000      0x271 .\CortexM3\ARM_GCC_541\Debug\main.o
  .debug_line    0x00000271      0x244 .\CortexM3\ARM_GCC_541\Debug\fir_filter1.o
  .debug_line    0x000004b5        0x0 .\CortexM3\ARM_GCC_541\Debug\encoding.o
- .debug_line    0x000004b5      0x209 .\CortexM3\ARM_GCC_541\Debug\cyfitter_cfg.o
- .debug_line    0x000006be      0x141 .\CortexM3\ARM_GCC_541\Debug\cymetadata.o
- .debug_line    0x000007ff      0x241 .\CortexM3\ARM_GCC_541\Debug\Cm3Start.o
- .debug_line    0x00000a40      0x3ee .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(ADC_DelSig_1.o)
- .debug_line    0x00000e2e       0x89 .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(ADC_DelSig_1_INT.o)
- .debug_line    0x00000eb7       0xaa .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(Opamp_1.o)
- .debug_line    0x00000f61       0x82 .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(DMA_1_dma.o)
- .debug_line    0x00000fe3      0x186 .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(ADC_DelSig_1_Ext_CP_Clk.o)
- .debug_line    0x00001169      0x13d .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(ADC_DelSig_1_IRQ.o)
- .debug_line    0x000012a6      0x1a6 .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(ADC_DelSig_1_theACLK.o)
- .debug_line    0x0000144c      0x2e4 .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(CyDmac.o)
- .debug_line    0x00001730      0x816 .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(CyLib.o)
- .debug_line    0x00001f46      0x367 .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(cyPm.o)
- .debug_line    0x000022ad      0x139 .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(ISR_DMA_Done.o)
- .debug_line    0x000023e6       0xe4 .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(VDAC8_1.o)
- .debug_line    0x000024ca       0xaa .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(Opamp_2.o)
- .debug_line    0x00002574       0xb5 .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(ADC_DelSig_1_AMux.o)
- .debug_line    0x00002629       0x66 .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(CyBootAsmGnu.o)
- .debug_line    0x0000268f      0x21a .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(CyFlash.o)
- .debug_line    0x000028a9      0x260 .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(CySpc.o)
+ .debug_line    0x000004b5      0x207 .\CortexM3\ARM_GCC_541\Debug\cyfitter_cfg.o
+ .debug_line    0x000006bc      0x141 .\CortexM3\ARM_GCC_541\Debug\cymetadata.o
+ .debug_line    0x000007fd      0x241 .\CortexM3\ARM_GCC_541\Debug\Cm3Start.o
+ .debug_line    0x00000a3e      0x3ee .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(ADC_DelSig_1.o)
+ .debug_line    0x00000e2c       0x89 .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(ADC_DelSig_1_INT.o)
+ .debug_line    0x00000eb5       0xaa .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(Opamp_1.o)
+ .debug_line    0x00000f5f       0x82 .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(DMA_1_dma.o)
+ .debug_line    0x00000fe1      0x186 .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(ADC_DelSig_1_Ext_CP_Clk.o)
+ .debug_line    0x00001167      0x13d .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(ADC_DelSig_1_IRQ.o)
+ .debug_line    0x000012a4      0x1a6 .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(ADC_DelSig_1_theACLK.o)
+ .debug_line    0x0000144a      0x2e4 .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(CyDmac.o)
+ .debug_line    0x0000172e      0x816 .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(CyLib.o)
+ .debug_line    0x00001f44      0x367 .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(cyPm.o)
+ .debug_line    0x000022ab      0x139 .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(ISR_DMA_Done.o)
+ .debug_line    0x000023e4       0xe4 .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(VDAC8_1.o)
+ .debug_line    0x000024c8       0xaa .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(Opamp_2.o)
+ .debug_line    0x00002572       0xb5 .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(ADC_DelSig_1_AMux.o)
+ .debug_line    0x00002627       0x66 .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(CyBootAsmGnu.o)
+ .debug_line    0x0000268d      0x21a .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(CyFlash.o)
+ .debug_line    0x000028a7      0x260 .\CortexM3\ARM_GCC_541\Debug\ADC_TO_FILTERBANK.a(CySpc.o)
 
 .debug_frame    0x00000000     0x1b4c
  *(.debug_frame)

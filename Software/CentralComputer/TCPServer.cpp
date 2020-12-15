@@ -3,7 +3,7 @@
  
  TCPServer::TCPServer()
 {
-   bytesReceived = 0;
+
 }
 
 int TCPServer::openServer(int port)
@@ -28,6 +28,9 @@ int TCPServer::openServer(int port)
     cout << "Wait for a connection" << endl;
     sockaddr_in client;
     socklen_t clientSize = sizeof(client);
+    
+    cout << "about to accept client on socket" << endl;
+
     clientSocket_ = accept(listening, (sockaddr*)&client, &clientSize);
 
     cout << "accept client on socket" << endl;
