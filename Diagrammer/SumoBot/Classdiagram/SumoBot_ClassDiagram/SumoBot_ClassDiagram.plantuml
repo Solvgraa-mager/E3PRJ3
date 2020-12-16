@@ -21,11 +21,9 @@ class MotorstyringIF <<Boundary>>{
 }
 class CentralComputerIF <<Boundary>>{
     -*_TCPC : TCPClient
-    -_dir : int
-    -_speed : int
     +CentralComputerIF(string, string, string, string, int)
     +~CentralComputerIF()
-    +getDirSpeed(string, cahr*, int) : char[]
+    +getDirSpeed(string, char*, int) : char[]
 }
 
 CentralComputerIF -- UC1
