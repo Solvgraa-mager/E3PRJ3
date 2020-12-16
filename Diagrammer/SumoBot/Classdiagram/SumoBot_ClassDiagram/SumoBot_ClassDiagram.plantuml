@@ -23,7 +23,7 @@ class CentralComputerIF <<Boundary>>{
     -*_TCPC : TCPClient
     +CentralComputerIF(string, string, string, string, int)
     +~CentralComputerIF()
-    +getDirSpeed(string, char*, int) : char[]
+    +getDirSpeed(string, char*, int) : char*
 }
 
 CentralComputerIF -- UC1
