@@ -20,9 +20,10 @@ class MotorstyringIF <<Boundary>>{
     +setSpeedDir(char *speedDir) : void
 }
 class CentralComputerIF <<Boundary>>{
-    -_dir : int
-    -_speed : int
-    +getDirSpeed() : char[]
+    -*_TCPC : TCPClient
+    +CentralComputerIF(string, string, string, string, int)
+    +~CentralComputerIF()
+    +getDirSpeed(string, char*, int) : char[]
 }
 
 CentralComputerIF -- UC1

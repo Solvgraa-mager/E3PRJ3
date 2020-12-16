@@ -8,12 +8,9 @@ class CentralComputerIF
 {
 public:
 	CentralComputerIF(string SSID, string passphrase, string IPAddress, string MAC, int playerNr);
-	int getDirSpeed(string msg, char *buffer, int length);
+	char* getDirSpeed(string msg, char *buffer, int length);
 	~CentralComputerIF();
 private:
-	TCPClient *_TCPC; 
-	int _dir;
-	int _speed;
-	
+	TCPClient *_TCPC;
 };
 

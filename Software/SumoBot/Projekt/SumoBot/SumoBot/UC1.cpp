@@ -23,7 +23,10 @@ void UC1::run()
 
     while (true)
     {
-        CCIF_->getDirSpeed((ASIF_->getAttackStatus() == true ? "1" : "0"), receiverBuffer, receiverBufferLength); //Send attackStatus, Receive dir|speed.
-        MSIF_->setSpeedDir(receiverBuffer); // send speed and dir to motorstyring
+        /// <summary>
+        /// F�rst checkes der om der har v�ret et attack, som sendes med til CC gennem getDirSpeed.
+        /// getDirSpeed returnerer en pointer til arrayet med hastighed & retning, som til sidst sendes med i setSpeedDir i MotorstyringIF.
+        /// </summary>
+        MSIF_->setSpeedDir(CCIF_->getDirSpeed((ASIF_->getAttackStatus() == true ? "1" : "0"), receiverBuffer, receiverBufferLength)); //byt til recievebuffer
     }
 }
