@@ -6,7 +6,7 @@
 using namespace std;
 #define PI 3.1415926
 
-
+ /// CHARALLSTART
 int main()
 {
 	char C1[] = { '-','7','7','|', '-','4','5', '\0' };
@@ -16,7 +16,7 @@ int main()
 	//char C1[] = {,'7','0','|','0', '\0' };
 	//char C1[] = {'1','0','0','|', '0', '\0' };
 
-
+	/// CHARALLSTOP
 
 	int Derection = 0; int PWM_Size = 0; int ValueDerection = 0; int Angle_Size = 0;     // Sætter værdier til default
 	int DerectionAngle = 0; int ValueAngle = 0; int MotorV; int MotorH;
@@ -63,6 +63,7 @@ int main()
 		}
 	}
 	else { MotorH = ValueDerection; MotorV = ValueDerection; }
+	/// PRINTSTART
 
 	cout << "Input1: " << Input1 << endl;
 	cout << "Input2: " << Input2 << endl;
@@ -72,5 +73,6 @@ int main()
 	cout << "PWM motor1: " << MotorV << endl;
 	cout << "PWM motor2: " << MotorH << endl;
 
+	/// PRINTSTOP
 	return 0;
 }
