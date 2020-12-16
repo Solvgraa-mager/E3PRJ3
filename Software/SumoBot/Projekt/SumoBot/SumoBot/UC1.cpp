@@ -24,7 +24,7 @@ void UC1::run()
     while (true)
     {
         /// <summary>
-        /// Først checkes der om der har været et attack, som sendes med til CC gennem getDirSpeed.
+        /// Fï¿½rst checkes der om der har vï¿½ret et attack, som sendes med til CC gennem getDirSpeed.
         /// getDirSpeed returnerer en pointer til arrayet med hastighed & retning, som til sidst sendes med i setSpeedDir i MotorstyringIF.
         /// </summary>
         MSIF_->setSpeedDir(CCIF_->getDirSpeed((ASIF_->getAttackStatus() == true ? "1" : "0"), receiverBuffer, receiverBufferLength)); //byt til recievebuffer
