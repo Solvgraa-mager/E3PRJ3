@@ -1,0 +1,36 @@
+@startuml
+skinparam BackgroundColor transparent
+
+title Systemdiagram
+
+object "Robo-Sumo-Battle" as system
+
+object "Central Computer" as central_computer
+    central_computer : <b>Parts:</b>
+    central_computer : Display
+    central_computer : Embedded Controller
+object "SumoBot" as sumobot
+    sumobot : <b>Parts:</b>
+    sumobot : Motor
+    sumobot : Motorstyring
+    sumobot : PSU
+    sumobot : Batteri
+    sumobot : Microcontroller
+    sumobot : Attack Sensor
+object "Styringsenhed" as styringsenhed
+    styringsenhed : <b>Parts:</b>
+    styringsenhed : Mikrofon
+    styringsenhed : Analog Signalbehandling
+    styringsenhed : Signalkonditionering
+    styringsenhed : ADC
+    styringsenhed : Digital Signal Processing
+    styringsenhed : PSU
+    
+system *--"1" central_computer
+system *--"2" styringsenhed
+system *--"2" sumobot
+
+
+
+
+@enduml

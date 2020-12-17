@@ -8,7 +8,7 @@ Wifi::Wifi()
 	passphrase_ = "00000000";
 	MAC_ 		= "00000000";
 }
-
+/// CreateHotspotStart
 int Wifi::createHotspot(string SSID, string passphrase)
 {
 	SSID_ = SSID; //lager SSID. til f.esk nædlægning af HOTSPOT
@@ -23,7 +23,7 @@ int Wifi::createHotspot(string SSID, string passphrase)
 
 	return 0;
 }
-
+/// CreateHotspotStop
 int Wifi::closeHotspot()
 {
 	
@@ -35,7 +35,7 @@ int Wifi::closeHotspot()
 }
 
 
-
+/// ConnectToWifiStart
 int Wifi::connectToWifi(string SSID, string passphrase, string MAC)
 {
 	SSID_ = SSID; 				//Gemmer SSID
@@ -64,6 +64,7 @@ int Wifi::connectToWifi(string SSID, string passphrase, string MAC)
 	
 	return 0;
 }
+/// ConnectToWifiStop
 
 int Wifi::disconnectToWifi()
 {
@@ -74,10 +75,11 @@ int Wifi::disconnectToWifi()
 		string SumoBot_hex = "53756d6f426f74"; //Text to Hex value. SumoBot = 53756d6f426f74
 		err = system(("connmanctl disconnect wifi_"+MAC_+SumoBot_hex"__managed_psk").c_str()); //connman connect to hotspot
 		if ((err == -1) || (err == 127)) 
+		return -2
 	}
 	else
 	{
-		return -2;
+		return -1
 	}
 	
 	return 0;

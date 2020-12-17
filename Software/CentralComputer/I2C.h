@@ -5,8 +5,8 @@ class I2C :
 {
 public:
 	I2C();
-	int send(string msg);
-	int receive();
+	int sendMsg(string msg);
+	int receiveMsg();
 	~I2C();
 private:
 	int SDA_Gipos;

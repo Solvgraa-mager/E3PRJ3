@@ -4,12 +4,12 @@ I2C::I2C()
 {
 }
 
-int I2C::send(string msg)
+int I2C::sendMsg(string msg)
 {
 	return 0;
 }
 
-int I2C::receive()
+int I2C::receiveMsg()
 {
 	return 0;
 }
