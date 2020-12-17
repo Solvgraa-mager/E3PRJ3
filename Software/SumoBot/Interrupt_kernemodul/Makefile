@@ -7,7 +7,7 @@ default:
 
 else
 
-	obj-m := SW2Driver_interrupt.o
+	obj-m := AttackSensor_kernelModule.o
 	ccflags-y := -std=gnu99 -Wno-declaration-after-statement -Werror
 
 endif

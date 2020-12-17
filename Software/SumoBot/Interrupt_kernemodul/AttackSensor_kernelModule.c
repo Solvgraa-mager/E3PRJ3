@@ -4,34 +4,32 @@
 #include <linux/device.h>
 #include <linux/uaccess.h>
 #include <linux/module.h>
-
 #include <linux/interrupt.h>
 #include <linux/wait.h>
 #include <linux/sched.h>
 
-
-#define SW2_MAJOR 57
-#define SW2_MINOR 1
+#define ATTACK_MAJOR 57
+#define ATTACK_MINOR 1
 #define NO_MINORS 1
-#define gpio_no_SW 16
+#define Attack_GPIO 16
 
 static int devno;
 static struct cdev my_cdev;
 static int IRQline;
 struct file_operations my_fops;
-static int interrupts = 0;
+static int interrupts = 0; //Global varibel, reseted
 
 static DECLARE_WAIT_QUEUE_HEAD(wq);
 
 MODULE_LICENSE ("GPL");
-MODULE_AUTHOR("Simon");
-MODULE_DESCRIPTION("Driver_SW2_rpi");
+MODULE_AUTHOR("Gruppe6");
+MODULE_DESCRIPTION("Interrupt_Driver_SumoBot");
 
 //Interrupt Handler
 
 static irqreturn_t mygpio_isr(int irq, void *dev_id) {
 	interrupts++;
-    printk(KERN_ALERT "Interrupt accured, global varible incremented by 1, currently interrupts is %i\n", interrupts);
+    printk(KERN_ALERT "Interrupt accured, global varible incremented by 1, currently interrupts %d\n", interrupts);
   return IRQ_HANDLED;
 }
 
@@ -39,7 +37,7 @@ static int mygpio_init(void)
  {
     int error;
     // Request GPIO
-    error = gpio_request(gpio_no_SW, "SW2");
+    error = gpio_request(Attack_GPIO, "Attack_driver");
     if (error < 0)
         {
         printk("error in GPIO request\n");
@@ -47,17 +45,17 @@ static int mygpio_init(void)
         }
 
     // Set GPIO direction (in or out)
-    error = gpio_direction_input(gpio_no_SW);
+    error = gpio_direction_input(Attack_GPIO);
     if (error < 0)
     {
         printk("error in direction\n");
         goto error_gpio_direction_input;
     }
-    // Make device no (vælg - Enten bruger I statisk eller også bruger I dynamisk major
-    devno = MKDEV(SW2_MAJOR, SW2_MINOR);
+    // Make device no
+    devno = MKDEV(ATTACK_MAJOR, ATTACK_MINOR);
 
      // Register Device
-    error = register_chrdev_region(devno, NO_MINORS, "SW2");
+    error = register_chrdev_region(devno, NO_MINORS, "Attack_driver");
     if (error < 0)
     {
         printk("error in char dev register\n");
@@ -75,15 +73,12 @@ static int mygpio_init(void)
     }
 
     //Requester IRQ linje
-    IRQline = gpio_to_irq(gpio_no_SW);
+    IRQline = gpio_to_irq(Attack_GPIO);
     printk("IRQline to request: %i\n", IRQline);
 
     error = request_irq(IRQline, mygpio_isr, IRQF_TRIGGER_FALLING, "GpioInt", NULL);
-    
-    printk(KERN_ALERT "Currently number of interrupts: %i", interrupts);
 
     printk("IRQline requested: %i \nrequest_isr returned: %i\n", IRQline, error);
-    
 
     return 0;
 
@@ -94,7 +89,7 @@ static int mygpio_init(void)
     unregister_chrdev_region(devno, NO_MINORS);
 
     error_gpio_direction_input:
-    gpio_free(gpio_no_SW);
+    gpio_free(Attack_GPIO);
 
     error_pgio_request:
 
@@ -111,7 +106,7 @@ static void mygpio_exit(void)
     unregister_chrdev_region(devno, NO_MINORS);
 
     // Free GPIO
-    gpio_free(gpio_no_SW);
+    gpio_free(Attack_GPIO);
 
     //Release ISRLine
     free_irq(IRQline, NULL);
