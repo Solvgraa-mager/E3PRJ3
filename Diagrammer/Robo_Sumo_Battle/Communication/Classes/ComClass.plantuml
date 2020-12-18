@@ -73,26 +73,6 @@ Class SPISlave{
 	+receiveMsg(char *buffer, int length) : int
 	~SPISlave()
 }
-class I2C{
-    -SDA_Gpio
-    -SCL_Gpio
-    -clkFrequency
-}
-class I2CMaster{
-    +I2CMaster();
-    +sendMsg(string msg) override int
-	+receiveMsg(char *buffer, int length) int
-    -address[MAX_CLIENT_COUNT] : int 
-    ~I2CMaster();
-    -clientCount : int 
-}
-class I2CSlave{
-    +I2CSlave()
-    +sendMsg(string msg)
-    +receiveMsg(char *buffer, int length)
-    ~I2CSlave()
-    -address int
-}
 
 Communication <|- Wifi
 Wifi <|- TCP
@@ -101,8 +81,5 @@ TCP <|-- TCPClient
 TCP <|--TCPServer
 SPI <|--SPIMaster
 SPI <|--SPISlave
-Communication <|--I2C
-I2C <|-- I2CMaster
-I2C <|-- I2CSlave
 
 @enduml

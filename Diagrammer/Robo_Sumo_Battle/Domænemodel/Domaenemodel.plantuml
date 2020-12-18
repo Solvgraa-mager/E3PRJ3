@@ -1,45 +1,40 @@
 @startuml
-title Domæneanalyse for UC1 + UC2
+title Domæneanalyse for UC1
 
 
-class Joystick
 class Mikrofon
 class Startknap
 
 class Attacksensor{ 
-bool Activated
+bool attackStatus
 }
 
 object Spiller <<Actor>> #Tomato
 
 class SumoBot {
-int Liv
-float Retning
-int Hastighed
+int liv
+int retning
+int hastighed
 }
 
 class Motor
 {
-float Retning
-int Hastighed
+int retning
+int hastighed
 }
 
 object CentralComputer
-'class Display{
-'Nedtælling(int tid)
-'}
+
 class Styringsenhed{
-float Retning
-int Hastighed
+int retning
+int hastighed
 }
 
-Spiller -- Mikrofon  : Påvirker >
-Joystick - Spiller   : Påvirker <
+Mikrofon - Spiller : Påvirker <
 Spiller -- Startknap : Påvirker >
 Spiller - Display : Viser <
 
 
-Joystick  ---  Styringsenhed  : Opfanger signal fra <
 Mikrofon  --  Styringsenhed : Opfanger signal fra <
 Display  ---  CentralComputer : Opdatere <
 Startknap -- CentralComputer : Giver besked til start >
@@ -50,7 +45,7 @@ Attacksensor  -  SumoBot : Giver info om attack >
 CentralComputer -- SumoBot : Giver retning og hastighed >
 CentralComputer -- SumoBot : Giver info om attack <
 SumoBot -- Motor : Sætter retning og hastighed >
-SumoBot -- Motor : bevæger <
+SumoBot -- Motor : Bevæger <
 
 
 @enduml
